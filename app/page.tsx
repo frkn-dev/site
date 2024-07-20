@@ -63,7 +63,6 @@ export default function Home() {
         </div>
 
         <div className="flex justify-between max-lg:flex-col items-center gap-[10px]">
-          {" "}
           <Image width={426} height={450} src={benefit2} alt="image" />
           <div className="max-w-[480px]">
             <h2 className="font-[700] mb-[25px] text-[37px] max-lg:text-[30px]">
@@ -89,19 +88,17 @@ export default function Home() {
 
           <ul className="flex flex-col gap-[20px] mb-[27px] pl-[6px]">
             <li className="flex items-center gap-[7px]">
-              <Image src={checkDark} alt="check" />{" "}
+              <Image src={checkDark} alt="check" />
               <p className="text-[13px] font-[400] text-[#AEAEAE]">
                 Бесплатно навсегда
               </p>
             </li>
             <li className="flex items-center gap-[7px]">
-              {" "}
-              <Image src={checkDark} alt="check" />{" "}
+              <Image src={checkDark} alt="check" />
               <p className="text-[13px] font-[400] text-[#AEAEAE]">4 региона</p>
             </li>
             <li className="flex items-center gap-[7px]">
-              {" "}
-              <Image src={checkDark} alt="check" />{" "}
+              <Image src={checkDark} alt="check" />
               <p className="text-[13px] font-[400] text-[#4D4D4D]">
                 Протокол Wireguard
               </p>
@@ -119,26 +116,24 @@ export default function Home() {
             Pro
           </h3>
           <p className="border-[#D4D4D4] text-[18px]  border-b-[1px] pb-[23px] font-[500] mb-[33px] text-center text-[#ffffff]">
-            4${" "}
+            4$
             <span className="  text-[10px]  font-[400] opacity-[50%]">
               / месяц
             </span>
           </p>
           <ul className="flex flex-col gap-[20px] mb-[27px] pl-[6px]">
             <li className="flex items-center gap-[7px]">
-              <Image src={checkLight} alt="check" />{" "}
+              <Image src={checkLight} alt="check" />
               <p className="text-[13px] font-[400] text-[#AEAEAE]">
                 36$ при оплате за год
               </p>
             </li>
             <li className="flex items-center gap-[7px]">
-              {" "}
-              <Image src={checkLight} alt="check" />{" "}
+              <Image src={checkLight} alt="check" />
               <p className="text-[13px] font-[400] text-[#AEAEAE]">2 региона</p>
             </li>
             <li className="flex items-center gap-[7px]">
-              {" "}
-              <Image src={checkLight} alt="check" />{" "}
+              <Image src={checkLight} alt="check" />
               <p className="text-[13px] font-[400] text-[#AEAEAE]">
                 Протокол XRay
               </p>
@@ -165,7 +160,7 @@ export default function Home() {
               Мы уверены, что конфиденциальность и безопасность — это базовые
               права каждого человека, поэтому предлагаем бесплатную версию FRKN.
               В отличие от других бесплатных VPN-сервисов, мы не продаем вашу
-              историю посещений.{" "}
+              историю посещений.
             </p>
           </div>
         </div>

@@ -16,7 +16,6 @@ import {
 export function Header() {
   return (
     <div className="h-[91px] max-lg:text-[10px] text-[#fff] flex justify-between  max-lg:gap-[10px] items-center">
-      {" "}
       <Link href="/">
         <Image src={logo} alt="logo" />
       </Link>

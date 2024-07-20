@@ -1,29 +1,27 @@
-import logo from "@/app/assets/images/main-logo.svg"
 import Image from "next/image"
 import Link from "next/link"
 
 import github from "@/app/assets/icons/github.svg"
 import telegram from "@/app/assets/icons/telegram.svg"
 import twitter from "@/app/assets/icons/twitter.svg"
+import logo from "@/app/assets/images/main-logo.svg"
 
 export function Footer() {
   return (
     <footer className="text-[#ffffff] px-[20px] flex justify-between pt-[40px] max-lg:flex-col max-lg:items-center border-t-[1px] mb-[56px] border-[rgba(255,255,255,1)]">
       <div className="flex max-lg:flex-col-reverse  gap-[50px] max-lg:mb-[30px]">
-        <div className="flex flex-col ">
-          {" "}
-          <Link className="mb-[30px] max-lg:mx-auto " href="/">
-            <Image src={logo} alt="logo" />
+        <div className="flex flex-col">
+          <Link className="mb-[30px] max-lg:mx-auto" href="/">
+            <Image src={logo} alt="FRKN" />
           </Link>
           <div className="flex flex-col max-lg:items-center gap-[13px]">
-            <p>ИНН 773613031776 </p>
-            <p>Адрес</p>
-            <p>Ф.И.О.</p>
-            <p>ОГРН</p>
+            <p>FRKN LLP</p>
+            <p>London W6 8JA</p>
+            <p>111 Fulham Palace Road</p>
           </div>
         </div>
         <div className="flex gap-[40px] max-sm:flex-col leading-[19px]">
-          <div className="flex flex-col  max-sm:items-center">
+          {/* <div className="flex flex-col  max-sm:items-center">
             <h4 className="font-[500] text-[18px] mb-[20px] leading-[21px]">
               О нас
             </h4>
@@ -41,25 +39,37 @@ export function Footer() {
                 Мерч
               </Link>
             </div>
-          </div>
+          </div> */}
+
           <div className="flex flex-col max-sm:items-center">
             <h4 className="font-[500] text-[18px] mb-[20px] leading-[21px]">
               Контакты
             </h4>
             <div className="flex flex-col gap-[10px] max-sm:items-center">
-              <p className="font-[400] text-[16px]">E-mail</p>
-              <p className="font-[400] text-[16px]">Чат</p>
+              <Link
+                className="font-[400] text-[16px]"
+                href="mailto:wlan@cpan.org"
+              >
+                E-mail
+              </Link>
+              <Link
+                className="font-[400] text-[16px]"
+                href="https://t.me/frkn_dev"
+              >
+                Чат
+              </Link>
             </div>
           </div>
+
           <div className="flex flex-col max-sm:items-center">
             <h4 className="font-[500] text-[18px] mb-[20px] leading-[21px]">
               Документы
             </h4>
             <div className="flex flex-col gap-[10px] max-sm:items-center">
-              <Link className="font-[400] text-[16px] " href="/">
+              <Link className="font-[400] text-[16px]" href="#">
                 Пользовательское соглашение
               </Link>
-              <Link className="font-[400] text-[16px]" href="/">
+              <Link className="font-[400] text-[16px]" href="#">
                 Политика конфиденциальности
               </Link>
             </div>
@@ -67,14 +77,14 @@ export function Footer() {
         </div>
       </div>
       <div className="flex gap-[15px]">
-        <Link href="/">
-          <Image src={github} alt="icon" />
+        <Link href="https://github.com/frkn-dev">
+          <Image src={github} alt="Github" />
         </Link>
-        <Link href="/">
-          <Image src={telegram} alt="icon" />
+        <Link href="https://t.me/frkn_dev">
+          <Image src={telegram} alt="Telegram" />
         </Link>
-        <Link href="/">
-          <Image src={twitter} alt="icon" />
+        <Link href="https://x.com/frkn_org">
+          <Image src={twitter} alt="Twitter" />
         </Link>
       </div>
     </footer>
