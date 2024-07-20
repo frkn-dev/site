@@ -80,7 +80,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex gap-[40px]  justify-center max-lg:flex-col  items-center mb-[80px]">
+      {/* <section className="flex gap-[40px]  justify-center max-lg:flex-col  items-center mb-[80px]">
         <div className="bg-[#fff] w-[306px] max-sm:w-[280px] box-border h-[100%] rounded-[20px] p-[30px]">
           <h3 className="text-[30px] pb-[27px] border-b-[1px] text-[#4D4D4D] font-[600] text-center border-[#D4D4D4] mb-[27px]">
             Free
@@ -145,7 +145,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="flex gap-[35px] max-lg:flex-col max-lg:items-center mb-[80px]">
         <div className="flex gap-[20px] w-[360px] max-lg:w-[300px]">
@@ -199,11 +199,8 @@ export default function Home() {
 
       <section className="mb-[80px]">
         <div className="mb-[40px] max-w-[640px] mx-auto">
-          <h3 className="mb-[10px] max-lg:text-[30px] max-lg:text-center font-[400] text-[36px] leading-[43px]">
-            Подпишитесь и получите скидку 25%!
-          </h3>
           <p className="text-[18px] max-lg:text-[16px] max-lg:text-center px-[40px] max-lg:leading-[23px] opacity-[80%] text-[#FAFAFA] text-left  font-[400]">
-            Получайте еженедельную информацию о нашем продукте на свою
+            Получайте ежемесячную информацию о нашем продукте на свою
             электронную почту, мы гарантируем отсутствие спама.
           </p>
         </div>

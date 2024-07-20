@@ -21,7 +21,7 @@ export function Header() {
       </Link>
       <div>
         <nav className="flex items-center  max-lg:gap-[15px] gap-[40px]">
-          <ul className="flex items-center max-lg:gap-[15px] gap-[40px]">
+          {/* <ul className="flex items-center max-lg:gap-[15px] gap-[40px]">
             <li>
               <Link href="/">Цены</Link>
             </li>
@@ -31,7 +31,7 @@ export function Header() {
             <li>
               <Link href="/">Помощь</Link>
             </li>
-          </ul>
+          </ul> */}
           <div className="flex items-center gap-[7px]">
             <Select defaultValue={"RU"}>
               <SelectTrigger className="w-[60px] text-[16px] max-lg:text-[10px] bg-[none] border-none  text-[#ffffff]">
@@ -48,9 +48,9 @@ export function Header() {
           </div>
         </nav>
       </div>
-      <Button className="tracking-[1px] max-lg:text-[10px]  max-lg:px-[15px] max-lg:py-[0]  px-[36px] py-[8px] font-[600]">
+      {/* <Button className="tracking-[1px] max-lg:text-[10px]  max-lg:px-[15px] max-lg:py-[0]  px-[36px] py-[8px] font-[600]">
         Войти
-      </Button>
+      </Button> */}
     </div>
   )
 }
