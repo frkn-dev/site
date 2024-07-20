@@ -1,9 +1,8 @@
-import Image from "next/image"
-import logo from "../../assets/images/main-logo.svg"
+import logo from "@/app/assets/images/main-logo.svg"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import Link from "next/link"
 
-import dropdownArrow from "../../assets/icons/dropdown-arrow.svg"
 import {
   Select,
   SelectContent,

@@ -1,15 +1,15 @@
-import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
-import heroImg from "./assets/images/hero.png"
-import benefit1 from "./assets/images/benefit1.png"
-import benefit2 from "./assets/images/benefit2.png"
+import checkDark from "@/app/assets/icons/check-dark.svg"
+import checkLight from "@/app/assets/icons/check-light.svg"
+import computer from "@/app/assets/icons/laptop-computer.svg"
+import protect from "@/app/assets/icons/protect.svg"
+import rocket from "@/app/assets/icons/rocket-one.svg"
+import benefit1 from "@/app/assets/images/benefit1.png"
+import benefit2 from "@/app/assets/images/benefit2.png"
+import heroImg from "@/app/assets/images/hero.png"
 
-import checkDark from "./assets/icons/check-dark.svg"
-import checkLight from "./assets/icons/check-light.svg"
-import protect from "./assets/icons/protect.svg"
-import rocket from "./assets/icons/rocket-one.svg"
-import computer from "./assets/icons/laptop-computer.svg"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 export default function Home() {

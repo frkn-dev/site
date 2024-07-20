@@ -1,7 +1,7 @@
-import { Footer } from "./components/footer/Footer"
-import "./globals.css"
 import type { Metadata } from "next"
+import { Footer } from "./components/footer/Footer"
 import { Header } from "./components/header/Header"
+import "./globals.css"
 
 const title = "FRKN VPN"
 const description = "Cвободный VPN для свободных людей"

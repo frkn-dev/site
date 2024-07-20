@@ -1,10 +1,10 @@
+import logo from "@/app/assets/images/main-logo.svg"
 import Image from "next/image"
-import logo from "../../assets/images/main-logo.svg"
 import Link from "next/link"
 
-import github from "../../assets/icons/github.svg"
-import twitter from "../../assets/icons/twitter.svg"
-import telegram from "../../assets/icons/telegram.svg"
+import github from "@/app/assets/icons/github.svg"
+import telegram from "@/app/assets/icons/telegram.svg"
+import twitter from "@/app/assets/icons/twitter.svg"
 
 export function Footer() {
   return (
