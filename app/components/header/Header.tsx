@@ -1,9 +1,9 @@
-import Image from "next/image";
-import logo from "../../assets/images/main-logo.svg";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Image from "next/image"
+import logo from "../../assets/images/main-logo.svg"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-import dropdownArrow from "../../assets/icons/dropdown-arrow.svg";
+import dropdownArrow from "../../assets/icons/dropdown-arrow.svg"
 import {
   Select,
   SelectContent,
@@ -12,7 +12,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 export function Header() {
   return (
@@ -54,5 +54,5 @@ export function Header() {
         Войти
       </Button>
     </div>
-  );
+  )
 }

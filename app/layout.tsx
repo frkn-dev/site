@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Header } from "./components/header/Header";
-import { Footer } from "./components/footer/Footer";
+import { Footer } from "./components/footer/Footer"
+import "./globals.css"
+import type { Metadata } from "next"
+import { Header } from "./components/header/Header"
 
 const title = "FRKN VPN"
 const description = "Cвободный VPN для свободных людей"
@@ -20,23 +20,25 @@ export const metadata: Metadata = {
     title,
     description,
     siteName: "FRKN",
-    images: [{
-      url: url + icon,
-    }],
+    images: [
+      {
+        url: url + icon,
+      },
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: "summary",
     title,
     description,
-    site: '@frkn_org',
+    site: "@frkn_org",
     images: url + icon,
-  }
-};
+  },
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -48,5 +50,5 @@ export default function RootLayout({
         </div>
       </body>
     </html>
-  );
+  )
 }

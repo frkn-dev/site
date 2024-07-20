@@ -1,10 +1,10 @@
-import Image from "next/image";
-import logo from "../../assets/images/main-logo.svg";
-import Link from "next/link";
+import Image from "next/image"
+import logo from "../../assets/images/main-logo.svg"
+import Link from "next/link"
 
-import github from "../../assets/icons/github.svg";
-import twitter from "../../assets/icons/twitter.svg";
-import telegram from "../../assets/icons/telegram.svg";
+import github from "../../assets/icons/github.svg"
+import twitter from "../../assets/icons/twitter.svg"
+import telegram from "../../assets/icons/telegram.svg"
 
 export function Footer() {
   return (
@@ -78,5 +78,5 @@ export function Footer() {
         </Link>
       </div>
     </footer>
-  );
+  )
 }

@@ -1,16 +1,16 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
-import heroImg from "./assets/images/hero.png";
-import benefit1 from "./assets/images/benefit1.png";
-import benefit2 from "./assets/images/benefit2.png";
+import heroImg from "./assets/images/hero.png"
+import benefit1 from "./assets/images/benefit1.png"
+import benefit2 from "./assets/images/benefit2.png"
 
-import checkDark from "./assets/icons/check-dark.svg";
-import checkLight from "./assets/icons/check-light.svg";
-import protect from "./assets/icons/protect.svg";
-import rocket from "./assets/icons/rocket-one.svg";
-import computer from "./assets/icons/laptop-computer.svg";
-import { Input } from "@/components/ui/input";
+import checkDark from "./assets/icons/check-dark.svg"
+import checkLight from "./assets/icons/check-light.svg"
+import protect from "./assets/icons/protect.svg"
+import rocket from "./assets/icons/rocket-one.svg"
+import computer from "./assets/icons/laptop-computer.svg"
+import { Input } from "@/components/ui/input"
 
 export default function Home() {
   return (
@@ -224,5 +224,5 @@ export default function Home() {
         </div>
       </section>
     </main>
-  );
+  )
 }
