@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  title: FRKN API
+  description: API for FRKN services
+  version: 1.0.0
+servers:
+  - url: https://api.frkn.org
+    description: Production server
+
+paths:
+  /locations:
+    get:
+      summary: Get all locations
+      responses:
+        '200':
+          description: A list of locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+
+  /peer:
+    get:
+      summary: Get peer information by location
+      parameters:
+        - name: location
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "uk"
+      responses:
+        '200':
+          description: Peer information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeerResponse'
+
+components:
+  schemas:
+    Location:
+      type: object
+      required: [code, name]
+      properties:
+        code:
+          type: string
+          example: "uk"
+        name:
+          type: string
+          example: "🇬🇧 uk"
+
+    PeerResponse:
+      type: object
+      required: [iface, peer]
+      properties:
+        iface:
+          type: object
+          required: [address, key, dns]
+          properties:
+            address:
+              type: string
+              example: "10.0.0.1/24"
+            key:
+              type: string
+              example: "example-key-123456"
+            dns:
+              type: string
+              example: "8.8.8.8, 8.8.4.4"
+        peer:
+          type: object
+          required: [pubkey, psk, allowed_ips, endpoint]
+          properties:
+            pubkey:
+              type: string
+              example: "example-pubkey-abcdef"
+            psk:
+              type: string
+              example: "example-psk-123456"
+            allowed_ips:
+              type: string
+              example: "0.0.0.0/0"
+            endpoint:
+              type: string
+              example: "192.0.2.1:51820"
