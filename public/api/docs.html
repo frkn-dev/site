@@ -15,7 +15,11 @@
     <div id="redoc-container" />
 
     <script>
-      Redoc.init("/api.yaml", {}, document.getElementById("redoc-container"));
+      Redoc.init(
+        "/api/schema.yaml",
+        {},
+        document.getElementById("redoc-container")
+      );
     </script>
   </body>
 </html>
