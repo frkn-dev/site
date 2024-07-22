@@ -38,6 +38,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PeerResponse'
+                
+  /stat:
+    get:
+      summary: Get statistics of nodes
+      responses:
+        '200':
+          description: A list of node statistics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NodeStat'
 
 components:
   schemas:
@@ -85,3 +98,43 @@ components:
             endpoint:
               type: string
               example: "192.0.2.1:51820"
+              
+    NodeStat:
+      type: object
+      required: [node, hostname, location, type, peers]
+      properties:
+        node:
+          type: string
+          example: "example-node-id"
+        hostname:
+          type: string
+          example: "example-hostname"
+        location:
+          type: object
+          required: [code, name]
+          properties:
+            code:
+              type: string
+              example: "uk"
+            name:
+              type: string
+              example: "🇬🇧 uk"
+        type:
+          type: string
+          example: "wg"
+        peers:
+          type: object
+          required: [total, live, tx, rx]
+          properties:
+            total:
+              type: integer
+              example: 1500
+            live:
+              type: integer
+              example: 75
+            tx:
+              type: string
+              example: "1234567890"
+            rx:
+              type: string
+              example: "0987654321"

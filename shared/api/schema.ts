@@ -78,6 +78,42 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/stat": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get statistics of nodes */
+    get: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody?: never
+      responses: {
+        /** @description A list of node statistics */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json": components["schemas"]["NodeStat"][]
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -106,6 +142,30 @@ export interface components {
         allowed_ips: string
         /** @example 192.0.2.1:51820 */
         endpoint: string
+      }
+    }
+    NodeStat: {
+      /** @example example-node-id */
+      node: string
+      /** @example example-hostname */
+      hostname: string
+      location: {
+        /** @example uk */
+        code: string
+        /** @example 🇬🇧 uk */
+        name: string
+      }
+      /** @example wg */
+      type: string
+      peers: {
+        /** @example 1500 */
+        total: number
+        /** @example 75 */
+        live: number
+        /** @example 1234567890 */
+        tx: string
+        /** @example 0987654321 */
+        rx: string
       }
     }
   }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FRNK API Documentation</title>
+    <script
+      src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"
+      integrity="sha256-vlwzMMjDW4/OsppbdVKtRb/8L9lJT+LhqC+pQXnrX48="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div id="redoc-container" />
+
+    <script>
+      Redoc.init("/api.yaml", {}, document.getElementById("redoc-container"));
+    </script>
+  </body>
+</html>

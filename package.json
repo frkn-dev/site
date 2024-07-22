@@ -10,11 +10,11 @@
     "dev": "next dev",
     "build": "next build",
     "api": "npm-run-all api:*",
-    "api:gen": "openapi-typescript ./shared/api/schema.yaml -o ./shared/api/schema.ts",
+    "api:gen": "openapi-typescript ./public/api/schema.yaml -o ./shared/api/schema.ts",
     "api:format": "biome format ./shared/api/schema.ts --write",
     "test": "npm-run-all test:*",
     "test:lint": "biome lint .",
-    "test:audit": "npm audit"
+    "test:audit": "pnpm audit"
   },
   "dependencies": {
     "@radix-ui/react-select": "2.1.1",
