@@ -17,7 +17,14 @@
     "rules": {
       "recommended": true,
       "style": {
-        "useTemplate": "off"
+        "useTemplate": "off",
+        "noNonNullAssertion": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
+      "a11y": {
+        "useButtonType": "off"
       }
     }
   }

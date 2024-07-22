@@ -1,8 +1,9 @@
+import { HOSTNAME } from "@/app/config"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
 
 export async function GET(request: NextRequest) {
-  const isProd = request.nextUrl.hostname === "frkn.org"
+  const isProd = request.nextUrl.hostname === HOSTNAME
   const robots = ["User-agent: *"]
   isProd ? robots.push("Disallow:") : robots.push("Disallow: /")
 
