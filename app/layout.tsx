@@ -35,11 +35,9 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+type Props = Readonly<{ children: React.ReactNode }>
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className="bg-[#000000]">

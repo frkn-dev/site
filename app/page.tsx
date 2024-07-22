@@ -1,7 +1,5 @@
 import Image from "next/image"
 
-import checkDark from "@/app/assets/icons/check-dark.svg"
-import checkLight from "@/app/assets/icons/check-light.svg"
 import computer from "@/app/assets/icons/laptop-computer.svg"
 import protect from "@/app/assets/icons/protect.svg"
 import rocket from "@/app/assets/icons/rocket-one.svg"
@@ -9,8 +7,8 @@ import benefit1 from "@/app/assets/images/benefit1.png"
 import benefit2 from "@/app/assets/images/benefit2.png"
 import heroImg from "@/app/assets/images/hero.png"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/shared/ui/button"
+import { Input } from "@/shared/ui/input"
 
 export default function Home() {
   return (

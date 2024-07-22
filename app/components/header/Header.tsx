@@ -1,8 +1,4 @@
 import logo from "@/app/assets/images/main-logo.svg"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import Link from "next/link"
-
 import {
   Select,
   SelectContent,
@@ -11,7 +7,9 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/shared/ui/select"
+import Image from "next/image"
+import Link from "next/link"
 
 export function Header() {
   return (

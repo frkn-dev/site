@@ -4,8 +4,6 @@
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ### Requirements
 
 [Node.js LTS](https://nodejs.org). IDE with [TypeScript](https://code.visualstudio.com/docs/languages/typescript) and [Biome](https://biomejs.dev/guides/integrate-in-editor/) support.
@@ -21,6 +19,11 @@ To automatically format code, it is important to properly configure your IDE. He
   }
 }
 ```
+
+### Stack
+
+- [Next.js](https://nextjs.org/docs/getting-started/project-structure#app-routing-conventions) app Routing Conventions
+- [FSD](https://feature-sliced.design/ru/docs/get-started/overview) folder structure
 
 ## Build
 
