@@ -18,13 +18,33 @@
       "recommended": true,
       "style": {
         "useTemplate": "off",
-        "noNonNullAssertion": "off"
+        "useSelfClosingElements": "off",
+        "useCollapsedElseIf": "error",
+        "useForOf": "error"
+      },
+      "complexity": {
+        "noForEach": "off",
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 15
+          }
+        },
+        "noVoid": "error"
       },
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noNewSymbol": "error",
+        "noUnusedVariables": "warn"
       },
       "a11y": {
-        "useButtonType": "off"
+        "useButtonType": "off",
+        "noSvgWithoutTitle": "warn"
+      },
+      "suspicious": {
+        "noEmptyBlockStatements": "error",
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "warn"
       }
     }
   }
