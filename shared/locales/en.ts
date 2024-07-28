@@ -115,10 +115,10 @@ export default {
       support:
         "If you have any problems with the installation, please write to us in the Telegram bot",
     },
-    components: {
-      bash_command: {
-        copied: "Copied!",
-      },
+  },
+  components: {
+    bash_command: {
+      copied: "Copied!",
     },
   },
 } as const

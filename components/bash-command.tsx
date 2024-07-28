@@ -11,11 +11,11 @@ type Props = {
 }
 
 export function BashCommand({ command }: Props) {
-  const t = useScopedI18n("components")
+  const t = useScopedI18n("components.bash_command")
 
   const copy = useCallback(() => {
     navigator.clipboard?.writeText(command).then(() => {
-      toast.success(t("bash_command.copied"))
+      toast.success(t("copied"))
     })
   }, [command])
 
