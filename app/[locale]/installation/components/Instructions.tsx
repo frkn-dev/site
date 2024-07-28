@@ -3,6 +3,7 @@
 import { Tabs } from "@/components/tabs"
 import { Button } from "@/components/ui/button"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
+import { useScopedI18n } from "@/locales/client"
 import { QrCode } from "lucide-react"
 import { useState } from "react"
 
@@ -19,6 +20,8 @@ type Props = {
 }
 
 export function Instructions({ locations }: Props) {
+  const t = useScopedI18n("app.installation")
+
   const [activeTabIndex, setActiveTabIndex] = useState(0)
 
   return (
@@ -27,7 +30,7 @@ export function Instructions({ locations }: Props) {
         <DrawerTrigger asChild>
           <Button className="inline-flex lg:hidden w-full mb-4">
             <QrCode className="mr-2" size={16} />
-            Конфиг и QR-код
+            {t("qr.mobile_button")}
           </Button>
         </DrawerTrigger>
         <DrawerContent>

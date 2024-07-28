@@ -109,6 +109,7 @@ export default {
           'Note: If you encounter the error "resolvconf: command not found", install resolvconf:',
       },
       qr: {
+        mobile_button: "Config and QR code",
         title: "QR code and configuration file",
         description:
           "Select a server to generate a QR code and configuration file",

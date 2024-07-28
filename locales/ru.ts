@@ -109,6 +109,7 @@ export default {
           'Примечание: Если возникает ошибка "resolvconf: command not found", установите resolvconf:',
       },
       qr: {
+        mobile_button: "Конфиг и QR-код",
         title: "QR-код и файл конфигурации",
         description:
           "Выберите сервер, чтобы сгенерировать QR-код и файл конфигурации",
