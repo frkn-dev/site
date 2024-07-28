@@ -83,10 +83,6 @@ export default {
             "Locate and select the downloaded configuration file (with .conf extension)",
           step7: "Use the toggle switch to turn VPN on/off",
         },
-        alternative: {
-          title: "Alternative method: Using AmneziaVPN",
-          step1: "You can also use the client",
-        },
       },
       macos_windows: {
         step1: "Install the WireGuard application",

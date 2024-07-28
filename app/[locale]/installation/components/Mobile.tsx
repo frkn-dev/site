@@ -50,16 +50,6 @@ export function Mobile() {
           <li>{t("method2.step7")}</li>
         </ol>
       </div>
-
-      <div className="bg-zinc-950 p-6 rounded-lg">
-        <h3 className="text-xl font-semibold mb-3">{t("alternative.title")}</h3>
-        <p>
-          {t("alternative.step1")}{" "}
-          <ExternalLink href="https://amnezia.org/en/downloads">
-            AmneziaVPN
-          </ExternalLink>
-        </p>
-      </div>
     </div>
   )
 }
