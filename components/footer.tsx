@@ -16,11 +16,11 @@ export function Footer() {
           <Link href="/">Twitter</Link>
         </div>
         <div className="flex flex-col text-end md:flex-row md:text-start gap-6 justify-self-end">
-          <Link href="/">{t("support")}</Link>
+          <Link href="https://t.me/frkn_support">{t("support")}</Link>
           <Link href="/">{t("contact")}</Link>
           <Link href="/">{t("merch")}</Link>
-          <Link href="/">{t("privacy")}</Link>
-          <Link href="/">{t("terms")}</Link>
+          <Link href="/privacy-policy">{t("privacy")}</Link>
+          <Link href="/terms-of-use">{t("terms")}</Link>
         </div>
       </div>
       <Separator className="w-full" />
