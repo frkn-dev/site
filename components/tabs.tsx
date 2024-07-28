@@ -1,8 +1,4 @@
-// @NOTE: in case you are using Next.js
 "use client"
-
-import { useState } from "react"
-
 import { motion } from "framer-motion"
 
 import { cn } from "@/shared/clsx"

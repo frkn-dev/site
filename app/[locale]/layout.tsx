@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react"
-import "./globals.css"
+import "@/shared/globals.css"
 import { Page } from "@/components/page"
 import { cn } from "@/shared/clsx"
 import { getI18n, getStaticParams } from "@/shared/locales/server"
