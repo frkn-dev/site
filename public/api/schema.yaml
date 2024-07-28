@@ -6,24 +6,30 @@ info:
 servers:
   - url: https://api.frkn.org
     description: Production server
+  - url: https://frkn.org/api
+    description: User registration and authentication server
 
 paths:
   /locations:
     get:
       summary: Get all locations
+      tags:
+        - peers
       responses:
-        '200':
+        "200":
           description: A list of locations
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Location'
+                  $ref: "#/components/schemas/Location"
 
   /peer:
     get:
       summary: Get peer information by location
+      tags:
+        - peers
       parameters:
         - name: location
           in: query
@@ -32,25 +38,82 @@ paths:
             type: string
             example: "uk"
       responses:
-        '200':
+        "200":
           description: Peer information
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PeerResponse'
-                
+                $ref: "#/components/schemas/PeerResponse"
+
   /stat:
     get:
       summary: Get statistics of nodes
+      tags:
+        - stats
       responses:
-        '200':
+        "200":
           description: A list of node statistics
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NodeStat'
+                  $ref: "#/components/schemas/NodeStat"
+
+  /register:
+    post:
+      summary: Register a new user
+      tags:
+        - user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: "example-password"
+      responses:
+        "200":
+          description: User registration response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/RegisterSuccessResponse"
+                  - $ref: "#/components/schemas/RegisterErrorResponse"
+
+  /auth:
+    post:
+      summary: Authenticate a user
+      tags:
+        - user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: "example-password"
+      responses:
+        "200":
+          description: Authentication response
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/AuthSuccessResponse"
+                  - $ref: "#/components/schemas/AuthErrorResponse"
+          headers:
+            Set-Cookie:
+              description: JWT token cookie
+              schema:
+                type: string
 
 components:
   schemas:
@@ -98,7 +161,7 @@ components:
             endpoint:
               type: string
               example: "192.0.2.1:51820"
-              
+
     NodeStat:
       type: object
       required: [node, hostname, location, type, peers]
@@ -138,3 +201,60 @@ components:
             rx:
               type: string
               example: "0987654321"
+
+    RegisterSuccessResponse:
+      type: object
+      required: [status, id, created]
+      properties:
+        status:
+          type: string
+          enum: [success]
+          example: "success"
+        id:
+          type: string
+          format: uuid
+          example: "70b57249-a76c-44e0-85c4-cedcb33aa664"
+        created:
+          type: string
+          format: date-time
+          example: "2024-07-24T13:49:08.380Z"
+
+    RegisterErrorResponse:
+      type: object
+      required: [status, message]
+      properties:
+        status:
+          type: string
+          enum: [error]
+          example: "error"
+        message:
+          type: string
+          example: "Invalid hash"
+
+    AuthSuccessResponse:
+      type: object
+      required: [status, id, token]
+      properties:
+        status:
+          type: string
+          enum: [success]
+          example: "success"
+        id:
+          type: string
+          format: uuid
+          example: "70b57249-a76c-44e0-85c4-cedcb33aa664"
+        token:
+          type: string
+          example: "example.jwt.token"
+
+    AuthErrorResponse:
+      type: object
+      required: [status, message]
+      properties:
+        status:
+          type: string
+          enum: [error]
+          example: "error"
+        message:
+          type: string
+          example: "Invalid hash"
