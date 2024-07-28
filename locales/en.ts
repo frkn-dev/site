@@ -60,4 +60,43 @@ export default {
     privacy: "Privacy Policy",
     terms: "Terms of Service",
   },
+  app: {
+    installation: {
+      ios_android: {
+        method1: {
+          title: "Method 1: Installation using QR code",
+          step1: "Generate a QR code",
+          step2: "Install the WireGuard app",
+          step3: "Open the WireGuard app",
+          step4: 'Tap "+" in the upper right corner',
+          step5: 'Select "Create from QR code"',
+          step6: "Scan the QR code generated on the website",
+        },
+        method2: {
+          title: "Method 2: Installation from configuration file",
+          step1: "Install the WireGuard app",
+          step2: "Download the configuration file from the website",
+          step3: "Open the WireGuard app",
+          step4: 'Tap "+" in the upper right corner',
+          step5: 'Select "Create from file or archive"',
+          step6:
+            "Locate and select the downloaded configuration file (with .conf extension)",
+          step7: "Use the toggle switch to turn VPN on/off",
+        },
+        alternative: {
+          title: "Alternative method: Using AmneziaVPN",
+          step1: "You can also use the client",
+        },
+      },
+      macos_windows: {
+        step1: "Install the WireGuard application",
+        step2: "Download the configuration file from the website",
+        step3: "Open the WireGuard application",
+        step4: 'Click "Import tunnels from file"',
+        step5: "Select the downloaded configuration file",
+        step6: 'Click "Connect"',
+      },
+      linux: {},
+    },
+  },
 } as const

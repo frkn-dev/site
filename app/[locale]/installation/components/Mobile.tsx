@@ -1,16 +1,17 @@
 import { ExternalLink } from "@/components/external-link"
+import { useScopedI18n } from "@/locales/client"
 
 export function Mobile() {
+  const t = useScopedI18n("app.installation.ios_android")
+
   return (
     <div>
       <div className="bg-zinc-950 p-6 rounded-lg mb-6">
-        <h3 className="text-xl font-semibold mb-3">
-          Метод 1: Установка с помощью QR-кода
-        </h3>
+        <h3 className="text-xl font-semibold mb-3">{t("method1.title")}</h3>
         <ol className="list-decimal list-inside space-y-2">
-          <li>Сгенерируйте QR-код</li>
+          <li>{t("method1.step1")}</li>
           <li>
-            Установите приложение WireGuard (
+            {t("method1.step2")} (
             <ExternalLink href="https://apps.apple.com/us/app/wireguard/id1441195209">
               iOS
             </ExternalLink>
@@ -20,20 +21,18 @@ export function Mobile() {
             </ExternalLink>
             )
           </li>
-          <li>Откройте приложение WireGuard</li>
-          <li>Нажмите "+" в правом верхнем углу</li>
-          <li>Выберите "Создать из QR-кода"</li>
-          <li>Отсканируйте QR-код, сгенерированный на сайте</li>
+          <li>{t("method1.step3")}</li>
+          <li>{t("method1.step4")}</li>
+          <li>{t("method1.step5")}</li>
+          <li>{t("method1.step6")}</li>
         </ol>
       </div>
 
       <div className="bg-zinc-950 p-6 rounded-lg mb-6">
-        <h3 className="text-xl font-semibold mb-3">
-          Метод 2: Установка из файла конфигурации
-        </h3>
+        <h3 className="text-xl font-semibold mb-3">{t("method2.title")}</h3>
         <ol className="list-decimal list-inside space-y-2">
           <li>
-            Установите приложение WireGuard (
+            {t("method2.step1")} (
             <ExternalLink href="https://apps.apple.com/us/app/wireguard/id1441195209">
               iOS
             </ExternalLink>
@@ -43,27 +42,22 @@ export function Mobile() {
             </ExternalLink>
             )
           </li>
-          <li>Скачайте файл конфигурации с сайта</li>
-          <li>Откройте приложение WireGuard</li>
-          <li>Нажмите "+" в правом верхнем углу</li>
-          <li>Выберите "Создать из файла или архива"</li>
-          <li>
-            Найдите и выберите скачанный файл конфигурации (с расширением .conf)
-          </li>
-          <li>Используйте переключатель для включения/выключения VPN</li>
+          <li>{t("method2.step2")}</li>
+          <li>{t("method2.step3")}</li>
+          <li>{t("method2.step4")}</li>
+          <li>{t("method2.step5")}</li>
+          <li>{t("method2.step6")}</li>
+          <li>{t("method2.step7")}</li>
         </ol>
       </div>
 
       <div className="bg-zinc-950 p-6 rounded-lg">
-        <h3 className="text-xl font-semibold mb-3">
-          Альтернативный метод: Использование AmneziaVPN
-        </h3>
+        <h3 className="text-xl font-semibold mb-3">{t("alternative.title")}</h3>
         <p>
-          Вы также можете использовать клиент{" "}
+          {t("alternative.step1")}{" "}
           <ExternalLink href="https://amnezia.org/en/downloads">
             AmneziaVPN
           </ExternalLink>
-          .
         </p>
       </div>
     </div>

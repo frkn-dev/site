@@ -1,12 +1,15 @@
 import { ExternalLink } from "@/components/external-link"
+import { useScopedI18n } from "@/locales/client"
 
 export function MacOSAndWindows() {
+  const t = useScopedI18n("app.installation.macos_windows")
+
   return (
     <div>
       <div className="bg-zinc-950 p-6 rounded-lg">
         <ol className="list-decimal list-inside space-y-2">
           <li>
-            Установите приложение WireGuard (
+            {t("step1")} (
             <ExternalLink href="https://apps.apple.com/us/app/wireguard/id1451685025">
               MacOS
             </ExternalLink>
@@ -16,11 +19,11 @@ export function MacOSAndWindows() {
             </ExternalLink>
             )
           </li>
-          <li>Скачайте файл конфигурации с сайта</li>
-          <li>Откройте приложение WireGuard</li>
-          <li>Нажмите "Импорт туннелей из файла"</li>
-          <li>Выберите скачанный файл конфигурации</li>
-          <li>Нажмите "Подключить"</li>
+          <li>{t("step2")}</li>
+          <li>{t("step3")}</li>
+          <li>{t("step4")}</li>
+          <li>{t("step5")}</li>
+          <li>{t("step6")}</li>
         </ol>
       </div>
     </div>

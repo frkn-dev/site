@@ -6,7 +6,22 @@ import { Instructions } from "./components/Instructions"
 
 import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
 
-export default async function Installation() {
+import { getStaticParams } from "@/locales/server"
+import { setStaticParamsLocale } from "next-international/server"
+
+export function generateStaticParams() {
+  return getStaticParams()
+}
+
+type Props = {
+  params: {
+    locale: "ru" | "en"
+  }
+}
+
+export default async function Page({ params: { locale } }: Props) {
+  setStaticParamsLocale(locale)
+
   const locations = await getLocations()
 
   return (
