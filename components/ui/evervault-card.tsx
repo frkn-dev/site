@@ -1,8 +1,9 @@
 "use client"
 import { cn } from "@/lib/utils"
+import type { MotionValue } from "framer-motion"
 import { useMotionValue } from "framer-motion"
 import { motion, useMotionTemplate } from "framer-motion"
-import React, { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export const EvervaultCard = ({
   text,
@@ -21,7 +22,11 @@ export const EvervaultCard = ({
     setRandomString(str)
   }, [])
 
-  function onMouseMove({ currentTarget, clientX, clientY }: any) {
+  function onMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent<HTMLElement>) {
     const { left, top } = currentTarget.getBoundingClientRect()
     mouseX.set(clientX - left)
     mouseY.set(clientY - top)
@@ -57,7 +62,15 @@ export const EvervaultCard = ({
   )
 }
 
-export function CardPattern({ mouseX, mouseY, randomString }: any) {
+export function CardPattern({
+  mouseX,
+  mouseY,
+  randomString,
+}: {
+  mouseX: MotionValue<number>
+  mouseY: MotionValue<number>
+  randomString: string
+}) {
   const maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`
   const style = { maskImage, WebkitMaskImage: maskImage }
 
@@ -90,7 +103,10 @@ export const generateRandomString = (length: number) => {
   return result
 }
 
-export const Icon = ({ className, ...rest }: any) => {
+export const Icon: React.FC<React.SVGProps<SVGSVGElement>> = ({
+  className,
+  ...rest
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

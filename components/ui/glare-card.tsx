@@ -24,7 +24,10 @@ export const GlareCard = ({
       y: 0,
     },
   })
-  const containerStyle = {
+
+  const containerStyle: React.CSSProperties & {
+    [key: `--${string}`]: string
+  } = {
     "--m-x": "50%",
     "--m-y": "50%",
     "--r-x": "0deg",
@@ -37,7 +40,7 @@ export const GlareCard = ({
     "--radius": "48px",
     "--easing": "ease",
     "--transition": "var(--duration) var(--easing)",
-  } as any
+  }
 
   const backgroundStyle = {
     "--step": "5%",
@@ -54,7 +57,6 @@ export const GlareCard = ({
 
   const updateStyles = () => {
     if (refElement.current) {
-      console.log(state.current)
       const { background, rotate, glare } = state.current
       refElement.current?.style.setProperty("--m-x", `${glare.x}%`)
       refElement.current?.style.setProperty("--m-y", `${glare.y}%`)
