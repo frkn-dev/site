@@ -39,12 +39,13 @@
       },
       "a11y": {
         "useButtonType": "off",
-        "noSvgWithoutTitle": "warn"
+        "noSvgWithoutTitle": "info"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",
         "noExplicitAny": "warn",
-        "noArrayIndexKey": "warn"
+        "noArrayIndexKey": "warn",
+        "noConsoleLog": "info"
       }
     }
   }

@@ -26,8 +26,8 @@ Run migrations when the schema changes. For local development, use Docker with P
 
 ```sh
 docker-compose up -d
-npx prisma migrate dev
-npx prisma migrate deploy
+npx prisma migrate
+npx prisma studio
 ```
 
 ## Build
