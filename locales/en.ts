@@ -96,7 +96,32 @@ export default {
         step5: "Select the downloaded configuration file",
         step6: 'Click "Connect"',
       },
-      linux: {},
+      linux: {
+        step1: "Update the system:",
+        step2: "Install WireGuard:",
+        step3: "Download the configuration file from the website",
+        step4: "Move the configuration file:",
+        step5: "Managing the connection:",
+        step5_1: "Connect:",
+        step5_2: "Check status:",
+        step5_3: "Disconnect:",
+        notice:
+          'Note: If you encounter the error "resolvconf: command not found", install resolvconf:',
+      },
+      qr: {
+        title: "QR code and configuration file",
+        description:
+          "Select a server to generate a QR code and configuration file",
+        choose_server: "Choose a server",
+        download: "Download",
+      },
+      support:
+        "If you have any problems with the installation, please write to us in the Telegram bot",
+    },
+    components: {
+      bash_command: {
+        copied: "Copied!",
+      },
     },
   },
 } as const

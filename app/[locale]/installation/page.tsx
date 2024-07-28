@@ -6,7 +6,7 @@ import { Instructions } from "./components/Instructions"
 
 import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
 
-import { getStaticParams } from "@/locales/server"
+import { getScopedI18n, getStaticParams } from "@/locales/server"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {
@@ -24,6 +24,8 @@ export default async function Page({ params: { locale } }: Props) {
 
   const locations = await getLocations()
 
+  const t = await getScopedI18n("app.installation")
+
   return (
     <div>
       <div className="grid grid-rows-1 lg:grid-cols-[1fr_auto] max-w-6xl w-full mx-auto px-4 gap-6">
@@ -34,8 +36,7 @@ export default async function Page({ params: { locale } }: Props) {
       </div>
       <PageSection className="py-4 md:py-4">
         <p>
-          Если у вас возникли какие-либо проблемы с установкой, то напишите нам
-          в телеграм-бот{" "}
+          {t("support")}{" "}
           <ExternalLink href="https://t.me/frkn_support">
             @frkn_support
           </ExternalLink>

@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { createConfig } from "@/lib/create-config"
 import { download } from "@/lib/download"
 import { cn } from "@/lib/utils"
+import { useScopedI18n } from "@/locales/client"
 import { getPeer } from "@/shared/api"
 import { useQuery } from "@tanstack/react-query"
 import { Download } from "lucide-react"
@@ -36,6 +37,8 @@ const LOCATIONS_NAME_MAP = {
 }
 
 export function QRCodeAndConfig({ locations, place }: Props) {
+  const t = useScopedI18n("app.installation.qr")
+
   const [server, setServer] = useState<string>()
   const [qr, setQr] = useState<string>()
   const [conf, setConf] = useState<string>()
@@ -91,13 +94,13 @@ export function QRCodeAndConfig({ locations, place }: Props) {
         "bg-zinc-950 rounded-lg mt-[68px]": place === "aside",
       })}
     >
-      <h3 className="font-semibold mb-0.5">QR-код и файл конфигурации</h3>
+      <h3 className="font-semibold mb-0.5">{t("title")}</h3>
       <p className="mb-4 text-muted-foreground text-sm max-w-80">
-        Выберите сервер, чтобы сгенерировать QR-код и файл конфигурации
+        {t("description")}
       </p>
       <Select onValueChange={setServer} value={server} disabled={isLoading}>
         <SelectTrigger className="mb-4">
-          <SelectValue placeholder="Выберите сервер" />
+          <SelectValue placeholder={t("choose_server")} />
         </SelectTrigger>
         <SelectContent>
           {locations.map(({ code }) => (
@@ -116,7 +119,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
             download(`frkn-${server}.conf`, conf)
           }}
         >
-          Скачать <Download className="ml-2" size={16} />
+          {t("download")} <Download className="ml-2" size={16} />
         </Button>
       )}
     </div>
