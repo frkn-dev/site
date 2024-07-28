@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/clsx"
 import type { PropsWithChildren } from "react"
 
 type Props = PropsWithChildren<{

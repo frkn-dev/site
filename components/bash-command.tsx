@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { useScopedI18n } from "@/locales/client"
+import { useScopedI18n } from "@/shared/locales/client"
 import { Copy } from "lucide-react"
 import { useCallback } from "react"
 import { toast } from "sonner"
@@ -11,11 +11,11 @@ type Props = {
 }
 
 export function BashCommand({ command }: Props) {
-  const t = useScopedI18n("components.bash_command")
+  const t = useScopedI18n("components")
 
   const copy = useCallback(() => {
     navigator.clipboard?.writeText(command).then(() => {
-      toast.success(t("copied"))
+      toast.success(t("bash_command.copied"))
     })
   }, [command])
 

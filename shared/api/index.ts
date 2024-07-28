@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "@/app/config"
+import { API_BASE_URL } from "@/shared/config"
 import type { paths } from "./schema"
 
 // #region Locations

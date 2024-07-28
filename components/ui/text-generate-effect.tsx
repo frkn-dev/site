@@ -1,5 +1,5 @@
 "use client"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/clsx"
 import { motion, stagger, useAnimate } from "framer-motion"
 import { useEffect } from "react"
 

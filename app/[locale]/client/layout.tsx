@@ -1,4 +1,4 @@
-import { I18nProviderClient } from "@/locales/client"
+import { I18nProviderClient } from "@/shared/locales/client"
 import type { ReactElement } from "react"
 
 export default function SubLayout({

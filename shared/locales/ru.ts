@@ -54,11 +54,11 @@ export default {
     subscribe: "Подписаться",
   },
   footer: {
-    support: "Поддержать",
+    support: "Поддержка",
     contact: "Связаться",
     merch: "Мерч",
-    privacy: "Политика конфиденциальности",
-    terms: "Пользовательское соглашение",
+    privacy: "Конфиденциальность",
+    terms: "Соглашение",
   },
   app: {
     installation: {

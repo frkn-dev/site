@@ -1,7 +1,7 @@
 "use client"
 
 import { Separator } from "@/components/ui/separator"
-import { useScopedI18n } from "@/locales/client"
+import { useScopedI18n } from "@/shared/locales/client"
 import Link from "next/link"
 
 export function Footer() {

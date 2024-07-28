@@ -3,7 +3,7 @@
 import { LanguageMenu } from "@/components/language-menu"
 import { Button } from "@/components/ui/button"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
-import { useScopedI18n } from "@/locales/client"
+import { useScopedI18n } from "@/shared/locales/client"
 import { Menu } from "lucide-react"
 import Link from "next/link"
 
@@ -20,9 +20,8 @@ export function MobileMenu() {
       <DrawerContent>
         <div className="p-4">
           <nav className="flex flex-col gap-4 mb-6">
-            <Link href="/">{t("pricing")}</Link>
-            <Link href="/">{t("connect")}</Link>
-            <Link href="/">{t("help")}</Link>
+            <Link href="/#pricing">{t("pricing")}</Link>
+            <Link href="/installation">{t("connect")}</Link>
             <LanguageMenu />
           </nav>
           <Button className="w-full">{t("login")}</Button>

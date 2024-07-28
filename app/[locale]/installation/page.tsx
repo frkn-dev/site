@@ -6,7 +6,7 @@ import { Instructions } from "./components/Instructions"
 
 import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
 
-import { getScopedI18n, getStaticParams } from "@/locales/server"
+import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {

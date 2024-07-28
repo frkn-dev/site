@@ -1,5 +1,5 @@
 "use client"
-import { useChangeLocale, useCurrentLocale } from "@/locales/client"
+import { useChangeLocale, useCurrentLocale } from "@/shared/locales/client"
 
 import {
   DropdownMenu,

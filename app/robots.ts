@@ -1,4 +1,4 @@
-import { HOSTNAME } from "@/app/config"
+import { HOSTNAME } from "@/shared/config"
 import type { MetadataRoute } from "next"
 import { headers } from "next/headers"
 

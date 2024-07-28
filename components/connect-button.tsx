@@ -1,7 +1,7 @@
 "use client"
 
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
-import { useScopedI18n } from "@/locales/client"
+import { useScopedI18n } from "@/shared/locales/client"
 
 export function ConnectButton() {
   const t = useScopedI18n("hero")

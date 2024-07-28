@@ -1,5 +1,5 @@
 import { BashCommand } from "@/components/bash-command"
-import { useScopedI18n } from "@/locales/client"
+import { useScopedI18n } from "@/shared/locales/client"
 
 export function Linux() {
   const t = useScopedI18n("app.installation.linux")

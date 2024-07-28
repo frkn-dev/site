@@ -1,7 +1,7 @@
 import { ConnectButton } from "@/components/connect-button"
 import { PageSection } from "@/components/page-section"
-import { getScopedI18n } from "@/locales/server"
 import hero from "@/public/hero.svg"
+import { getScopedI18n } from "@/shared/locales/server"
 import Image from "next/image"
 
 export async function Hero() {

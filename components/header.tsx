@@ -3,7 +3,7 @@
 import { LanguageMenu } from "@/components/language-menu"
 import { MobileMenu } from "@/components/mobile-menu"
 import { Button } from "@/components/ui/button"
-import { useScopedI18n } from "@/locales/client"
+import { useScopedI18n } from "@/shared/locales/client"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -18,14 +18,13 @@ export function Header() {
         </a>
       </div>
       <div className="w-full justify-between hidden lg:flex px-6 py-4 rounded-full bg-zinc-950">
-        <Link href="#pricing">{t("pricing")}</Link>
-        <Link href="#pricing">{t("connect")}</Link>
-        <Link href="/">{t("help")}</Link>
+        <Link href="/#pricing">{t("pricing")}</Link>
+        <Link href="/installation">{t("connect")}</Link>
         <LanguageMenu />
       </div>
       <div className="justify-self-end">
-        <Button className="hidden lg:flex">{t("login")}</Button>
-        <MobileMenu />
+        {/* <Button className="hidden lg:flex">{t("login")}</Button> */}
+        {/* <MobileMenu /> */}
       </div>
     </header>
   )

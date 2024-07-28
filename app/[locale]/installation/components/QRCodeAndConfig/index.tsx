@@ -9,16 +9,16 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
-import { createConfig } from "@/lib/create-config"
-import { download } from "@/lib/download"
-import { cn } from "@/lib/utils"
-import { useScopedI18n } from "@/locales/client"
 import { getPeer } from "@/shared/api"
+import { cn } from "@/shared/clsx"
+import { useScopedI18n } from "@/shared/locales/client"
 import { useQuery } from "@tanstack/react-query"
 import { Download } from "lucide-react"
 import QRCodeGen from "qrcode"
 import { useEffect, useMemo, useState } from "react"
 import { toast } from "sonner"
+import { createConfig } from "./create-config"
+import { download } from "./download"
 
 type Props = {
   locations: {

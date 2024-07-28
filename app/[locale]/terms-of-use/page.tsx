@@ -1,4 +1,4 @@
-import { getStaticParams } from "@/locales/server"
+import { getStaticParams } from "@/shared/locales/server"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {

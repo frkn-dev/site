@@ -2,7 +2,7 @@
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/clsx"
 import { motion } from "framer-motion"
 
 type Direction = "TOP" | "LEFT" | "BOTTOM" | "RIGHT"

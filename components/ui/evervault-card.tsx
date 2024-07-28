@@ -1,5 +1,5 @@
 "use client"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/clsx"
 import type { MotionValue } from "framer-motion"
 import { useMotionValue } from "framer-motion"
 import { motion, useMotionTemplate } from "framer-motion"

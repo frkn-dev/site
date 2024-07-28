@@ -1,5 +1,5 @@
 import { ExternalLink } from "@/components/external-link"
-import { useScopedI18n } from "@/locales/client"
+import { useScopedI18n } from "@/shared/locales/client"
 
 export function Mobile() {
   const t = useScopedI18n("app.installation.ios_android")
