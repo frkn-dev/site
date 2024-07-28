@@ -11,6 +11,16 @@ export function ConnectButton() {
       containerClassName="rounded-full"
       as="button"
       className="flex items-center space-x-2"
+      onClick={() => {
+        const pricing = document.getElementById("pricing")
+
+        if (pricing) {
+          pricing.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          })
+        }
+      }}
     >
       <span className="min-w-24">{t("connect")}</span>
     </HoverBorderGradient>

@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react"
 import "./globals.css"
-import { Toaster } from "@/components/ui/toaster"
+import { Page } from "@/components/page"
 import { cn } from "@/lib/utils"
 import { getI18n, getStaticParams } from "@/locales/server"
 import { GeistMono } from "geist/font/mono"
@@ -32,9 +32,8 @@ export default function RootLayout({ children, params: { locale } }: Props) {
       lang={locale}
       className={cn(GeistSans.variable, GeistMono.variable, "h-full")}
     >
-      <body className="min-h-full bg-black text-white">
-        {children}
-        <Toaster />
+      <body className="h-full bg-black text-white">
+        <Page locale={locale}>{children}</Page>
       </body>
     </html>
   )

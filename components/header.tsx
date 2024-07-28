@@ -11,7 +11,7 @@ export function Header() {
   const t = useScopedI18n("header")
 
   return (
-    <header className="flex justify-between lg:grid lg:grid-cols-3 max-w-6xl w-full mx-auto px-4 py-2 md:py-8 place-items-center">
+    <header className="flex justify-between lg:grid lg:grid-cols-3 max-w-6xl w-full mx-auto px-4 py-8 place-items-center">
       <div className="justify-self-start">
         <a href="/">
           <Image width={137} height={40} src="/logo.svg" alt="FRKN" />

@@ -1,18 +1,31 @@
-import { getStaticParams } from "@/locales/server"
-import { setStaticParamsLocale } from "next-international/server"
-import { Instruction } from "./Instruction"
+import { ExternalLink } from "@/components/external-link"
+import { PageSection } from "@/components/page-section"
 
-export function generateStaticParams() {
-  return getStaticParams()
-}
+import { getLocations } from "@/shared/api"
+import { Instructions } from "./components/Instructions"
 
-type Props = {
-  params: {
-    locale: "ru" | "en"
-  }
-}
+import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
 
-export default async function Installation({ params: { locale } }: Props) {
-  setStaticParamsLocale(locale)
-  return <Instruction />
+export default async function Installation() {
+  const locations = await getLocations()
+
+  return (
+    <div>
+      <div className="grid grid-rows-1 lg:grid-cols-[1fr_auto] max-w-6xl w-full mx-auto px-4 gap-6">
+        <Instructions locations={locations || []} />
+        <div className="hidden lg:block">
+          <QRCodeAndConfig locations={locations || []} place="aside" />
+        </div>
+      </div>
+      <PageSection className="py-4 md:py-4">
+        <p>
+          Если у вас возникли какие-либо проблемы с установкой, то напишите нам
+          в телеграм-бот{" "}
+          <ExternalLink href="https://t.me/frkn_support">
+            @frkn_support
+          </ExternalLink>
+        </p>
+      </PageSection>
+    </div>
+  )
 }

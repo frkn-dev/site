@@ -1,5 +1,5 @@
 import { ConnectButton } from "@/components/connect-button"
-import { PageSection } from "@/components/landing/page-section"
+import { PageSection } from "@/components/page-section"
 import { getScopedI18n } from "@/locales/server"
 import hero from "@/public/hero.svg"
 import Image from "next/image"
