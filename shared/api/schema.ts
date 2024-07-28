@@ -114,6 +114,98 @@ export interface paths {
     patch?: never
     trace?: never
   }
+  "/register": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Register a new user */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody: {
+        content: {
+          "application/json": {
+            /** @example example-password */
+            password?: string
+          }
+        }
+      }
+      responses: {
+        /** @description User registration response */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json":
+              | components["schemas"]["RegisterSuccessResponse"]
+              | components["schemas"]["RegisterErrorResponse"]
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/auth": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Authenticate a user */
+    post: {
+      parameters: {
+        query?: never
+        header?: never
+        path?: never
+        cookie?: never
+      }
+      requestBody: {
+        content: {
+          "application/json": {
+            /** @example example-password */
+            password?: string
+          }
+        }
+      }
+      responses: {
+        /** @description Authentication response */
+        200: {
+          headers: {
+            /** @description JWT token cookie */
+            "Set-Cookie"?: string
+            [name: string]: unknown
+          }
+          content: {
+            "application/json":
+              | components["schemas"]["AuthSuccessResponse"]
+              | components["schemas"]["AuthErrorResponse"]
+          }
+        }
+      }
+    }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
 export type webhooks = Record<string, never>
 export interface components {
@@ -167,6 +259,55 @@ export interface components {
         /** @example 0987654321 */
         rx: string
       }
+    }
+    RegisterSuccessResponse: {
+      /**
+       * @example success
+       * @enum {string}
+       */
+      status: "success"
+      /**
+       * Format: uuid
+       * @example 70b57249-a76c-44e0-85c4-cedcb33aa664
+       */
+      id: string
+      /**
+       * Format: date-time
+       * @example 2024-07-24T13:49:08.380Z
+       */
+      created: string
+    }
+    RegisterErrorResponse: {
+      /**
+       * @example error
+       * @enum {string}
+       */
+      status: "error"
+      /** @example Invalid hash */
+      message: string
+    }
+    AuthSuccessResponse: {
+      /**
+       * @example success
+       * @enum {string}
+       */
+      status: "success"
+      /**
+       * Format: uuid
+       * @example 70b57249-a76c-44e0-85c4-cedcb33aa664
+       */
+      id: string
+      /** @example example.jwt.token */
+      token: string
+    }
+    AuthErrorResponse: {
+      /**
+       * @example error
+       * @enum {string}
+       */
+      status: "error"
+      /** @example Invalid hash */
+      message: string
     }
   }
   responses: never
