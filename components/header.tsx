@@ -24,7 +24,7 @@ export function Header() {
       </div>
       <div className="justify-self-end">
         {/* <Button className="hidden lg:flex">{t("login")}</Button> */}
-        {/* <MobileMenu /> */}
+        <MobileMenu />
       </div>
     </header>
   )

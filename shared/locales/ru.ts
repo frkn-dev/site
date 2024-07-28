@@ -4,7 +4,7 @@ export default {
   },
   header: {
     pricing: "Цены",
-    connect: "Подключиться",
+    connect: "Скачать",
     help: "Помощь",
     login: "Войти",
   },
