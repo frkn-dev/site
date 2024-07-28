@@ -1,9 +1,7 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "@/prisma"
 import argon2 from "argon2"
 import { NextResponse } from "next/server"
 import { z } from "zod"
-
-const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
   try {
