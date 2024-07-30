@@ -114,7 +114,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/register": {
+  "/user/register": {
     parameters: {
       query?: never
       header?: never
@@ -148,7 +148,7 @@ export interface paths {
           content: {
             "application/json":
               | components["schemas"]["RegisterSuccessResponse"]
-              | components["schemas"]["RegisterErrorResponse"]
+              | components["schemas"]["AuthErrorResponse"]
           }
         }
       }
@@ -159,7 +159,7 @@ export interface paths {
     patch?: never
     trace?: never
   }
-  "/auth": {
+  "/user/auth": {
     parameters: {
       query?: never
       header?: never
@@ -200,6 +200,50 @@ export interface paths {
         }
       }
     }
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  "/user/me": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get user information */
+    get: {
+      parameters: {
+        query?: never
+        header?: {
+          /** @description Bearer token */
+          Authorization?: string
+        }
+        path?: never
+        cookie?: {
+          /** @description Authentication token stored in cookie */
+          frkn_auth?: string
+        }
+      }
+      requestBody?: never
+      responses: {
+        /** @description User information and token details */
+        200: {
+          headers: {
+            [name: string]: unknown
+          }
+          content: {
+            "application/json":
+              | components["schemas"]["UserMeSuccessResponse"]
+              | components["schemas"]["AuthErrorResponse"]
+          }
+        }
+      }
+    }
+    put?: never
+    post?: never
     delete?: never
     options?: never
     head?: never
@@ -277,15 +321,6 @@ export interface components {
        */
       created: string
     }
-    RegisterErrorResponse: {
-      /**
-       * @example error
-       * @enum {string}
-       */
-      status: "error"
-      /** @example Invalid hash */
-      message: string
-    }
     AuthSuccessResponse: {
       /**
        * @example success
@@ -300,13 +335,35 @@ export interface components {
       /** @example example.jwt.token */
       token: string
     }
+    UserMeSuccessResponse: {
+      /**
+       * @example success
+       * @enum {string}
+       */
+      status: "success"
+      user: {
+        /** @example c4c4a9b8-4748-4a60-8d7e-9b7df8aeb0f1 */
+        id: string
+        /**
+         * Format: date-time
+         * @example 2024-07-30T14:21:00Z
+         */
+        created: string
+      }
+      token: {
+        /** @example 1722302939 */
+        issued?: number
+        /** @example 1753860539 */
+        expiration?: number
+      }
+    }
     AuthErrorResponse: {
       /**
        * @example error
        * @enum {string}
        */
       status: "error"
-      /** @example Invalid hash */
+      /** @example Invalid token */
       message: string
     }
   }

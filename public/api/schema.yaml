@@ -60,7 +60,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/NodeStat"
 
-  /register:
+  /user/register:
     post:
       summary: Register a new user
       tags:
@@ -83,9 +83,9 @@ paths:
               schema:
                 oneOf:
                   - $ref: "#/components/schemas/RegisterSuccessResponse"
-                  - $ref: "#/components/schemas/RegisterErrorResponse"
+                  - $ref: "#/components/schemas/AuthErrorResponse"
 
-  /auth:
+  /user/auth:
     post:
       summary: Authenticate a user
       tags:
@@ -114,6 +114,36 @@ paths:
               description: JWT token cookie
               schema:
                 type: string
+
+  /user/me:
+    get:
+      summary: Get user information
+      tags:
+        - user
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          description: Bearer token
+          schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        - name: frkn_auth
+          in: cookie
+          required: false
+          description: Authentication token stored in cookie
+          schema:
+            type: string
+            example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      responses:
+        "200":
+          description: User information and token details
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/UserMeSuccessResponse"
+                  - $ref: "#/components/schemas/AuthErrorResponse"
 
 components:
   schemas:
@@ -219,18 +249,6 @@ components:
           format: date-time
           example: "2024-07-24T13:49:08.380Z"
 
-    RegisterErrorResponse:
-      type: object
-      required: [status, message]
-      properties:
-        status:
-          type: string
-          enum: [error]
-          example: "error"
-        message:
-          type: string
-          example: "Invalid hash"
-
     AuthSuccessResponse:
       type: object
       required: [status, id, token]
@@ -247,6 +265,35 @@ components:
           type: string
           example: "example.jwt.token"
 
+    UserMeSuccessResponse:
+      type: object
+      required: [status, user, token]
+      properties:
+        status:
+          type: string
+          enum: [success]
+          example: "success"
+        user:
+          type: object
+          required: [id, created]
+          properties:
+            id:
+              type: string
+              example: "c4c4a9b8-4748-4a60-8d7e-9b7df8aeb0f1"
+            created:
+              type: string
+              format: date-time
+              example: "2024-07-30T14:21:00Z"
+        token:
+          type: object
+          properties:
+            issued:
+              type: integer
+              example: 1722302939
+            expiration:
+              type: integer
+              example: 1753860539
+
     AuthErrorResponse:
       type: object
       required: [status, message]
@@ -257,4 +304,4 @@ components:
           example: "error"
         message:
           type: string
-          example: "Invalid hash"
+          example: "Invalid token"

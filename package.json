@@ -14,8 +14,9 @@
     "api:gen": "openapi-typescript ./public/api/schema.yaml -o ./shared/api/schema.ts",
     "api:format": "biome format ./shared/api/schema.ts --write",
     "test": "npm-run-all test:*",
-    "test:lint": "biome lint . --diagnostic-level=error",
-    "test:audit": "pnpm audit"
+    "test:audit": "pnpm audit",
+    "test:types": "tsc --noEmit --incremental false",
+    "test:lint": "biome lint . --diagnostic-level=error"
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",
@@ -28,8 +29,8 @@
     "@radix-ui/react-separator": "1.1.0",
     "@radix-ui/react-slot": "1.1.0",
     "@radix-ui/react-toast": "1.2.1",
-    "@tanstack/react-query": "5.51.15",
     "@scure/bip39": "1.3.0",
+    "@tanstack/react-query": "5.51.15",
     "argon2": "0.40.3",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",

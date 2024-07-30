@@ -46,6 +46,7 @@ export async function POST(req: Request) {
     })
 
     response.cookies.set("frkn_auth", token, {
+      secure: true,
       httpOnly: true,
       sameSite: "lax",
       path: "/",
