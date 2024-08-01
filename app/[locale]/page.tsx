@@ -83,8 +83,10 @@ export default async function Home({ params: { locale } }: Props) {
               <PricingFeature isEmpty>Empty</PricingFeature>
               <PricingFeature isEmpty>Empty</PricingFeature>
             </div>
-            <Button variant="default" className="w-full">
-              {pricingT("pro.button")}
+            <Button variant="default" className="w-full" asChild>
+              <Link href="https://t.me/frkn_support" target="_blank">
+                {pricingT("pro.button")}
+              </Link>
             </Button>
           </div>
         </div>
