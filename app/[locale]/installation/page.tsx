@@ -7,16 +7,11 @@ import { Instructions } from "./components/Instructions"
 import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
 
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
+import type { Props } from "@/shared/locales/server"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {
   return getStaticParams()
-}
-
-type Props = {
-  params: {
-    locale: "ru" | "en"
-  }
 }
 
 export default async function Page({ params: { locale } }: Props) {

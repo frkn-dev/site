@@ -5,18 +5,13 @@ import { PageSection } from "@/components/page-section"
 import { Button } from "@/components/ui/button"
 import { formatPrice } from "@/shared/format-price"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
+import type { Props } from "@/shared/locales/server"
 import { GitPullRequestDraft, Logs, Rocket, Shield } from "lucide-react"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
 
 export function generateStaticParams() {
   return getStaticParams()
-}
-
-type Props = {
-  params: {
-    locale: "ru" | "en"
-  }
 }
 
 export default async function Home({ params: { locale } }: Props) {
