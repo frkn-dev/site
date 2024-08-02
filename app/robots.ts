@@ -11,5 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       disallow: isProd ? "/api" : "/",
     },
+    sitemap: isProd ? `https://${HOSTNAME}/sitemap.xml` : undefined,
   }
 }
