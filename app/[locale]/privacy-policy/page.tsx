@@ -130,10 +130,10 @@ export default async function Page({ params: { locale } }: Props) {
         <p className="mb-4">
           If you wish to exercise your rights, please contact us at{" "}
           <a
-            href="mailto:support@frkn.org"
+            href="mailto:mail@frkn.org"
             className="text-blue-600 hover:underline"
           >
-            support@frkn.org
+            mail@frkn.org
           </a>{" "}
           for more information.
         </p>
@@ -271,10 +271,10 @@ export default async function Page({ params: { locale } }: Props) {
         Если вы хотите воспользоваться своими правами, пожалуйста, свяжитесь с
         нами по адресу{" "}
         <a
-          href="mailto:support@frkn.org"
+          href="mailto:mail@frkn.org"
           className="text-blue-600 hover:underline"
         >
-          support@frkn.org
+          mail@frkn.org
         </a>{" "}
         для получения дополнительной информации.
       </p>

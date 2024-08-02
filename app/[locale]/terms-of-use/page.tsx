@@ -95,10 +95,10 @@ export default async function Page({ params: { locale } }: Props) {
           from the moment of payment. If you have complaints about the service
           after this period, the remaining time may be refunded. Please contact{" "}
           <a
-            href="mailto:support@frkn.org"
+            href="mailto:mail@frkn.org"
             className="text-blue-600 hover:underline"
           >
-            support@frkn.org
+            mail@frkn.org
           </a>
         </p>
         <p className="mb-4">
@@ -224,10 +224,10 @@ export default async function Page({ params: { locale } }: Props) {
         сервис после этого периода, оставшееся время может быть возмещено.
         Пожалуйста, свяжитесь с{" "}
         <a
-          href="mailto:support@frkn.org"
+          href="mailto:mail@frkn.org"
           className="text-blue-600 hover:underline"
         >
-          support@frkn.org
+          mail@frkn.org
         </a>
       </p>
       <p className="mb-4">
