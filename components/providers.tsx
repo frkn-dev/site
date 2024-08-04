@@ -3,9 +3,19 @@
 import type { PropsWithChildren } from "react"
 
 import { I18nProviderClient } from "@/shared/locales/client"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import {
+  MutationCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess: () => {
+      queryClient.invalidateQueries()
+    },
+  }),
+})
 
 export function Providers({
   children,

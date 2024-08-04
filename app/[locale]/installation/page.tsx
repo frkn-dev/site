@@ -6,6 +6,7 @@ import { Instructions } from "./components/Instructions"
 
 import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
 
+import { isLoggedIn } from "@/shared/guards"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import { setStaticParamsLocale } from "next-international/server"
 
@@ -20,6 +21,8 @@ type Props = {
 }
 
 export default async function Page({ params: { locale } }: Props) {
+  await isLoggedIn()
+
   setStaticParamsLocale(locale)
 
   const locations = await getLocations()

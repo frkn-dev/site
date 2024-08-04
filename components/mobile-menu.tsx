@@ -6,12 +6,13 @@ import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { useScopedI18n } from "@/shared/locales/client"
 import { Menu } from "lucide-react"
 import Link from "next/link"
+import { User } from "./user"
 
 export function MobileMenu() {
   const t = useScopedI18n("header")
 
   return (
-    <Drawer>
+    <Drawer noBodyStyles>
       <DrawerTrigger asChild>
         <Button size="icon" variant="ghost" className="lg:hidden">
           <Menu size={24} />
@@ -24,7 +25,11 @@ export function MobileMenu() {
             <Link href="/installation">{t("connect")}</Link>
             <LanguageMenu />
           </nav>
-          <Button className="w-full">{t("login")}</Button>
+          <User
+            withUserClassName="flex justify-center"
+            withoutUserClassName="grid grid-cols-2 gap-4"
+            align="center"
+          />
         </div>
       </DrawerContent>
     </Drawer>
