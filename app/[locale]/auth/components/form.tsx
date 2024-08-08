@@ -25,6 +25,7 @@ import { useMutation } from "@tanstack/react-query"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useMemo } from "react"
+import { toast } from "sonner"
 
 export function Form() {
   const t = useScopedI18n("app.auth")
@@ -53,8 +54,12 @@ export function Form() {
   })
 
   async function onSubmit({ mnemonic }: z.infer<typeof FormSchema>) {
-    await mutateAsync(sha3_512(mnemonic))
-    push("/")
+    const result = await mutateAsync(sha3_512(mnemonic))
+    if (result?.status === "success") {
+      push("/")
+    } else {
+      toast.error(result?.message)
+    }
   }
 
   return (
@@ -74,7 +79,8 @@ export function Form() {
                   <FormLabel>{t("phrase")}</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="umbrella whisper candle butterfly meadow telescope laughter cinnamon waterfall puzzle harmony serendipity"
+                      id="mnemonic"
+                      placeholder="frog roof kitchen nature ..."
                       autoFocus
                       className="font-mono"
                       {...field}

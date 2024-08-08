@@ -1,6 +1,6 @@
 "use client"
 
-import { User2 } from "lucide-react"
+import { Loader2, User2 } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
@@ -8,7 +8,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAuth } from "@/shared/auth/client"
@@ -25,9 +24,12 @@ export function User({
   withoutUserClassName,
   align = "end",
 }: Props) {
-  const { data } = useAuth()
-
+  const { data, isLoading } = useAuth()
   const t = useScopedI18n("header")
+
+  if (isLoading) {
+    return <Loader2 size={16} className="animate-spin" />
+  }
 
   if (data?.status !== "success") {
     return (
@@ -46,17 +48,20 @@ export function User({
     <div className={withUserClassName}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="rounded-full bg-gradient-to-r from-zinc-700 to-zinc-950"
-          >
-            <User2 size={16} />
-          </Button>
+          <span title={data.user.id}>
+            {"ID: " + data.user.id.split("-")[0] + "..."}
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full bg-gradient-to-r from-zinc-700 to-zinc-950 ml-[15px]"
+            >
+              <User2 size={16} />
+            </Button>
+          </span>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-48" align={align}>
+        {/* <DropdownMenuContent className="w-48" align={align}>
           <DropdownMenuItem>Log out</DropdownMenuItem>
-        </DropdownMenuContent>
+        </DropdownMenuContent> */}
       </DropdownMenu>
     </div>
   )

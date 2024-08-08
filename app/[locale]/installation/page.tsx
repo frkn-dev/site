@@ -10,6 +10,7 @@ import { isLoggedIn } from "@/shared/guards"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
 import { setStaticParamsLocale } from "next-international/server"
+import { cookies, headers } from "next/headers"
 
 export function generateStaticParams() {
   return getStaticParams()
@@ -17,8 +18,12 @@ export function generateStaticParams() {
 
 export default async function Page({ params: { locale } }: Props) {
   setStaticParamsLocale(locale)
+  const cookieToken = cookies().get("frkn_auth")
+  const host = headers().get("host")
+  const protocol = headers().get("x-forwarded-proto") || "http"
+  const currentUrl = `${protocol}://${host}`
 
-  await isLoggedIn()
+  await isLoggedIn(currentUrl, cookieToken)
   const locations = await getLocations()
 
   const t = await getScopedI18n("app.installation")

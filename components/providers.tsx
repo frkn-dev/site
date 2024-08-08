@@ -3,6 +3,7 @@
 import { type PropsWithChildren, useState } from "react"
 
 import { I18nProviderClient } from "@/shared/locales/client"
+import type { Props } from "@/shared/locales/server"
 import {
   MutationCache,
   QueryClient,
@@ -27,7 +28,7 @@ const errorMessageMap = {
 export function Providers({
   children,
   locale,
-}: PropsWithChildren<{ locale: "ru" | "en" }>) {
+}: PropsWithChildren<Props["params"]>) {
   const [queryClient] = useState(() => {
     return new QueryClient({
       mutationCache: new MutationCache({
