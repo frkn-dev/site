@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from "react"
 import "@/shared/globals.css"
+import Provider from "@/app/_trpc/Provider"
 import { Page } from "@/components/page"
 import { cn } from "@/shared/clsx"
 import { getI18n, getStaticParams } from "@/shared/locales/server"
@@ -30,9 +31,11 @@ export default function RootLayout({
       lang={locale}
       className={cn(GeistSans.variable, GeistMono.variable, "h-full")}
     >
-      <body className="h-full bg-black text-white">
-        <Page locale={locale}>{children}</Page>
-      </body>
+      <Provider>
+        <body className="h-full bg-black text-white">
+          <Page locale={locale}>{children}</Page>
+        </body>
+      </Provider>
     </html>
   )
 }

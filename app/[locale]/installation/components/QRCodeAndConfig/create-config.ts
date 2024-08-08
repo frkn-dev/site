@@ -1,4 +1,4 @@
-import type { Peer } from "@/shared/api"
+import type { Peer } from "@/shared/api/legacy"
 
 export function createConfig({ iface, peer }: Peer): string {
   return `[Interface]

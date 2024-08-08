@@ -1,7 +1,7 @@
 import { ExternalLink } from "@/components/external-link"
 import { PageSection } from "@/components/page-section"
 
-import { getLocations } from "@/shared/api"
+import { getLocations } from "@/shared/api/legacy"
 import { Instructions } from "./components/Instructions"
 
 import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
