@@ -1,5 +1,6 @@
 import { Advantage } from "@/components/landing/advantage"
 import { Hero } from "@/components/landing/hero"
+import { NewsletterForm } from "@/components/landing/newsletter-form"
 import { PricingFeature } from "@/components/landing/pricing-feature"
 import { PageSection } from "@/components/page-section"
 import { Button } from "@/components/ui/button"
@@ -86,7 +87,7 @@ export default async function Home({ params: { locale } }: Props) {
           </div>
         </div>
       </PageSection>
-      {/* <NewsletterForm /> */}
+      <NewsletterForm />
     </>
   )
 }
