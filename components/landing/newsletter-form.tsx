@@ -37,8 +37,8 @@ export function NewsletterForm() {
         lang: locale,
       },
       {
-        onSuccess: ({ error }) => {
-          if (error) {
+        onSuccess: (result) => {
+          if (result?.error) {
             toast.error(t("invalid"))
           } else {
             toast.success(t("success"))
