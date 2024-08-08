@@ -24,7 +24,9 @@ export function Instructions({ locations }: Props) {
   useEffect(() => {
     const userAgent = window.navigator.userAgent.toLowerCase()
 
-    if (userAgent.includes("win") || userAgent.includes("mac")) {
+    if (/mobile|android|iphone|ipad|ipod/.test(userAgent)) {
+      setActiveTabIndex(0)
+    } else if (userAgent.includes("win") || userAgent.includes("mac")) {
       setActiveTabIndex(1)
     } else if (userAgent.includes("linux")) {
       setActiveTabIndex(2)
