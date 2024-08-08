@@ -111,7 +111,11 @@ export function QRCodeAndConfig({ locations, place }: Props) {
         </SelectContent>
       </Select>
       {isLoading && <Skeleton className={imageClassName} />}
-      {qr && <img className={imageClassName} src={qr} alt="QR code" />}
+      {qr && (
+        <div className="p-6 bg-white rounded-lg">
+          <img className={imageClassName} src={qr} alt="QR code" />
+        </div>
+      )}
       {conf && (
         <Button
           className="w-full mt-4"
