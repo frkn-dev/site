@@ -51,8 +51,10 @@ export default {
   newsletter_form: {
     title: "Stay connected",
     description:
-      "Receive weekly information about our product to your email, we guarantee no spam.",
+      "Receive information about our product to your email, we guarantee no spam.",
     subscribe: "Subscribe",
+    invalid: "Invalid email address",
+    success: "Thank you for subscribing to our newsletter!",
   },
   footer: {
     support: "Support",

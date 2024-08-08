@@ -14,7 +14,12 @@ export function MobileMenu() {
   return (
     <Drawer noBodyStyles>
       <DrawerTrigger asChild>
-        <Button size="icon" variant="ghost" className="lg:hidden">
+        <Button
+          size="icon"
+          variant="ghost"
+          aria-label="Menu"
+          className="lg:hidden"
+        >
           <Menu size={24} />
         </Button>
       </DrawerTrigger>

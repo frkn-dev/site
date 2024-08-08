@@ -1,10 +1,10 @@
 "use client"
-
-import { useScopedI18n } from "@/shared/locales/client"
+import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
 import Link from "next/link"
 
 export function Footer() {
   const t = useScopedI18n("footer")
+  const locale = useCurrentLocale()
 
   return (
     <footer className="max-w-6xl w-full mx-auto px-4 py-8">
@@ -17,15 +17,21 @@ export function Footer() {
           >
             GitHub
           </Link>
+          {locale === "ru" && (
+            <Link
+              href="https://t.me/FRKN_org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Telegram
+            </Link>
+          )}
           <Link
-            href="https://t.me/FRKN_org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Telegram
-          </Link>
-          <Link
-            href="https://x.com/frkn_org"
+            href={
+              locale === "ru"
+                ? "https://x.com/frkn_org"
+                : "https://x.com/frkn_vpn"
+            }
             target="_blank"
             rel="noopener noreferrer"
           >

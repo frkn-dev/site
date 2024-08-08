@@ -1,30 +1,24 @@
 import { ExternalLink } from "@/components/external-link"
 import { PageSection } from "@/components/page-section"
 
-import { getLocations } from "@/shared/api"
+import { getLocations } from "@/shared/api/legacy"
 import { Instructions } from "./components/Instructions"
 
 import { QRCodeAndConfig } from "./components/QRCodeAndConfig"
 
 import { isLoggedIn } from "@/shared/guards"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
+import type { Props } from "@/shared/locales/server"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {
   return getStaticParams()
 }
 
-type Props = {
-  params: {
-    locale: "ru" | "en"
-  }
-}
-
 export default async function Page({ params: { locale } }: Props) {
-  await isLoggedIn()
-
   setStaticParamsLocale(locale)
 
+  await isLoggedIn()
   const locations = await getLocations()
 
   const t = await getScopedI18n("app.installation")

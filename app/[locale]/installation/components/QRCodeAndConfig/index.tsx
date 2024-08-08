@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getPeer } from "@/shared/api"
+import { getPeer } from "@/shared/api/legacy"
 import { cn } from "@/shared/clsx"
 import { useScopedI18n } from "@/shared/locales/client"
 import { useQuery } from "@tanstack/react-query"
@@ -111,7 +111,11 @@ export function QRCodeAndConfig({ locations, place }: Props) {
         </SelectContent>
       </Select>
       {isLoading && <Skeleton className={imageClassName} />}
-      {qr && <img className={imageClassName} src={qr} alt="QR code" />}
+      {qr && (
+        <div className="p-6 bg-white rounded-lg">
+          <img className={imageClassName} src={qr} alt="QR code" />
+        </div>
+      )}
       {conf && (
         <Button
           className="w-full mt-4"

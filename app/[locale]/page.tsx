@@ -1,22 +1,18 @@
 import { Advantage } from "@/components/landing/advantage"
 import { Hero } from "@/components/landing/hero"
+import { NewsletterForm } from "@/components/landing/newsletter-form"
 import { PricingFeature } from "@/components/landing/pricing-feature"
 import { PageSection } from "@/components/page-section"
 import { Button } from "@/components/ui/button"
 import { formatPrice } from "@/shared/format-price"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
+import type { Props } from "@/shared/locales/server"
 import { GitPullRequestDraft, Logs, Rocket, Shield } from "lucide-react"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
 
 export function generateStaticParams() {
   return getStaticParams()
-}
-
-type Props = {
-  params: {
-    locale: "ru" | "en"
-  }
 }
 
 export default async function Home({ params: { locale } }: Props) {
@@ -83,13 +79,15 @@ export default async function Home({ params: { locale } }: Props) {
               <PricingFeature isEmpty>Empty</PricingFeature>
               <PricingFeature isEmpty>Empty</PricingFeature>
             </div>
-            <Button variant="default" className="w-full">
-              {pricingT("pro.button")}
+            <Button variant="default" className="w-full" asChild>
+              <Link href="https://t.me/frkn_support" target="_blank">
+                {pricingT("pro.button")}
+              </Link>
             </Button>
           </div>
         </div>
       </PageSection>
-      {/* <NewsletterForm /> */}
+      <NewsletterForm />
     </>
   )
 }

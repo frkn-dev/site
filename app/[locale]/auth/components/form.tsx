@@ -17,7 +17,7 @@ import {
   Form as UIForm,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { login } from "@/shared/api"
+import { login } from "@/shared/api/legacy"
 import { useScopedI18n } from "@/shared/locales/client"
 import { validateMnemonic } from "@scure/bip39"
 import { wordlist } from "@scure/bip39/wordlists/english"

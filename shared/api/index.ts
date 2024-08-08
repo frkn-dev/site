@@ -1,83 +1,48 @@
-import { API_BASE_URL } from "@/shared/config"
-import type { paths } from "./schema"
+import { initTRPC } from "@trpc/server"
+import { z } from "zod"
 
-// #region Locations
-export type Locations =
-  paths["/locations"]["get"]["responses"][200]["content"]["application/json"]
+const t = initTRPC.create()
+const publicProcedure = t.procedure
 
-export async function getLocations(): Promise<Locations | null> {
-  try {
-    const data = await fetch(API_BASE_URL + "/locations")
-    return data.json()
-  } catch (error) {
-    console.error("getLocations API_METHOD", error)
-    return null
-  }
-}
-// #endregion
+export const appRouter = t.router({
+  subscribers: {
+    create: publicProcedure
+      .input(
+        z.object({
+          email: z.string().email(),
+          lang: z.string(),
+        }),
+      )
+      .mutation(async ({ input }) => {
+        const groupToIdMap = {
+          ru: "e3KmpA",
+          en: "b4Ynq7",
+        } as const
+        type Lang = keyof typeof groupToIdMap
 
-// #region Peer
-export type Peer =
-  paths["/peer"]["get"]["responses"][200]["content"]["application/json"]
+        try {
+          const res = await fetch("https://api.sender.net/v2/subscribers", {
+            method: "POST",
+            body: JSON.stringify({
+              email: input.email,
+              groups: ["b21loM"].concat(groupToIdMap[input.lang as Lang]),
+            }),
+            headers: {
+              Authorization: "Bearer " + process.env.MAIL_SENDER_API_KEY,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          })
 
-type PeerParam = paths["/peer"]["get"]["parameters"]["query"]["location"]
+          const result = await res.json()
+          return {
+            error: result?.errors?.email?.[0],
+          }
+        } catch (error) {
+          console.error("trpc.subscribers.create", error)
+        }
+      }),
+  },
+})
 
-export async function getPeer(location: PeerParam): Promise<Peer | null> {
-  try {
-    const data = await fetch(`${API_BASE_URL}/peer?location=${location}`)
-    return data.json()
-  } catch (error) {
-    console.error("getPeer API_METHOD", error)
-    return null
-  }
-}
-// #endregion
-
-// #region User
-type User =
-  paths["/user/auth"]["post"]["responses"][200]["content"]["application/json"]
-
-export async function login(password: string): Promise<User | null> {
-  try {
-    const data = await fetch("/api/user/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    })
-    return data.json()
-  } catch (error) {
-    console.error("login API_METHOD", error)
-    return null
-  }
-}
-
-type Status =
-  paths["/user/register"]["post"]["responses"][200]["content"]["application/json"]
-
-export async function register(password: string): Promise<Status | null> {
-  try {
-    const data = await fetch("/api/user/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    })
-    return data.json()
-  } catch (error) {
-    console.error("register API_METHOD", error)
-    return null
-  }
-}
-
-type UserInfo =
-  paths["/user/me"]["get"]["responses"][200]["content"]["application/json"]
-
-export async function isAuth(): Promise<UserInfo | null> {
-  try {
-    const data = await fetch("/api/user/me")
-    return data.json()
-  } catch (error) {
-    console.error("register API_METHOD", error)
-    return null
-  }
-}
-// #endregion
+export type AppRouter = typeof appRouter

@@ -1,9 +1,10 @@
 "use client"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
+import { trpc } from "@/app/_trpc/client"
 import { PageSection } from "@/components/page-section"
 import { Button } from "@/components/ui/button"
 import {
@@ -14,34 +15,37 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { toast } from "@/components/ui/use-toast"
-import { useScopedI18n } from "@/shared/locales/client"
-
-const FormSchema = z.object({
-  email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
+import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
 
 export function NewsletterForm() {
   const t = useScopedI18n("newsletter_form")
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      email: "",
-    },
+  const locale = useCurrentLocale()
+  const schema = z.object({
+    email: z.string().email({ message: t("invalid") }),
   })
+  type FormData = z.infer<typeof schema>
+  const form = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { email: "" },
+  })
+  const mutation = trpc.subscribers.create.useMutation()
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+  async function onSubmit(data: FormData) {
+    mutation.mutate(
+      {
+        email: data.email,
+        lang: locale,
+      },
+      {
+        onSuccess: (result) => {
+          if (result?.error) {
+            toast.error(t("invalid"))
+          } else {
+            toast.success(t("success"))
+          }
+        },
+      },
+    )
   }
 
   return (
@@ -68,7 +72,9 @@ export function NewsletterForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit">{t("subscribe")}</Button>
+            <Button type="submit" disabled={mutation.isPending}>
+              {t("subscribe")}
+            </Button>
           </form>
         </Form>
       </div>

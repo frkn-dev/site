@@ -1,11 +1,10 @@
 "use client"
-
 import { Tabs } from "@/components/tabs"
 import { Button } from "@/components/ui/button"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { useScopedI18n } from "@/shared/locales/client"
 import { QrCode } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Linux } from "./Linux"
 import { MacOSAndWindows } from "./MacOSAndWindows"
@@ -21,8 +20,18 @@ type Props = {
 
 export function Instructions({ locations }: Props) {
   const t = useScopedI18n("app.installation")
-
   const [activeTabIndex, setActiveTabIndex] = useState(0)
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase()
+
+    if (/mobile|android|iphone|ipad|ipod/.test(userAgent)) {
+      setActiveTabIndex(0)
+    } else if (userAgent.includes("win") || userAgent.includes("mac")) {
+      setActiveTabIndex(1)
+    } else if (userAgent.includes("linux")) {
+      setActiveTabIndex(2)
+    }
+  }, [])
 
   return (
     <div>
