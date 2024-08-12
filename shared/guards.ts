@@ -3,12 +3,14 @@ import { redirect } from "next/navigation"
 
 export async function isLoggedIn(currentUrl: string, cookie?: RequestCookie) {
   try {
+    console.log("start isLoggedIn", currentUrl, cookie)
     const data = await fetch(currentUrl + "/api/user/me", {
       headers: {
         Cookie: cookie?.name + "=" + cookie?.value,
       },
     })
     const auth = await data.json()
+    console.log("try isLoggedIn", auth)
 
     if (!auth || auth.status === "error") {
       return redirect("/registration")
