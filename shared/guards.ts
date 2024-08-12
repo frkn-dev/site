@@ -9,8 +9,9 @@ export async function isLoggedIn(currentUrl: string, cookie?: RequestCookie) {
         Cookie: cookie?.name + "=" + cookie?.value,
       },
     })
+    console.log("isLoggedIn data", data)
     const auth = await data.json()
-    console.log("try isLoggedIn", auth)
+    console.log("isLoggedIn auth", auth)
 
     if (!auth || auth.status === "error") {
       return redirect("/registration")
