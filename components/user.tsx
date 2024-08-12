@@ -68,11 +68,7 @@ export function User({
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align={align}>
           <DropdownMenuItem
-            onClick={() =>
-              refetch().then(() => {
-                window.location.href = "/"
-              })
-            }
+            onClick={() => refetch().then(() => window.location.reload())}
             className="cursor-pointer"
           >
             {t("logout")}
