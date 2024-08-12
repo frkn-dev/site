@@ -9,7 +9,7 @@ export async function isLoggedIn(currentUrl: string, cookie?: RequestCookie) {
         Cookie: cookie?.name + "=" + cookie?.value,
       },
     })
-    console.log("isLoggedIn data", data)
+    console.log("isLoggedIn data", await data.text())
     const auth = await data.json()
     console.log("isLoggedIn auth", auth)
 
