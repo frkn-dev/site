@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-export async function GET() {
+export async function POST() {
   try {
     const response = NextResponse.json({
       status: "success",
@@ -13,6 +13,8 @@ export async function GET() {
       path: "/",
       maxAge: 0, // delete
     })
+
+    response.headers.set("Cache-Control", "no-store")
 
     return response
   } catch (error) {

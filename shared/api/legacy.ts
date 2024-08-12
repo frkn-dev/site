@@ -83,7 +83,10 @@ export async function isAuth(): Promise<UserInfo | null> {
 
 export async function logout() {
   try {
-    const data = await fetch("/api/user/logout")
+    const data = await fetch("/api/user/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
     return data.json()
   } catch (error) {
     console.error("logout API_METHOD", error)
