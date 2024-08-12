@@ -14,7 +14,6 @@ import { logout } from "@/shared/api/legacy"
 import { useAuth } from "@/shared/auth/client"
 import { useScopedI18n } from "@/shared/locales/client"
 import { useQuery } from "@tanstack/react-query"
-import { useRouter } from "next/navigation"
 
 type Props = {
   withUserClassName?: string
@@ -27,7 +26,6 @@ export function User({
   withoutUserClassName,
   align = "end",
 }: Props) {
-  const router = useRouter()
   const { data, isLoading } = useAuth()
   const t = useScopedI18n("header")
   const { refetch, isLoading: isLogoutLoading } = useQuery({
@@ -72,8 +70,7 @@ export function User({
           <DropdownMenuItem
             onClick={() =>
               refetch().then(() => {
-                router.push("/")
-                router.refresh()
+                window.location.href = "/"
               })
             }
             className="cursor-pointer"
