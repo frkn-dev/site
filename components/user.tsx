@@ -10,8 +10,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { logout } from "@/shared/api/legacy"
 import { useAuth } from "@/shared/auth/client"
 import { useScopedI18n } from "@/shared/locales/client"
+import { useQuery } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
 
 type Props = {
   withUserClassName?: string
@@ -24,10 +27,16 @@ export function User({
   withoutUserClassName,
   align = "end",
 }: Props) {
+  const router = useRouter()
   const { data, isLoading } = useAuth()
   const t = useScopedI18n("header")
+  const { refetch, isLoading: isLogoutLoading } = useQuery({
+    queryKey: ["logout"],
+    queryFn: logout,
+    enabled: false,
+  })
 
-  if (isLoading) {
+  if (isLoading || isLogoutLoading) {
     return <Loader2 size={16} className="animate-spin" />
   }
 
@@ -59,9 +68,19 @@ export function User({
             </Button>
           </span>
         </DropdownMenuTrigger>
-        {/* <DropdownMenuContent className="w-48" align={align}>
-          <DropdownMenuItem>Log out</DropdownMenuItem>
-        </DropdownMenuContent> */}
+        <DropdownMenuContent className="w-48" align={align}>
+          <DropdownMenuItem
+            onClick={() =>
+              refetch().then(() => {
+                router.push("/")
+                router.refresh()
+              })
+            }
+            className="cursor-pointer"
+          >
+            {t("logout")}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
       </DropdownMenu>
     </div>
   )

@@ -80,4 +80,14 @@ export async function isAuth(): Promise<UserInfo | null> {
     return null
   }
 }
+
+export async function logout() {
+  try {
+    const data = await fetch("/api/user/logout")
+    return data.json()
+  } catch (error) {
+    console.error("logout API_METHOD", error)
+    return null
+  }
+}
 // #endregion

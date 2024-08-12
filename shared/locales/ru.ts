@@ -8,6 +8,7 @@ export default {
     help: "Помощь",
     login: "Войти",
     register: "Регистрация",
+    logout: "Выйти",
   },
   hero: {
     h1: "FRKN — свободный VPN для свободных людей",
