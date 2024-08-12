@@ -22,6 +22,7 @@ export default async function Page({ params: { locale } }: Props) {
   const host = headers().get("host")
   const protocol = headers().get("x-forwarded-proto") || "http"
   const currentUrl = `${protocol}://${host}`
+  console.log("host", host, protocol, currentUrl)
 
   await isLoggedIn(currentUrl, cookieToken)
   const locations = await getLocations()
