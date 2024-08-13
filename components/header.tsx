@@ -2,10 +2,10 @@
 
 import { LanguageMenu } from "@/components/language-menu"
 import { MobileMenu } from "@/components/mobile-menu"
-import { Button } from "@/components/ui/button"
 import { useScopedI18n } from "@/shared/locales/client"
 import Image from "next/image"
 import Link from "next/link"
+import { User } from "./user"
 
 export function Header() {
   const t = useScopedI18n("header")
@@ -23,7 +23,10 @@ export function Header() {
         <LanguageMenu />
       </div>
       <div className="justify-self-end">
-        {/* <Button className="hidden lg:flex">{t("login")}</Button> */}
+        <User
+          withUserClassName="hidden lg:flex"
+          withoutUserClassName="hidden lg:flex items-center gap-2"
+        />
         <MobileMenu />
       </div>
     </header>

@@ -7,6 +7,8 @@ export default {
     connect: "Download",
     help: "Help",
     login: "Login",
+    register: "Get Started",
+    logout: "Log out",
   },
   hero: {
     h1: "FRKN — Free VPN for Free people",
@@ -116,6 +118,48 @@ export default {
       },
       support:
         "If you have any problems with the installation, please write to us in the Telegram bot",
+    },
+    registration: {
+      title: "Registration",
+      description: {
+        part1:
+          "FRKN ensures complete anonymity without collecting any personal data. Upon registration, you will be provided with a unique 12-word mnemonic phrase.",
+        part2: "This phrase is your only key to access your account.",
+        part3: "Important:",
+        list_item1: "Write down and securely store your mnemonic phrase",
+        list_item2: "Do not share it with anyone",
+        list_item3: "Use it to log into the system",
+        list_item4: "If you lose the phrase, account recovery is impossible",
+        part4:
+          "Your security is our priority. The absence of personal data guarantees your anonymity but requires responsible storage of the mnemonic phrase.",
+        error:
+          "Unfortunately, we couldn't generate the mnemonic phrase. Please try again. If the problem persists, contact our support team.",
+        already_registered:
+          "If you already have a mnemophrase, just log in to your account",
+      },
+      generated: {
+        title: "Congratulations!",
+        warning:
+          "Warning: After leaving this page or refreshing, you will no longer be able to see your mnemonic phrase. Make sure you have saved it in a secure location.",
+        copy: "Copy",
+        login: "Login",
+        copy_success: "The mnemophrase is copied to the clipboard",
+      },
+      confirm_dialog: {
+        title: "Confirm that you are ready to create a mnemophrase",
+        button: "Generate",
+        text: "Your unique mnemonic phrase is ready to be displayed. Please note that it will be shown only once. We recommend immediately writing down or copying the phrase and storing it in a secure place. Unfortunately, if lost, we won't be able to recover this phrase, even through customer support. Without it, access to your account will be impossible. Are you ready to view and save your mnemonic phrase?",
+        confirm: "Continue",
+        cancel: "Cancel",
+      },
+    },
+    auth: {
+      title: "Login into account",
+      phrase: "Your mnemophrase",
+      description: "12-word mnemonic phrase",
+      login: "Login",
+      register: "Register",
+      validation_error: "Invalid mnemophrase. Please try again.",
     },
   },
   components: {
