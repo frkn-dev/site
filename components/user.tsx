@@ -10,10 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { logout } from "@/shared/api/legacy"
-import { useAuth } from "@/shared/auth/client"
+import { isAuth, logout } from "@/shared/api/legacy"
 import { useScopedI18n } from "@/shared/locales/client"
 import { useQuery } from "@tanstack/react-query"
+import { useEffect } from "react"
 
 type Props = {
   withUserClassName?: string
@@ -26,7 +26,18 @@ export function User({
   withoutUserClassName,
   align = "end",
 }: Props) {
-  const { data, isLoading } = useAuth()
+  const {
+    data,
+    isLoading,
+    refetch: fetchMe,
+  } = useQuery({
+    queryKey: ["me"],
+    queryFn: isAuth,
+    enabled: false,
+  })
+  useEffect(() => {
+    fetchMe()
+  }, [])
   const t = useScopedI18n("header")
   const { refetch, isLoading: isLogoutLoading } = useQuery({
     queryKey: ["logout"],

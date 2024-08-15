@@ -76,7 +76,7 @@ export async function isAuth(): Promise<UserInfo | null> {
     const data = await fetch("/api/user/me")
     return data.json()
   } catch (error) {
-    console.error("register API_METHOD", error)
+    console.error("isAuth API_METHOD", error)
     return null
   }
 }
