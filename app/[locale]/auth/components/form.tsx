@@ -56,7 +56,7 @@ export function Form() {
   async function onSubmit({ mnemonic }: z.infer<typeof FormSchema>) {
     const result = await mutateAsync(sha3_512(mnemonic))
     if (result?.status === "success") {
-      push("/")
+      push("/installation")
     } else {
       toast.error(result?.message)
     }
