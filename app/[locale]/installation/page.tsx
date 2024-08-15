@@ -19,7 +19,6 @@ export default async function Page({ params: { locale } }: Props) {
   setStaticParamsLocale(locale)
   await isLoggedIn()
   const locations = await getLocations()
-
   const t = await getScopedI18n("app.installation")
 
   return (

@@ -1,8 +1,7 @@
 "use client"
 import { cn } from "@/shared/clsx"
 import type { MotionValue } from "framer-motion"
-import { useMotionValue } from "framer-motion"
-import { motion, useMotionTemplate } from "framer-motion"
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion"
 import { useEffect, useState } from "react"
 
 export const EvervaultCard = ({
