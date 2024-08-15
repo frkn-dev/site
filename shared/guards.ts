@@ -12,6 +12,7 @@ export async function isLoggedIn() {
 
     if (cookie) {
       const data = await fetch(currentUrl + "/api/user/me", {
+        cache: "no-cache",
         headers: {
           Cookie: cookie.name + "=" + cookie.value,
         },
