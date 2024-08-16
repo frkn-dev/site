@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useAnalytics } from "@/shared/analytics"
 import { getPeer } from "@/shared/api/legacy"
 import { cn } from "@/shared/clsx"
 import { useScopedI18n } from "@/shared/locales/client"
@@ -38,7 +39,7 @@ const LOCATIONS_NAME_MAP = {
 
 export function QRCodeAndConfig({ locations, place }: Props) {
   const t = useScopedI18n("app.installation.qr")
-
+  const analytics = useAnalytics()
   const [server, setServer] = useState<string>()
   const [qr, setQr] = useState<string>()
   const [conf, setConf] = useState<string>()
@@ -76,8 +77,10 @@ export function QRCodeAndConfig({ locations, place }: Props) {
         errorCorrectionLevel: "M",
       },
       (err, url) => {
-        if (!err) setQr(url)
-        else toast.error("Error generating QR code")
+        if (!err) {
+          setQr(url)
+          analytics("generatedQRcode")
+        } else toast.error("Error generating QR code")
       },
     )
   }, [data])
@@ -120,6 +123,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
         <Button
           className="w-full mt-4"
           onClick={() => {
+            analytics("downloadedConfigurationFile")
             download(`frkn-${server}.conf`, conf)
           }}
         >

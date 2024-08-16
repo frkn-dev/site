@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
+import { useAnalytics } from "@/shared/analytics"
 import { register } from "@/shared/api/legacy"
 import { cn } from "@/shared/clsx"
 import { useScopedI18n } from "@/shared/locales/client"
@@ -26,7 +27,7 @@ import { toast } from "sonner"
 
 export function Form() {
   const t = useScopedI18n("app.registration")
-
+  const analytics = useAnalytics()
   const [mnemonic, setMnemonic] = useState("")
 
   const { mutateAsync, isPending } = useMutation({
@@ -46,6 +47,7 @@ export function Form() {
     setMnemonic(mnemonic)
 
     mutateAsync(sha3_512(mnemonic))
+    analytics("registration")
   }, [])
 
   const handleCopy = useCallback(async () => {

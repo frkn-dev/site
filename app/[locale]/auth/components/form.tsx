@@ -17,6 +17,7 @@ import {
   Form as UIForm,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useAnalytics } from "@/shared/analytics"
 import { login } from "@/shared/api/legacy"
 import { useScopedI18n } from "@/shared/locales/client"
 import { validateMnemonic } from "@scure/bip39"
@@ -29,7 +30,7 @@ import { toast } from "sonner"
 
 export function Form() {
   const t = useScopedI18n("app.auth")
-
+  const analytics = useAnalytics()
   const { push } = useRouter()
 
   const FormSchema = useMemo(() => {
@@ -57,6 +58,7 @@ export function Form() {
     const result = await mutateAsync(sha3_512(mnemonic))
     if (result?.status === "success") {
       push("/installation")
+      analytics("auth")
     } else {
       toast.error(result?.message)
     }
