@@ -1,0 +1,7 @@
+This software is open-source, and the source code is available for public use. However, this is not a copyleft license. All rights are reserved by FRKN LLP, London, United Kingdom.
+
+By contributing to this repository, including but not limited to submitting pull requests, you agree to transfer all copyrights and intellectual property rights related to your contributions to FRKN LLP. Additionally, you acknowledge that any contributions you make are provided voluntarily and without compensation.
+
+You also warrant that you have the rights to use and submit the work you are contributing, and that this work does not infringe on the rights of any third parties.
+
+The software is provided "as is", without any warranty. FRKN LLP is not liable for any direct, indirect, incidental, special, exemplary, or consequential damages arising from the use of this software.
