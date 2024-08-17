@@ -17,6 +17,7 @@ export const appRouter = t.router({
         const groupToIdMap = {
           ru: "e3KmpA",
           en: "b4Ynq7",
+          es: "b4Ynq7", // same as en?
         } as const
         type Lang = keyof typeof groupToIdMap
 
