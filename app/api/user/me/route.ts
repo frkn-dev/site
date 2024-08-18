@@ -1,3 +1,4 @@
+import { env } from "@/env"
 import prisma from "@/prisma"
 import type { JwtPayload } from "jsonwebtoken"
 import jwt, { JsonWebTokenError } from "jsonwebtoken"
@@ -17,12 +18,9 @@ export async function GET() {
       })
     }
 
-    const { id, iat, exp } = jwt.verify(
-      token,
-      process.env.JWT_SECRET,
-    ) as JwtPayload
+    const { id, iat, exp } = jwt.verify(token, env.JWT_SECRET) as JwtPayload
 
-    const user = await prisma.user.findUnique({
+    const user = await prisma.users.findUnique({
       where: { id },
       select: {
         id: true,

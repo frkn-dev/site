@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { trpc } from "@/app/_trpc/client"
 import { PageSection } from "@/components/page-section"
 import { Button } from "@/components/ui/button"
 import {
@@ -16,6 +15,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
+import { trpc } from "@/shared/trpc/provider"
 
 export function NewsletterForm() {
   const t = useScopedI18n("newsletter_form")
@@ -28,7 +28,7 @@ export function NewsletterForm() {
     resolver: zodResolver(schema),
     defaultValues: { email: "" },
   })
-  const mutation = trpc.subscribers.create.useMutation()
+  const mutation = trpc.emailNewsletter.create.useMutation()
 
   async function onSubmit(data: FormData) {
     mutation.mutate(

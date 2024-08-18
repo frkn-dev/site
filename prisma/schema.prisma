@@ -5,7 +5,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["tracing"]
 }
 
 model Users {
@@ -13,10 +14,56 @@ model Users {
   password         String            @unique
   created          DateTime          @default(now())
   subscriptionType SubscriptionType? @map("subscription_type")
+  stripeCustomerId String?           @unique @map("stripe_customer_id")
 
-  @@map("user")
+  // Relations
+  stripeSubscription StripeSubscriptions?
+
+  @@map("users")
 }
 
 enum SubscriptionType {
   Stripe
+}
+
+model StripeSubscriptions {
+  id      String                   @id
+  status  StripeSubscriptionStatus
+  created DateTime                 @default(now()) @map("created")
+  updated DateTime?                @map("updated")
+
+  // Relations
+  user                    Users                     @relation(fields: [userId], references: [id])
+  userId                  String                    @unique @map("user_id")
+  stripeSubscriptionItems StripeSubscriptionItems[]
+
+  @@index([id])
+  @@index([userId])
+  @@map("stripe_subscriptions")
+}
+
+enum StripeSubscriptionStatus {
+  incomplete
+  incomplete_expired
+  trialing
+  active
+  past_due
+  canceled
+  unpaid
+  paused
+}
+
+model StripeSubscriptionItems {
+  id      String    @id
+  priceId String
+  created DateTime  @default(now()) @map("created")
+  updated DateTime? @map("updated")
+
+  // Relations
+  subscription   StripeSubscriptions @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  subscriptionId String
+
+  @@index([id])
+  @@index([subscriptionId])
+  @@map("stripe_subscription_items")
 }

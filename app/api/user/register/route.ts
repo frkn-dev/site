@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       salt: Buffer.from(env.PASSWORD_PEPPER),
     })
 
-    const newUser = await prisma.user.create({
+    const newUser = await prisma.users.create({
       data: { password: hashedPassword },
       select: {
         id: true,

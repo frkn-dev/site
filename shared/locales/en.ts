@@ -48,6 +48,10 @@ export default {
       feature_2: "XRay protocol",
       button: "Buy",
     },
+    payment_provider_dialog: {
+      title: "Payment provider",
+      description: "Choose a payment provider",
+    },
   },
   newsletter_form: {
     title: "Stay connected",

@@ -3,6 +3,7 @@ import { z } from "zod"
 
 export const env = createEnv({
   server: {
+    HOST: z.string().url(),
     PASSWORD_PEPPER: z.string().min(1),
     JWT_SECRET: z.string().min(1),
     MAIL_SENDER_API_KEY: z.string().min(1),
@@ -11,6 +12,7 @@ export const env = createEnv({
     STRIPE_WEBHOOK_SECRET: z.string().startsWith("whsec_"),
     DATABASE_URL: z.string().startsWith("postgresql://"),
     DIRECT_URL: z.string().startsWith("postgresql://"),
+    STRIPE_PRICE_ID_MONTHLY: z.string().startsWith("price_"),
   },
   client: {},
   experimental__runtimeEnv: {},

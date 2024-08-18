@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react"
 import "@/shared/globals.css"
-import TRPC from "@/app/_trpc/Provider"
 import { Page } from "@/components/page"
 import { cn } from "@/shared/clsx"
 import { HOSTNAME } from "@/shared/config"
@@ -37,11 +36,9 @@ export default function RootLayout({
         <Plausible domain={HOSTNAME} />
       </head>
 
-      <TRPC>
-        <body className="h-full bg-black text-white">
-          <Page locale={locale}>{children}</Page>
-        </body>
-      </TRPC>
+      <body className="h-full bg-black text-white">
+        <Page locale={locale}>{children}</Page>
+      </body>
     </html>
   )
 }

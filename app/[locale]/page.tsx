@@ -3,6 +3,7 @@ import { Hero } from "@/components/landing/hero"
 import { NewsletterForm } from "@/components/landing/newsletter-form"
 import { PricingFeature } from "@/components/landing/pricing-feature"
 import { PageSection } from "@/components/page-section"
+import { PurchaseButton } from "@/components/purchase-button"
 import { Button } from "@/components/ui/button"
 import { formatPrice } from "@/shared/format-price"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
@@ -79,11 +80,7 @@ export default async function Home({ params: { locale } }: Props) {
               <PricingFeature isEmpty>Empty</PricingFeature>
               <PricingFeature isEmpty>Empty</PricingFeature>
             </div>
-            <Button variant="default" className="w-full" asChild>
-              <Link href="https://t.me/frkn_support" target="_blank">
-                {pricingT("pro.button")}
-              </Link>
-            </Button>
+            <PurchaseButton />
           </div>
         </div>
       </PageSection>

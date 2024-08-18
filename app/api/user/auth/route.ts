@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       salt: Buffer.from(env.PASSWORD_PEPPER),
     })
 
-    const user = await prisma.user.findUnique({
+    const user = await prisma.users.findUnique({
       where: { password: hashedPassword },
     })
 
