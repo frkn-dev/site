@@ -23,6 +23,11 @@ const errorMessageMap = {
     info: "Error info:",
     copy: "Copy error message",
   },
+  es: {
+    main: "Disculpe las molestias. Estamos solucionando un problema en el servidor. Por favor, contacte con el soporte si necesita más ayuda.",
+    info: "Información del error:",
+    copy: "Copiar mensaje de error",
+  },
 } as const
 
 export function Providers({

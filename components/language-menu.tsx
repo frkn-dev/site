@@ -32,6 +32,13 @@ export function LanguageMenu() {
         >
           En
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {
+            changeLocale("es")
+          }}
+        >
+          Es
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: {
         languages: {
           en: url,
+          es: url + "/es",
           ru: url + "/ru",
         },
       },
@@ -19,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: {
         languages: {
           en: url + "/installation",
+          es: url + "/es/installation",
           ru: url + "/ru/installation",
         },
       },
@@ -28,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: {
         languages: {
           en: url + "/privacy-policy",
+          es: url + "/es/privacy-policy",
           ru: url + "/ru/privacy-policy",
         },
       },
@@ -37,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: {
         languages: {
           en: url + "/terms-of-use",
+          es: url + "/es/terms-of-use",
           ru: url + "/ru/terms-of-use",
         },
       },
