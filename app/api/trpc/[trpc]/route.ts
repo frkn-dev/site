@@ -8,9 +8,7 @@ export const dynamic = "force-dynamic"
 
 const handler = async (req: NextRequest) => {
   return fetchRequestHandler({
-    createContext: () => {
-      return createContext(req)
-    },
+    createContext,
     endpoint: "/api/trpc",
     req,
     router: appRouter,

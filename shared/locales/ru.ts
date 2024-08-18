@@ -9,6 +9,7 @@ export default {
     login: "Войти",
     register: "Регистрация",
     logout: "Выйти",
+    account: "Аккаунт",
   },
   hero: {
     h1: "FRKN — свободный VPN для свободных людей",
@@ -164,6 +165,14 @@ export default {
       login: "Войти",
       register: "Зарегистрироваться",
       validation_error: "Введенная вами мнемофраза не валидна",
+    },
+    account: {
+      subscription: {
+        title: "Информация о подписке",
+        provider: "Провайдер",
+        status: "Статус",
+        manage: "Управление подпиской",
+      },
     },
   },
   components: {

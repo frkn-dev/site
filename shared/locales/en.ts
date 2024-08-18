@@ -9,6 +9,7 @@ export default {
     login: "Login",
     register: "Get Started",
     logout: "Log out",
+    account: "Account",
   },
   hero: {
     h1: "FRKN — Free VPN for Free people",
@@ -164,6 +165,14 @@ export default {
       login: "Login",
       register: "Register",
       validation_error: "Invalid mnemophrase. Please try again.",
+    },
+    account: {
+      subscription: {
+        title: "Subscription information",
+        provider: "Provider",
+        status: "Status",
+        manage: "Manage subscription",
+      },
     },
   },
   components: {

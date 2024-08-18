@@ -10,10 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { isAuth, logout } from "@/shared/api/legacy"
 import { useScopedI18n } from "@/shared/locales/client"
-import { useQuery } from "@tanstack/react-query"
-import { useEffect } from "react"
+import { useMe } from "@/shared/services/auth/use-me"
+import { trpc } from "@/shared/trpc"
+import { useRouter } from "next/navigation"
 
 type Props = {
   withUserClassName?: string
@@ -26,30 +26,20 @@ export function User({
   withoutUserClassName,
   align = "end",
 }: Props) {
-  const {
-    data,
-    isLoading,
-    refetch: fetchMe,
-  } = useQuery({
-    queryKey: ["me"],
-    queryFn: isAuth,
-    enabled: false,
-  })
-  useEffect(() => {
-    fetchMe()
-  }, [])
-  const t = useScopedI18n("header")
-  const { refetch, isLoading: isLogoutLoading } = useQuery({
-    queryKey: ["logout"],
-    queryFn: logout,
-    enabled: false,
-  })
+  const router = useRouter()
 
-  if (isLoading || isLogoutLoading) {
+  const { data: user, isLoading } = useMe()
+  const { mutateAsync: logout } = trpc.user.logout.useMutation()
+
+  const isSubscriber = Boolean(user && user.subscriptionType !== null)
+
+  const t = useScopedI18n("header")
+
+  if (isLoading) {
     return <Loader2 size={16} className="animate-spin" />
   }
 
-  if (data?.status !== "success") {
+  if (!user) {
     return (
       <div className={withoutUserClassName}>
         <Button asChild>
@@ -65,9 +55,9 @@ export function User({
   return (
     <div className={withUserClassName}>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <span title={data.user.id}>
-            {"ID: " + data.user.id.split("-")[0] + "..."}
+        <DropdownMenuTrigger asChild className="flex items-center">
+          <span title={user.id}>
+            {`ID: ${user.id.split("-")[0]}...`}
             <Button
               variant="outline"
               size="icon"
@@ -78,8 +68,17 @@ export function User({
           </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align={align}>
+          {isSubscriber && (
+            <DropdownMenuItem asChild>
+              <Link href="/account">{t("account")}</Link>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem
-            onClick={() => refetch().then(() => window.location.reload())}
+            onClick={() =>
+              logout().then(() => {
+                router.refresh()
+              })
+            }
             className="cursor-pointer"
           >
             {t("logout")}

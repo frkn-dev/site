@@ -1,13 +1,20 @@
+import { Button } from "@/components/ui/button"
 import type { Props } from "@/shared/locales/server"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { getFetch, httpBatchLink, loggerLink } from "@trpc/client"
+import {
+  TRPCClientError,
+  getFetch,
+  httpBatchLink,
+  loggerLink,
+} from "@trpc/client"
 import { createTRPCReact } from "@trpc/react-query"
 import type { PropsWithChildren } from "react"
 import { useState } from "react"
 import superjson from "superjson"
 
 import { Copy } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import type { AppRouter } from "./root"
 
@@ -40,6 +47,8 @@ export function TRPCProvider({
   children,
   locale,
 }: PropsWithChildren<Props["params"]>) {
+  const router = useRouter()
+
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -50,27 +59,32 @@ export function TRPCProvider({
           },
           mutations: {
             onError(error) {
+              if (error instanceof TRPCClientError) {
+                const err = error as TRPCClientError<AppRouter>
+
+                if (err.data?.code === "UNAUTHORIZED") {
+                  router.push("/registration")
+
+                  return
+                }
+              }
+
               toast.error(
-                <div>
-                  <p className="mb-4">{errorMessageMap[locale].main}</p>
-                  <p className="mb-1.5 font-semibold">
-                    {errorMessageMap[locale].info}
-                  </p>
-                  <div className="rounded-md border border-red-200 p-2">
-                    <p className="mb-2 line-clamp-2 font-mono">
-                      {error.message}
-                    </p>
-                    <button
-                      className="flex items-center text-black dark:text-white"
+                <div className="GlobalErrorToast">
+                  <p className="Description">{errorMessageMap[locale].main}</p>
+                  <p className="InfoTitle">{errorMessageMap[locale].info}</p>
+                  <div className="InfoBlock">
+                    <p className="InfoMessage">{error.message}</p>
+                    <Button
                       type="button"
                       aria-label="copy error message to clipboard"
                       onClick={async () => {
                         await navigator.clipboard.writeText(error.message)
                       }}
                     >
-                      <Copy className="mr-2 size-4" />{" "}
+                      <Copy className="CopyIcon" size={16} />{" "}
                       {errorMessageMap[locale].copy}
-                    </button>
+                    </Button>
                   </div>
                 </div>,
                 {

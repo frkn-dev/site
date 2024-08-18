@@ -13,7 +13,7 @@ export const stripe = createTRPCRouter({
 
     const customer = await getOrCreateCustomer(me)
 
-    const host = ctx.req.headers.get("origin") as string
+    const host = env.HOST
 
     const checkoutSession = await stripeClient.checkout.sessions.create({
       customer,
@@ -39,5 +39,19 @@ export const stripe = createTRPCRouter({
       alreadySubscribed: false,
       url: checkoutSession.url,
     }
+  }),
+  createPortal: protectedProcedure.mutation(async ({ ctx }) => {
+    const me = ctx.user
+
+    const customer = await getOrCreateCustomer(me)
+
+    const host = env.HOST
+
+    const { url } = await stripeClient.billingPortal.sessions.create({
+      customer,
+      return_url: `${host}/account`,
+    })
+
+    return url
   }),
 })

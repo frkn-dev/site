@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",
+    "@nanostores/react": "0.7.3",
     "@prisma/client": "5.17.0",
     "@radix-ui/react-alert-dialog": "1.1.1",
     "@radix-ui/react-dialog": "1.1.1",
@@ -42,6 +43,7 @@
     "@trpc/client": "11.0.0-rc.477",
     "@trpc/react-query": "11.0.0-rc.477",
     "@trpc/server": "11.0.0-rc.477",
+    "@vercel/edge": "1.1.2",
     "argon2": "0.31.2",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
@@ -51,6 +53,7 @@
     "jsonwebtoken": "9.0.2",
     "lucide-react": "0.408.0",
     "mono": "link:geist/font/mono",
+    "nanostores": "0.11.2",
     "next": "14.2.5",
     "next-international": "1.2.4",
     "next-plausible": "3.12.1",

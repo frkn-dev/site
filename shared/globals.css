@@ -42,3 +42,23 @@
     font-synthesis: none;
   }
 }
+
+.GlobalErrorToast .Description {
+  @apply mb-4;
+}
+
+.GlobalErrorToast .InfoTitle {
+  @apply mb-1.5 font-semibold;
+}
+
+.GlobalErrorToast .InfoBlock {
+  @apply rounded-md border border-red-200 p-2;
+}
+
+.GlobalErrorToast .InfoMessage {
+  @apply mb-2 line-clamp-2 font-mono;
+}
+
+.GlobalErrorToast .CopyIcon {
+  @apply mr-2;
+}

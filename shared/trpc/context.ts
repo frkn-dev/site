@@ -2,9 +2,8 @@ import { env } from "@/env"
 import prisma from "@/prisma"
 import jwt, { type JwtPayload } from "jsonwebtoken"
 import { cookies } from "next/headers"
-import type { NextRequest } from "next/server"
 
-export async function createContext(req: NextRequest) {
+export async function createContext() {
   const authCookie = cookies().get("frkn_auth")
 
   if (authCookie) {
@@ -22,13 +21,11 @@ export async function createContext(req: NextRequest) {
     })
 
     return {
-      req,
       user,
     }
   }
 
   return {
-    req,
     user: null,
   }
 }

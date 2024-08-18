@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/sonner"
 import type { Props } from "@/shared/locales/server"
 import type { PropsWithChildren } from "react"
 
+import { Modals } from "./modals"
+
 export function Page({ children, locale }: PropsWithChildren<Props["params"]>) {
   return (
     <Providers locale={locale}>
@@ -14,6 +16,7 @@ export function Page({ children, locale }: PropsWithChildren<Props["params"]>) {
         <Footer />
       </div>
       <Toaster richColors position="top-right" />
+      <Modals />
     </Providers>
   )
 }
