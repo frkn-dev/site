@@ -1,3 +1,4 @@
+import { env } from "@/env"
 import { initTRPC } from "@trpc/server"
 import { z } from "zod"
 
@@ -28,7 +29,7 @@ export const appRouter = t.router({
               groups: ["b21loM"].concat(groupToIdMap[input.lang as Lang]),
             }),
             headers: {
-              Authorization: "Bearer " + process.env.MAIL_SENDER_API_KEY,
+              Authorization: "Bearer " + env.MAIL_SENDER_API_KEY,
               "Content-Type": "application/json",
               Accept: "application/json",
             },

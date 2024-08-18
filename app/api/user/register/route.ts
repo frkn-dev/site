@@ -1,3 +1,4 @@
+import { env } from "@/env"
 import prisma from "@/prisma"
 import argon2 from "argon2"
 import { NextResponse } from "next/server"
@@ -20,7 +21,7 @@ export async function POST(req: Request) {
     }
 
     const hashedPassword = await argon2.hash(password, {
-      salt: Buffer.from(process.env.PASSWORD_PEPPER),
+      salt: Buffer.from(env.PASSWORD_PEPPER),
     })
 
     const newUser = await prisma.user.create({

@@ -1,3 +1,4 @@
+import { env } from "@/env"
 import prisma from "@/prisma"
 import argon2 from "argon2"
 import jwt from "jsonwebtoken"
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
     }
 
     const hashedPassword = await argon2.hash(password, {
-      salt: Buffer.from(process.env.PASSWORD_PEPPER),
+      salt: Buffer.from(env.PASSWORD_PEPPER),
     })
 
     const user = await prisma.user.findUnique({
@@ -35,7 +36,7 @@ export async function POST(req: Request) {
       })
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user.id }, env.JWT_SECRET, {
       expiresIn: "1y",
     })
 
