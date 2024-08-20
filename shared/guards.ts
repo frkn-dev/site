@@ -1,31 +1,31 @@
-import { cookies, headers } from "next/headers"
+import type { StripeSubscriber } from "@/shared/entities/User"
+import { getMe } from "@/shared/services/auth/get-me"
 import { redirect } from "next/navigation"
 
 export async function isLoggedIn() {
-  let isLogged = false
+  const me = await getMe()
 
-  try {
-    const cookie = cookies().get("frkn_auth")
-    const host = headers().get("host")
-    const protocol = headers().get("x-forwarded-proto") || "http"
-    const currentUrl = `${protocol}://${host}`
-
-    if (cookie) {
-      const data = await fetch(currentUrl + "/api/user/me", {
-        cache: "no-cache",
-        headers: {
-          Cookie: cookie.name + "=" + cookie.value,
-        },
-      })
-      const auth = await data.json()
-
-      if (auth.status === "success") {
-        isLogged = true
-      }
-    }
-  } catch (error) {
-    console.error("isLoggedIn", error)
-  } finally {
-    if (!isLogged) redirect("/registration")
+  if (!me) {
+    redirect("/registration")
   }
+
+  return me
+}
+
+export async function isSubscriber() {
+  const me = await isLoggedIn()
+
+  if (!me.subscriptionType) {
+    redirect("/#pricing")
+  }
+
+  if (me.subscriptionType === "Stripe" && me.stripeSubscription) {
+    if (me.stripeSubscription.status !== "active") {
+      redirect("/#pricing")
+    }
+
+    return me as StripeSubscriber
+  }
+
+  return me
 }

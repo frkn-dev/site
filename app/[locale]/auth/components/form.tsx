@@ -18,17 +18,18 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useAnalytics } from "@/shared/analytics"
-import { login } from "@/shared/api/legacy"
 import { useScopedI18n } from "@/shared/locales/client"
+import { trpc } from "@/shared/trpc"
 import { validateMnemonic } from "@scure/bip39"
 import { wordlist } from "@scure/bip39/wordlists/english"
-import { useMutation } from "@tanstack/react-query"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useMemo } from "react"
 import { toast } from "sonner"
 
 export function Form() {
+  const { mutateAsync: login, isPending } = trpc.user.login.useMutation()
+
   const t = useScopedI18n("app.auth")
   const analytics = useAnalytics()
   const { push } = useRouter()
@@ -43,10 +44,6 @@ export function Form() {
     })
   }, [])
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationFn: login,
-  })
-
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -55,7 +52,7 @@ export function Form() {
   })
 
   async function onSubmit({ mnemonic }: z.infer<typeof FormSchema>) {
-    const result = await mutateAsync(sha3_512(mnemonic))
+    const result = await login(sha3_512(mnemonic))
     if (result?.status === "success") {
       push("/installation")
       analytics("auth")

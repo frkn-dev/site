@@ -1,12 +1,18 @@
-import { appRouter } from "@/shared/api"
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch"
+import type { NextRequest } from "next/server"
 
-const handler = (req: Request) =>
-  fetchRequestHandler({
+import { createContext } from "@/shared/trpc/context"
+import { appRouter } from "@/shared/trpc/root"
+
+export const dynamic = "force-dynamic"
+
+const handler = async (req: NextRequest) => {
+  return fetchRequestHandler({
+    createContext,
     endpoint: "/api/trpc",
     req,
     router: appRouter,
-    createContext: () => ({}),
   })
+}
 
 export { handler as GET, handler as POST }

@@ -9,6 +9,7 @@ export default {
     login: "Войти",
     register: "Регистрация",
     logout: "Выйти",
+    account: "Аккаунт",
   },
   hero: {
     h1: "FRKN — свободный VPN для свободных людей",
@@ -47,6 +48,10 @@ export default {
       feature_1: "Всё, что в Free",
       feature_2: "Протокол XRay",
       button: "Купить",
+    },
+    payment_provider_dialog: {
+      title: "Платежный провайдер",
+      description: "Выберите платежный провайдер",
     },
   },
   newsletter_form: {
@@ -160,6 +165,14 @@ export default {
       login: "Войти",
       register: "Зарегистрироваться",
       validation_error: "Введенная вами мнемофраза не валидна",
+    },
+    account: {
+      subscription: {
+        title: "Информация о подписке",
+        provider: "Провайдер",
+        status: "Статус",
+        manage: "Управление подпиской",
+      },
     },
   },
   components: {

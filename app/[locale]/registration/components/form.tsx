@@ -16,10 +16,9 @@ import {
 import { Button } from "@/components/ui/button"
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
 import { useAnalytics } from "@/shared/analytics"
-import { register } from "@/shared/api/legacy"
 import { cn } from "@/shared/clsx"
 import { useScopedI18n } from "@/shared/locales/client"
-import { useMutation } from "@tanstack/react-query"
+import { trpc } from "@/shared/trpc"
 import { Copy, Loader2, User2 } from "lucide-react"
 import Link from "next/link"
 import { useCallback, useState } from "react"
@@ -30,8 +29,12 @@ export function Form() {
   const analytics = useAnalytics()
   const [mnemonic, setMnemonic] = useState("")
 
-  const { mutateAsync, isPending } = useMutation({
-    mutationFn: register,
+  const { mutateAsync: register, isPending } = trpc.user.register.useMutation({
+    onSuccess(data) {
+      if (data.status !== "success") {
+        toast.error(data.message)
+      }
+    },
     onError() {
       toast.error(t("description.error"))
     },
@@ -46,7 +49,7 @@ export function Form() {
 
     setMnemonic(mnemonic)
 
-    mutateAsync(sha3_512(mnemonic))
+    await register(sha3_512(mnemonic))
     analytics("registration")
   }, [])
 
