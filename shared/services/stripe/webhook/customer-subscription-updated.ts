@@ -56,7 +56,7 @@ export async function customerSubscriptionUpdated(
       },
     )
   } catch (error) {
-    console.error(error)
+    console.error("customerSubscriptionUpdated", error)
     throw error
   }
 }

@@ -12,9 +12,9 @@ export const user = createTRPCRouter({
   }),
   paymentProviders: protectedProcedure.query(async () => {
     const response = await fetch(env.HOST + "/api/geo")
-    const json = (await response.json()) as { country: string }
+    const json: { country: string } = await response.json()
 
-    const country = (json.country ?? "unknown").toLowerCase()
+    const country = json.country ?? "unknown"
 
     const providers = {
       stripe: country !== "RU",

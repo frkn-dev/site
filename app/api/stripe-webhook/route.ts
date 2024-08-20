@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     return Response.json({ received: true })
   } catch (error) {
     const message = getErrorMessage(error)
-    console.error(error)
+    console.error("POST stripe-webhook", error)
     return Response.json({ message }, { status: 500 })
   }
 }

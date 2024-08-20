@@ -69,7 +69,7 @@ export default async function Home({ params: { locale } }: Props) {
           <div className="p-8 rounded-sm shadow-lg bg-zinc-950">
             <h3 className="mb-2 text-3xl font-bold tracking-tight">Pro</h3>
             <div className="mb-4 flex items-end gap-2 text-xl font-semibold">
-              {formatPrice(4.99)}{" "}
+              {formatPrice(5)}{" "}
               <span className="text-sm font-semibold tracking-tight text-muted-foreground">
                 {pricingT("pro.in_month")}
               </span>

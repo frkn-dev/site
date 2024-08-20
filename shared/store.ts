@@ -1,14 +1,13 @@
 import { map } from "nanostores"
 
-export const $modals = map<
-  Record<
-    "paymentProvider",
-    {
-      open: boolean
-      payload?: unknown
-    }
-  >
->({
+type PaymentProvider = {
+  paymentProvider: {
+    open: boolean
+    payload?: unknown
+  }
+}
+
+export const $modals = map<PaymentProvider>({
   paymentProvider: {
     open: false,
   },

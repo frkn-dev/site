@@ -1,6 +1,6 @@
 import { ManageStripeSubscriptionButton } from "@/components/manage-stripe-subscription-button"
 import { PageSection } from "@/components/page-section"
-import { Button } from "@/components/ui/button"
+
 import {
   Card,
   CardContent,
@@ -27,17 +27,14 @@ export default async function Page({ params: { locale } }: Props) {
   const me = await isSubscriber()
 
   function buildSubscriptionData() {
-    const data = {} as {
-      provider: string
-      status: string
-    }
-
     if (me.subscriptionType === "Stripe") {
-      data.provider = "Stripe"
-      data.status = me.stripeSubscription?.status ?? "unknown"
+      return {
+        provider: "Stripe",
+        status: me.stripeSubscription?.status ?? "unknown",
+      }
     }
 
-    return data
+    return {}
   }
 
   const subscriptionData = buildSubscriptionData()
