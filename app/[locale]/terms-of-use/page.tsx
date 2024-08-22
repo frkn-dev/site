@@ -15,7 +15,7 @@ export default async function Page({ params: { locale } }: Props) {
         <h1 className="text-4xl font-bold mb-6">Terms of Service</h1>
 
         <p className="text-sm text-gray-600 mb-6">
-          Last updated: July 23, 2024
+          Last updated: August 23, 2024
         </p>
 
         <p className="mb-4">
@@ -25,6 +25,11 @@ export default async function Page({ params: { locale } }: Props) {
           one month before they take effect. If you wish to exercise your right
           to opt out of such changes, you must stop using the service (for
           refunds, see below).
+        </p>
+        <p className="mb-4">
+          The user agrees that the English version of the agreement takes
+          precedence in case of discrepancies with translations into other
+          languages.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4">Service</h2>
@@ -53,7 +58,7 @@ export default async function Page({ params: { locale } }: Props) {
         </p>
         <p className="mb-4">
           We are not the developer, owner, or provider of third-party
-          applications used to connect to the service (Wireguard, XRay,
+          applications used to connect to the service (WireGuard, XRay,
           OpenVPN). We are not responsible for the operation, functionality,
           security, or compatibility of these applications.
         </p>
@@ -73,6 +78,11 @@ export default async function Page({ params: { locale } }: Props) {
         <p className="mb-4">
           The user agrees to use the service and website only for lawful
           purposes and by lawful means, taking into account local legislation.
+        </p>
+        <p className="mb-4">
+          The user is responsible for the safekeeping of the data required to
+          connect to the service. In case of their loss or compromise, the user
+          must immediately notify the administration.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4">Payment</h2>
@@ -97,9 +107,14 @@ export default async function Page({ params: { locale } }: Props) {
           </a>
         </p>
         <p className="mb-4">
-          We do not offer refunds for cash and cryptocurrency payments. Refund
-          requests for purchases made through the App Store or reseller must be
-          directed to them directly.
+          We do not offer refunds for cash payments. Refund requests for
+          purchases made through the App Store or reseller must be directed to
+          them directly.
+        </p>
+        <p className="mb-4">
+          In the case of refunds for purchases made in cryptocurrency, the
+          refund will be made to the same cryptocurrency wallet from which the
+          payment was made.
         </p>
 
         <h2 className="text-2xl font-semibold mb-4">Privacy</h2>
@@ -141,7 +156,7 @@ export default async function Page({ params: { locale } }: Props) {
       <h1 className="text-4xl font-bold mb-6">Условия использования</h1>
 
       <p className="text-sm text-gray-600 mb-6">
-        Последнее обновление: 23 июля 2024 г.
+        Последнее обновление: 23 августа 2024 г.
       </p>
 
       <p className="mb-4">
@@ -151,6 +166,10 @@ export default async function Page({ params: { locale } }: Props) {
         frkn.org/blog как минимум за один месяц до их вступления в силу. Если вы
         хотите воспользоваться правом отказаться от таких изменений, вы должны
         прекратить использование сервиса (для возвратов см. ниже).
+      </p>
+      <p className="mb-4">
+        Пользователь соглашается, что версия соглашения на английском языке
+        имеет преимущество в случае расхождений с переводами на другие языки.
       </p>
 
       <h2 className="text-2xl font-semibold mb-4">Сервис</h2>
@@ -181,7 +200,7 @@ export default async function Page({ params: { locale } }: Props) {
       </p>
       <p className="mb-4">
         Мы не является разработчиком, владельцем или поставщиком сторонних
-        приложений, которые используется для подключения к сервису (Wireguard,
+        приложений, которые используется для подключения к сервису (WireGuard,
         XRay, OpenVPN). Мы не несем ответственности за работу, функциональность,
         безопасность или совместимость этих приложений.
       </p>
@@ -201,6 +220,11 @@ export default async function Page({ params: { locale } }: Props) {
       <p className="mb-4">
         Пользователь обязуется использовать сервис и сайт только для законных
         целей и законными способами с учетом местного законодательства.
+      </p>
+      <p className="mb-4">
+        Пользователь несет ответственность за сохранность данных для подключения
+        к сервису. В случае их утраты или компрометации, пользователь обязан
+        незамедлительно уведомить администрацию.
       </p>
 
       <h2 className="text-2xl font-semibold mb-4">Оплата</h2>
@@ -226,9 +250,14 @@ export default async function Page({ params: { locale } }: Props) {
         </a>
       </p>
       <p className="mb-4">
-        Мы не предлагаем возвраты для наличных и криптовалютных платежей.
-        Запросы на возврат средств за покупки, совершенные через App Store или
-        реселлера, должны быть направлены непосредственно к ним.
+        Мы не предлагаем возвраты для наличных платежей. Запросы на возврат
+        средств за покупки, совершенные через App Store или реселлера, должны
+        быть направлены непосредственно к ним.
+      </p>
+      <p className="mb-4">
+        В случае возврата средств за покупки, произведенные в криптовалюте,
+        возврат будет осуществляться на тот же криптовалютный кошелек, с
+        которого был совершен платеж.
       </p>
 
       <h2 className="text-2xl font-semibold mb-4">Конфиденциальность</h2>
