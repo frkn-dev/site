@@ -1,10 +1,8 @@
 import { env } from "@/env"
 import { getErrorMessage } from "@/shared/get-error-message"
 import { stripe } from "@/shared/services/stripe/client"
-import {
-  customerSubscriptionDeleted,
-  customerSubscriptionUpdated,
-} from "@/shared/services/stripe/webhook"
+import { customerSubscriptionDeleted } from "./customer-subscription-deleted"
+import { customerSubscriptionUpdated } from "./customer-subscription-updated"
 
 export async function POST(request: Request) {
   try {
