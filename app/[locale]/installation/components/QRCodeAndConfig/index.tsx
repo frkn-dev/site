@@ -10,10 +10,10 @@ import {
 } from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useAnalytics } from "@/shared/analytics"
-import { getPeer } from "@/shared/api/legacy"
 import { cn } from "@/shared/clsx"
 import { useScopedI18n } from "@/shared/locales/client"
-import { useQuery } from "@tanstack/react-query"
+import { trpc } from "@/shared/trpc"
+import type { Location } from "@/shared/trpc/routers/peer"
 import { Download } from "lucide-react"
 import QRCodeGen from "qrcode"
 import { useEffect, useMemo, useState } from "react"
@@ -22,10 +22,7 @@ import { createConfig } from "./create-config"
 import { download } from "./download"
 
 type Props = {
-  locations: {
-    code: string
-    name: string
-  }[]
+  locations: Location[]
   place: "aside" | "drawer"
 }
 
@@ -44,11 +41,10 @@ export function QRCodeAndConfig({ locations, place }: Props) {
   const [qr, setQr] = useState<string>()
   const [conf, setConf] = useState<string>()
 
-  const { refetch, data, isLoading } = useQuery({
-    queryKey: ["peer", server],
-    queryFn: ({ queryKey }) => getPeer(queryKey[1] as string),
-    enabled: false,
-  })
+  const { refetch, data, isLoading } = trpc.peer.create.useQuery(
+    { location: server! },
+    { enabled: false },
+  )
 
   useEffect(() => {
     if (!server) return
