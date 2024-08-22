@@ -17,10 +17,6 @@ To automatically format code, it is important to properly configure your IDE. Se
 - [Prisma ORM](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma)
 - [FSD](https://feature-sliced.design/ru/docs/get-started/overview) folder structure
 
-### API
-
-The API documentation is maintained in OpenAPI format in the `shared/api/schema.yaml` file. TypeScript types are [generated](https://www.npmjs.com/package/openapi-typescript) with the command `npm run api`.
-
 ### DB
 
 Run migrations when the schema changes. For local development, use Docker with PostgreSQL and pgAdmin (`localhost:5050`). Connection parameters are in `docker-compose.yml`.
@@ -41,7 +37,7 @@ The project is automatically deployed to Vercel upon merging into the main branc
 
 ### Env
 
-Fill in all required environment variables. Use `.env.example` as a template for your `.env` file.
+Fill in all required environment variables. Use `env.ts` as a template for your `.env` file.
 
 ### Security
 
