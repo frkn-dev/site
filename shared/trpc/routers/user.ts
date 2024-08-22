@@ -23,21 +23,13 @@ export const user = createTRPCRouter({
     return providers
   }),
   register: publicProcedure
-    .input(z.string())
-    .mutation(async ({ input: password }) => {
-      const validation = z
-        .string()
-        .length(128, "Invalid hash")
-        .safeParse(password)
-
-      if (!validation.success) {
-        return {
-          status: "error",
-          message: validation.error.message,
-        }
-      }
-
-      const hashedPassword = await argon2.hash(password, {
+    .input(
+      z.object({
+        password: z.string().length(128, "Invalid hash"),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const hashedPassword = await argon2.hash(input.password, {
         salt: Buffer.from(env.PASSWORD_PEPPER),
       })
 
@@ -47,25 +39,16 @@ export const user = createTRPCRouter({
 
       return {
         status: "success",
-        message: "",
       }
     }),
   login: publicProcedure
-    .input(z.string())
-    .mutation(async ({ input: password }) => {
-      const validation = z
-        .string()
-        .length(128, "Invalid hash")
-        .safeParse(password)
-
-      if (!validation.success) {
-        return {
-          status: "error",
-          message: validation.error.message,
-        }
-      }
-
-      const hashedPassword = await argon2.hash(password, {
+    .input(
+      z.object({
+        password: z.string().length(128, "Invalid hash"),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const hashedPassword = await argon2.hash(input.password, {
         salt: Buffer.from(env.PASSWORD_PEPPER),
       })
 
@@ -97,7 +80,7 @@ export const user = createTRPCRouter({
         message: "",
       }
     }),
-  logout: protectedProcedure.mutation(async () => {
+  logout: protectedProcedure.mutation(() => {
     cookies().delete("frkn_auth")
 
     return { success: true }

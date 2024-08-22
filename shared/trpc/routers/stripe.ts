@@ -45,11 +45,9 @@ export const stripe = createTRPCRouter({
 
     const customer = await getOrCreateCustomer(me)
 
-    const host = env.HOST
-
     const { url } = await stripeClient.billingPortal.sessions.create({
       customer,
-      return_url: `${host}/account`,
+      return_url: `${env.HOST}/account`,
     })
 
     return url

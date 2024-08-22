@@ -30,11 +30,6 @@ export function Form() {
   const [mnemonic, setMnemonic] = useState("")
 
   const { mutateAsync: register, isPending } = trpc.user.register.useMutation({
-    onSuccess(data) {
-      if (data.status !== "success") {
-        toast.error(data.message)
-      }
-    },
     onError() {
       toast.error(t("description.error"))
     },
@@ -49,7 +44,7 @@ export function Form() {
 
     setMnemonic(mnemonic)
 
-    await register(sha3_512(mnemonic))
+    await register({ password: sha3_512(mnemonic) })
     analytics("registration")
   }, [])
 

@@ -44,15 +44,17 @@ export function Form() {
     })
   }, [])
 
-  const form = useForm<z.infer<typeof FormSchema>>({
+  type IForm = z.infer<typeof FormSchema>
+
+  const form = useForm<IForm>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       mnemonic: "",
     },
   })
 
-  async function onSubmit({ mnemonic }: z.infer<typeof FormSchema>) {
-    const result = await login(sha3_512(mnemonic))
+  async function onSubmit({ mnemonic }: IForm) {
+    const result = await login({ password: sha3_512(mnemonic) })
     if (result?.status === "success") {
       push("/installation")
       analytics("auth")
