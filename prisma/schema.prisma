@@ -67,3 +67,8 @@ model StripeSubscriptionItems {
   @@index([subscriptionId])
   @@map("stripe_subscription_items")
 }
+
+model Tokens {
+  id    String @id
+  token String @db.Text
+}

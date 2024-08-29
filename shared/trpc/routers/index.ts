@@ -1,4 +1,5 @@
 export * from "./email-newsletter"
 export * from "./wg"
+export * from "./xray"
 export * from "./stripe"
 export * from "./user"
