@@ -41,6 +41,7 @@
     "@trpc/react-query": "11.0.0-rc.477",
     "@trpc/server": "11.0.0-rc.477",
     "@vercel/edge": "1.1.2",
+    "@vercel/kv": "2.0.0",
     "argon2": "0.31.2",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
@@ -84,7 +85,9 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": ["CVE-2024-4067"]
+      "ignoreCves": [
+        "CVE-2024-4067"
+      ]
     }
   }
 }
