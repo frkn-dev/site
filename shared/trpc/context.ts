@@ -11,10 +11,21 @@ export async function createContext() {
 
     const user = await prisma.users.findUnique({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        password: false, // NOTE: Exclude password
+        subscriptionType: true,
+        stripeCustomerId: true,
         stripeSubscription: {
-          include: {
-            stripeSubscriptionItems: true,
+          select: {
+            id: true,
+            status: true,
+            stripeSubscriptionItems: {
+              select: {
+                id: true,
+                priceId: true,
+              },
+            },
           },
         },
       },
