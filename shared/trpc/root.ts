@@ -1,11 +1,11 @@
-import { emailNewsletter, peer, stripe, user } from "./routers"
+import { emailNewsletter, stripe, user, wg } from "./routers"
 import { createTRPCRouter } from "./trpc"
 
 export const appRouter = createTRPCRouter({
   emailNewsletter,
   stripe,
   user,
-  peer,
+  wg,
 })
 
 export type AppRouter = typeof appRouter

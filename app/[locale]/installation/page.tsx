@@ -18,7 +18,7 @@ export function generateStaticParams() {
 export default async function Page({ params: { locale } }: Props) {
   setStaticParamsLocale(locale)
   await isLoggedIn()
-  const locations = await caller.peer.locations()
+  const locations = await caller.wg.locations()
   const t = await getScopedI18n("app.installation")
 
   return (

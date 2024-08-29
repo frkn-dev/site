@@ -1,4 +1,4 @@
-import type { Peer } from "@/shared/trpc/routers/peer"
+import type { Peer } from "@/shared/trpc/routers/wg"
 
 export function createConfig({ iface, peer }: Peer): string {
   return `[Interface]

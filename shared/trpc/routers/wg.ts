@@ -1,27 +1,27 @@
-import { API_BASE_URL } from "@/shared/config"
+import { WG_API_URL } from "@/shared/config"
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 
-export const peer = createTRPCRouter({
+export const wg = createTRPCRouter({
   create: protectedProcedure
     .input(z.object({ location: z.string().length(2) }))
     .query(async ({ input }) => {
       try {
         const data = await fetch(
-          `${API_BASE_URL}/peer?location=${input.location}`,
+          `${WG_API_URL}/peer?location=${input.location}`,
         )
         return data.json() as Promise<Peer>
       } catch (error) {
-        console.error("TRPC peer.create", error)
+        console.error("TRPC wg.create", error)
         return null
       }
     }),
   locations: protectedProcedure.query(async () => {
     try {
-      const data = await fetch(API_BASE_URL + "/locations")
+      const data = await fetch(WG_API_URL + "/locations")
       return data.json() as Promise<Location[]>
     } catch (error) {
-      console.error("TRPC peer.locations", error)
+      console.error("TRPC wg.locations", error)
       return null
     }
   }),

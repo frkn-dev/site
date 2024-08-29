@@ -13,7 +13,7 @@ import { useAnalytics } from "@/shared/analytics"
 import { cn } from "@/shared/clsx"
 import { useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
-import type { Location } from "@/shared/trpc/routers/peer"
+import type { Location } from "@/shared/trpc/routers/wg"
 import { Download } from "lucide-react"
 import QRCodeGen from "qrcode"
 import { useEffect, useMemo, useState } from "react"
@@ -41,7 +41,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
   const [qr, setQr] = useState<string>()
   const [conf, setConf] = useState<string>()
 
-  const { refetch, data, isLoading } = trpc.peer.create.useQuery(
+  const { refetch, data, isLoading } = trpc.wg.create.useQuery(
     { location: server! },
     { enabled: false },
   )
