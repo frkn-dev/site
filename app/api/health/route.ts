@@ -1,5 +1,5 @@
 import prisma from "@/prisma"
-import kv from "@vercel/kv"
+import { kv } from "@vercel/kv"
 import { NextResponse } from "next/server"
 
 export async function GET() {

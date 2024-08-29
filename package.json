@@ -15,10 +15,8 @@
     "test:types": "tsc --noEmit --incremental false",
     "test:lint": "biome lint . --diagnostic-level=error",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe-webhook --latest",
-    "prisma:push:development": "dotenv -e .env.development.local -- npx prisma db push",
-    "prisma:generate:development": "dotenv -e .env.development.local -- npx prisma generate",
-    "prisma:push:production": "dotenv -e .env.production.local -- npx prisma db push",
-    "prisma:generate:production": "dotenv -e .env.production.local -- npx prisma generate"
+    "prisma:push": "prisma db push",
+    "prisma:push:production": "dotenv -e .env.production.local -- prisma db push"
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",
@@ -85,9 +83,7 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": [
-        "CVE-2024-4067"
-      ]
+      "ignoreCves": ["CVE-2024-4067"]
     }
   }
 }
