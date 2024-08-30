@@ -10,13 +10,11 @@ generator client {
 }
 
 model Users {
-  id               String            @id @default(uuid())
-  password         String            @unique
-  created          DateTime          @default(now())
-  subscriptionType SubscriptionType? @map("subscription_type")
-  stripeCustomerId String?           @unique @map("stripe_customer_id")
-
-  // Relations
+  id                 String               @id @default(uuid())
+  password           String               @unique
+  created            DateTime             @default(now())
+  subscriptionType   SubscriptionType?    @map("subscription_type")
+  stripeCustomerId   String?              @unique @map("stripe_customer_id")
   stripeSubscription StripeSubscriptions?
 
   @@map("users")
@@ -27,15 +25,13 @@ enum SubscriptionType {
 }
 
 model StripeSubscriptions {
-  id      String                   @id
-  status  StripeSubscriptionStatus
-  created DateTime                 @default(now()) @map("created")
-  updated DateTime?                @map("updated")
-
-  // Relations
-  user                    Users                     @relation(fields: [userId], references: [id])
+  id                      String                    @id
+  status                  StripeSubscriptionStatus
+  created                 DateTime                  @default(now()) @map("created")
+  updated                 DateTime?                 @map("updated")
   userId                  String                    @unique @map("user_id")
   stripeSubscriptionItems StripeSubscriptionItems[]
+  user                    Users                     @relation(fields: [userId], references: [id])
 
   @@index([id])
   @@index([userId])
@@ -54,14 +50,12 @@ enum StripeSubscriptionStatus {
 }
 
 model StripeSubscriptionItems {
-  id      String    @id
-  priceId String
-  created DateTime  @default(now()) @map("created")
-  updated DateTime? @map("updated")
-
-  // Relations
-  subscription   StripeSubscriptions @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  id             String              @id
+  priceId        String
+  created        DateTime            @default(now()) @map("created")
+  updated        DateTime?           @map("updated")
   subscriptionId String
+  subscription   StripeSubscriptions @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
 
   @@index([id])
   @@index([subscriptionId])
