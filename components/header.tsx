@@ -19,7 +19,7 @@ export function Header() {
       </div>
       <div className="w-full justify-between hidden lg:flex px-6 py-4 rounded-full bg-zinc-950">
         <Link href="/#pricing">{t("pricing")}</Link>
-        <Link href="/installation">{t("connect")}</Link>
+        <Link href="/connect">{t("connect")}</Link>
         <LanguageMenu />
       </div>
       <div className="justify-self-end">

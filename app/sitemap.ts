@@ -15,15 +15,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
-      url: url + "/installation",
-      alternates: {
-        languages: {
-          en: url + "/installation",
-          ru: url + "/ru/installation",
-        },
-      },
-    },
-    {
       url: url + "/privacy-policy",
       alternates: {
         languages: {
