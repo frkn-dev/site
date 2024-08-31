@@ -4,7 +4,7 @@ import { createTRPCRouter, protectedProcedure } from "../trpc"
 
 export const wg = createTRPCRouter({
   create: protectedProcedure
-    .input(z.object({ location: z.string().length(2) }))
+    .input(z.object({ location: z.string().min(2).max(3) }))
     .query(async ({ input }) => {
       try {
         const data = await fetch(
