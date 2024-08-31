@@ -55,7 +55,7 @@ export const xray = createTRPCRouter({
       }
     }
   }),
-  get: protectedProcedure.mutation(async ({ ctx }) => {
+  get: protectedProcedure.query(async ({ ctx }) => {
     const me = ctx.user
     const token = await prisma.tokens.findUnique({
       where: { id: XRAY_TOKEN_NAME },

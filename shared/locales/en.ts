@@ -174,6 +174,20 @@ export default {
         manage: "Manage subscription",
       },
     },
+    connect: {
+      wg: "For countries with minimal censorship. When you just want to enhance privacy",
+      xray: "For countries with high censorship (Russia, Belarus, China, Iran) to bypass restrictions",
+      create: "Create",
+      table: {
+        title: "Connections",
+        protocol: "Protocol",
+        country: "Country",
+        traffic: "Traffic",
+        limit: "Limit",
+        configuration: "Configuration",
+        qr: "QR Code",
+      },
+    },
   },
   components: {
     bash_command: {
