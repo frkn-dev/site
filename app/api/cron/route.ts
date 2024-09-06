@@ -18,6 +18,7 @@ export async function GET() {
 
   const res = NextResponse.json({
     status: "ok",
+    timestamp: new Date().toISOString(),
   })
   res.headers.set(
     "Cache-Control",

@@ -1,10 +1,12 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { useAnalytics } from "@/shared/analytics"
 import { formatBytes } from "@/shared/format-bytes"
 import { formatStrategy } from "@/shared/format-strategy"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
-import { Loader2, QrCode } from "lucide-react"
+import { Loader2, MessageCircleQuestion, QrCode } from "lucide-react"
 import Link from "next/link"
 import { useMemo, useState } from "react"
 import { Card } from "./components/Card"
@@ -17,7 +19,9 @@ import wg from "./components/logo/wg.svg"
 export function Main() {
   const t = useScopedI18n("app.connect")
   const locale = useCurrentLocale()
+  const analytics = useAnalytics()
   const [isModalOpen, setModalOpen] = useState(false)
+  const [helpDialog, setHelpDialog] = useState(false)
   const [qr, setQr] = useState("")
   const { mutateAsync: create, isPending } = trpc.xray.create.useMutation()
   const { data, isLoading } = trpc.xray.get.useQuery()
@@ -54,7 +58,10 @@ export function Main() {
                   variant="outline"
                   className="ml-4"
                   disabled={isPending || isLoading || Boolean(data)}
-                  onClick={() => create()}
+                  onClick={() => {
+                    create()
+                    analytics("xrayCreated")
+                  }}
                 >
                   {isPending && (
                     <Loader2 size={16} className="mr-2 animate-spin" />
@@ -95,6 +102,11 @@ export function Main() {
                     </th>
                     <th className="border border-gray-600 px-4 py-2 text-left">
                       {t("table.limit")}
+                      <MessageCircleQuestion
+                        width={18}
+                        className="inline-block ml-1 cursor-pointer"
+                        onClick={() => setHelpDialog(true)}
+                      />
                     </th>
                     <th className="border border-gray-600 px-4 py-2 text-left">
                       {t("table.configuration")}
@@ -171,6 +183,34 @@ export function Main() {
         close={() => setModalOpen(false)}
         data={qr}
       />
+
+      <Dialog open={helpDialog} onOpenChange={() => setHelpDialog(false)}>
+        <DialogContent className="sm:max-w-[425px]">
+          <div>
+            <p>{t("table.premium")}</p>
+            <br />
+            Email:{" "}
+            <a
+              href="mailto:mail@frkn.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500"
+            >
+              mail@frkn.org
+            </a>
+            <br />
+            Telegram:{" "}
+            <a
+              href="https://t.me/frkn_support"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500"
+            >
+              @frkn_support
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }
