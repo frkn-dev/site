@@ -23,7 +23,6 @@ import { trpc } from "@/shared/trpc"
 import { validateMnemonic } from "@scure/bip39"
 import { wordlist } from "@scure/bip39/wordlists/english"
 import { Loader2 } from "lucide-react"
-import { useRouter } from "next/navigation"
 import { useMemo } from "react"
 import { toast } from "sonner"
 
@@ -32,7 +31,6 @@ export function Form() {
 
   const t = useScopedI18n("app.auth")
   const analytics = useAnalytics()
-  const { push } = useRouter()
 
   const FormSchema = useMemo(() => {
     return z.object({
@@ -55,11 +53,11 @@ export function Form() {
 
   async function onSubmit({ mnemonic }: IForm) {
     const result = await login({ password: sha3_512(mnemonic) })
-    if (result?.status === "success") {
-      push("/installation")
+    if (result.status === "success") {
       analytics("auth")
+      window.location.href = "/connect"
     } else {
-      toast.error(result?.message)
+      toast.error(result.message)
     }
   }
 

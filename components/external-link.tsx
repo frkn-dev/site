@@ -1,5 +1,5 @@
 import { ExternalLink as ExternalLinkIcon } from "lucide-react"
-import type { HTMLAttributes, PropsWithChildren } from "react"
+import type { PropsWithChildren } from "react"
 
 export function ExternalLink({
   children,
@@ -21,3 +21,11 @@ export function ExternalLink({
     </a>
   )
 }
+
+export const External = ({
+  text,
+  href,
+}: {
+  text: string
+  href: string
+}) => <ExternalLink href={href}>{text}</ExternalLink>

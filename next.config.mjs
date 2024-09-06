@@ -6,12 +6,12 @@ const nextConfig = {
     return [
       {
         source: "/installation-ru.html",
-        destination: "/ru/installation",
+        destination: "/ru/connect",
         permanent: true,
       },
       {
         source: "/installation-en.html",
-        destination: "/installation",
+        destination: "/connect",
         permanent: true,
       },
     ]

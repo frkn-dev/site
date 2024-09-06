@@ -16,14 +16,19 @@ export async function GET() {
     })
   }
 
-  const response = NextResponse.json({
+  const res = NextResponse.json({
     status: "ok",
+    timestamp: new Date().toISOString(),
   })
-  response.headers.set(
+  res.headers.set(
     "Cache-Control",
     "no-store, no-cache, must-revalidate, proxy-revalidate",
   )
-  return response
+  res.headers.set("Pragma", "no-cache")
+  res.headers.set("Expires", "0")
+  res.headers.set("Surrogate-Control", "no-store")
+
+  return res
 }
 
 async function getToken() {

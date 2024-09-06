@@ -73,6 +73,14 @@ export function User({
               <Link href="/account">{t("account")}</Link>
             </DropdownMenuItem>
           )}
+
+          <DropdownMenuItem
+            onClick={() => navigator.clipboard.writeText(user.id)}
+            className="cursor-pointer"
+          >
+            {t("myId")}
+          </DropdownMenuItem>
+
           <DropdownMenuItem
             onClick={() =>
               logout().then(() => {

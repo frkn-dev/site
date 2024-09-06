@@ -1,6 +1,7 @@
 import { usePlausible } from "next-plausible"
 
 type Events = {
+  xrayCreated: never
   downloadedConfigurationFile: never
   generatedQRcode: never
   registration: never
