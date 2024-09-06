@@ -4,6 +4,8 @@ import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import { NextResponse } from "next/server"
 
+export const revalidate = 0
+
 export async function GET() {
   const id = XRAY_TOKEN_NAME
   const token = await getToken()
