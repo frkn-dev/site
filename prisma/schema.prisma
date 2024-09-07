@@ -17,6 +17,8 @@ model Users {
   stripeCustomerId   String?              @unique @map("stripe_customer_id")
   stripeSubscription StripeSubscriptions?
 
+  wireguardConfigs WireguardConfigs[]
+
   @@map("users")
 }
 
@@ -65,4 +67,16 @@ model StripeSubscriptionItems {
 model Tokens {
   id    String @id
   token String @db.Text
+}
+
+model WireguardConfigs {
+  id      String   @id @default(uuid())
+  config  String
+  country String
+  created DateTime @default(now())
+
+  userId String @map("user_id")
+  user   Users  @relation(fields: [userId], references: [id])
+
+  @@map("wireguard_configs")
 }

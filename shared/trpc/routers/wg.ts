@@ -1,3 +1,4 @@
+import prisma from "@/prisma"
 import { WG_API_URL } from "@/shared/config"
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
@@ -5,12 +6,22 @@ import { createTRPCRouter, protectedProcedure } from "../trpc"
 export const wg = createTRPCRouter({
   create: protectedProcedure
     .input(z.object({ location: z.string().min(2).max(3) }))
-    .query(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       try {
         const data = await fetch(
           `${WG_API_URL}/peer?location=${input.location}`,
         )
-        return data.json() as Promise<Peer>
+        const json = (await data.json()) as Peer
+
+        await prisma.wireguardConfigs.create({
+          data: {
+            userId: ctx.user.id,
+            config: JSON.stringify(json),
+            country: input.location,
+          },
+        })
+
+        return json
       } catch (error) {
         console.error("TRPC wg.create", error)
         return null
@@ -24,6 +35,14 @@ export const wg = createTRPCRouter({
       console.error("TRPC wg.locations", error)
       return null
     }
+  }),
+  get: protectedProcedure.query(async ({ ctx }) => {
+    const me = ctx.user
+    const wg = await prisma.wireguardConfigs.findMany({
+      where: { userId: me.id },
+    })
+
+    return wg
   }),
 })
 

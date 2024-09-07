@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
+import { XRAY_TOKEN_NAME } from "@/shared/config"
 import argon2 from "argon2"
 import jwt from "jsonwebtoken"
 import { cookies } from "next/headers"

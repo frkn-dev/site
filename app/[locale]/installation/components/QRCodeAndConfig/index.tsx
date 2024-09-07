@@ -41,10 +41,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
   const [qr, setQr] = useState<string>()
   const [conf, setConf] = useState<string>()
 
-  const { refetch, data, isLoading } = trpc.wg.create.useQuery(
-    { location: server! },
-    { enabled: false },
-  )
+  const { mutateAsync, data, isPending } = trpc.wg.create.useMutation()
 
   useEffect(() => {
     if (!server) return
@@ -52,7 +49,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
     setQr(undefined)
     setConf(undefined)
 
-    refetch()
+    mutateAsync({ location: server })
   }, [server])
 
   useEffect(() => {
@@ -97,7 +94,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
       <p className="mb-4 text-muted-foreground text-sm max-w-80">
         {t("description")}
       </p>
-      <Select onValueChange={setServer} value={server} disabled={isLoading}>
+      <Select onValueChange={setServer} value={server} disabled={isPending}>
         <SelectTrigger className="mb-4">
           <SelectValue placeholder={t("choose_server")} />
         </SelectTrigger>
@@ -109,7 +106,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
           ))}
         </SelectContent>
       </Select>
-      {isLoading && <Skeleton className={imageClassName} />}
+      {isPending && <Skeleton className={imageClassName} />}
       {qr && (
         <div className="p-6 bg-white rounded-lg">
           <img className={imageClassName} src={qr} alt="QR code" />

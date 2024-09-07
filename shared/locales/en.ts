@@ -179,6 +179,11 @@ export default {
       wg: "For countries with minimal censorship. When you just want to enhance privacy",
       xray: "For countries with high censorship (Russia, Belarus, China, Iran) to bypass restrictions",
       create: "Create",
+      wg_alert: {
+        title: "Unstable connection to WireGuard",
+        description:
+          "WireGuard may experience interruptions due to blockages. For a reliable connection, use the XRay protocol.",
+      },
       table: {
         title: "Connections",
         protocol: "Protocol",
