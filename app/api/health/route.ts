@@ -2,6 +2,8 @@ import prisma from "@/prisma"
 import { kv } from "@vercel/kv"
 import { NextResponse } from "next/server"
 
+export const revalidate = 300
+
 export async function GET() {
   const databaseConnectionStatus = await checkDatabaseConnection()
   const kvConnectionStatus = await checkKvConnection()
