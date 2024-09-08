@@ -55,7 +55,7 @@ export function Form() {
     const result = await login({ password: sha3_512(mnemonic) })
     if (result.status === "success") {
       analytics("auth")
-      window.location.href = "/connect"
+      window.location.href = "/dashboard"
     } else {
       toast.error(result.message)
     }

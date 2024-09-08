@@ -74,6 +74,10 @@ export function User({
             </DropdownMenuItem>
           )}
 
+          <DropdownMenuItem asChild>
+            <Link href="/dashboard">{t("dashboard")}</Link>
+          </DropdownMenuItem>
+
           <DropdownMenuItem
             onClick={() => navigator.clipboard.writeText(user.id)}
             className="cursor-pointer"

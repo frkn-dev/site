@@ -2,27 +2,32 @@
 
 import { Button } from "@/components/ui/button"
 import { useConfigs } from "@/shared/hooks/use-configs"
+import { useScopedI18n } from "@/shared/locales/client"
 import { Plus } from "lucide-react"
 import { ConfigCard } from "./config-card"
+import { ConfigsTable } from "./configs-table"
 import { CreateConnectionDialog } from "./create-connection-dialog"
 import { EmptyState } from "./empty-state"
 
 export function Configs() {
+  const t = useScopedI18n("app.dashboard")
   const { data, isLoading } = useConfigs()
 
+  console.log(data)
+
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>{t("loading")}</div>
   }
 
   if (data.length > 0) {
     return (
       <div>
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold">Your configurations</h1>
+          <h1 className="text-2xl font-bold">{t("your_configurations")}</h1>
           <CreateConnectionDialog>
             <Button className="hidden sm:flex">
               <Plus className="size-4 mr-2" />
-              Add new configuration
+              {t("add_new_configuration")}
             </Button>
           </CreateConnectionDialog>
           <CreateConnectionDialog>
@@ -31,11 +36,7 @@ export function Configs() {
             </Button>
           </CreateConnectionDialog>
         </div>
-        <div className="flex gap-2 flex-wrap">
-          {data.map((config, index) => (
-            <ConfigCard key={index} config={config} />
-          ))}
-        </div>
+        <ConfigsTable data={data} />
       </div>
     )
   }

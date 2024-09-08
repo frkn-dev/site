@@ -9,6 +9,7 @@ export default {
     login: "Login",
     register: "Get Started",
     myId: "Copy my ID",
+    dashboard: "Dashboard",
     logout: "Log out",
     account: "Account",
   },
@@ -194,6 +195,54 @@ export default {
         qr: "QR Code",
         premium:
           "To increase the current limits, please contact our support team:",
+      },
+    },
+    dashboard: {
+      wg_description:
+        "For countries with minimal censorship. When you just want to enhance privacy",
+      xray_description:
+        "For countries with high censorship (Russia, Belarus, China, Iran) to bypass restrictions",
+      wg_alert: {
+        title: "Unstable connection to WireGuard",
+        description:
+          "WireGuard may experience interruptions due to blockages. For a reliable connection, use the XRay protocol.",
+      },
+      your_configurations: "Your configurations",
+      add_new_configuration: "Add new configuration",
+      loading: "Loading...",
+      create_vpn_connection: "Create VPN Connection",
+      setup_vpn_connection:
+        "Setup your VPN connection and start browsing securely",
+      select_protocol: "Select protocol",
+      select_server: "Select server",
+      choose_server: "Choose server",
+      only_one_server:
+        "Only one server connection is available in the free plan",
+      create_connection: "Create Connection",
+      upgrade_plan:
+        "You already have a WireGuard connection. Upgrade plan to create a new one",
+      no_active_configs: "You don't have any active VPN configurations yet",
+      create_first_config:
+        "Create your first configuration to start browsing the internet securely and anonymously. It only takes a couple of minutes!",
+      create_first_connection: "Create your first connection",
+      limit: "Limit",
+      used_traffic: "Used traffic",
+      copy: "Copy",
+      download: "Download",
+      country_validation_error: "Country is required for WireGuard protocol",
+      table: {
+        protocol: "Protocol",
+        country: "Country",
+        limit: "Limit",
+        traffic: "Traffic",
+        reset_limit_strategy: "Reset Limit Strategy",
+        actions: {
+          show_qr: "Show QR",
+          download_config: "Download Config",
+          copy_url: "Copy URL",
+          delete: "Delete",
+          show_instruction: "Show Instruction",
+        },
       },
     },
   },

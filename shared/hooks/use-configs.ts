@@ -1,32 +1,18 @@
+import { formatBytes } from "@/shared/format-bytes"
 import { useMemo } from "react"
 import { trpc } from "../trpc"
 
-export type Config =
-  | {
-      type: "WireGuard"
-      data: {
-        config: string
-        country: string
-      }
-    }
-  | {
-      type: "Shadowsocks"
-      data: {
-        limit: number
-        usedTraffic: number
-        links: string[]
-        strategy: string
-      }
-    }
-  | {
-      type: "XRay"
-      data: {
-        limit: number
-        usedTraffic: number
-        links: string[]
-        strategy: string
-      }
-    }
+export type Config = {
+  type: "WireGuard" | "Shadowsocks" | "XRay"
+  limit: string
+  resetLimitStrategy: string
+  usedTraffic: string
+  links: string[]
+  country: string
+  configJSON: string
+  configId: string
+  subscriptionUrl: string
+}
 
 export function useConfigs() {
   const { data: wg, isLoading: isWgLoading } = trpc.wg.get.useQuery()
@@ -38,13 +24,17 @@ export function useConfigs() {
     const result: Config[] = []
 
     if (wg) {
-      wg.forEach(({ config, country }) => {
+      wg.forEach(({ config, country, id }) => {
         result.push({
           type: "WireGuard",
-          data: {
-            config,
-            country,
-          },
+          limit: "",
+          resetLimitStrategy: "",
+          usedTraffic: "",
+          links: [],
+          country,
+          configJSON: config,
+          configId: id,
+          subscriptionUrl: "",
         })
       })
     }
@@ -52,22 +42,26 @@ export function useConfigs() {
     if (xray) {
       result.push({
         type: "XRay",
-        data: {
-          limit: xray.limit || 0,
-          usedTraffic: xray.used_traffic || 0,
-          links: xray.links.filter((link) => !link.startsWith("ss://")),
-          strategy: xray.limit_reset_strategy,
-        },
+        limit: formatBytes(xray.limit),
+        usedTraffic: formatBytes(xray.used_traffic),
+        links: xray.links.filter((link) => !link.startsWith("ss://")),
+        resetLimitStrategy: xray.limit_reset_strategy,
+        country: "",
+        configJSON: "",
+        subscriptionUrl: xray.subscription_url,
+        configId: "",
       })
 
       result.push({
         type: "Shadowsocks",
-        data: {
-          limit: xray.limit || 0,
-          usedTraffic: xray.used_traffic || 0,
-          links: xray.links.filter((link) => link.startsWith("ss://")),
-          strategy: xray.limit_reset_strategy,
-        },
+        limit: formatBytes(xray.limit),
+        usedTraffic: formatBytes(xray.used_traffic),
+        links: xray.links.filter((link) => link.startsWith("ss://")),
+        resetLimitStrategy: xray.limit_reset_strategy,
+        country: "",
+        configJSON: "",
+        subscriptionUrl: xray.subscription_url,
+        configId: "",
       })
     }
 

@@ -29,10 +29,11 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { TriangleAlert } from "lucide-react"
-import type { PropsWithChildren } from "react"
+import { type PropsWithChildren, useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -44,30 +45,34 @@ const LOCATIONS_NAME_MAP = {
   ch: "Switzerland",
 } as const
 
-const createConnectionSchema = z
-  .object({
-    protocol: z.enum(["WireGuard", "XRay"]),
-    wireguardCountry: z
-      .enum(["uk", "ru", "nl", "nl2", "ch"])
-      .refine((data) => Object.keys(LOCATIONS_NAME_MAP).includes(data), {
-        message: "Invalid country",
-      })
-      .optional(),
-  })
-  .refine(
-    (data) => {
-      if (data.protocol === "WireGuard") {
-        return !!data.wireguardCountry
-      }
-      return true
-    },
-    {
-      message: "Country is required for WireGuard protocol",
-      path: ["wireguardCountry"],
-    },
-  )
-
 export function CreateConnectionDialog({ children }: PropsWithChildren) {
+  const t = useScopedI18n("app.dashboard")
+
+  const createConnectionSchema = useMemo(() => {
+    return z
+      .object({
+        protocol: z.enum(["WireGuard", "XRay"]),
+        wireguardCountry: z
+          .enum(["uk", "ru", "nl", "nl2", "ch"])
+          .refine((data) => Object.keys(LOCATIONS_NAME_MAP).includes(data), {
+            message: "Invalid country",
+          })
+          .optional(),
+      })
+      .refine(
+        (data) => {
+          if (data.protocol === "WireGuard") {
+            return !!data.wireguardCountry
+          }
+          return true
+        },
+        {
+          message: t("country_validation_error"),
+          path: ["wireguardCountry"],
+        },
+      )
+  }, [])
+
   const { data: locations, isLoading } = trpc.wg.locations.useQuery()
   const createWg = trpc.wg.create.useMutation()
   const createXray = trpc.xray.create.useMutation()
@@ -98,10 +103,8 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-3xl">
         <DialogHeader>
-          <DialogTitle>Create VPN Connection</DialogTitle>
-          <DialogDescription>
-            Setup your VPN connection and start browsing the web with enhanced
-          </DialogDescription>
+          <DialogTitle>{t("create_vpn_connection")}</DialogTitle>
+          <DialogDescription>{t("setup_vpn_connection")}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -111,7 +114,7 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
                 name="protocol"
                 render={({ field }) => (
                   <FormItem className="mb-4">
-                    <FormLabel>Select protocol</FormLabel>
+                    <FormLabel>{t("select_protocol")}</FormLabel>
                     <FormControl>
                       <ToggleGroup
                         type="single"
@@ -129,10 +132,7 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
                             <p className="font-medium text-base mb-1">
                               WireGuard
                             </p>
-                            <p className="text-xs">
-                              For countries with minimal censorship. When you
-                              just want to enhance privacy
-                            </p>
+                            <p className="text-xs">{t("wg_description")}</p>
                           </div>
                         </ToggleGroupItem>
                         <ToggleGroupItem
@@ -142,10 +142,7 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
                         >
                           <div>
                             <p className="font-medium text-base mb-1">XRay</p>
-                            <p className="text-xs">
-                              For countries with high censorship (Russia,
-                              Belarus, China, Iran) to bypass restrictions
-                            </p>
+                            <p className="text-xs">{t("xray_description")}</p>
                           </div>
                         </ToggleGroupItem>
                       </ToggleGroup>
@@ -158,10 +155,9 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
                 <div>
                   <Alert variant="warning" className="mb-4">
                     <TriangleAlert className="size-4" />
-                    <AlertTitle>Unstable connection to WireGuard</AlertTitle>
+                    <AlertTitle>{t("wg_alert.title")}</AlertTitle>
                     <AlertDescription>
-                      WireGuard may experience interruptions due to blockages.
-                      For a reliable connection, use the XRay protocol.
+                      {t("wg_alert.description")}
                     </AlertDescription>
                   </Alert>
                   <FormField
@@ -169,7 +165,7 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
                     name="wireguardCountry"
                     render={({ field }) => (
                       <FormItem className="mb-8">
-                        <FormLabel>Select server</FormLabel>
+                        <FormLabel>{t("select_server")}</FormLabel>
                         <FormControl>
                           <Select
                             onValueChange={field.onChange}
@@ -177,7 +173,7 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
                             disabled={isLoading}
                           >
                             <SelectTrigger>
-                              <SelectValue placeholder="Choose server" />
+                              <SelectValue placeholder={t("choose_server")} />
                             </SelectTrigger>
                             <SelectContent>
                               {locations.map(({ code }) => (
@@ -193,8 +189,7 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
                           </Select>
                         </FormControl>
                         <FormDescription>
-                          Only one server connection is available in the free
-                          plan
+                          {t("only_one_server")}
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -206,14 +201,13 @@ export function CreateConnectionDialog({ children }: PropsWithChildren) {
             <DialogFooter>
               <DialogClose asChild>
                 <Button type="submit" disabled={isSubmitDisabled}>
-                  Create Connection
+                  {t("create_connection")}
                 </Button>
               </DialogClose>
             </DialogFooter>
             {hasWGConfigs && (
               <div className="text-sm text-muted-foreground text-right mt-2">
-                You already have a WireGuard connection. Upgrade plan to create
-                a new one
+                {t("upgrade_plan")}
               </div>
             )}
           </form>

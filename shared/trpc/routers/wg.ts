@@ -27,6 +27,16 @@ export const wg = createTRPCRouter({
         return null
       }
     }),
+  remove: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      await prisma.wireguardConfigs.delete({
+        where: {
+          id: input,
+          userId: ctx.user.id,
+        },
+      })
+    }),
   locations: protectedProcedure.query(async () => {
     try {
       const data = await fetch(WG_API_URL + "/locations")
