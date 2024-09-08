@@ -4,11 +4,6 @@ import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 
-const protocolsFilter = (link: string) =>
-  link.startsWith("vmess://") ||
-  link.startsWith("vless://") ||
-  link.startsWith("ss://")
-
 export const xray = createTRPCRouter({
   create: protectedProcedure.mutation(async ({ ctx }) => {
     const me = ctx.user
@@ -44,7 +39,6 @@ export const xray = createTRPCRouter({
 
         return {
           subscription_url: xray.subscription_url,
-          links: xray.links.filter(protocolsFilter),
           expire: xray.expire,
           limit: xray.data_limit,
           limit_reset_strategy: xray.data_limit_reset_strategy,
@@ -57,6 +51,7 @@ export const xray = createTRPCRouter({
   }),
   get: protectedProcedure.query(async ({ ctx }) => {
     const me = ctx.user
+    const cluster = "https://mk2.frkn.org"
     const token = await prisma.tokens.findUnique({
       where: { id: XRAY_TOKEN_NAME },
     })
@@ -74,8 +69,13 @@ export const xray = createTRPCRouter({
 
         return {
           status: xray.status,
-          subscription_url: xray.subscription_url,
-          links: xray.links.filter(protocolsFilter),
+          subscription_url: cluster + xray.subscription_url,
+          ss_links: xray.links
+            .filter((link) => link.startsWith("ss://"))
+            .map((link) => ({
+              country: extractCountry(link),
+              link,
+            })),
           used_traffic: xray.used_traffic,
           limit: xray.data_limit,
           limit_reset_strategy: xray.data_limit_reset_strategy,
@@ -90,3 +90,11 @@ export const xray = createTRPCRouter({
     }
   }),
 })
+
+function extractCountry(uri: string): string {
+  const desc = uri.split("#")?.[1]
+  if (desc) {
+    return decodeURIComponent(desc).split(" [")[0] ?? "UN"
+  }
+  return "UN"
+}

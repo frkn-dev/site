@@ -39,7 +39,7 @@ export default {
     free: {
       price: "Free",
       feature_1: "Free forever",
-      feature_2: "4 regions",
+      feature_2: "6 regions",
       feature_3: "Support for all OS",
       feature_4: "100 MB of traffic per day",
       button: "Connect",
@@ -187,6 +187,7 @@ export default {
         limit: "Limit",
         configuration: "Configuration",
         qr: "QR Code",
+        all: "All countries",
         premium:
           "To increase the current limits, please contact our support team:",
       },

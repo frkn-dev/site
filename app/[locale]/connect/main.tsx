@@ -25,9 +25,6 @@ export function Main() {
   const [qr, setQr] = useState("")
   const { mutateAsync: create, isPending } = trpc.xray.create.useMutation()
   const { data, isLoading } = trpc.xray.get.useQuery()
-  const shadowsocks = useMemo(() => {
-    return data?.links.find((link) => link.startsWith("ss://")) as string
-  }, [data?.links])
 
   const showQr = (data: string) => {
     setQr(data)
@@ -120,7 +117,9 @@ export function Main() {
                 <tbody>
                   <tr className="bg-gray-900 text-white hover:bg-gray-800">
                     <td className="border border-gray-700 px-4 py-2">XRay</td>
-                    <td className="border border-gray-700 px-4 py-2">NL</td>
+                    <td className="border border-gray-700 px-4 py-2">
+                      {t("table.all")}
+                    </td>
                     <td className="border border-gray-700 px-4 py-2">
                       {formatBytes(data.used_traffic)}
                     </td>
@@ -129,46 +128,49 @@ export function Main() {
                       {formatStrategy(data.limit_reset_strategy, locale)}
                     </td>
                     <td className="border border-gray-700 px-4 py-2">
-                      <CopyInput
-                        value={"https://mk2.frkn.org" + data.subscription_url}
-                      />
+                      <CopyInput value={data.subscription_url} />
                     </td>
                     <td className="border border-gray-700 px-4 py-2 text-center">
                       <button
                         className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-500"
-                        onClick={() =>
-                          showQr("https://mk2.frkn.org" + data.subscription_url)
-                        }
+                        onClick={() => showQr(data.subscription_url)}
                       >
                         <QrCode className="h-4 w-4" />
                       </button>
                     </td>
                   </tr>
 
-                  <tr className="bg-gray-900 text-white hover:bg-gray-800">
-                    <td className="border border-gray-700 px-4 py-2">
-                      Shadowsocks
-                    </td>
-                    <td className="border border-gray-700 px-4 py-2">NL</td>
-                    <td className="border border-gray-700 px-4 py-2">
-                      {formatBytes(data.used_traffic)}
-                    </td>
-                    <td className="border border-gray-700 px-4 py-2">
-                      {formatBytes(data.limit)}{" "}
-                      {formatStrategy(data.limit_reset_strategy, locale)}
-                    </td>
-                    <td className="border border-gray-700 px-4 py-2">
-                      <CopyInput value={shadowsocks} />
-                    </td>
-                    <td className="border border-gray-700 px-4 py-2 text-center">
-                      <button
-                        className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-500"
-                        onClick={() => showQr(shadowsocks)}
-                      >
-                        <QrCode className="h-4 w-4" />
-                      </button>
-                    </td>
-                  </tr>
+                  {data.ss_links.map((link) => (
+                    <tr
+                      className="bg-gray-900 text-white hover:bg-gray-800"
+                      key={link.link}
+                    >
+                      <td className="border border-gray-700 px-4 py-2">
+                        Shadowsocks
+                      </td>
+                      <td className="border border-gray-700 px-4 py-2">
+                        {link.country}
+                      </td>
+                      <td className="border border-gray-700 px-4 py-2">
+                        {formatBytes(data.used_traffic)}
+                      </td>
+                      <td className="border border-gray-700 px-4 py-2">
+                        {formatBytes(data.limit)}{" "}
+                        {formatStrategy(data.limit_reset_strategy, locale)}
+                      </td>
+                      <td className="border border-gray-700 px-4 py-2">
+                        <CopyInput value={link.link} />
+                      </td>
+                      <td className="border border-gray-700 px-4 py-2 text-center">
+                        <button
+                          className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-500"
+                          onClick={() => showQr(link.link)}
+                        >
+                          <QrCode className="h-4 w-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
