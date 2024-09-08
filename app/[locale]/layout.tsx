@@ -33,7 +33,7 @@ export default function RootLayout({
       className={cn(GeistSans.variable, GeistMono.variable, "h-full")}
     >
       <head>
-        <Plausible domain={HOSTNAME} />
+        <Plausible domain={HOSTNAME} revenue={true} />
       </head>
 
       <body className="h-full bg-black text-white">

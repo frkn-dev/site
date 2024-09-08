@@ -22,6 +22,7 @@ model Users {
 
 enum SubscriptionType {
   Stripe
+  Lava
 }
 
 model StripeSubscriptions {
@@ -47,6 +48,18 @@ enum StripeSubscriptionStatus {
   canceled
   unpaid
   paused
+}
+
+enum LavaSubscriptionStatus {
+  new
+  in_progress
+  completed
+  failed
+  cancelled
+  subscription_active
+  subscription_expired
+  subscription_cancelled
+  subscription_failed
 }
 
 model StripeSubscriptionItems {

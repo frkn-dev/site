@@ -45,14 +45,19 @@ export default {
       button: "Подключиться",
     },
     pro: {
+      price: "400 ₽",
       in_month: "в месяц",
       feature_1: "Всё, что в Free",
       feature_2: "Без лимитов на трафик",
       button: "Купить",
     },
     payment_provider_dialog: {
-      title: "Платежный провайдер",
+      title: "Способ оплаты",
       description: "Выберите платежный провайдер",
+      lava: "Зарубежные карты",
+      lava_rub: "Рублевые карты (Банки РФ)",
+      pay: "Оплатить",
+      invalid: "Неверный адрес электронной почты",
     },
   },
   newsletter_form: {
