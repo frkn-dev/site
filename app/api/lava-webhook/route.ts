@@ -8,12 +8,9 @@ import type { NextRequest } from "next/server"
 export async function POST(req: NextRequest) {
   try {
     const body: components["schemas"]["SaleWebhook"] = await req.json()
-    const signature = req.headers.get("X-Api-Key")
+    const signature = req.headers.get("x-api-key")
 
-    console.log("lava-headers:", req.headers) // TODO
-    console.log("lava-webhook:", signature, body)
-
-    if (signature !== env.LAVA_TOP_SECRET_KEY) {
+    if (signature !== env.LAVA_TOP_WEBHOOK_SECRET) {
       return NextResponse.json(
         { message: "Missing signature" },
         { status: 401 },
