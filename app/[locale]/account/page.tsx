@@ -26,7 +26,10 @@ export default async function Page({ params: { locale } }: Props) {
   const stripeStatus = me.stripeSubscription?.status ?? "unknown"
   const lavaSubscriptions = await prisma.lavaSubscriptions.findMany({
     where: {
-      userId: me.id,
+      OR: [
+        { contractId: me.lavaParentContractId || undefined },
+        { parentContractId: me.lavaParentContractId },
+      ],
     },
   })
 

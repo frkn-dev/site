@@ -10,13 +10,13 @@ generator client {
 }
 
 model Users {
-  id                 String               @id @default(uuid())
-  password           String               @unique
-  created            DateTime             @default(now())
-  subscriptionType   SubscriptionType?    @map("subscription_type")
-  stripeCustomerId   String?              @unique @map("stripe_customer_id")
-  stripeSubscription StripeSubscriptions?
-  lavaSubscriptions  LavaSubscriptions[]
+  id                   String               @id @default(uuid())
+  password             String               @unique
+  created              DateTime             @default(now())
+  subscriptionType     SubscriptionType?    @map("subscription_type")
+  stripeCustomerId     String?              @unique @map("stripe_customer_id")
+  stripeSubscription   StripeSubscriptions?
+  lavaParentContractId String?              @unique @map("lava_parent_contract_id")
 
   @@map("users")
 }
@@ -50,11 +50,8 @@ model LavaSubscriptions {
   productId        String?
   amount           Float?
   currency         String?
-  userId           String
 
-  user Users @relation(fields: [userId], references: [id])
-
-  @@index([userId])
+  @@index([parentContractId])
   @@map("lava_subscriptions")
 }
 

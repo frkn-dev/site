@@ -1,4 +1,5 @@
 import { env } from "@/env"
+import prisma from "@/prisma"
 import type { components } from "@/shared/types/lava"
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
@@ -15,7 +16,7 @@ export const lava = createTRPCRouter({
         lang: z.string(),
       }),
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
       try {
         const body: components["schemas"]["InvoiceRequestDto"] = {
           email: input.email,
@@ -34,9 +35,18 @@ export const lava = createTRPCRouter({
           },
           body: JSON.stringify(body),
         })
-        return data.json() as Promise<
-          components["schemas"]["InvoicePaymentParamsResponse"]
-        >
+        const invoice: components["schemas"]["InvoicePaymentParamsResponse"] =
+          await data.json()
+
+        await prisma.users.update({
+          where: { id: ctx.user.id },
+          data: {
+            subscriptionType: "Lava",
+            lavaParentContractId: invoice.id,
+          },
+        })
+
+        return invoice
       } catch (error) {
         console.error("TRPC lava.invoice", error)
         return null
