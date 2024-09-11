@@ -10,6 +10,9 @@ export async function POST(req: NextRequest) {
     const body: components["schemas"]["SaleWebhook"] = await req.json()
     const signature = req.headers.get("X-Api-Key")
 
+    console.log("lava-headers:", req.headers) // TODO
+    console.log("lava-webhook:", signature, body)
+
     if (signature !== env.LAVA_TOP_SECRET_KEY) {
       return NextResponse.json(
         { message: "Missing signature" },
@@ -21,8 +24,6 @@ export async function POST(req: NextRequest) {
     const type = url.searchParams.get(
       "type",
     ) as components["schemas"]["WebhookEventTypeDto"]
-
-    console.log("lava-webhook:", signature, body) // TODO
 
     await prisma.lavaSubscriptions.create({
       data: {
