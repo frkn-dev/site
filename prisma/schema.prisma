@@ -16,6 +16,7 @@ model Users {
   subscriptionType   SubscriptionType?    @map("subscription_type")
   stripeCustomerId   String?              @unique @map("stripe_customer_id")
   stripeSubscription StripeSubscriptions?
+  lavaSubscriptions  LavaSubscriptions[]
 
   @@map("users")
 }
@@ -37,6 +38,24 @@ model StripeSubscriptions {
   @@index([id])
   @@index([userId])
   @@map("stripe_subscriptions")
+}
+
+model LavaSubscriptions {
+  contractId       String    @unique
+  parentContractId String?
+  status           String?
+  type             String?
+  timestamp        DateTime?
+  errorMessage     String?
+  productId        String?
+  amount           Float?
+  currency         String?
+  userId           String
+
+  user Users @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("lava_subscriptions")
 }
 
 enum StripeSubscriptionStatus {

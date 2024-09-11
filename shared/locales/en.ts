@@ -9,6 +9,7 @@ export default {
     login: "Login",
     register: "Get Started",
     myId: "Copy my ID",
+    payments: "Payments",
     logout: "Log out",
     account: "Account",
   },
@@ -178,6 +179,7 @@ export default {
         provider: "Provider",
         status: "Status",
         manage: "Manage subscription",
+        inactive: "Active subscriptions not found.",
       },
     },
     connect: {

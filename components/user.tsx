@@ -82,6 +82,13 @@ export function User({
           </DropdownMenuItem>
 
           <DropdownMenuItem
+            onClick={() => router.push("/account")}
+            className="cursor-pointer"
+          >
+            {t("payments")}
+          </DropdownMenuItem>
+
+          <DropdownMenuItem
             onClick={() =>
               logout().then(() => {
                 router.refresh()

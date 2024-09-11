@@ -9,6 +9,7 @@ export default {
     login: "Войти",
     register: "Регистрация",
     myId: "Скопировать ID",
+    payments: "Платежи",
     logout: "Выйти",
     account: "Аккаунт",
   },
@@ -178,6 +179,7 @@ export default {
         provider: "Провайдер",
         status: "Статус",
         manage: "Управление подпиской",
+        inactive: "Активные подписки не найдены.",
       },
     },
     connect: {
