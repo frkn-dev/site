@@ -9,6 +9,7 @@ export default {
     login: "Login",
     register: "Get Started",
     myId: "Copy my ID",
+    payments: "Payments",
     logout: "Log out",
     account: "Account",
   },
@@ -45,6 +46,7 @@ export default {
       button: "Connect",
     },
     pro: {
+      price: "$5",
       in_month: "per month",
       feature_1: "Everything in Free",
       feature_2: "Unlimited traffic",
@@ -53,6 +55,10 @@ export default {
     payment_provider_dialog: {
       title: "Payment provider",
       description: "Choose a payment provider",
+      lava: "Payment by Card",
+      lava_rub: "Ruble Cards (Russian Banks)",
+      pay: "Pay",
+      invalid: "Invalid email address",
     },
   },
   newsletter_form: {
@@ -173,6 +179,7 @@ export default {
         provider: "Provider",
         status: "Status",
         manage: "Manage subscription",
+        inactive: "Active subscriptions not found.",
       },
     },
     connect: {

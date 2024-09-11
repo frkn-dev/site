@@ -6,6 +6,7 @@ type Events = {
   generatedQRcode: never
   registration: never
   auth: never
+  subscribe: { revenue: { currency: string; amount: number } }
 }
 
 export const useAnalytics = () => {

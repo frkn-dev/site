@@ -4,6 +4,13 @@ import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 
+const proxies = {
+  vmess: {},
+  vless: {},
+  shadowsocks: {},
+}
+const inbounds = {}
+
 export const xray = createTRPCRouter({
   create: protectedProcedure.mutation(async ({ ctx }) => {
     const me = ctx.user
@@ -11,12 +18,8 @@ export const xray = createTRPCRouter({
       username: me.id,
       data_limit: 104_857_600, // 100 MB
       data_limit_reset_strategy: "day",
-      proxies: {
-        vmess: {},
-        vless: {},
-        shadowsocks: {},
-      },
-      inbounds: {},
+      proxies,
+      inbounds,
     }
 
     const token = await prisma.tokens.findUnique({
@@ -49,9 +52,45 @@ export const xray = createTRPCRouter({
       }
     }
   }),
+  update: protectedProcedure.mutation(async ({ ctx }) => {
+    const me = ctx.user
+    const timestamp = Math.floor(Date.now() / 1000)
+
+    const user: components["schemas"]["UserModify"] = {
+      status: "active",
+      data_limit: 0, // unlimited
+      data_limit_reset_strategy: "no_reset",
+      expire: timestamp + 31 * 24 * 60 * 60, // 31 days
+      proxies,
+      inbounds,
+    }
+
+    const token = await prisma.tokens.findUnique({
+      where: { id: XRAY_TOKEN_NAME },
+    })
+
+    if (token) {
+      try {
+        const response = await fetch(env.XRAY_API + "/api/user/" + me.id, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: "Bearer " + token.token,
+          },
+          body: JSON.stringify(user),
+        })
+        const xray: components["schemas"]["UserResponse"] =
+          await response.json()
+
+        return { status: xray.status }
+      } catch (error) {
+        console.error("XRay user create", error)
+        return null
+      }
+    }
+  }),
   get: protectedProcedure.query(async ({ ctx }) => {
     const me = ctx.user
-    const cluster = "https://mk2.frkn.org"
     const token = await prisma.tokens.findUnique({
       where: { id: XRAY_TOKEN_NAME },
     })
@@ -69,7 +108,7 @@ export const xray = createTRPCRouter({
 
         return {
           status: xray.status,
-          subscription_url: cluster + xray.subscription_url,
+          subscription_url: env.XRAY_API + xray.subscription_url,
           ss_links: xray.links
             .filter((link) => link.startsWith("ss://"))
             .map((link) => ({

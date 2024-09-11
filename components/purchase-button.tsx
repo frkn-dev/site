@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-
 import { useScopedI18n } from "@/shared/locales/client"
 import { useMe } from "@/shared/services/auth/use-me"
 import { $modals } from "@/shared/store"
