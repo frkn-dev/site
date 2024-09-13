@@ -24,14 +24,16 @@ export default async function Page({ params: { locale } }: Props) {
   const t = await getScopedI18n("app.account.subscription")
   const me = await isLoggedIn()
   const stripeStatus = me.stripeSubscription?.status ?? "unknown"
-  const lavaSubscriptions = await prisma.lavaSubscriptions.findMany({
-    where: {
-      OR: [
-        { contractId: me.lavaParentContractId || undefined },
-        { parentContractId: me.lavaParentContractId },
-      ],
-    },
-  })
+  const lavaSubscriptions = me.lavaParentContractId
+    ? await prisma.lavaSubscriptions.findMany({
+        where: {
+          OR: [
+            { contractId: me.lavaParentContractId },
+            { parentContractId: me.lavaParentContractId },
+          ],
+        },
+      })
+    : []
 
   return (
     <PageSection>

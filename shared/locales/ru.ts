@@ -11,7 +11,6 @@ export default {
     myId: "Скопировать ID",
     payments: "Платежи",
     logout: "Выйти",
-    account: "Аккаунт",
   },
   hero: {
     h1: "FRKN — свободный VPN для свободных людей",

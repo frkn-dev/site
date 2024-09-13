@@ -68,12 +68,6 @@ export function User({
           </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align={align}>
-          {isSubscriber && (
-            <DropdownMenuItem asChild>
-              <Link href="/account">{t("account")}</Link>
-            </DropdownMenuItem>
-          )}
-
           <DropdownMenuItem
             onClick={() => navigator.clipboard.writeText(user.id)}
             className="cursor-pointer"
@@ -81,12 +75,11 @@ export function User({
             {t("myId")}
           </DropdownMenuItem>
 
-          <DropdownMenuItem
-            onClick={() => router.push("/account")}
-            className="cursor-pointer"
-          >
-            {t("payments")}
-          </DropdownMenuItem>
+          {isSubscriber && (
+            <DropdownMenuItem asChild>
+              <Link href="/account">{t("payments")}</Link>
+            </DropdownMenuItem>
+          )}
 
           <DropdownMenuItem
             onClick={() =>
