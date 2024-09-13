@@ -44,7 +44,13 @@ export async function POST(req: NextRequest) {
       const user = await prisma.users.findUnique({
         where: { lavaBuyerId },
       })
-      if (user) await upgrade(user.id)
+      if (user) {
+        await upgrade(user.id)
+      } else {
+        console.error("lava: user not found", body.buyer.email, lavaBuyerId)
+      }
+    } else {
+      console.error("lava: new status", body.status)
     }
 
     return NextResponse.json({ status: "ok" })

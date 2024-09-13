@@ -41,7 +41,8 @@ model StripeSubscriptions {
 }
 
 model LavaSubscriptions {
-  lavaBuyerId      String    @id
+  id               String    @id @default(uuid())
+  lavaBuyerId      String
   contractId       String?
   parentContractId String?
   status           String?
@@ -52,6 +53,7 @@ model LavaSubscriptions {
   amount           Float?
   currency         String?
 
+  @@index([lavaBuyerId])
   @@map("lava_subscriptions")
 }
 
