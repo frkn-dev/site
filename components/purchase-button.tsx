@@ -16,15 +16,6 @@ export function PurchaseButton() {
   const router = useRouter()
 
   return (
-    <Button variant="default" className="w-full" asChild>
-      <Link href="https://t.me/frkn_support" target="_blank">
-        {t("pro.button")}
-      </Link>
-    </Button>
-  )
-
-  // biome-ignore lint/correctness/noUnreachable: <explanation>
-  return (
     <Button
       variant="default"
       className="w-full"

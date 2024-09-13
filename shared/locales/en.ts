@@ -56,8 +56,12 @@ export default {
       description: "Choose a payment provider",
       lava: "Payment by Card",
       lava_rub: "Ruble Cards (Russian Banks)",
+      crypto: "Cryptocurrencies",
+      sbp: "The Faster Payments System (SBP)",
       pay: "Pay",
+      email_required: "Enter your e-mail",
       invalid: "Invalid email address",
+      support: "Contact our support team on Telegram",
     },
   },
   newsletter_form: {

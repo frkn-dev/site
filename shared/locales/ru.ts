@@ -45,7 +45,7 @@ export default {
       button: "Подключиться",
     },
     pro: {
-      price: "400 ₽",
+      price: "500 ₽",
       in_month: "в месяц",
       feature_1: "Всё, что в Free",
       feature_2: "Без лимитов на трафик",
@@ -56,8 +56,12 @@ export default {
       description: "Выберите платежный провайдер",
       lava: "Зарубежные карты",
       lava_rub: "Рублевые карты (Банки РФ)",
+      crypto: "Криптовалюта",
+      sbp: "Система быстрых платежей (СБП)",
       pay: "Оплатить",
+      email_required: "Введите e-mail",
       invalid: "Неверный адрес электронной почты",
+      support: "Обратитесь в нашу поддержку в Telegram",
     },
   },
   newsletter_form: {
