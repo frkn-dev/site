@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
+import { hashEmail } from "@/shared/hmac"
 import type { components } from "@/shared/types/lava"
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
@@ -42,7 +43,7 @@ export const lava = createTRPCRouter({
           where: { id: ctx.user.id },
           data: {
             subscriptionType: "Lava",
-            lavaParentContractId: invoice.id,
+            lavaBuyerId: hashEmail(input.email),
           },
         })
 

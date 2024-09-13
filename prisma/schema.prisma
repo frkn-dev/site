@@ -10,13 +10,13 @@ generator client {
 }
 
 model Users {
-  id                   String               @id @default(uuid())
-  password             String               @unique
-  created              DateTime             @default(now())
-  subscriptionType     SubscriptionType?    @map("subscription_type")
-  stripeCustomerId     String?              @unique @map("stripe_customer_id")
-  stripeSubscription   StripeSubscriptions?
-  lavaParentContractId String?              @unique @map("lava_parent_contract_id")
+  id                 String               @id @default(uuid())
+  password           String               @unique
+  created            DateTime             @default(now())
+  subscriptionType   SubscriptionType?    @map("subscription_type")
+  stripeCustomerId   String?              @unique @map("stripe_customer_id")
+  stripeSubscription StripeSubscriptions?
+  lavaBuyerId        String?              @unique @map("lava_buyer_id")
 
   @@map("users")
 }
@@ -41,7 +41,8 @@ model StripeSubscriptions {
 }
 
 model LavaSubscriptions {
-  contractId       String    @unique
+  lavaBuyerId      String    @id
+  contractId       String?
   parentContractId String?
   status           String?
   type             String?
@@ -51,7 +52,6 @@ model LavaSubscriptions {
   amount           Float?
   currency         String?
 
-  @@index([parentContractId])
   @@map("lava_subscriptions")
 }
 
@@ -64,18 +64,6 @@ enum StripeSubscriptionStatus {
   canceled
   unpaid
   paused
-}
-
-enum LavaSubscriptionStatus {
-  new
-  in_progress
-  completed
-  failed
-  cancelled
-  subscription_active
-  subscription_expired
-  subscription_cancelled
-  subscription_failed
 }
 
 model StripeSubscriptionItems {

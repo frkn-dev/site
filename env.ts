@@ -6,6 +6,7 @@ export const env = createEnv({
     HOST: z.string().url(),
     PASSWORD_PEPPER: z.string().min(1),
     JWT_SECRET: z.string().min(1),
+    HMAC_SECRET: z.string().min(1),
     MAIL_SENDER_API_KEY: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().startsWith("sk_"),
     STRIPE_PUBLISHABLE_KEY: z.string().startsWith("pk_"),

@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
+import { hashEmail } from "@/shared/hmac"
 import { caller } from "@/shared/trpc/caller"
 import type { components } from "@/shared/types/lava"
 import { NextResponse } from "next/server"
@@ -24,7 +25,8 @@ export async function POST(req: NextRequest) {
 
     await prisma.lavaSubscriptions.create({
       data: {
-        contractId: body.contractId!,
+        lavaBuyerId: hashEmail(body.buyer?.email!),
+        contractId: body.contractId,
         parentContractId: body.parentContractId,
         status: body.status,
         type,

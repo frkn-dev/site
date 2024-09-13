@@ -15,7 +15,7 @@ export async function createContext() {
         id: true,
         password: false, // NOTE: Exclude password
         subscriptionType: true,
-        lavaParentContractId: true,
+        lavaBuyerId: true,
         stripeCustomerId: true,
         stripeSubscription: {
           select: {
