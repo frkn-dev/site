@@ -41,4 +41,4 @@ The project is automatically deployed to Vercel upon merging into the main branc
 
 ### Security
 
-The `pnpm test` command includes a package audit. Additionally, to ensure the security of our project, periodically update packages using `ncu` ([npm-check-updates](https://www.npmjs.com/package/npm-check-updates)) and [scan](https://www.npmjs.com/package/snyk) them with `snyk test`.
+The `pnpm test` command includes a package audit. Additionally, to ensure the security of our project, periodically update packages using `ncu` ([npm-check-updates](https://www.npmjs.com/package/npm-check-updates)) and [scan](https://www.npmjs.com/package/snyk) them with `snyk test`
