@@ -5,7 +5,7 @@ import { PricingFeature } from "@/components/landing/pricing-feature"
 import { PageSection } from "@/components/page-section"
 import { PurchaseButton } from "@/components/purchase-button"
 import { Button } from "@/components/ui/button"
-import { formatPrice } from "@/shared/format-price"
+import { formatPrice } from "@/shared/format/price"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
 import { GitPullRequestDraft, Logs, Rocket, Shield } from "lucide-react"
@@ -54,7 +54,7 @@ export default async function Home({ params: { locale } }: Props) {
           <div className="p-8 rounded-sm shadow-lg">
             <h3 className="mb-2 text-3xl font-bold tracking-tight">Free</h3>
             <div className="mb-4 flex items-center gap-2 text-xl font-semibold">
-              {formatPrice(0)}
+              {formatPrice(0, locale)}
             </div>
             <div className="mb-6 space-y-2">
               <PricingFeature>{pricingT("free.feature_1")}</PricingFeature>

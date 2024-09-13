@@ -30,9 +30,7 @@ export const user = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      const hashedPassword = await argon2.hash(input.password, {
-        salt: Buffer.from(env.PASSWORD_PEPPER),
-      })
+      const hashedPassword = await hashPassword(input.password)
 
       const user = await prisma.users.create({
         data: { password: hashedPassword },
@@ -50,10 +48,7 @@ export const user = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      const hashedPassword = await argon2.hash(input.password, {
-        salt: Buffer.from(env.PASSWORD_PEPPER),
-      })
-
+      const hashedPassword = await hashPassword(input.password)
       const user = await prisma.users.findUnique({
         where: { password: hashedPassword },
       })
@@ -88,3 +83,9 @@ export const user = createTRPCRouter({
     return { success: true }
   }),
 })
+
+export async function hashPassword(password: string): Promise<string> {
+  return argon2.hash(password, {
+    salt: Buffer.from(env.PASSWORD_PEPPER),
+  })
+}
