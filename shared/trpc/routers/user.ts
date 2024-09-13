@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import { cookies } from "next/headers"
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
+import { create } from "./xray"
 
 export const user = createTRPCRouter({
   me: publicProcedure.query(async ({ ctx }) => {
@@ -33,9 +34,10 @@ export const user = createTRPCRouter({
         salt: Buffer.from(env.PASSWORD_PEPPER),
       })
 
-      await prisma.users.create({
+      const user = await prisma.users.create({
         data: { password: hashedPassword },
       })
+      await create(user.id)
 
       return {
         status: "success",
