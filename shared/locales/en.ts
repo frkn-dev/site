@@ -50,6 +50,7 @@ export default {
       feature_1: "Everything in Free",
       feature_2: "Unlimited traffic",
       button: "Buy",
+      active: "Active",
     },
     payment_provider_dialog: {
       title: "Payment provider",
@@ -181,6 +182,8 @@ export default {
         title: "Subscription information",
         provider: "Provider",
         status: "Status",
+        amount: "Amount",
+        error: "Error",
         manage: "Manage subscription",
         inactive: "Active subscriptions not found.",
       },
@@ -199,7 +202,7 @@ export default {
         qr: "QR Code",
         all: "All countries",
         premium:
-          "To increase the current limits, please contact our support team:",
+          "To increase the current limits, please visit the Pricing page or contact our support team:",
       },
     },
   },

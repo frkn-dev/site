@@ -52,38 +52,36 @@ export default async function Page({ params: { locale } }: Props) {
             <div className="flex flex-wrap gap-4">
               {lavaSubscriptions.map((payment) => (
                 <div
-                  key={payment.contractId}
+                  key={payment.id}
                   className="border rounded-lg p-4 shadow-sm bg-gray-100 text-black w-64"
                 >
-                  <div className="text-lg font-bold">{payment.contractId}</div>
+                  {payment.timestamp && (
+                    <div className="text-lg font-bold">
+                      {new Date(payment.timestamp).toLocaleString(locale)}
+                    </div>
+                  )}
+
+                  {payment.contractId && (
+                    <div className="text-sm mt-2">
+                      <strong>ID:</strong> {payment.contractId}
+                    </div>
+                  )}
                   {payment.parentContractId && (
                     <div className="text-sm text-gray-500">
                       Parent ID: {payment.parentContractId}
                     </div>
                   )}
-                  {payment.timestamp && (
-                    <div className="text-sm mt-2">
-                      <strong>Timestamp:</strong>{" "}
-                      {new Date(payment.timestamp).toLocaleString()}
-                    </div>
-                  )}
-                  {payment.type && (
-                    <div className="text-sm mt-1">
-                      <strong>Type:</strong> {payment.type}
-                    </div>
-                  )}
                   <div className="text-sm mt-1">
-                    <strong>Amount:</strong> {payment.amount?.toFixed(2)}{" "}
+                    <strong>{t("amount")}:</strong> {payment.amount}{" "}
                     {payment.currency}
                   </div>
-                  {payment.status && (
-                    <div className="text-sm mt-1">
-                      <strong>Status:</strong> {payment.status}
-                    </div>
-                  )}
+                  <div className="text-sm mt-1">
+                    <strong>{t("status")}:</strong> {payment.status}
+                  </div>
+
                   {payment.errorMessage && (
                     <div className="text-sm mt-1 text-red-500">
-                      <strong>Error:</strong> {payment.errorMessage}
+                      <strong>{t("error")}:</strong> {payment.errorMessage}
                     </div>
                   )}
                 </div>

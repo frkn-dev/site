@@ -19,10 +19,11 @@ export function PurchaseButton() {
     <Button
       variant="default"
       className="w-full"
-      disabled={isSubscriber}
       onClick={() => {
         if (!me) {
           router.push("/registration")
+        } else if (isSubscriber) {
+          router.push("/account")
         } else {
           $modals.setKey("paymentProvider", {
             open: true,
@@ -30,7 +31,7 @@ export function PurchaseButton() {
         }
       }}
     >
-      {isSubscriber ? "Active" : t("pro.button")}
+      {isSubscriber ? t("pro.active") : t("pro.button")}
     </Button>
   )
 }

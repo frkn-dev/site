@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
 import { formatBytes } from "@/shared/format/bytes"
 import { formatStrategy } from "@/shared/format/strategy"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
@@ -108,6 +108,7 @@ export function Main() {
                     <td className="border border-gray-700 px-4 py-2">
                       {formatBytes(data.limit)}{" "}
                       {formatStrategy(data.limit_reset_strategy, locale)}
+                      {formatExpire(data.expire, locale)}
                     </td>
                     <td className="border border-gray-700 px-4 py-2">
                       <CopyInput value={data.subscription_url} />
@@ -170,6 +171,8 @@ export function Main() {
 
       <Dialog open={helpDialog} onOpenChange={() => setHelpDialog(false)}>
         <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader></DialogHeader>
+
           <div>
             <p>{t("table.premium")}</p>
             <br />
@@ -197,4 +200,10 @@ export function Main() {
       </Dialog>
     </>
   )
+}
+
+function formatExpire(expire: number | null | undefined, locale: string) {
+  if (!expire) return null
+
+  return "(" + new Date(expire * 1000).toLocaleDateString(locale) + ")"
 }
