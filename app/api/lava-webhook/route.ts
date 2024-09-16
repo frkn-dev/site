@@ -1,7 +1,7 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
 import { hashEmail } from "@/shared/hmac"
-import { caller } from "@/shared/trpc/caller"
+import { upgrade } from "@/shared/trpc/routers/xray"
 import type { components } from "@/shared/types/lava"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
@@ -11,7 +11,8 @@ export async function POST(req: NextRequest) {
     const body: components["schemas"]["SaleWebhook"] = await req.json()
     const signature = req.headers.get("x-api-key")
 
-    if (signature !== env.LAVA_TOP_WEBHOOK_SECRET) {
+    if (signature !== env.LAVA_TOP_WEBHOOK_SECRET || !body.buyer?.email) {
+      console.error("lava-webhook", signature, body)
       return NextResponse.json(
         { message: "Missing signature" },
         { status: 401 },
@@ -22,10 +23,11 @@ export async function POST(req: NextRequest) {
     const type = url.searchParams.get(
       "type",
     ) as components["schemas"]["WebhookEventTypeDto"]
+    const lavaBuyerId = hashEmail(body.buyer.email)
 
     await prisma.lavaSubscriptions.create({
       data: {
-        lavaBuyerId: hashEmail(body.buyer?.email!),
+        lavaBuyerId,
         contractId: body.contractId,
         parentContractId: body.parentContractId,
         status: body.status,
@@ -38,9 +40,20 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    const message = await caller.xray.update()
+    if (body.status === "completed" || body.status === "subscription-active") {
+      const user = await prisma.users.findUnique({
+        where: { lavaBuyerId },
+      })
+      if (user) {
+        await upgrade(user.id)
+      } else {
+        console.error("lava: user not found", body.buyer.email, lavaBuyerId)
+      }
+    } else {
+      console.error("lava: new status", body.status)
+    }
 
-    return NextResponse.json({ message }, { status: 200 })
+    return NextResponse.json({ status: "ok" })
   } catch (error) {
     console.error("POST /api/lava-webhook", error)
     return NextResponse.json(

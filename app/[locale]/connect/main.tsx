@@ -1,14 +1,13 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { useAnalytics } from "@/shared/analytics"
-import { formatBytes } from "@/shared/format-bytes"
-import { formatStrategy } from "@/shared/format-strategy"
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
+import { formatBytes } from "@/shared/format/bytes"
+import { formatStrategy } from "@/shared/format/strategy"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
 import { Loader2, MessageCircleQuestion, QrCode } from "lucide-react"
 import Link from "next/link"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import { Card } from "./components/Card"
 import { CopyInput } from "./components/CopyInput"
 import { Instructions } from "./components/Instructions"
@@ -19,11 +18,9 @@ import wg from "./components/logo/wg.svg"
 export function Main() {
   const t = useScopedI18n("app.connect")
   const locale = useCurrentLocale()
-  const analytics = useAnalytics()
   const [isModalOpen, setModalOpen] = useState(false)
   const [helpDialog, setHelpDialog] = useState(false)
   const [qr, setQr] = useState("")
-  const { mutateAsync: create, isPending } = trpc.xray.create.useMutation()
   const { data, isLoading } = trpc.xray.get.useQuery()
 
   const showQr = (data: string) => {
@@ -50,22 +47,7 @@ export function Main() {
               logo={v2ray}
               title="XRay"
               subtitle={t("xray")}
-              action={() => (
-                <Button
-                  variant="outline"
-                  className="ml-4"
-                  disabled={isPending || isLoading || Boolean(data)}
-                  onClick={() => {
-                    create()
-                    analytics("xrayCreated")
-                  }}
-                >
-                  {isPending && (
-                    <Loader2 size={16} className="mr-2 animate-spin" />
-                  )}
-                  {t("create")}
-                </Button>
-              )}
+              action={() => null}
             />
           </div>
         </div>
@@ -126,6 +108,7 @@ export function Main() {
                     <td className="border border-gray-700 px-4 py-2">
                       {formatBytes(data.limit)}{" "}
                       {formatStrategy(data.limit_reset_strategy, locale)}
+                      {formatExpire(data.expire, locale)}
                     </td>
                     <td className="border border-gray-700 px-4 py-2">
                       <CopyInput value={data.subscription_url} />
@@ -188,6 +171,8 @@ export function Main() {
 
       <Dialog open={helpDialog} onOpenChange={() => setHelpDialog(false)}>
         <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader></DialogHeader>
+
           <div>
             <p>{t("table.premium")}</p>
             <br />
@@ -215,4 +200,10 @@ export function Main() {
       </Dialog>
     </>
   )
+}
+
+function formatExpire(expire: number | null | undefined, locale: string) {
+  if (!expire) return null
+
+  return "(" + new Date(expire * 1000).toLocaleDateString(locale) + ")"
 }

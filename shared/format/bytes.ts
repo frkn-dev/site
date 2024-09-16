@@ -1,5 +1,5 @@
 export function formatBytes(bytes?: number, unit = true): string {
-  if (bytes === undefined) return "∞"
+  if (bytes === undefined || bytes === null) return "∞"
 
   const megabytes = bytes / (1024 * 1024)
 

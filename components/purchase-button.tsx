@@ -16,22 +16,14 @@ export function PurchaseButton() {
   const router = useRouter()
 
   return (
-    <Button variant="default" className="w-full" asChild>
-      <Link href="https://t.me/frkn_support" target="_blank">
-        {t("pro.button")}
-      </Link>
-    </Button>
-  )
-
-  // biome-ignore lint/correctness/noUnreachable: <explanation>
-  return (
     <Button
       variant="default"
       className="w-full"
-      disabled={isSubscriber}
       onClick={() => {
         if (!me) {
           router.push("/registration")
+        } else if (isSubscriber) {
+          router.push("/account")
         } else {
           $modals.setKey("paymentProvider", {
             open: true,
@@ -39,7 +31,7 @@ export function PurchaseButton() {
         }
       }}
     >
-      {isSubscriber ? "Active" : t("pro.button")}
+      {isSubscriber ? t("pro.active") : t("pro.button")}
     </Button>
   )
 }

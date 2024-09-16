@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import { cookies } from "next/headers"
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
+import { create } from "./xray"
 
 export const user = createTRPCRouter({
   me: publicProcedure.query(async ({ ctx }) => {
@@ -29,13 +30,12 @@ export const user = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      const hashedPassword = await argon2.hash(input.password, {
-        salt: Buffer.from(env.PASSWORD_PEPPER),
-      })
+      const hashedPassword = await hashPassword(input.password)
 
-      await prisma.users.create({
+      const user = await prisma.users.create({
         data: { password: hashedPassword },
       })
+      await create(user.id)
 
       return {
         status: "success",
@@ -48,10 +48,7 @@ export const user = createTRPCRouter({
       }),
     )
     .mutation(async ({ input }) => {
-      const hashedPassword = await argon2.hash(input.password, {
-        salt: Buffer.from(env.PASSWORD_PEPPER),
-      })
-
+      const hashedPassword = await hashPassword(input.password)
       const user = await prisma.users.findUnique({
         where: { password: hashedPassword },
       })
@@ -86,3 +83,9 @@ export const user = createTRPCRouter({
     return { success: true }
   }),
 })
+
+export async function hashPassword(password: string): Promise<string> {
+  return argon2.hash(password, {
+    salt: Buffer.from(env.PASSWORD_PEPPER),
+  })
+}

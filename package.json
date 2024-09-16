@@ -14,6 +14,7 @@
     "test:audit": "pnpm audit",
     "test:types": "tsc --noEmit --incremental false",
     "test:lint": "biome lint . --diagnostic-level=error",
+    "test:unit": "jest",
     "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe-webhook --latest",
     "prisma:push": "prisma db push",
     "prisma:push:production": "dotenv -e .env.production.local -- prisma db push"
@@ -69,21 +70,27 @@
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@next/bundle-analyzer": "14.2.5",
+    "@types/jest": "29.5.13",
     "@types/jsonwebtoken": "9.0.6",
     "@types/node": "^20",
     "@types/qrcode": "1.5.5",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "dotenv-cli": "7.4.2",
+    "jest": "29.7.0",
+    "jest-transform-stub": "2.0.0",
     "npm-run-all": "4.1.5",
     "postcss": "8.4.39",
     "prisma": "5.17.0",
     "tailwindcss": "3.4.1",
+    "ts-jest": "29.2.5",
     "typescript": "5.5.3"
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": ["CVE-2024-4067"]
+      "ignoreCves": [
+        "CVE-2024-4067"
+      ]
     }
   }
 }
