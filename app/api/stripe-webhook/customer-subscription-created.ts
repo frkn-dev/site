@@ -11,7 +11,7 @@ export async function customerSubscriptionCreated(
     const userId = subscription.metadata.userId
 
     if (!userId) {
-      throw new Error("User id not found in subscription metadata")
+      throw new Error("User id not found in subscription metadata: " + userId)
     }
 
     const promises = [
@@ -33,6 +33,8 @@ export async function customerSubscriptionCreated(
 
     if (subscription.status === "active") {
       await upgrade(userId)
+    } else {
+      console.error("Stripe: unexpected status", subscription.status)
     }
 
     await prisma.stripeSubscriptionItems.createMany({
