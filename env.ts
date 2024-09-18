@@ -3,7 +3,6 @@ import { z } from "zod"
 
 export const env = createEnv({
   server: {
-    HOST: z.string().url(),
     PASSWORD_PEPPER: z.string().min(1),
     JWT_SECRET: z.string().min(1),
     HMAC_SECRET: z.string().min(1),
