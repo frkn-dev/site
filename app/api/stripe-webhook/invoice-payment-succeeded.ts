@@ -7,7 +7,7 @@ export async function invoicePaymentSucceeded(
 ) {
   try {
     const invoice = event.data.object
-    const userId = invoice.metadata?.userId
+    const userId = invoice.subscription_details?.metadata?.userId
 
     if (!userId) {
       throw new Error("User id not found in metadata: " + userId)
