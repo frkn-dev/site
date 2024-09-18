@@ -1,7 +1,6 @@
-import type { Stripe } from "stripe"
-
 import prisma from "@/prisma"
 import { upgrade } from "@/shared/trpc/routers"
+import type { Stripe } from "stripe"
 
 export async function customerSubscriptionCreated(
   event: Stripe.CustomerSubscriptionCreatedEvent,

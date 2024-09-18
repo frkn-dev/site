@@ -5,6 +5,7 @@ import { headers } from "next/headers"
 import { customerSubscriptionCreated } from "./customer-subscription-created"
 import { customerSubscriptionDeleted } from "./customer-subscription-deleted"
 import { customerSubscriptionUpdated } from "./customer-subscription-updated"
+import { invoicePaymentSucceeded } from "./invoice-payment-succeeded"
 
 export async function POST(request: Request) {
   try {
@@ -32,6 +33,10 @@ export async function POST(request: Request) {
       }
       case "customer.subscription.deleted": {
         await customerSubscriptionDeleted(event)
+        break
+      }
+      case "invoice.payment_succeeded": {
+        await invoicePaymentSucceeded(event)
         break
       }
     }
