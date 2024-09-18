@@ -1,7 +1,5 @@
-import type { Stripe } from "stripe"
-
 import prisma from "@/prisma"
-import { upgrade } from "@/shared/trpc/routers"
+import type { Stripe } from "stripe"
 
 export async function customerSubscriptionCreated(
   event: Stripe.CustomerSubscriptionCreatedEvent,
@@ -30,12 +28,6 @@ export async function customerSubscriptionCreated(
     ]
 
     await Promise.all(promises)
-
-    if (subscription.status === "active") {
-      await upgrade(userId)
-    } else {
-      console.error("Stripe: unexpected status", subscription.status)
-    }
 
     await prisma.stripeSubscriptionItems.createMany({
       data: subscription.items.data.map((item) => ({

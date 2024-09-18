@@ -81,7 +81,24 @@ model StripeSubscriptionItems {
   @@map("stripe_subscription_items")
 }
 
+model StripeInvoices {
+  id          String  @id @default(uuid())
+  invoiceId   String
+  created     Int
+  status      String?
+  amount_paid Int
+  currency    String
+  paid        Boolean
+  userId      String
+
+  @@index([userId])
+  @@map("stripe_invoices")
+}
+
 model Tokens {
   id    String @id
   token String @db.Text
+  // token String
+
+  // @@map("tokens")
 }
