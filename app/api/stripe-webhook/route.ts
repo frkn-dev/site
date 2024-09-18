@@ -1,6 +1,7 @@
 import { env } from "@/env"
 import { getErrorMessage } from "@/shared/get-error-message"
 import { stripe } from "@/shared/services/stripe/client"
+import { customerSubscriptionCreated } from "./customer-subscription-created"
 import { customerSubscriptionDeleted } from "./customer-subscription-deleted"
 import { customerSubscriptionUpdated } from "./customer-subscription-updated"
 
@@ -20,6 +21,10 @@ export async function POST(request: Request) {
     )
 
     switch (event.type) {
+      case "customer.subscription.created": {
+        await customerSubscriptionCreated(event)
+        break
+      }
       case "customer.subscription.updated": {
         await customerSubscriptionUpdated(event)
         break
