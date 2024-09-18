@@ -81,16 +81,23 @@ export function PaymentProviderModal() {
             </DialogHeader>
 
             <div className="grid gap-2">
-              {/* <Button
+              <Button
                 type="button"
-                onClick={() => stripe.mutateAsync()}
+                onClick={() => {
+                  analytics("subscribe", {
+                    props: {
+                      revenue: { currency: "USD", amount: 5 },
+                    },
+                  })
+                  stripe.mutateAsync()
+                }}
                 disabled={stripe.isPending}
               >
                 {stripe.isPending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 ) : null}
                 Stripe
-              </Button> */}
+              </Button>
 
               <Button
                 type="button"
