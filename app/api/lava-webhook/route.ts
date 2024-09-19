@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    if (body.status === "completed" || body.status === "subscription-active") {
+    if (body.status === "subscription-active") {
       const user = await prisma.users.findUnique({
         where: { lavaBuyerId },
       })
@@ -49,8 +49,14 @@ export async function POST(req: NextRequest) {
       } else {
         console.error("lava: user not found", body.buyer.email, lavaBuyerId)
       }
-    } else {
-      console.error("lava: new status", body.status)
+    }
+
+    if (
+      ["new", "in-progress", "completed", "failed", "cancelled"].includes(
+        body.status!,
+      )
+    ) {
+      console.error("lava: unexpected status", body.status)
     }
 
     return NextResponse.json({ status: "ok" })

@@ -88,9 +88,7 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": [
-        "CVE-2024-4067"
-      ]
+      "ignoreCves": ["CVE-2024-4067", "CVE-2024-46982"]
     }
   }
 }

@@ -13,8 +13,6 @@ export const stripe = createTRPCRouter({
 
     const customer = await getOrCreateCustomer(me)
 
-    const host = env.HOST
-
     const checkoutSession = await stripeClient.checkout.sessions.create({
       customer,
       client_reference_id: me.id,
@@ -25,8 +23,6 @@ export const stripe = createTRPCRouter({
           quantity: 1,
         },
       ],
-      success_url: host,
-      cancel_url: host,
       allow_promotion_codes: true,
       subscription_data: {
         metadata: {
@@ -47,7 +43,6 @@ export const stripe = createTRPCRouter({
 
     const { url } = await stripeClient.billingPortal.sessions.create({
       customer,
-      return_url: `${env.HOST}/account`,
     })
 
     return url

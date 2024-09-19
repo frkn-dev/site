@@ -11,18 +11,6 @@ export const user = createTRPCRouter({
   me: publicProcedure.query(async ({ ctx }) => {
     return ctx.user
   }),
-  paymentProviders: protectedProcedure.query(async () => {
-    const response = await fetch(env.HOST + "/api/geo")
-    const json: { country: string } = await response.json()
-
-    const country = json.country ?? "unknown"
-
-    const providers = {
-      stripe: country !== "RU",
-    } as Record<"stripe", boolean>
-
-    return providers
-  }),
   register: publicProcedure
     .input(
       z.object({

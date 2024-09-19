@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
 import { formatBytes } from "@/shared/format/bytes"
-import { formatStrategy } from "@/shared/format/strategy"
+import { formatExpire, formatStrategy } from "@/shared/format/strategy"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
 import { Loader2, MessageCircleQuestion, QrCode } from "lucide-react"
@@ -200,10 +200,4 @@ export function Main() {
       </Dialog>
     </>
   )
-}
-
-function formatExpire(expire: number | null | undefined, locale: string) {
-  if (!expire) return null
-
-  return "(" + new Date(expire * 1000).toLocaleDateString(locale) + ")"
 }

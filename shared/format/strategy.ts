@@ -17,3 +17,12 @@ export function formatStrategy(
 
   return "/ " + strategy
 }
+
+export function formatExpire(
+  expire: number | null | undefined,
+  locale: string,
+) {
+  if (!expire) return null
+
+  return "(" + new Date(expire * 1000).toLocaleDateString(locale) + ")"
+}

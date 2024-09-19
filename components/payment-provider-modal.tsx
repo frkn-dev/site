@@ -8,8 +8,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
-import type { Currencies } from "@/shared/services/lava"
-import { offer } from "@/shared/services/lava"
 import { $modals } from "@/shared/store"
 import { trpc } from "@/shared/trpc"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -37,7 +35,6 @@ export function PaymentProviderModal() {
   const router = useRouter()
   const analytics = useAnalytics()
   const [step, setStep] = useState<"init" | "email" | "support">("init")
-  const [currency, setCurrency] = useState<Currencies>("RUB")
 
   const stripe = trpc.stripe.createCheckoutSession.useMutation({
     onSuccess(data) {
@@ -81,31 +78,27 @@ export function PaymentProviderModal() {
             </DialogHeader>
 
             <div className="grid gap-2">
-              {/* <Button
+              <Button
                 type="button"
-                onClick={() => stripe.mutateAsync()}
+                onClick={() => {
+                  analytics("subscribe", {
+                    props: {
+                      revenue: { currency: "USD", amount: 5 },
+                    },
+                  })
+                  stripe.mutateAsync()
+                }}
                 disabled={stripe.isPending}
               >
                 {stripe.isPending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 ) : null}
                 Stripe
-              </Button> */}
-
-              <Button
-                type="button"
-                onClick={() => {
-                  setCurrency("USD")
-                  setStep("email")
-                }}
-              >
-                {t("lava")}
               </Button>
 
               <Button
                 type="button"
                 onClick={() => {
-                  setCurrency("RUB")
                   setStep("email")
                 }}
               >
@@ -142,13 +135,13 @@ export function PaymentProviderModal() {
                   onSubmit={form.handleSubmit((data) => {
                     analytics("subscribe", {
                       props: {
-                        revenue: { currency, amount: offer[currency] },
+                        revenue: { currency: "RUB", amount: 500 },
                       },
                     })
                     lava.mutate({
                       email: data.email,
                       lang: locale.toUpperCase(),
-                      currency,
+                      currency: "RUB",
                     })
                   })}
                   className="flex gap-2 w-full"

@@ -1,4 +1,4 @@
-import { formatStrategy } from "./strategy"
+import { formatExpire, formatStrategy } from "./strategy"
 
 describe("formatStrategy", () => {
   it('should return null for "no_reset" strategy', () => {
@@ -15,5 +15,21 @@ describe("formatStrategy", () => {
 
   it('should return correct format for "week" strategy in unsupported locale', () => {
     expect(formatStrategy("week", "fr")).toBe("/ week")
+  })
+})
+
+describe("formatExpire", () => {
+  it("should return formatted date for a valid timestamp", () => {
+    const expire = 1695158400
+    const locale = "en-US"
+    const result = formatExpire(expire, locale)
+    expect(result).toBe("(9/20/2023)")
+  })
+
+  it("should format the date according to the locale", () => {
+    const expire = 1695158400
+    const locale = "ru-RU"
+    const result = formatExpire(expire, locale)
+    expect(result).toBe("(20.09.2023)")
   })
 })
