@@ -1,8 +1,9 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
 import { XRAY_TOKEN_NAME } from "@/shared/config"
+import { extractCountry } from "@/shared/format/country"
 import type { components } from "@/shared/types/xray"
-import { createTRPCRouter, protectedProcedure } from "../trpc"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
 
 const proxies = {
   vmess: {},
@@ -51,6 +52,29 @@ export const xray = createTRPCRouter({
       }
     } catch (error) {
       console.error("XRay user get", error)
+      return null
+    }
+  }),
+  nodes: publicProcedure.query(async () => {
+    try {
+      const token = await prisma.tokens.findUnique({
+        where: { id: XRAY_TOKEN_NAME },
+      })
+
+      const response = await fetch(env.XRAY_API + "/api/nodes", {
+        headers: {
+          Authorization: "Bearer " + token?.token,
+        },
+      })
+      const nodes: components["schemas"]["NodeResponse"][] =
+        await response.json()
+
+      return {
+        hasError: nodes.some((node) => node.status === "error"),
+        allConnected: nodes.every((node) => node.status === "connected"),
+      }
+    } catch (error) {
+      console.error("XRay nodes", error)
       return null
     }
   }),
@@ -131,12 +155,4 @@ export async function upgrade(userId: string) {
     console.error("XRay upgrade", error)
     return null
   }
-}
-
-function extractCountry(uri: string): string {
-  const desc = uri.split("#")?.[1]
-  if (desc) {
-    return decodeURIComponent(desc).split(" [")[0] ?? "UN"
-  }
-  return "UN"
 }
