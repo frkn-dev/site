@@ -4,7 +4,7 @@ import prisma from "@/prisma"
 import { stripe } from "@/shared/services/stripe/client"
 
 export async function getOrCreateCustomer(
-  user: Omit<Users, "password" | "created">,
+  user: Pick<Users, "id" | "stripeCustomerId">,
 ) {
   if (user.stripeCustomerId) {
     return user.stripeCustomerId
