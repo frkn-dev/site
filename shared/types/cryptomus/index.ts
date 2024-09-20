@@ -43,9 +43,9 @@ export type WebhookResponse = {
   uuid: string
   order_id: string
   amount: string
-  payment_amount: string
-  payment_amount_usd: string
-  merchant_amount: string
+  payment_amount: string | null
+  payment_amount_usd: string | null
+  merchant_amount: string | null
   commission: string
   is_final: boolean
   // https://doc.cryptomus.com/business/payments/payment-statuses
@@ -66,9 +66,9 @@ export type WebhookResponse = {
     | "locked"
   from: string
   wallet_address_uuid: string | null
-  network: string
+  network: string | null
   currency: string
-  payer_currency: string
+  payer_currency: string | null
   additional_data: string | null
   convert: {
     to_currency: string

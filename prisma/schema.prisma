@@ -43,16 +43,16 @@ model StripeSubscriptions {
 }
 
 model CryptomusInvoices {
-  id               String @id @default(uuid())
-  orderId          String @map("order_id")
+  id               String  @id @default(uuid())
+  userId           String  @map("user_id")
+  orderId          String  @map("order_id")
   status           String
   amount           String
   currency         String
-  paymentAmount    String @map("payment_amount")
-  payerCurrency    String @map("payer_currency")
-  paymentAmountUsd String @map("payment_amount_usd")
-  network          String
-  userId           String @map("user_id")
+  paymentAmount    String? @map("payment_amount")
+  payerCurrency    String? @map("payer_currency")
+  paymentAmountUsd String? @map("payment_amount_usd")
+  network          String?
 
   @@index([userId])
   @@map("cryptomus_invoices")
