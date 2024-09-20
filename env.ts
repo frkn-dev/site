@@ -20,6 +20,8 @@ export const env = createEnv({
     XRAY_API: z.string().startsWith("https://"),
     XRAY_USERNAME: z.string().min(1),
     XRAY_PASSWORD: z.string().min(1),
+    CRYPTOMUS_ID: z.string().min(1),
+    CRYPTOMUS_API_KEY: z.string().min(1),
   },
   client: {},
   experimental__runtimeEnv: {},
