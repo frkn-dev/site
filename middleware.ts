@@ -8,6 +8,21 @@ const I18nMiddleware = createI18nMiddleware({
 })
 
 export function middleware(request: NextRequest) {
+  const url = new URL(request.url)
+  const refCode = url.searchParams.get("ref")
+
+  if (refCode) {
+    const response = I18nMiddleware(request)
+    response.cookies.set("frkn_ref", refCode, {
+      maxAge: 30 * 24 * 60 * 60, // 30 days
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      path: "/",
+    })
+    return response
+  }
+
   return I18nMiddleware(request)
 }
 

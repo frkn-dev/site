@@ -13,6 +13,7 @@ model Users {
   id                 String               @id @default(uuid())
   password           String               @unique
   created            DateTime             @default(now())
+  ref                String?
   subscriptionType   SubscriptionType?    @map("subscription_type")
   stripeCustomerId   String?              @unique @map("stripe_customer_id")
   stripeSubscription StripeSubscriptions?
