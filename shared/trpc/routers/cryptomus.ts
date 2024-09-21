@@ -23,10 +23,7 @@ export const cryptomus = createTRPCRouter({
           order_id: nanoid(36),
           additional_data: ctx.user.id,
           url_success: "https://frkn.org/account",
-          // TODO:
-          url_callback:
-            "https://site-git-crypto-frkn.vercel.app/api/cryptomus-webhook",
-          lifetime: 600,
+          url_callback: "https://frkn.org/api/cryptomus-webhook",
         } as CreateInvoiceRequest)
 
         const sign = getSign(body, env.CRYPTOMUS_API_KEY)
