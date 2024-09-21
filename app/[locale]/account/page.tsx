@@ -1,3 +1,4 @@
+import { ManageCryptomusButton } from "@/components/manage-cryptomus-button"
 import { ManageStripeSubscriptionButton } from "@/components/manage-stripe-subscription-button"
 import { PageSection } from "@/components/page-section"
 import {
@@ -29,6 +30,9 @@ export default async function Page({ params: { locale } }: Props) {
         where: { lavaBuyerId: me.lavaBuyerId },
       })
     : []
+  const cryptomusInvoices = await prisma.cryptomusInvoices.findMany({
+    where: { userId: me.id },
+  })
 
   return (
     <PageSection>
@@ -37,6 +41,60 @@ export default async function Page({ params: { locale } }: Props) {
           <CardHeader>
             <CardTitle>{t("inactive")}</CardTitle>
           </CardHeader>
+        </Card>
+      )}
+
+      {cryptomusInvoices.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("title")}</CardTitle>
+            <CardDescription>
+              {t("provider")}: <span className="font-semibold">Cryptomus</span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-4">
+              {cryptomusInvoices.map((payment) => {
+                const {
+                  id,
+                  created,
+                  amount,
+                  currency,
+                  paymentAmount,
+                  payerCurrency,
+                  network,
+                  status,
+                } = payment
+                return (
+                  <div
+                    key={id}
+                    className="border rounded-lg p-4 shadow-sm bg-gray-100 text-black w-64"
+                  >
+                    <div className="text-lg font-bold">
+                      {created.toLocaleString(locale)}
+                    </div>
+
+                    <div className="text-sm mt-2">
+                      <strong>ID:</strong> {id}
+                    </div>
+
+                    <div className="text-sm mt-1">
+                      <strong>{t("amount")}:</strong>{" "}
+                      {Number.parseFloat(amount)} {currency}{" "}
+                      {formatAmount(paymentAmount, payerCurrency, network)}
+                    </div>
+
+                    <div className="text-sm mt-1">
+                      <strong>{t("status")}:</strong> {status}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </CardContent>
+          <CardFooter>
+            <ManageCryptomusButton />
+          </CardFooter>
         </Card>
       )}
 
@@ -116,4 +174,13 @@ export default async function Page({ params: { locale } }: Props) {
       )}
     </PageSection>
   )
+}
+
+function formatAmount(
+  paymentAmount: string | null,
+  payerCurrency: string | null,
+  network: string | null,
+) {
+  if (!paymentAmount) return null
+  return ` (${Number.parseFloat(paymentAmount)} ${payerCurrency} ${network})`
 }

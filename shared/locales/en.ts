@@ -186,6 +186,7 @@ export default {
         error: "Error",
         manage: "Manage subscription",
         inactive: "Active subscriptions not found.",
+        pay: "Pay",
       },
     },
     connect: {

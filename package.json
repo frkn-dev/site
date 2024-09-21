@@ -50,6 +50,7 @@
     "jsonwebtoken": "9.0.2",
     "lucide-react": "0.408.0",
     "mono": "link:geist/font/mono",
+    "nanoid": "5.0.7",
     "nanostores": "0.11.2",
     "next": "14.2.5",
     "next-international": "1.2.4",
@@ -88,7 +89,10 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": ["CVE-2024-4067", "CVE-2024-46982"]
+      "ignoreCves": [
+        "CVE-2024-4067",
+        "CVE-2024-46982"
+      ]
     }
   }
 }

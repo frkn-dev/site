@@ -27,11 +27,8 @@ export function User({
   align = "end",
 }: Props) {
   const router = useRouter()
-
   const { data: user, isLoading } = useMe()
   const { mutateAsync: logout } = trpc.user.logout.useMutation()
-
-  const isSubscriber = Boolean(user && user.subscriptionType !== null)
 
   const t = useScopedI18n("header")
 
@@ -75,11 +72,9 @@ export function User({
             {t("myId")}
           </DropdownMenuItem>
 
-          {isSubscriber && (
-            <DropdownMenuItem asChild>
-              <Link href="/account">{t("payments")}</Link>
-            </DropdownMenuItem>
-          )}
+          <DropdownMenuItem asChild>
+            <Link href="/account">{t("payments")}</Link>
+          </DropdownMenuItem>
 
           <DropdownMenuItem
             onClick={() =>

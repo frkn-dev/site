@@ -50,6 +50,13 @@ export function PaymentProviderModal() {
       }
     },
   })
+  const cryptomus = trpc.cryptomus.invoice.useMutation({
+    onSuccess(data) {
+      if (data?.url) {
+        router.push(data.url)
+      }
+    },
+  })
 
   const schema = z.object({
     email: z.string().email({
@@ -99,6 +106,24 @@ export function PaymentProviderModal() {
               <Button
                 type="button"
                 onClick={() => {
+                  analytics("subscribe", {
+                    props: {
+                      revenue: { currency: "USD", amount: 5 },
+                    },
+                  })
+                  cryptomus.mutateAsync({ amount: "5" })
+                }}
+                disabled={cryptomus.isPending}
+              >
+                {cryptomus.isPending ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : null}
+                {t("crypto")}
+              </Button>
+
+              <Button
+                type="button"
+                onClick={() => {
                   setStep("email")
                 }}
               >
@@ -107,10 +132,6 @@ export function PaymentProviderModal() {
 
               <Button type="button" onClick={() => setStep("support")}>
                 {t("sbp")}
-              </Button>
-
-              <Button type="button" onClick={() => setStep("support")}>
-                {t("crypto")}
               </Button>
             </div>
           </>
