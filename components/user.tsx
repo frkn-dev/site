@@ -72,7 +72,7 @@ export function User({
             {t("myId")}
           </DropdownMenuItem>
 
-          <DropdownMenuItem asChild>
+          <DropdownMenuItem asChild className="cursor-pointer">
             <Link href="/account">{t("payments")}</Link>
           </DropdownMenuItem>
 

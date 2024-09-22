@@ -40,7 +40,6 @@ export const lava = createTRPCRouter({
         await prisma.users.update({
           where: { id: ctx.user.id },
           data: {
-            subscriptionType: "Lava",
             lavaBuyerId: hashEmail(input.email),
           },
         })

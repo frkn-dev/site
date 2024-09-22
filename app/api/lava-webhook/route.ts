@@ -41,14 +41,14 @@ export async function POST(req: NextRequest) {
     })
 
     if (body.status === "subscription-active") {
-      const user = await prisma.users.findUnique({
+      const user = await prisma.users.update({
         where: { lavaBuyerId },
+        data: {
+          subscriptionType: "Lava",
+        },
       })
-      if (user) {
-        await upgrade(user.id)
-      } else {
-        console.error("lava: user not found", body.buyer.email, lavaBuyerId)
-      }
+
+      await upgrade(user.id)
     }
 
     if (
