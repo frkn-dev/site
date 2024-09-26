@@ -40,7 +40,8 @@
       },
       "a11y": {
         "useButtonType": "off",
-        "noSvgWithoutTitle": "info"
+        "noSvgWithoutTitle": "info",
+        "noBlankTarget": "info"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",

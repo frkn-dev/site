@@ -21,7 +21,9 @@ export function Main() {
   const [isModalOpen, setModalOpen] = useState(false)
   const [helpDialog, setHelpDialog] = useState(false)
   const [qr, setQr] = useState("")
-  const { data, isLoading } = trpc.xray.get.useQuery()
+  const { data, isLoading } = trpc.xray.get.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  })
 
   const showQr = (data: string) => {
     setQr(data)

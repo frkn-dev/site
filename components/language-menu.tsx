@@ -19,6 +19,7 @@ export function LanguageMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem
+          className="cursor-pointer"
           onClick={() => {
             changeLocale("ru")
           }}
@@ -26,6 +27,7 @@ export function LanguageMenu() {
           Ru
         </DropdownMenuItem>
         <DropdownMenuItem
+          className="cursor-pointer"
           onClick={() => {
             changeLocale("en")
           }}
