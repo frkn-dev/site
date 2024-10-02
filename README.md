@@ -1,7 +1,11 @@
 ## Dev-mode
 
 ```sh
-pnpm i
+mv .env.example .env
+docker-compose up -d
+pnpm install
+pnpm run prisma:push
+
 pnpm run dev
 ```
 
@@ -17,19 +21,9 @@ To automatically format code, it is important to properly configure your IDE. Se
 - [Prisma ORM](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma)
 - [FSD](https://feature-sliced.design/ru/docs/get-started/overview) folder structure
 
-### Env
-
-Fill in all required environment variables. Use `env.ts` as a template for your `.env` file.
-
 ### DB
 
-Run migrations when the schema changes. For local development, use Docker with PostgreSQL and pgAdmin (`localhost:5050`). Connection parameters are in `docker-compose.yml`.
-
-```sh
-docker-compose up -d
-pnpm run prisma:push
-npx prisma studio
-```
+Run migrations when the schema changes. For local development, use Docker with PostgreSQL and pgAdmin (`localhost:5050`) or `npx prisma studio`.
 
 ## Build
 
