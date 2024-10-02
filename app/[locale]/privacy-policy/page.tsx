@@ -1,5 +1,6 @@
 import { getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
+import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {
@@ -287,4 +288,15 @@ export default async function Page({ params: { locale } }: Props) {
       </p>
     </div>
   )
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    ru: {
+      title: "Политика конфиденциальности – FRKN VPN",
+    },
+    en: {
+      title: "Privacy Policy – FRKN VPN",
+    },
+  }[locale]
 }

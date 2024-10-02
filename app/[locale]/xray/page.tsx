@@ -1,5 +1,6 @@
 import { getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
+import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {
@@ -170,4 +171,19 @@ export default async function Page({ params: { locale } }: Props) {
       </ul>
     </div>
   )
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    ru: {
+      title: "XRay: Передовой VPN-протокол",
+      description:
+        "Узнайте о преимуществах XRay, его использовании для обхода интернет-цензуры и настройке на различных устройствах.",
+    },
+    en: {
+      title: "XRay: Advanced VPN Protocol",
+      description:
+        "Learn about the advantages of XRay, its use for bypassing internet censorship, and setup on various devices.",
+    },
+  }[locale]
 }

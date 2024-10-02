@@ -1,5 +1,6 @@
 import { getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
+import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
 
@@ -197,4 +198,19 @@ function Download() {
       ))}
     </ul>
   )
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    ru: {
+      title: "Vless: Современный протокол для повышения производительности",
+      description:
+        "Узнайте о Vless, его преимуществах, настройке и подключении для повышения безопасности и обхода интернет-цензуры.",
+    },
+    en: {
+      title: "Vless: Modern Protocol for Enhanced Performance",
+      description:
+        "Learn about Vless, its advantages, setup, and connection for improved security and bypassing internet censorship.",
+    },
+  }[locale]
 }

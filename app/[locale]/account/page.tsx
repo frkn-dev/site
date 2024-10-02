@@ -14,6 +14,7 @@ import { cn } from "@/shared/clsx"
 import { isLoggedIn } from "@/shared/guards"
 import type { Props } from "@/shared/locales/server"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
+import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {
@@ -183,4 +184,15 @@ function formatAmount(
 ) {
   if (!paymentAmount) return null
   return ` (${Number.parseFloat(paymentAmount)} ${payerCurrency} ${network})`
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    ru: {
+      title: "Платежи – FRKN VPN",
+    },
+    en: {
+      title: "Payments – FRKN VPN",
+    },
+  }[locale]
 }

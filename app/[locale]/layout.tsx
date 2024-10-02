@@ -3,19 +3,16 @@ import "@/shared/globals.css"
 import { Page } from "@/components/page"
 import { cn } from "@/shared/clsx"
 import { HOSTNAME } from "@/shared/config"
-import { getI18n, getStaticParams } from "@/shared/locales/server"
+import { getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
 import { GeistMono } from "geist/font/mono"
 import { GeistSans } from "geist/font/sans"
 import type { Metadata } from "next"
 import Plausible from "next-plausible"
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getI18n()
-
+export function generateMetadata(): Metadata {
   return {
     title: "FRKN VPN",
-    description: t("meta.description"),
   }
 }
 

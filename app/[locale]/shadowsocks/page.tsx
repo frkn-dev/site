@@ -1,5 +1,6 @@
 import { getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
+import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
 
@@ -201,4 +202,19 @@ function Download() {
       ))}
     </ul>
   )
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    ru: {
+      title: "Shadowsocks: Обход интернет-цензуры",
+      description:
+        "Узнайте, как использовать Shadowsocks для обхода интернет-цензуры, настройки и подключения.",
+    },
+    en: {
+      title: "Shadowsocks: Bypass Internet Censorship",
+      description:
+        "Learn how to use Shadowsocks to bypass internet censorship, configure, and connect.",
+    },
+  }[locale]
 }

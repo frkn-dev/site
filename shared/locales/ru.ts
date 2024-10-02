@@ -1,7 +1,4 @@
 export default {
-  meta: {
-    description: "FRKN — быстрый, бесплатный VPN с поддержкой протокола XRay",
-  },
   header: {
     pricing: "Цены",
     connect: "Скачать",

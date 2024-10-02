@@ -9,6 +9,7 @@ import { formatPrice } from "@/shared/format/price"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
 import { GitPullRequestDraft, Logs, Rocket, Shield } from "lucide-react"
+import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
 
@@ -87,4 +88,19 @@ export default async function Home({ params: { locale } }: Props) {
       <NewsletterForm />
     </>
   )
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    ru: {
+      title: "FRKN — быстрый, бесплатный VPN с поддержкой протокола XRay",
+      description:
+        "Мы поддерживаем свободу слова и выступаем против любых форм цензуры. Разрабатываем децентрализованный VPN, который не собирает и не хранит пользовательские данные.",
+    },
+    en: {
+      title: "FRKN — fast, free VPN with XRay protocol support",
+      description:
+        "We support freedom of speech and oppose any form of censorship. We develop a decentralized VPN that does not collect or store user data.",
+    },
+  }[locale]
 }

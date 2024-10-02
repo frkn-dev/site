@@ -1,5 +1,6 @@
 import { getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
+import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
 
@@ -160,4 +161,19 @@ function Download() {
       ))}
     </ul>
   )
+}
+
+export function generateMetadata({ params: { locale } }: Props): Metadata {
+  return {
+    ru: {
+      title: "WireGuard: Безопасный и быстрый VPN-протокол",
+      description:
+        "Узнайте о преимуществах и недостатках WireGuard, а также о способах обхода блокировок и подключении.",
+    },
+    en: {
+      title: "WireGuard: Secure and Fast VPN Protocol",
+      description:
+        "Learn about the advantages and disadvantages of WireGuard, ways to bypass blocks, and how to connect.",
+    },
+  }[locale]
 }
