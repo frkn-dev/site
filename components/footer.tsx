@@ -10,6 +10,7 @@ export function Footer() {
     <footer className="max-w-6xl w-full mx-auto px-4 py-8">
       <div className="flex flex-col justify-center md:grid md:grid-cols-3 gap-6 w-full">
         <div className="flex flex-col md:items-center gap-6">
+          <p className="font-mono font-bold text-l text-center">FRKN LLP</p>
           <Link
             href="https://github.com/frkn-dev"
             target="_blank"
@@ -40,6 +41,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col md:items-center gap-6">
+          <p className="font-mono font-bold text-l text-center">{t("help")}</p>
           <Link
             href="https://t.me/frkn_support"
             target="_blank"
@@ -47,42 +49,23 @@ export function Footer() {
           >
             {t("support")}
           </Link>
+          <Link href="/faq">FAQ</Link>
           <Link href="/privacy-policy">{t("privacy")}</Link>
           <Link href="/terms-of-use">{t("terms")}</Link>
         </div>
 
         <div className="flex flex-col md:items-center gap-6">
-          <Link
-            href="https://frkn.org/xray"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <p className="font-mono font-bold text-l text-center">
+            {t("protocols")}
+          </p>
+          <Link href="/xray" target="_blank" rel="noopener noreferrer">
             XRay
           </Link>
-          <Link
-            href="https://frkn.org/shadowsocks"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Shadowsocks
-          </Link>
-          <Link
-            href="https://frkn.org/vless"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            VLESS
-          </Link>
-          <Link
-            href="https://frkn.org/wireguard"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            WireGuard
-          </Link>
+          <Link href="/shadowsocks">Shadowsocks</Link>
+          <Link href="/vless">VLESS</Link>
+          <Link href="/wireguard">WireGuard</Link>
         </div>
       </div>
-      <p className="font-mono text-center mt-12">FRKN LLP</p>
     </footer>
   )
 }

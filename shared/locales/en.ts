@@ -71,10 +71,12 @@ export default {
     success: "Thank you for subscribing to our newsletter!",
   },
   footer: {
-    support: "Support",
     contact: "Contact",
+    help: "Help",
     merch: "Merch",
     privacy: "Privacy Policy",
+    protocols: "Protocols",
+    support: "Support",
     terms: "Terms of Service",
   },
   app: {
