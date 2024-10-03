@@ -24,6 +24,8 @@ export const stripe = createTRPCRouter({
         },
       ],
       allow_promotion_codes: true,
+      success_url: "https://frkn.org/account",
+      cancel_url: "https://frkn.org/account",
       subscription_data: {
         metadata: {
           userId: me.id,
