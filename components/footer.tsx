@@ -42,6 +42,7 @@ export function Footer() {
 
         <div className="flex flex-col md:items-center gap-6">
           <p className="font-mono font-bold text-l text-center">{t("help")}</p>
+          <Link href="/faq">FAQ</Link>
           <Link
             href="https://t.me/frkn_support"
             target="_blank"
@@ -49,7 +50,6 @@ export function Footer() {
           >
             {t("support")}
           </Link>
-          <Link href="/faq">FAQ</Link>
           <Link href="/privacy-policy">{t("privacy")}</Link>
           <Link href="/terms-of-use">{t("terms")}</Link>
         </div>
