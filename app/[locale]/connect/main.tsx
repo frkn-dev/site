@@ -1,19 +1,14 @@
 "use client"
-import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog"
 import { formatBytes } from "@/shared/format/bytes"
 import { formatExpire, formatStrategy } from "@/shared/format/strategy"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
 import { Loader2, MessageCircleQuestion, QrCode } from "lucide-react"
-import Link from "next/link"
 import { useState } from "react"
-import { Card } from "./components/Card"
 import { CopyInput } from "./components/CopyInput"
 import { Instructions } from "./components/Instructions"
 import { QrModal } from "./components/QRModal"
-import v2ray from "./components/logo/v2ray.png"
-import wg from "./components/logo/wg.svg"
 
 export function Main() {
   const t = useScopedI18n("app.connect")
@@ -33,27 +28,6 @@ export function Main() {
   return (
     <>
       <div>
-        <div className="grid grid-rows-1 lg:grid-cols-[1fr_auto] max-w-6xl w-full mx-auto px-4 gap-6">
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-8">
-            <Card
-              logo={wg}
-              title="WireGuard"
-              subtitle={t("wg")}
-              action={() => (
-                <Button variant="outline" className="ml-4" asChild>
-                  <Link href="/installation">{t("create")}</Link>
-                </Button>
-              )}
-            />
-            <Card
-              logo={v2ray}
-              title="XRay"
-              subtitle={t("xray")}
-              action={() => null}
-            />
-          </div>
-        </div>
-
         {isLoading && (
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-8">
             <Loader2 className="ml-4 h-6 w-6 text-white animate-spin" />
