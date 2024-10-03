@@ -71,10 +71,12 @@ export default {
     success: "Спасибо за подписку на нашу рассылку!",
   },
   footer: {
-    support: "Поддержка",
     contact: "Связаться",
+    help: "Помощь",
     merch: "Мерч",
     privacy: "Конфиденциальность",
+    protocols: "Протоколы",
+    support: "Поддержка",
     terms: "Соглашение",
   },
   app: {
