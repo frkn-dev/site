@@ -33,7 +33,7 @@ export default function RootLayout({
         <Plausible domain={HOSTNAME} revenue={true} />
       </head>
 
-      <body className="h-full bg-black text-white">
+      <body className="h-full">
         <Page locale={locale}>{children}</Page>
       </body>
     </html>
