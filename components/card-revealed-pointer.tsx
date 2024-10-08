@@ -15,7 +15,7 @@ export function CardRevealedPointer({ children }: PropsWithChildren) {
         mouseX.set(e.clientX - left)
         mouseY.set(e.clientY - top)
       }}
-      className="group relative w-full overflow-hidden rounded-xl bg-neutral-950"
+      className="group relative w-full overflow-hidden rounded-xl bg-background"
     >
       <div className="absolute right-5 top-0 h-px w-80 bg-gradient-to-l from-transparent via-white/30 via-10% to-transparent" />
       <motion.div
@@ -26,7 +26,7 @@ export function CardRevealedPointer({ children }: PropsWithChildren) {
 					`,
         }}
       />
-      <div className="relative flex flex-col gap-3 rounded-xl border border-white/10 px-4 py-5">
+      <div className="relative flex flex-col gap-3 rounded-xl border border-zinc-900/10 px-4 py-5">
         {children}
       </div>
     </div>

@@ -58,7 +58,7 @@ export function User({
             <Button
               variant="outline"
               size="icon"
-              className="rounded-full bg-gradient-to-r from-zinc-700 to-zinc-950 ml-[15px]"
+              className="rounded-full bg-gradient-to-r from-background ml-[15px]"
             >
               <User2 size={16} />
             </Button>

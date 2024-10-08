@@ -14,7 +14,7 @@ export async function Hero() {
         <p className="text-pretty text-base md:text-xl">{t("text")}</p>
         <ConnectButton />
       </div>
-      <div className="absolute -z-10 top-0 right-0 opacity-20">
+      <div className="absolute -z-10 top-0 right-0 opacity-80">
         <Image
           src={hero}
           alt=""

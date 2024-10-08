@@ -58,7 +58,7 @@ export function Footer() {
           <p className="font-mono font-bold text-l text-center">
             {t("protocols")}
           </p>
-          <Link href="/xray" target="_blank" rel="noopener noreferrer">
+          <Link href="/xray" rel="noopener noreferrer">
             XRay
           </Link>
           <Link href="/shadowsocks">Shadowsocks</Link>

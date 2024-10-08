@@ -18,7 +18,7 @@ export function Header() {
           <Image width={137} height={40} src="/logo.svg" alt="FRKN" />
         </a>
       </div>
-      <div className="w-full justify-between hidden lg:flex px-6 py-4 rounded-full border border-zinc-950">
+      <div className="w-full justify-between hidden lg:flex px-6 py-4 rounded-full">
         <Link href="/#pricing">{t("pricing")}</Link>
         <Link href="/connect">{t("connect")}</Link>
         <LanguageMenu />

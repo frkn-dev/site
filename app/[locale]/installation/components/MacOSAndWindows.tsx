@@ -6,7 +6,7 @@ export function MacOSAndWindows() {
 
   return (
     <div>
-      <div className="bg-zinc-950 p-6 rounded-lg">
+      <div className="bg-background p-6 rounded-lg">
         <ol className="list-decimal list-inside space-y-2">
           <li>
             {t("step1")} (

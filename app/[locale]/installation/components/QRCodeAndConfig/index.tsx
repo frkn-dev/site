@@ -90,7 +90,7 @@ export function QRCodeAndConfig({ locations, place }: Props) {
   return (
     <div
       className={cn("p-6", {
-        "bg-zinc-950 rounded-lg mt-[68px]": place === "aside",
+        "bg-background rounded-lg mt-[68px]": place === "aside",
       })}
     >
       <h3 className="font-semibold mb-0.5">{t("title")}</h3>

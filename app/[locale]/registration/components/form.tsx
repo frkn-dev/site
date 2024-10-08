@@ -54,7 +54,7 @@ export function Form() {
   }, [mnemonic])
 
   return (
-    <div className="h-full bg-gradient-to-t from-zinc-950">
+    <div className="h-full bg-gradient-to-t from-background">
       <PageSection className="md:py-16">
         {mnemonic ? (
           <div className="mx-auto w-fit text-center transition-opacity duration-1000 ease-in opacity-0 animate-fade-in">

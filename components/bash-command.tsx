@@ -20,7 +20,7 @@ export function BashCommand({ command }: Props) {
   }, [command])
 
   return (
-    <pre className="bg-zinc-900 text-sm px-4 py-1 rounded mt-2 overflow-x-auto grid grid-cols-[1fr,auto] items-center gap-2 border font-mono">
+    <pre className="bg-background text-sm px-4 py-1 rounded mt-2 overflow-x-auto grid grid-cols-[1fr,auto] items-center gap-2 border font-mono">
       <code className="overflow-x-auto">$ {command}</code>
       <Button aria-label="Copy" variant="outline" size="icon" onClick={copy}>
         <Copy size={12} />

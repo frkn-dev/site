@@ -62,7 +62,7 @@ export function Form() {
   }
 
   return (
-    <div className="h-full bg-gradient-to-t from-zinc-950 grid place-items-center">
+    <div className="h-full bg-gradient-to-t from-background grid place-items-center">
       <div className="w-full max-w-lg px-4">
         <UIForm {...form}>
           <form
