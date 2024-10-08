@@ -3,6 +3,7 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 
 import { cn } from "@/shared/clsx"
+import useTheme from "@/shared/theme/hooks/useTheme"
 import { motion } from "framer-motion"
 
 type Direction = "TOP" | "LEFT" | "BOTTOM" | "RIGHT"
@@ -27,6 +28,16 @@ export function HoverBorderGradient({
   const [hovered, setHovered] = useState<boolean>(false)
   const [direction, setDirection] = useState<Direction>("TOP")
 
+  const { theme } = useTheme()
+
+  const gradientColors = {
+    hsl: theme === "light" ? "hsl(0, 0%, 0%) 0%" : "hsl(0, 0%, 100%) 0%",
+    rgba:
+      theme === "light"
+        ? "rgba(0, 0, 0, 0) 100%"
+        : "rgba(255, 255, 255, 0) 100%",
+  }
+
   const rotateDirection = (currentDirection: Direction): Direction => {
     const directions: Direction[] = ["TOP", "LEFT", "BOTTOM", "RIGHT"]
     const currentIndex = directions.indexOf(currentDirection)
@@ -37,12 +48,10 @@ export function HoverBorderGradient({
   }
 
   const movingMap: Record<Direction, string> = {
-    TOP: "radial-gradient(20.7% 50% at 50% 0%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    LEFT: "radial-gradient(16.6% 43.1% at 0% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    BOTTOM:
-      "radial-gradient(20.7% 50% at 50% 100%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
-    RIGHT:
-      "radial-gradient(16.2% 41.199999999999996% at 100% 50%, hsl(0, 0%, 100%) 0%, rgba(255, 255, 255, 0) 100%)",
+    TOP: `radial-gradient(20.7% 50% at 50% 0%, ${gradientColors.hsl}, ${gradientColors.rgba})`,
+    LEFT: `radial-gradient(16.6% 43.1% at 0% 50%, ${gradientColors.hsl}, ${gradientColors.rgba})`,
+    BOTTOM: `radial-gradient(20.7% 50% at 50% 100%, ${gradientColors.hsl}, ${gradientColors.rgba})`,
+    RIGHT: `radial-gradient(16.2% 41.199999999999996% at 100% 50%, ${gradientColors.hsl}, ${gradientColors.rgba})`,
   }
 
   const highlight =
@@ -70,7 +79,7 @@ export function HoverBorderGradient({
     >
       <div
         className={cn(
-          "w-auto text-white z-10 bg-black px-4 py-2 rounded-[inherit]",
+          "w-auto text-foreground z-10 bg-background px-4 py-2 rounded-[inherit]",
           className,
         )}
       >

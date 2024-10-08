@@ -32,21 +32,25 @@ export default async function Home({ params: { locale } }: Props) {
             icon={<Logs className="text-slate-500" />}
             title={advantagesT("no_logs.title")}
             text={advantagesT("no_logs.text")}
+            textColor="text-slate-500"
           />
           <Advantage
             icon={<GitPullRequestDraft className="text-green-600" />}
             title={advantagesT("open_source.title")}
             text={advantagesT("open_source.text")}
+            textColor="text-green-600"
           />
           <Advantage
             icon={<Rocket className="text-rose-700" />}
             title={advantagesT("speed.title")}
             text={advantagesT("speed.text")}
+            textColor="text-rose-600"
           />
           <Advantage
             icon={<Shield className="text-blue-600" />}
             title={advantagesT("reliability.title")}
             text={advantagesT("reliability.text")}
+            textColor="text-blue-600"
           />
         </div>
       </PageSection>
@@ -67,9 +71,9 @@ export default async function Home({ params: { locale } }: Props) {
               <Link href="/connect">{pricingT("free.button")}</Link>
             </Button>
           </div>
-          <div className="p-8 rounded-sm shadow-lg bg-zinc-950">
+          <div className="p-8 rounded-sm shadow-lg bg-zinc-950 text-lightTitle">
             <h3 className="mb-2 text-3xl font-bold tracking-tight">Pro</h3>
-            <div className="mb-4 flex items-end gap-2 text-xl font-semibold">
+            <div className="mb-4 flex items-baseline gap-2 text-xl font-semibold">
               {pricingT("pro.price")}{" "}
               <span className="text-sm font-semibold tracking-tight text-muted-foreground">
                 {pricingT("pro.in_month")}

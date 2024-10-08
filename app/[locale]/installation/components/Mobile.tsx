@@ -6,7 +6,7 @@ export function Mobile() {
 
   return (
     <div>
-      <div className="bg-zinc-950 p-6 rounded-lg mb-6">
+      <div className="bg-background p-6 rounded-lg mb-6">
         <h3 className="text-xl font-semibold mb-3">{t("method1.title")}</h3>
         <ol className="list-decimal list-inside space-y-2">
           <li>{t("method1.step1")}</li>
@@ -28,7 +28,7 @@ export function Mobile() {
         </ol>
       </div>
 
-      <div className="bg-zinc-950 p-6 rounded-lg mb-6">
+      <div className="bg-background p-6 rounded-lg mb-6">
         <h3 className="text-xl font-semibold mb-3">{t("method2.title")}</h3>
         <ol className="list-decimal list-inside space-y-2">
           <li>

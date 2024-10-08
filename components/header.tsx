@@ -2,6 +2,7 @@
 
 import { LanguageMenu } from "@/components/language-menu"
 import { MobileMenu } from "@/components/mobile-menu"
+import ThemeSwitcher from "@/components/theme-switcher"
 import { useScopedI18n } from "@/shared/locales/client"
 import Image from "next/image"
 import Link from "next/link"
@@ -17,12 +18,13 @@ export function Header() {
           <Image width={137} height={40} src="/logo.svg" alt="FRKN" />
         </a>
       </div>
-      <div className="w-full justify-between hidden lg:flex px-6 py-4 rounded-full bg-zinc-950">
+      <div className="w-full justify-between hidden lg:flex px-6 py-4 rounded-full">
         <Link href="/#pricing">{t("pricing")}</Link>
         <Link href="/connect">{t("connect")}</Link>
         <LanguageMenu />
+        <ThemeSwitcher />
       </div>
-      <div className="justify-self-end">
+      <div className="flex items-center gap-2 justify-self-end">
         <User
           withUserClassName="hidden lg:flex"
           withoutUserClassName="hidden lg:flex items-center gap-2"

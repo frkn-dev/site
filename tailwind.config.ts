@@ -19,6 +19,8 @@ const config = {
       },
       colors: {
         border: "hsl(var(--border))",
+        title: "hsl(var(--title))",
+        lightTitle: "hsl(var(--light-title))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

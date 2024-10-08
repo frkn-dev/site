@@ -1,6 +1,7 @@
 "use client"
 
 import { LanguageMenu } from "@/components/language-menu"
+import ThemeSwitcher from "@/components/theme-switcher"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
@@ -33,7 +34,7 @@ export function MobileMenu() {
       </DrawerTrigger>
       <DrawerContent>
         <div className="p-4">
-          <nav className="flex flex-col gap-4 mb-6">
+          <nav className="flex flex-col items-start gap-4 mb-6">
             <DrawerClose
               className="text-left"
               onClick={() => {
@@ -56,6 +57,7 @@ export function MobileMenu() {
               <Link href="/connect">{t("connect")}</Link>
             </DrawerClose>
             <LanguageMenu />
+            <ThemeSwitcher />
           </nav>
           <User
             withUserClassName="flex justify-center"
