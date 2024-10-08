@@ -1,6 +1,6 @@
 {
   "name": "frkn-site",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "engines": {
     "pnpm": ">=9"
@@ -89,10 +89,7 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": [
-        "CVE-2024-4067",
-        "CVE-2024-46982"
-      ]
+      "ignoreCves": ["CVE-2024-4067", "CVE-2024-46982"]
     }
   }
 }

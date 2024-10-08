@@ -1,0 +1,23 @@
+{
+  "note": null,
+  "online_at": null,
+  "used_traffic": 0,
+  "lifetime_used_traffic": 0,
+  "created_at": "2024-10-03T11:03:05.331866",
+  "expire": null,
+  "data_limit": 104857600,
+  "data_limit_reset_strategy": "day",
+  "status": "active",
+  "subscription_url": "/sub/MDZiZGMyZTItNjI4Ni00OTZhLTk0Mz",
+  "links": [
+    "ss://Y2hhY2hhMjAta@1.1.1.1:1080#%F0%9F%87%B3%F0%9F%87%B1%20NL-1%20%5BFRKN%5D%20Shadowsocks",
+    "ss://Y2hhY2hhMjAta@1.1.1.17:1080#%F0%9F%87%AF%F0%9F%87%B5%20JP-1%20%5BFRKN%5D%20Shadowsocks",
+    "ss://Y2hhY2hhMjAta@1.1.1.10:1080#%F0%9F%87%B7%F0%9F%87%BA%20RU-1%20%5BFRKN%5D%20Shadowsocks",
+    "ss://Y2hhY2hhMjAta@1.1.1.17:1080#%F0%9F%87%B3%F0%9F%87%B1%20NL-2%20%5BFRKN%5D%20Shadowsocks",
+    "ss://Y2hhY2hhMjAta@1.1.1.16:1080#%F0%9F%87%B9%F0%9F%87%B7%20TR-1%20%5BFRKN%5D%20Shadowsocks",
+    "ss://Y2hhY2hhMjAta@1.1.1.11:1080#%F0%9F%87%BA%F0%9F%87%B8%20US-1%20%5BFRKN%5D%20Shadowsocks",
+    "ss://Y2hhY2hhMjAta@1.1.1.1:1080#%F0%9F%87%A6%F0%9F%87%B2%20AM-1%20%5BFRKN%5D%20Shadowsocks%20",
+    "ss://Y2hhY2hhMjAta@1.1.1.1:1080#%F0%9F%87%B0%F0%9F%87%BF%20KZ-1%20%5BFRKN%5D%20Shadowsocks%20",
+    "False"
+  ]
+}

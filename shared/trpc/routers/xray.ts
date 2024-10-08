@@ -14,18 +14,18 @@ const inbounds = {}
 
 export const xray = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
-    const me = ctx.user
-    const token = await prisma.tokens.findUnique({
-      where: { id: XRAY_TOKEN_NAME },
-    })
-    const request = () =>
-      fetch(env.XRAY_API + "/api/user/" + me.id, {
-        headers: {
-          Authorization: "Bearer " + token!.token,
-        },
-      })
-
     try {
+      const me = ctx.user
+      const token = await prisma.tokens.findUnique({
+        where: { id: XRAY_TOKEN_NAME },
+      })
+      const request = () =>
+        fetch(env.XRAY_API + "/api/user/" + me.id, {
+          headers: {
+            Authorization: "Bearer " + token?.token,
+          },
+        })
+
       let response = await request()
       if (response.status === 404) {
         create(me.id)
@@ -98,7 +98,7 @@ export async function create(userId: string) {
       method: "POST",
       headers: {
         "Content-type": "application/json",
-        Authorization: "Bearer " + token!.token,
+        Authorization: "Bearer " + token?.token,
       },
       body: JSON.stringify(user),
     })
@@ -138,7 +138,7 @@ export async function upgrade(userId: string) {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
-        Authorization: "Bearer " + token!.token,
+        Authorization: "Bearer " + token?.token,
       },
       body: JSON.stringify(user),
     })
