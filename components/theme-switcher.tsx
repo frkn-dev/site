@@ -17,7 +17,7 @@ const ThemeSwitcher: React.FC = () => {
       <label
         htmlFor="switcher-input"
         className={`flex items-center justify-between w-14 h-7 p-1 rounded-full cursor-pointer transition ${
-          isDarkMode ? "bg-gray-900" : "bg-gray-300 "
+          isDarkMode ? "bg-gray-900" : "bg-slate-200 "
         }`}
       >
         <MoonIcon className={`text-blue-600 ${!isDarkMode && "hidden"}`} />

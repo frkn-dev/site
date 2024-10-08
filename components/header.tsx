@@ -22,6 +22,7 @@ export function Header() {
         <Link href="/#pricing">{t("pricing")}</Link>
         <Link href="/connect">{t("connect")}</Link>
         <LanguageMenu />
+        <ThemeSwitcher />
       </div>
       <div className="flex items-center gap-2 justify-self-end">
         <User
@@ -29,7 +30,6 @@ export function Header() {
           withoutUserClassName="hidden lg:flex items-center gap-2"
         />
         <MobileMenu />
-        <ThemeSwitcher />
       </div>
     </header>
   )
