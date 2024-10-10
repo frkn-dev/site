@@ -202,6 +202,12 @@ export default {
           "To increase the current limits, please visit the Pricing page or contact our support team:",
       },
     },
+    status: {
+      connection: "Connection status",
+      services: "Services status",
+      databases: "API and databases status",
+      check: "View status details",
+    },
   },
   components: {
     bash_command: {
