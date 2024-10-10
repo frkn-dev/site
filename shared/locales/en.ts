@@ -77,6 +77,7 @@ export default {
     privacy: "Privacy Policy",
     protocols: "Protocols",
     support: "Support",
+    status: "Services status",
     terms: "Terms of Service",
   },
   app: {
