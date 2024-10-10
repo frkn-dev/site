@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import type { Props } from "@/shared/locales/server"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
