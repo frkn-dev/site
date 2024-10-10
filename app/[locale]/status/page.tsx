@@ -1,12 +1,16 @@
 import ClusterStatus from "@/components/cluster-status"
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
+import type { Props } from "@/shared/locales/server"
+import { setStaticParamsLocale } from "next-international/server"
 
 export function generateStaticParams() {
   return getStaticParams()
 }
 
-export default async function StatusPage() {
+export default async function StatusPage({ params: { locale } }: Props) {
+  setStaticParamsLocale(locale)
+
   const t = await getScopedI18n("app.status")
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
