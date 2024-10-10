@@ -35,10 +35,9 @@ export default {
   pricing: {
     free: {
       price: "Free",
-      feature_1: "Free forever",
-      feature_2: "6 regions",
-      feature_3: "Support for all OS",
-      feature_4: "100 MB of traffic per day",
+      feature_1: "6 regions",
+      feature_2: "Support for all OS",
+      feature_3: "100 MB of traffic per day",
       button: "Connect",
     },
     pro: {
@@ -46,6 +45,14 @@ export default {
       in_month: "per month",
       feature_1: "Everything in Free",
       feature_2: "Unlimited traffic",
+      button: "Buy",
+      active: "Active",
+    },
+    pro_plus: {
+      price: "$50",
+      in_year: "per year",
+      feature_1: "Everything in Pro",
+      feature_2: "20% cheaper than Pro",
       button: "Buy",
       active: "Active",
     },

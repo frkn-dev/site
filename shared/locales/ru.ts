@@ -35,10 +35,9 @@ export default {
   pricing: {
     free: {
       price: "Бесплатно",
-      feature_1: "Бесплатно навсегда",
-      feature_2: "6 регионов",
-      feature_3: "Поддержка всех ОС",
-      feature_4: "100 МБ трафика в день",
+      feature_1: "6 регионов",
+      feature_2: "Поддержка всех ОС",
+      feature_3: "100 МБ трафика в день",
       button: "Подключиться",
     },
     pro: {
@@ -46,6 +45,14 @@ export default {
       in_month: "в месяц",
       feature_1: "Всё, что в Free",
       feature_2: "Без лимитов на трафик",
+      button: "Купить",
+      active: "Активно",
+    },
+    pro_plus: {
+      price: "5000 ₽",
+      in_year: "в год",
+      feature_1: "Всё, что в Pro",
+      feature_2: "На 20% дешевле Pro",
       button: "Купить",
       active: "Активно",
     },

@@ -20,7 +20,8 @@ const config = {
       colors: {
         border: "hsl(var(--border))",
         title: "hsl(var(--title))",
-        lightTitle: "hsl(var(--light-title))",
+        light: "hsl(var(--light))",
+        dark: "hsl(var(--dark))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -40,6 +41,7 @@ const config = {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
+          light: "hsl(var(--muted-light))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
