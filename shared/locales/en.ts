@@ -77,6 +77,7 @@ export default {
     privacy: "Privacy Policy",
     protocols: "Protocols",
     support: "Support",
+    status: "Servers",
     terms: "Terms of Service",
   },
   app: {
@@ -201,6 +202,12 @@ export default {
         premium:
           "To increase the current limits, please visit the Pricing page or contact our support team:",
       },
+    },
+    status: {
+      connection: "Connection status",
+      services: "Services status",
+      databases: "API and databases status",
+      check: "View status details",
     },
   },
   components: {

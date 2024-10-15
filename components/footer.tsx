@@ -11,6 +11,7 @@ export function Footer() {
       <div className="flex flex-col justify-center md:grid md:grid-cols-3 gap-6 w-full">
         <div className="flex flex-col md:items-center gap-6">
           <p className="font-mono font-bold text-l text-center">FRKN LLP</p>
+          <Link href="/status">{t("status")}</Link>
           <Link
             href="https://github.com/frkn-dev"
             target="_blank"
