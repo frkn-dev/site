@@ -2,21 +2,17 @@
 import { useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
 
-const ClusterStatus: React.FC = () => {
+export const ClusterStatus: React.FC = () => {
   const t = useScopedI18n("app.status")
-  const { data, error } = trpc.xray.nodes.useQuery()
-
-  if (error) {
-    return <div className="text-red-500">Ошибка загрузки статуса кластера</div>
-  }
+  const { data } = trpc.xray.nodes.useQuery()
 
   const status = data
     ? data.allConnected
       ? "bg-green-100 text-green-700"
       : data.hasError
         ? "bg-yellow-100 text-yellow-700"
-        : "bg-red-100 text-red-700"
-    : "bg-red-100 text-red-700"
+        : "bg-gray-100 text-black-700"
+    : "bg-gray-100 text-black-700"
 
   const statusLabel = data
     ? data.allConnected
@@ -39,5 +35,3 @@ const ClusterStatus: React.FC = () => {
     </div>
   )
 }
-
-export default ClusterStatus

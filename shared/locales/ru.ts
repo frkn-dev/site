@@ -77,7 +77,7 @@ export default {
     privacy: "Конфиденциальность",
     protocols: "Протоколы",
     support: "Поддержка",
-    status: "Статус сервисов",
+    status: "Сервера",
     terms: "Соглашение",
   },
   app: {
