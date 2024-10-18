@@ -55,8 +55,8 @@ export default async function Home({ params: { locale } }: Props) {
         </div>
       </PageSection>
       <PageSection className="md:py-8" id="pricing">
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="p-8 rounded-sm shadow-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="p-8 rounded-sm bg-light text-dark shadow-lg">
             <h3 className="mb-2 text-3xl font-bold tracking-tight">Free</h3>
             <div className="mb-4 flex items-center gap-2 text-xl font-semibold">
               {formatPrice(0, locale)}
@@ -65,13 +65,13 @@ export default async function Home({ params: { locale } }: Props) {
               <PricingFeature>{pricingT("free.feature_1")}</PricingFeature>
               <PricingFeature>{pricingT("free.feature_2")}</PricingFeature>
               <PricingFeature>{pricingT("free.feature_3")}</PricingFeature>
-              <PricingFeature>{pricingT("free.feature_4")}</PricingFeature>
+              <PricingFeature isEmpty>Empty</PricingFeature>
             </div>
             <Button variant="secondary" className="w-full" asChild>
               <Link href="/connect">{pricingT("free.button")}</Link>
             </Button>
           </div>
-          <div className="p-8 rounded-sm shadow-lg bg-zinc-950 text-lightTitle">
+          <div className="p-8 rounded-sm shadow-lg bg-zinc-950 text-light">
             <h3 className="mb-2 text-3xl font-bold tracking-tight">Pro</h3>
             <div className="mb-4 flex items-baseline gap-2 text-xl font-semibold">
               {pricingT("pro.price")}{" "}
@@ -82,6 +82,22 @@ export default async function Home({ params: { locale } }: Props) {
             <div className="mb-6 space-y-2">
               <PricingFeature>{pricingT("pro.feature_1")}</PricingFeature>
               <PricingFeature>{pricingT("pro.feature_2")}</PricingFeature>
+              <PricingFeature isEmpty>Empty</PricingFeature>
+              <PricingFeature isEmpty>Empty</PricingFeature>
+            </div>
+            <PurchaseButton />
+          </div>
+          <div className="p-8 rounded-sm shadow-lg bg-blue-600 text-light">
+            <h3 className="mb-2 text-3xl font-bold tracking-tight">Pro Plus</h3>
+            <div className="mb-4 flex items-baseline gap-2 text-xl font-semibold">
+              {pricingT("pro_plus.price")}{" "}
+              <span className="text-sm font-semibold tracking-tight text-muted-light">
+                {pricingT("pro_plus.in_year")}
+              </span>
+            </div>
+            <div className="mb-6 space-y-2">
+              <PricingFeature>{pricingT("pro_plus.feature_1")}</PricingFeature>
+              <PricingFeature>{pricingT("pro_plus.feature_2")}</PricingFeature>
               <PricingFeature isEmpty>Empty</PricingFeature>
               <PricingFeature isEmpty>Empty</PricingFeature>
             </div>
