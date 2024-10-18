@@ -40,6 +40,15 @@ export async function POST(req: NextRequest) {
       },
     })
 
+    if (body.status === "subscription-failed") {
+      await prisma.users.update({
+        where: { lavaBuyerId },
+        data: {
+          subscriptionType: null,
+        },
+      })
+    }
+
     if (body.status === "subscription-active") {
       const user = await prisma.users.update({
         where: { lavaBuyerId },
