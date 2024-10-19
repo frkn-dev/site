@@ -7,10 +7,6 @@ export const stripe = createTRPCRouter({
   createCheckoutSession: protectedProcedure.mutation(async ({ ctx }) => {
     const me = ctx.user
 
-    if (me.stripeSubscription) {
-      return { alreadySubscribed: true, url: null }
-    }
-
     const customer = await getOrCreateCustomer(me)
 
     const checkoutSession = await stripeClient.checkout.sessions.create({
