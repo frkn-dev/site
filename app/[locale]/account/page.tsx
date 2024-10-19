@@ -25,7 +25,6 @@ export default async function Page({ params: { locale } }: Props) {
   setStaticParamsLocale(locale)
   const t = await getScopedI18n("app.account.subscription")
   const me = await isLoggedIn()
-  const stripeStatus = me.stripeSubscription?.status ?? "unknown"
   const lavaSubscriptions = me.lavaBuyerId
     ? await prisma.lavaSubscriptions.findMany({
         where: { lavaBuyerId: me.lavaBuyerId },
@@ -158,16 +157,6 @@ export default async function Page({ params: { locale } }: Props) {
               {t("provider")}: <span className="font-semibold">Stripe</span>
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div
-              className={cn("capitalize", {
-                "text-green-400": stripeStatus === "active",
-                "text-red-400": stripeStatus !== "active",
-              })}
-            >
-              {t("status")}: {stripeStatus}
-            </div>
-          </CardContent>
           <CardFooter>
             <ManageStripeSubscriptionButton />
           </CardFooter>

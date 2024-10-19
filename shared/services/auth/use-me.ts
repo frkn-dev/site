@@ -1,7 +1,7 @@
-import type { User } from "@/shared/entities/User"
 import { trpc } from "@/shared/trpc"
+import type { Prisma } from "@prisma/client"
 
-export function useMe(initial?: User) {
+export function useMe(initial?: Prisma.UsersGetPayload<true>) {
   const utils = trpc.useUtils()
 
   return trpc.user.me.useQuery(undefined, {

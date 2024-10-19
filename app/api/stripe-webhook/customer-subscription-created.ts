@@ -12,30 +12,9 @@ export async function customerSubscriptionCreated(
       throw new Error("User id not found in subscription metadata: " + userId)
     }
 
-    const promises = [
-      prisma.users.update({
-        where: { id: userId },
-        data: { subscriptionType: "Stripe" },
-      }),
-      prisma.stripeSubscriptions.create({
-        data: {
-          id: subscription.id,
-          status: subscription.status,
-          created: new Date(subscription.created * 1000),
-          userId,
-        },
-      }),
-    ]
-
-    await Promise.all(promises)
-
-    await prisma.stripeSubscriptionItems.createMany({
-      data: subscription.items.data.map((item) => ({
-        id: item.id,
-        priceId: item.price.id,
-        created: new Date(item.created * 1000),
-        subscriptionId: subscription.id,
-      })),
+    await prisma.users.update({
+      where: { id: userId },
+      data: { subscriptionType: "Stripe" },
     })
   } catch (error) {
     console.error("customerSubscriptionCreated", error)
