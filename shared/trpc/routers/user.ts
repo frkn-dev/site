@@ -28,9 +28,7 @@ export const user = createTRPCRouter({
       })
       await create(user.id)
 
-      return {
-        status: "success",
-      }
+      return { status: "success" }
     }),
   login: publicProcedure
     .input(
@@ -63,10 +61,7 @@ export const user = createTRPCRouter({
         maxAge: 31536000, // 1y
       })
 
-      return {
-        status: "success",
-        message: "",
-      }
+      return { status: "success", token }
     }),
   logout: protectedProcedure.mutation(() => {
     cookies().delete("frkn_auth")

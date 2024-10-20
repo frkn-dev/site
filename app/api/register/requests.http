@@ -1,0 +1,17 @@
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+  "password": "sha3_512(mnemonic)"
+}
+
+## Response:
+# {
+#   status: "success" | "error"
+#   message?: string
+#   cause?: {
+#     name: string
+#     code?: string
+#     issues?: []
+#   }
+# }
