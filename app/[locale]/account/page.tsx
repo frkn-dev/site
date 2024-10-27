@@ -1,5 +1,3 @@
-import { ManageCryptomusButton } from "@/components/manage-cryptomus-button"
-import { ManageStripeSubscriptionButton } from "@/components/manage-stripe-subscription-button"
 import { PageSection } from "@/components/page-section"
 import {
   Card,
@@ -10,12 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import prisma from "@/prisma"
-import { cn } from "@/shared/clsx"
 import { isLoggedIn } from "@/shared/guards"
 import type { Props } from "@/shared/locales/server"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
+import { ManageCryptomusButton } from "./manage-cryptomus-button"
+import { DeleteLavaSubscriptionsButton } from "./manage-lava-button"
+import { ManageStripeSubscriptionButton } from "./manage-stripe-button"
 
 export function generateStaticParams() {
   return getStaticParams()
@@ -149,6 +149,11 @@ export default async function Page({ params: { locale } }: Props) {
               ))}
             </div>
           </CardContent>
+          {me.subscriptionType === "Lava" && (
+            <CardFooter>
+              <DeleteLavaSubscriptionsButton />
+            </CardFooter>
+          )}
         </Card>
       )}
 

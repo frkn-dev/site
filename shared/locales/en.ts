@@ -185,6 +185,10 @@ export default {
         manage: "Manage subscription",
         inactive: "Active subscriptions not found.",
         pay: "Pay",
+        cancel: "Cancel Subscription",
+        cancel_desc:
+          "To cancel your VPN subscription, please enter the email address you used for payment:",
+        cancel_btn: "Unsubscribe",
       },
     },
     connect: {
