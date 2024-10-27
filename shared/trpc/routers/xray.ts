@@ -80,13 +80,17 @@ export const xray = createTRPCRouter({
   }),
 })
 
+const freePlan = {
+  data_limit: 104_857_600, // 100 MB
+  data_limit_reset_strategy: "day",
+  proxies,
+  inbounds,
+} as const
+
 export async function create(userId: string) {
   const user: components["schemas"]["UserCreate"] = {
     username: userId,
-    data_limit: 104_857_600, // 100 MB
-    data_limit_reset_strategy: "day",
-    proxies,
-    inbounds,
+    ...freePlan,
   }
 
   const token = await prisma.tokens.findUnique({
@@ -117,17 +121,18 @@ export async function create(userId: string) {
   }
 }
 
-export async function upgrade(userId: string) {
-  const timestamp = Math.floor(Date.now() / 1000)
+const proMonthPlan = {
+  status: "active",
+  data_limit: 0, // unlimited
+  data_limit_reset_strategy: "no_reset",
+  expire: Math.floor(Date.now() / 1000) + 31 * 24 * 60 * 60, // 31 days
+  proxies,
+  inbounds,
+} as const
 
-  const user: components["schemas"]["UserModify"] = {
-    status: "active",
-    data_limit: 0, // unlimited
-    data_limit_reset_strategy: "no_reset",
-    expire: timestamp + 31 * 24 * 60 * 60, // 31 days
-    proxies,
-    inbounds,
-  }
+export async function upgrade(userId: string, plan: "free" | "1m") {
+  const body: components["schemas"]["UserModify"] =
+    plan === "free" ? freePlan : proMonthPlan
 
   const token = await prisma.tokens.findUnique({
     where: { id: XRAY_TOKEN_NAME },
@@ -140,7 +145,7 @@ export async function upgrade(userId: string) {
         "Content-type": "application/json",
         Authorization: "Bearer " + token?.token,
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(body),
     })
 
   try {
