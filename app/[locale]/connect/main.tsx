@@ -30,7 +30,7 @@ export function Main() {
       <div>
         {isLoading && (
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-8">
-            <Loader2 className="ml-4 h-6 w-6 text-white animate-spin" />
+            <Loader2 className="ml-4 h-6 w-6 animate-spin" />
           </div>
         )}
 

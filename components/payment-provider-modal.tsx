@@ -100,7 +100,7 @@ export function PaymentProviderModal() {
                 {stripe.isPending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 ) : null}
-                Stripe
+                {t("stripe")}
               </Button>
 
               <Button

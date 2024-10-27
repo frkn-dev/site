@@ -52,7 +52,7 @@ export default {
     payment_provider_dialog: {
       title: "Payment provider",
       description: "Choose a payment provider",
-      lava: "Payment by Card",
+      stripe: "Pay with Card",
       lava_rub: "Ruble Cards (Russian Banks)",
       crypto: "Cryptocurrencies",
       sbp: "The Faster Payments System (SBP)",
