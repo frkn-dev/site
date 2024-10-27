@@ -1,6 +1,6 @@
-import type { Stripe } from "stripe"
-
 import prisma from "@/prisma"
+import { upgrade } from "@/shared/trpc/routers/xray"
+import type { Stripe } from "stripe"
 
 export async function customerSubscriptionDeleted(
   event: Stripe.CustomerSubscriptionDeletedEvent,
@@ -17,6 +17,7 @@ export async function customerSubscriptionDeleted(
       where: { id: userId },
       data: { subscriptionType: null },
     })
+    await upgrade(userId, "free")
   } catch (error) {
     console.error("customerSubscriptionDeleted", error)
     throw error
