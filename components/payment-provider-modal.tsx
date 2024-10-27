@@ -30,6 +30,7 @@ import { useAnalytics } from "@/shared/analytics"
 
 export function PaymentProviderModal() {
   const t = useScopedI18n("pricing.payment_provider_dialog")
+  const tc = useScopedI18n("components")
   const locale = useCurrentLocale()
   const { paymentProvider } = useStore($modals)
   const router = useRouter()
@@ -60,7 +61,7 @@ export function PaymentProviderModal() {
 
   const schema = z.object({
     email: z.string().email({
-      message: t("invalid"),
+      message: tc("email.invalid"),
     }),
   })
   type FormData = z.infer<typeof schema>

@@ -58,7 +58,6 @@ export default {
       sbp: "The Faster Payments System (SBP)",
       pay: "Pay",
       email_required: "Enter your e-mail",
-      invalid: "Invalid email address",
       support: "Contact our support team on Telegram",
     },
   },
@@ -67,7 +66,6 @@ export default {
     description:
       "Receive information about our product to your email, we guarantee no spam.",
     subscribe: "Subscribe",
-    invalid: "Invalid email address",
     success: "Thank you for subscribing to our newsletter!",
   },
   footer: {
@@ -211,6 +209,9 @@ export default {
     },
   },
   components: {
+    email: {
+      invalid: "Invalid email address",
+    },
     bash_command: {
       copied: "Copied!",
     },
