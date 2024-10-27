@@ -10,14 +10,13 @@ generator client {
 }
 
 model Users {
-  id                 String               @id @default(uuid())
-  password           String               @unique
-  created            DateTime             @default(now())
-  ref                String?
-  subscriptionType   SubscriptionType?    @map("subscription_type")
-  stripeCustomerId   String?              @unique @map("stripe_customer_id")
-  stripeSubscription StripeSubscriptions?
-  lavaBuyerId        String?              @unique @map("lava_buyer_id")
+  id               String            @id @default(uuid())
+  password         String            @unique
+  created          DateTime          @default(now())
+  ref              String?
+  subscriptionType SubscriptionType? @map("subscription_type")
+  stripeCustomerId String?           @unique @map("stripe_customer_id")
+  lavaBuyerId      String?           @unique @map("lava_buyer_id")
 
   @@map("users")
 }
@@ -26,20 +25,6 @@ enum SubscriptionType {
   Stripe
   Lava
   Cryptomus
-}
-
-model StripeSubscriptions {
-  id                      String                    @id
-  status                  StripeSubscriptionStatus
-  created                 DateTime                  @default(now()) @map("created")
-  updated                 DateTime?                 @map("updated")
-  userId                  String                    @unique @map("user_id")
-  stripeSubscriptionItems StripeSubscriptionItems[]
-  user                    Users                     @relation(fields: [userId], references: [id])
-
-  @@index([id])
-  @@index([userId])
-  @@map("stripe_subscriptions")
 }
 
 model CryptomusInvoices {
@@ -74,30 +59,6 @@ model LavaSubscriptions {
 
   @@index([lavaBuyerId])
   @@map("lava_subscriptions")
-}
-
-enum StripeSubscriptionStatus {
-  incomplete
-  incomplete_expired
-  trialing
-  active
-  past_due
-  canceled
-  unpaid
-  paused
-}
-
-model StripeSubscriptionItems {
-  id             String              @id
-  priceId        String
-  created        DateTime            @default(now()) @map("created")
-  updated        DateTime?           @map("updated")
-  subscriptionId String
-  subscription   StripeSubscriptions @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
-
-  @@index([id])
-  @@index([subscriptionId])
-  @@map("stripe_subscription_items")
 }
 
 model StripeInvoices {

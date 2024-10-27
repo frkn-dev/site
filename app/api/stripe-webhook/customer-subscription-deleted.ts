@@ -13,17 +13,10 @@ export async function customerSubscriptionDeleted(
       throw new Error("User id not found in subscription metadata")
     }
 
-    const promises = [
-      prisma.users.update({
-        where: { id: userId },
-        data: { subscriptionType: null },
-      }),
-      prisma.stripeSubscriptions.delete({
-        where: { id: subscription.id },
-      }),
-    ]
-
-    await Promise.all(promises)
+    await prisma.users.update({
+      where: { id: userId },
+      data: { subscriptionType: null },
+    })
   } catch (error) {
     console.error("customerSubscriptionDeleted", error)
     throw error

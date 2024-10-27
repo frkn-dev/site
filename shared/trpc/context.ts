@@ -19,18 +19,6 @@ export async function createContext() {
         subscriptionType: true,
         lavaBuyerId: true,
         stripeCustomerId: true,
-        stripeSubscription: {
-          select: {
-            id: true,
-            status: true,
-            stripeSubscriptionItems: {
-              select: {
-                id: true,
-                priceId: true,
-              },
-            },
-          },
-        },
       },
     })
 
