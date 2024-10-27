@@ -33,11 +33,14 @@ export default async function Page({ params: { locale } }: Props) {
   const cryptomusInvoices = await prisma.cryptomusInvoices.findMany({
     where: { userId: me.id },
   })
+  const stripeInvoices = await prisma.stripeInvoices.findMany({
+    where: { userId: me.id },
+  })
 
   return (
-    <PageSection>
+    <PageSection className="py-4 md:py-4">
       {!me.subscriptionType && (
-        <Card>
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("inactive")}</CardTitle>
           </CardHeader>
@@ -45,7 +48,7 @@ export default async function Page({ params: { locale } }: Props) {
       )}
 
       {cryptomusInvoices.length > 0 && (
-        <Card>
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("title")}</CardTitle>
             <CardDescription>
@@ -99,7 +102,7 @@ export default async function Page({ params: { locale } }: Props) {
       )}
 
       {lavaSubscriptions.length > 0 && (
-        <Card>
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("title")}</CardTitle>
             <CardDescription>
@@ -149,17 +152,41 @@ export default async function Page({ params: { locale } }: Props) {
         </Card>
       )}
 
-      {me.subscriptionType === "Stripe" && (
-        <Card>
+      {stripeInvoices.length > 0 && (
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("title")}</CardTitle>
             <CardDescription>
               {t("provider")}: <span className="font-semibold">Stripe</span>
             </CardDescription>
           </CardHeader>
-          <CardFooter>
-            <ManageStripeSubscriptionButton />
-          </CardFooter>
+          <CardContent>
+            <div className="flex flex-wrap gap-4">
+              {stripeInvoices.map((payment) => (
+                <div
+                  key={payment.id}
+                  className="border rounded-lg p-4 shadow-sm bg-gray-100 text-black w-64"
+                >
+                  <div className="text-lg font-bold">
+                    {new Date(payment.created * 1000).toLocaleString(locale)}
+                  </div>
+
+                  <div className="text-sm mt-1">
+                    <strong>{t("amount")}:</strong>{" "}
+                    {(payment.amount_paid / 100).toFixed(2)} {payment.currency}
+                  </div>
+                  <div className="text-sm mt-1">
+                    <strong>{t("status")}:</strong> {payment.status}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+          {me.subscriptionType === "Stripe" && (
+            <CardFooter>
+              <ManageStripeSubscriptionButton />
+            </CardFooter>
+          )}
         </Card>
       )}
     </PageSection>
