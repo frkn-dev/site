@@ -47,8 +47,11 @@ async function checkCluster(): Promise<boolean> {
       },
     })
     const nodes: components["schemas"]["NodeResponse"][] = await response.json()
+    const connected = nodes.filter((node) => node.status === "connected").length
 
-    return nodes.every((node) => node.status === "connected")
+    const isMajorityConnected = connected > nodes.length / 2
+
+    return isMajorityConnected
   } catch (error) {
     console.error("Cluster check failed:", error)
     return false
