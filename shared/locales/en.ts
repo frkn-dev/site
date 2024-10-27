@@ -59,13 +59,12 @@ export default {
     payment_provider_dialog: {
       title: "Payment provider",
       description: "Choose a payment provider",
-      lava: "Payment by Card",
+      stripe: "Pay with Card",
       lava_rub: "Ruble Cards (Russian Banks)",
       crypto: "Cryptocurrencies",
       sbp: "The Faster Payments System (SBP)",
       pay: "Pay",
       email_required: "Enter your e-mail",
-      invalid: "Invalid email address",
       support: "Contact our support team on Telegram",
     },
   },
@@ -74,7 +73,6 @@ export default {
     description:
       "Receive information about our product to your email, we guarantee no spam.",
     subscribe: "Subscribe",
-    invalid: "Invalid email address",
     success: "Thank you for subscribing to our newsletter!",
   },
   footer: {
@@ -84,6 +82,7 @@ export default {
     privacy: "Privacy Policy",
     protocols: "Protocols",
     support: "Support",
+    status: "Servers",
     terms: "Terms of Service",
   },
   app: {
@@ -193,6 +192,10 @@ export default {
         manage: "Manage subscription",
         inactive: "Active subscriptions not found.",
         pay: "Pay",
+        cancel: "Cancel Subscription",
+        cancel_desc:
+          "To cancel your VPN subscription, please enter the email address you used for payment:",
+        cancel_btn: "Unsubscribe",
       },
     },
     connect: {
@@ -209,8 +212,17 @@ export default {
           "To increase the current limits, please visit the Pricing page or contact our support team:",
       },
     },
+    status: {
+      connection: "Connection status",
+      services: "Services status",
+      databases: "API and databases status",
+      check: "View status details",
+    },
   },
   components: {
+    email: {
+      invalid: "Invalid email address",
+    },
     bash_command: {
       copied: "Copied!",
     },

@@ -8,7 +8,6 @@ export const env = createEnv({
     HMAC_SECRET: z.string().min(1),
     MAIL_SENDER_API_KEY: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().startsWith("sk_"),
-    STRIPE_PUBLISHABLE_KEY: z.string().startsWith("pk_"),
     STRIPE_WEBHOOK_SECRET: z.string().startsWith("whsec_"),
     STRIPE_PRICE_ID_MONTHLY: z.string().startsWith("price_"),
     LAVA_TOP_SECRET_KEY: z.string().min(1),

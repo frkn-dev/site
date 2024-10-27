@@ -19,9 +19,10 @@ import { trpc } from "@/shared/trpc/provider"
 
 export function NewsletterForm() {
   const t = useScopedI18n("newsletter_form")
+  const tc = useScopedI18n("components")
   const locale = useCurrentLocale()
   const schema = z.object({
-    email: z.string().email({ message: t("invalid") }),
+    email: z.string().email({ message: tc("email.invalid") }),
   })
   type FormData = z.infer<typeof schema>
   const form = useForm<FormData>({
@@ -39,7 +40,7 @@ export function NewsletterForm() {
       {
         onSuccess: (result) => {
           if (result?.error) {
-            toast.error(t("invalid"))
+            toast.error(tc("email.invalid"))
           } else {
             toast.success(t("success"))
           }

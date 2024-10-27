@@ -80,6 +80,9 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 1s ease-in forwards",
       },
+      width: {
+        "table-mobile": "calc(100vw - 2rem)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

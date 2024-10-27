@@ -15,7 +15,6 @@
     "test:types": "tsc --noEmit --incremental false",
     "test:lint": "biome lint . --diagnostic-level=error",
     "test:unit": "jest",
-    "stripe:listen": "stripe listen --forward-to localhost:3000/api/stripe-webhook --latest",
     "prisma:push": "prisma db push",
     "prisma:push:production": "dotenv -e .env.production.local -- prisma db push"
   },
@@ -36,9 +35,9 @@
     "@t3-oss/env-nextjs": "0.11.0",
     "@tanstack/react-query": "5.51.15",
     "@tanstack/react-query-devtools": "5.51.23",
-    "@trpc/client": "11.0.0-rc.477",
-    "@trpc/react-query": "11.0.0-rc.477",
-    "@trpc/server": "11.0.0-rc.477",
+    "@trpc/client": "11.0.0-rc.571",
+    "@trpc/react-query": "11.0.0-rc.571",
+    "@trpc/server": "11.0.0-rc.571",
     "@vercel/edge": "1.1.2",
     "@vercel/kv": "2.0.0",
     "argon2": "0.31.2",
@@ -52,7 +51,7 @@
     "mono": "link:geist/font/mono",
     "nanoid": "5.0.7",
     "nanostores": "0.11.2",
-    "next": "14.2.5",
+    "next": "14.2.15",
     "next-international": "1.2.4",
     "next-plausible": "3.12.1",
     "next-themes": "0.3.0",
@@ -89,7 +88,7 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": ["CVE-2024-4067", "CVE-2024-46982"]
+      "ignoreCves": ["CVE-2024-4067"]
     }
   }
 }

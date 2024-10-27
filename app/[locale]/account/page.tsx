@@ -1,5 +1,3 @@
-import { ManageCryptomusButton } from "@/components/manage-cryptomus-button"
-import { ManageStripeSubscriptionButton } from "@/components/manage-stripe-subscription-button"
 import { PageSection } from "@/components/page-section"
 import {
   Card,
@@ -10,12 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import prisma from "@/prisma"
-import { cn } from "@/shared/clsx"
 import { isLoggedIn } from "@/shared/guards"
 import type { Props } from "@/shared/locales/server"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
+import { ManageCryptomusButton } from "./manage-cryptomus-button"
+import { DeleteLavaSubscriptionsButton } from "./manage-lava-button"
+import { ManageStripeSubscriptionButton } from "./manage-stripe-button"
 
 export function generateStaticParams() {
   return getStaticParams()
@@ -25,7 +25,6 @@ export default async function Page({ params: { locale } }: Props) {
   setStaticParamsLocale(locale)
   const t = await getScopedI18n("app.account.subscription")
   const me = await isLoggedIn()
-  const stripeStatus = me.stripeSubscription?.status ?? "unknown"
   const lavaSubscriptions = me.lavaBuyerId
     ? await prisma.lavaSubscriptions.findMany({
         where: { lavaBuyerId: me.lavaBuyerId },
@@ -34,11 +33,14 @@ export default async function Page({ params: { locale } }: Props) {
   const cryptomusInvoices = await prisma.cryptomusInvoices.findMany({
     where: { userId: me.id },
   })
+  const stripeInvoices = await prisma.stripeInvoices.findMany({
+    where: { userId: me.id },
+  })
 
   return (
-    <PageSection>
+    <PageSection className="py-4 md:py-4">
       {!me.subscriptionType && (
-        <Card>
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("inactive")}</CardTitle>
           </CardHeader>
@@ -46,7 +48,7 @@ export default async function Page({ params: { locale } }: Props) {
       )}
 
       {cryptomusInvoices.length > 0 && (
-        <Card>
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("title")}</CardTitle>
             <CardDescription>
@@ -100,7 +102,7 @@ export default async function Page({ params: { locale } }: Props) {
       )}
 
       {lavaSubscriptions.length > 0 && (
-        <Card>
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("title")}</CardTitle>
             <CardDescription>
@@ -147,11 +149,16 @@ export default async function Page({ params: { locale } }: Props) {
               ))}
             </div>
           </CardContent>
+          {me.subscriptionType === "Lava" && (
+            <CardFooter>
+              <DeleteLavaSubscriptionsButton />
+            </CardFooter>
+          )}
         </Card>
       )}
 
-      {me.subscriptionType === "Stripe" && (
-        <Card>
+      {stripeInvoices.length > 0 && (
+        <Card className="mb-3">
           <CardHeader>
             <CardTitle>{t("title")}</CardTitle>
             <CardDescription>
@@ -159,18 +166,32 @@ export default async function Page({ params: { locale } }: Props) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div
-              className={cn("capitalize", {
-                "text-green-400": stripeStatus === "active",
-                "text-red-400": stripeStatus !== "active",
-              })}
-            >
-              {t("status")}: {stripeStatus}
+            <div className="flex flex-wrap gap-4">
+              {stripeInvoices.map((payment) => (
+                <div
+                  key={payment.id}
+                  className="border rounded-lg p-4 shadow-sm bg-gray-100 text-black w-64"
+                >
+                  <div className="text-lg font-bold">
+                    {new Date(payment.created * 1000).toLocaleString(locale)}
+                  </div>
+
+                  <div className="text-sm mt-1">
+                    <strong>{t("amount")}:</strong>{" "}
+                    {(payment.amount_paid / 100).toFixed(2)} {payment.currency}
+                  </div>
+                  <div className="text-sm mt-1">
+                    <strong>{t("status")}:</strong> {payment.status}
+                  </div>
+                </div>
+              ))}
             </div>
           </CardContent>
-          <CardFooter>
-            <ManageStripeSubscriptionButton />
-          </CardFooter>
+          {me.subscriptionType === "Stripe" && (
+            <CardFooter>
+              <ManageStripeSubscriptionButton />
+            </CardFooter>
+          )}
         </Card>
       )}
     </PageSection>

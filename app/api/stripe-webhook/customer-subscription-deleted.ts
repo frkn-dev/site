@@ -1,6 +1,6 @@
-import type { Stripe } from "stripe"
-
 import prisma from "@/prisma"
+import { upgrade } from "@/shared/trpc/routers/xray"
+import type { Stripe } from "stripe"
 
 export async function customerSubscriptionDeleted(
   event: Stripe.CustomerSubscriptionDeletedEvent,
@@ -13,17 +13,11 @@ export async function customerSubscriptionDeleted(
       throw new Error("User id not found in subscription metadata")
     }
 
-    const promises = [
-      prisma.users.update({
-        where: { id: userId },
-        data: { subscriptionType: null },
-      }),
-      prisma.stripeSubscriptions.delete({
-        where: { id: subscription.id },
-      }),
-    ]
-
-    await Promise.all(promises)
+    await prisma.users.update({
+      where: { id: userId },
+      data: { subscriptionType: null },
+    })
+    await upgrade(userId, "free")
   } catch (error) {
     console.error("customerSubscriptionDeleted", error)
     throw error

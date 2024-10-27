@@ -30,32 +30,31 @@ export function Main() {
       <div>
         {isLoading && (
           <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-8">
-            <Loader2 className="ml-4 h-6 w-6 text-white animate-spin" />
+            <Loader2 className="ml-4 h-6 w-6 animate-spin" />
           </div>
         )}
 
         {data && (
-          <div className="p-4 max-w-6xl mx-auto bg-gray-800 rounded-lg shadow-md">
+          <div className="px-4 py-4 mx-auto bg-gray-800 rounded-lg shadow-md max-w-full sm:max-w-6xl">
             <div className="flex items-center justify-center mb-6">
               <h2 className="text-2xl font-bold text-white">
                 {t("table.title")}
               </h2>
             </div>
-
-            <div className="overflow-x-auto">
-              <table className="min-w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-700 text-white">
-                    <th className="border border-gray-600 px-4 py-2 text-left">
+            <div className="overflow-x-auto w-table-mobile md:max-w-full md:border-none border">
+              <table className="min-w-full table-auto md:border-collapse border-separate relative">
+                <thead className="bg-gray-700 text-white">
+                  <tr>
+                    <th className="border border-gray-600 px-2 md:px-4 py-2 text-center sticky left-0 bg-gray-700 z-10 whitespace-nowrap">
                       {t("table.protocol")}
                     </th>
-                    <th className="border border-gray-600 px-4 py-2 text-left">
+                    <th className="border border-gray-600 px-2 md:px-4 py-2 text-center whitespace-nowrap">
                       {t("table.country")}
                     </th>
-                    <th className="border border-gray-600 px-4 py-2 text-left">
+                    <th className="border border-gray-600 px-2 md:px-4 py-2 text-center whitespace-nowrap">
                       {t("table.traffic")}
                     </th>
-                    <th className="border border-gray-600 px-4 py-2 text-left">
+                    <th className="border border-gray-600 px-2 md:px-4 py-2 text-center whitespace-nowrap">
                       {t("table.limit")}
                       <MessageCircleQuestion
                         width={18}
@@ -63,33 +62,34 @@ export function Main() {
                         onClick={() => setHelpDialog(true)}
                       />
                     </th>
-                    <th className="border border-gray-600 px-4 py-2 text-left">
+                    <th className="border border-gray-600 px-2 md:px-4 py-2 text-center whitespace-nowrap">
                       {t("table.configuration")}
                     </th>
-                    <th className="border border-gray-600 px-4 py-2 text-left">
+                    <th className="border border-gray-600 px-2 md:px-4 py-2 text-center whitespace-nowrap">
                       {t("table.qr")}
                     </th>
                   </tr>
                 </thead>
-
                 <tbody>
                   <tr className="bg-gray-900 text-white hover:bg-gray-800">
-                    <td className="border border-gray-700 px-4 py-2">XRay</td>
-                    <td className="border border-gray-700 px-4 py-2">
+                    <td className="border border-gray-700 px-2 md:px-4 py-2 text-center sticky left-0 bg-gray-900 whitespace-nowrap">
+                      XRay
+                    </td>
+                    <td className="border border-gray-700 text-center px-2 md:px-4 py-2 whitespace-nowrap">
                       {t("table.all")}
                     </td>
-                    <td className="border border-gray-700 px-4 py-2">
+                    <td className="border border-gray-700 text-center px-2 md:px-4 py-2 whitespace-nowrap">
                       {formatBytes(data.used_traffic)}
                     </td>
-                    <td className="border border-gray-700 px-4 py-2">
+                    <td className="border border-gray-700 text-center px-2 md:px-4 py-2 whitespace-nowrap">
                       {formatBytes(data.limit)}{" "}
                       {formatStrategy(data.limit_reset_strategy, locale)}
                       {formatExpire(data.expire, locale)}
                     </td>
-                    <td className="border border-gray-700 px-4 py-2">
+                    <td className="border border-gray-700 px-2 md:px-4 py-2 text-center whitespace-nowrap">
                       <CopyInput value={data.subscription_url} />
                     </td>
-                    <td className="border border-gray-700 px-4 py-2 text-center">
+                    <td className="border border-gray-700 px-2 md:px-4 py-2 flex justify-center whitespace-nowrap">
                       <button
                         className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-500"
                         onClick={() => showQr(data.subscription_url)}
@@ -98,29 +98,28 @@ export function Main() {
                       </button>
                     </td>
                   </tr>
-
                   {data.ss_links.map((link) => (
                     <tr
                       className="bg-gray-900 text-white hover:bg-gray-800"
                       key={link.link}
                     >
-                      <td className="border border-gray-700 px-4 py-2">
+                      <td className="border border-gray-700 px-2 md:px-4 py-2 text-center sticky left-0 bg-gray-900 whitespace-nowrap">
                         Shadowsocks
                       </td>
-                      <td className="border border-gray-700 px-4 py-2">
+                      <td className="border border-gray-700 text-center px-2 md:px-4 py-2 whitespace-nowrap">
                         {link.country}
                       </td>
-                      <td className="border border-gray-700 px-4 py-2">
+                      <td className="border border-gray-700 text-center px-2 md:px-4 py-2 whitespace-nowrap">
                         {formatBytes(data.used_traffic)}
                       </td>
-                      <td className="border border-gray-700 px-4 py-2">
+                      <td className="border border-gray-700 text-center px-2 md:px-4 py-2 whitespace-nowrap">
                         {formatBytes(data.limit)}{" "}
                         {formatStrategy(data.limit_reset_strategy, locale)}
                       </td>
-                      <td className="border border-gray-700 px-4 py-2">
+                      <td className="border border-gray-700 text-center px-2 md:px-4 py-2 whitespace-nowrap">
                         <CopyInput value={link.link} />
                       </td>
-                      <td className="border border-gray-700 px-4 py-2 text-center">
+                      <td className="border border-gray-700 px-2 md:px-4 py-2 flex justify-center whitespace-nowrap">
                         <button
                           className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-500"
                           onClick={() => showQr(link.link)}

@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         },
       })
 
-      await upgrade(userId)
+      await upgrade(userId, "1m")
     }
 
     return NextResponse.json({ status: "ok" })

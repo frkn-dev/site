@@ -4,7 +4,6 @@ import { stripe } from "@/shared/services/stripe/client"
 import { headers } from "next/headers"
 import { customerSubscriptionCreated } from "./customer-subscription-created"
 import { customerSubscriptionDeleted } from "./customer-subscription-deleted"
-import { customerSubscriptionUpdated } from "./customer-subscription-updated"
 import { invoicePaymentSucceeded } from "./invoice-payment-succeeded"
 
 export async function POST(request: Request) {
@@ -25,10 +24,6 @@ export async function POST(request: Request) {
     switch (event.type) {
       case "customer.subscription.created": {
         await customerSubscriptionCreated(event)
-        break
-      }
-      case "customer.subscription.updated": {
-        await customerSubscriptionUpdated(event)
         break
       }
       case "customer.subscription.deleted": {
