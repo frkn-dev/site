@@ -36,7 +36,7 @@ export function DeleteLavaSubscriptionsButton() {
   const lava = trpc.lava.unsubscribe.useMutation({
     onSuccess(data) {
       if (data?.status === "ok") {
-        toast.success("👍")
+        toast.success(t("cancel_result"))
         setShowEmail(false)
       } else {
         toast.error(data?.message)

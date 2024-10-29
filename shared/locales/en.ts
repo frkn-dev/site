@@ -196,6 +196,7 @@ export default {
         cancel_desc:
           "To cancel your VPN subscription, please enter the email address you used for payment:",
         cancel_btn: "Unsubscribe",
+        cancel_result: "The refund will be processed within 7 days.",
       },
     },
     connect: {
