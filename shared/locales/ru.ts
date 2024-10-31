@@ -35,10 +35,9 @@ export default {
   pricing: {
     free: {
       price: "Бесплатно",
-      feature_1: "Бесплатно навсегда",
-      feature_2: "6 регионов",
-      feature_3: "Поддержка всех ОС",
-      feature_4: "100 МБ трафика в день",
+      feature_1: "7 регионов",
+      feature_2: "Поддержка всех ОС",
+      feature_3: "100 МБ трафика в день",
       button: "Подключиться",
     },
     pro: {
@@ -49,10 +48,18 @@ export default {
       button: "Купить",
       active: "Активно",
     },
+    pro_plus: {
+      price: "5000 ₽",
+      in_year: "в год",
+      feature_1: "Всё, что в Pro",
+      feature_2: "На 15% дешевле Pro",
+      button: "Купить",
+      active: "Активно",
+    },
     payment_provider_dialog: {
       title: "Способ оплаты",
       description: "Выберите платежный провайдер",
-      stripe: "Stripe",
+      stripe: "Зарубежные карты (Stripe)",
       lava_rub: "Рублевые карты (Банки РФ)",
       crypto: "Криптовалюты",
       sbp: "Система быстрых платежей (СБП)",
@@ -189,6 +196,7 @@ export default {
         cancel_desc:
           "Чтобы отменить подписку на VPN, введите e-mail, который вы использовали при оплате:",
         cancel_btn: "Отписаться",
+        cancel_result: "Возврат средств будет произведен в течение 7 дней",
       },
     },
     connect: {

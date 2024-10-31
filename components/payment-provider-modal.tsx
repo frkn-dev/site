@@ -7,6 +7,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { useAnalytics } from "@/shared/analytics"
 import { useCurrentLocale, useScopedI18n } from "@/shared/locales/client"
 import { $modals } from "@/shared/store"
 import { trpc } from "@/shared/trpc"
@@ -17,16 +26,6 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { useAnalytics } from "@/shared/analytics"
 
 export function PaymentProviderModal() {
   const t = useScopedI18n("pricing.payment_provider_dialog")
@@ -69,10 +68,11 @@ export function PaymentProviderModal() {
     resolver: zodResolver(schema),
     defaultValues: { email: "" },
   })
+  const { open, plan } = paymentProvider
 
   return (
     <Dialog
-      open={paymentProvider.open}
+      open={open}
       onOpenChange={(state) =>
         $modals.setKey("paymentProvider", { open: state })
       }
@@ -86,33 +86,40 @@ export function PaymentProviderModal() {
             </DialogHeader>
 
             <div className="grid gap-2">
-              <Button
-                type="button"
-                onClick={() => {
-                  analytics("subscribe", {
-                    props: {
-                      revenue: { currency: "USD", amount: 5 },
-                    },
-                  })
-                  stripe.mutateAsync()
-                }}
-                disabled={stripe.isPending}
-              >
-                {stripe.isPending ? (
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                ) : null}
-                {t("stripe")}
-              </Button>
+              {plan === "1m" && (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    analytics("subscribe", {
+                      props: {
+                        revenue: { currency: "USD", amount: 5 },
+                      },
+                    })
+                    stripe.mutateAsync()
+                  }}
+                  disabled={stripe.isPending}
+                >
+                  {stripe.isPending ? (
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  ) : null}
+                  {t("stripe")}
+                </Button>
+              )}
 
               <Button
                 type="button"
                 onClick={() => {
                   analytics("subscribe", {
                     props: {
-                      revenue: { currency: "USD", amount: 5 },
+                      revenue: {
+                        currency: "USD",
+                        amount: plan === "1m" ? 5 : 50,
+                      },
                     },
                   })
-                  cryptomus.mutateAsync({ amount: "5" })
+                  cryptomus.mutateAsync({
+                    amount: plan === "1m" ? "5" : "50",
+                  })
                 }}
                 disabled={cryptomus.isPending}
               >
@@ -122,14 +129,16 @@ export function PaymentProviderModal() {
                 {t("crypto")}
               </Button>
 
-              <Button
-                type="button"
-                onClick={() => {
-                  setStep("email")
-                }}
-              >
-                {t("lava_rub")}
-              </Button>
+              {plan === "1m" && (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setStep("email")
+                  }}
+                >
+                  {t("lava_rub")}
+                </Button>
+              )}
 
               <Button type="button" onClick={() => setStep("support")}>
                 {t("sbp")}
@@ -137,7 +146,6 @@ export function PaymentProviderModal() {
             </div>
           </>
         )}
-
         {step === "email" && (
           <>
             <DialogHeader>
@@ -191,7 +199,6 @@ export function PaymentProviderModal() {
             </div>
           </>
         )}
-
         {step === "support" && (
           <>
             <DialogHeader>

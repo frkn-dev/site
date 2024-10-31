@@ -121,18 +121,21 @@ export async function create(userId: string) {
   }
 }
 
-const proMonthPlan = {
-  status: "active",
-  data_limit: 0, // unlimited
-  data_limit_reset_strategy: "no_reset",
-  expire: Math.floor(Date.now() / 1000) + 31 * 24 * 60 * 60, // 31 days
-  proxies,
-  inbounds,
-} as const
+const getProPlan = (plan: "1m" | "1y") => {
+  const days = plan === "1m" ? 31 : 367
+  return {
+    status: "active",
+    data_limit: 0, // unlimited
+    data_limit_reset_strategy: "no_reset",
+    expire: Math.floor(Date.now() / 1000) + days * 24 * 60 * 60,
+    proxies,
+    inbounds,
+  } as const
+}
 
-export async function upgrade(userId: string, plan: "free" | "1m") {
+export async function upgrade(userId: string, plan: "free" | "1m" | "1y") {
   const body: components["schemas"]["UserModify"] =
-    plan === "free" ? freePlan : proMonthPlan
+    plan === "free" ? freePlan : getProPlan(plan)
 
   const token = await prisma.tokens.findUnique({
     where: { id: XRAY_TOKEN_NAME },

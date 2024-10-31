@@ -137,7 +137,8 @@ export default async function Page({ params: { locale } }: Props) {
                     {payment.currency}
                   </div>
                   <div className="text-sm mt-1">
-                    <strong>{t("status")}:</strong> {payment.status}
+                    <strong>{t("status")}:</strong>{" "}
+                    {payment.status?.replace("-active", "-paid")}
                   </div>
 
                   {payment.errorMessage && (
