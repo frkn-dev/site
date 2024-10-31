@@ -47,7 +47,9 @@ export async function POST(req: NextRequest) {
         },
       })
 
-      await upgrade(userId, "1m")
+      const plan = Number(body.amount) === 5 ? "1m" : "1y"
+
+      await upgrade(userId, plan)
     }
 
     return NextResponse.json({ status: "ok" })

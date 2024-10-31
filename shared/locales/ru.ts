@@ -35,7 +35,7 @@ export default {
   pricing: {
     free: {
       price: "Бесплатно",
-      feature_1: "6 регионов",
+      feature_1: "7 регионов",
       feature_2: "Поддержка всех ОС",
       feature_3: "100 МБ трафика в день",
       button: "Подключиться",
@@ -52,14 +52,14 @@ export default {
       price: "5000 ₽",
       in_year: "в год",
       feature_1: "Всё, что в Pro",
-      feature_2: "На 20% дешевле Pro",
+      feature_2: "На 15% дешевле Pro",
       button: "Купить",
       active: "Активно",
     },
     payment_provider_dialog: {
       title: "Способ оплаты",
       description: "Выберите платежный провайдер",
-      stripe: "Stripe",
+      stripe: "Зарубежные карты (Stripe)",
       lava_rub: "Рублевые карты (Банки РФ)",
       crypto: "Криптовалюты",
       sbp: "Система быстрых платежей (СБП)",

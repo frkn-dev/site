@@ -35,7 +35,7 @@ export default {
   pricing: {
     free: {
       price: "Free",
-      feature_1: "6 regions",
+      feature_1: "7 regions",
       feature_2: "Support for all OS",
       feature_3: "100 MB of traffic per day",
       button: "Connect",
@@ -52,7 +52,7 @@ export default {
       price: "$50",
       in_year: "per year",
       feature_1: "Everything in Pro",
-      feature_2: "20% cheaper than Pro",
+      feature_2: "15% cheaper than Pro",
       button: "Buy",
       active: "Active",
     },
