@@ -26,7 +26,8 @@ export async function invoicePaymentSucceeded(
     })
 
     if (invoice.status === "paid") {
-      await upgrade(userId, "1m")
+      const plan = invoice.amount_paid === 500 ? "1m" : "1y"
+      await upgrade(userId, plan)
     } else {
       console.error("Stripe: unexpected status", invoice.status)
     }

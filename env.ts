@@ -9,7 +9,6 @@ export const env = createEnv({
     MAIL_SENDER_API_KEY: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().startsWith("sk_"),
     STRIPE_WEBHOOK_SECRET: z.string().startsWith("whsec_"),
-    STRIPE_PRICE_ID_MONTHLY: z.string().startsWith("price_"),
     LAVA_TOP_SECRET_KEY: z.string().min(1),
     LAVA_TOP_WEBHOOK_SECRET: z.string().min(1),
     DATABASE_URL: z.string().startsWith("postgresql://"),
