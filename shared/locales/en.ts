@@ -185,6 +185,7 @@ export default {
     account: {
       subscription: {
         title: "Subscription information",
+        onetimeTitle: "Payment Information",
         provider: "Provider",
         status: "Status",
         amount: "Amount",
@@ -197,6 +198,13 @@ export default {
           "To cancel your VPN subscription, please enter the email address you used for payment:",
         cancel_btn: "Unsubscribe",
         cancel_result: "The refund will be processed within 7 days.",
+        hook: {
+          successful:
+            "Your subscription payment was successful. Processing may take a few minutes.",
+          failed:
+            "The subscription payment failed. Please try again or contact customer support.",
+          refresh: "Refresh",
+        },
       },
     },
     connect: {

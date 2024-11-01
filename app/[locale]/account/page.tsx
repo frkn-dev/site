@@ -1,4 +1,5 @@
 import { PageSection } from "@/components/page-section"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -13,6 +14,7 @@ import type { Props } from "@/shared/locales/server"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
+import Link from "next/link"
 import { ManageCryptomusButton } from "./manage-cryptomus-button"
 import { DeleteLavaSubscriptionsButton } from "./manage-lava-button"
 import { ManageStripeSubscriptionButton } from "./manage-stripe-button"
@@ -21,7 +23,12 @@ export function generateStaticParams() {
   return getStaticParams()
 }
 
-export default async function Page({ params: { locale } }: Props) {
+type Params = { searchParams: { status?: "successful" | "failed" } }
+
+export default async function Page({
+  params: { locale },
+  searchParams,
+}: Props & Params) {
   setStaticParamsLocale(locale)
   const t = await getScopedI18n("app.account.subscription")
   const me = await isLoggedIn()
@@ -36,9 +43,28 @@ export default async function Page({ params: { locale } }: Props) {
   const stripeInvoices = await prisma.stripeInvoices.findMany({
     where: { userId: me.id },
   })
+  const cardlinkInvoices = await prisma.cardlinkInvoices.findMany({
+    where: { userId: me.id },
+  })
 
   return (
     <PageSection className="py-4 md:py-4">
+      {searchParams.status && (
+        <Card className="mb-3">
+          <CardHeader>
+            <CardTitle>
+              {searchParams.status === "successful"
+                ? t("hook.successful")
+                : t("hook.failed")}
+            </CardTitle>
+          </CardHeader>
+          <CardFooter>
+            <Button variant="secondary" asChild>
+              <Link href="/account">{t("hook.refresh")}</Link>
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
       {!me.subscriptionType && (
         <Card className="mb-3">
           <CardHeader>
@@ -47,10 +73,49 @@ export default async function Page({ params: { locale } }: Props) {
         </Card>
       )}
 
+      {cardlinkInvoices.length > 0 && (
+        <Card className="mb-3">
+          <CardHeader>
+            <CardTitle>{t("onetimeTitle")}</CardTitle>
+            <CardDescription>
+              {t("provider")}: <span className="font-semibold">Cardlink</span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-4">
+              {cardlinkInvoices.map(
+                ({ id, created, status, sum, currency }) => (
+                  <div
+                    key={id}
+                    className="border rounded-lg p-4 shadow-sm bg-gray-100 text-black w-64"
+                  >
+                    <div className="text-lg font-bold">
+                      {created.toLocaleString(locale)}
+                    </div>
+
+                    <div className="text-sm mt-2">
+                      <strong>ID:</strong> {id}
+                    </div>
+
+                    <div className="text-sm mt-1">
+                      <strong>{t("amount")}:</strong> {sum} {currency}
+                    </div>
+
+                    <div className="text-sm mt-1">
+                      <strong>{t("status")}:</strong> {status}
+                    </div>
+                  </div>
+                ),
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {cryptomusInvoices.length > 0 && (
         <Card className="mb-3">
           <CardHeader>
-            <CardTitle>{t("title")}</CardTitle>
+            <CardTitle>{t("onetimeTitle")}</CardTitle>
             <CardDescription>
               {t("provider")}: <span className="font-semibold">Cryptomus</span>
             </CardDescription>

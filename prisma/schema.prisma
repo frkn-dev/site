@@ -25,6 +25,7 @@ enum SubscriptionType {
   Stripe
   Lava
   Cryptomus
+  Cardlink
 }
 
 model CryptomusInvoices {
@@ -73,6 +74,20 @@ model StripeInvoices {
 
   @@index([userId])
   @@map("stripe_invoices")
+}
+
+model CardlinkInvoices {
+  id         String   @id @default(uuid())
+  created    DateTime @default(now())
+  userId     String   @map("user_id")
+  trsId      String   @map("trs_id")
+  status     String
+  sum        Float
+  currency   String
+  commission Float
+
+  @@index([userId])
+  @@map("cardlink_invoices")
 }
 
 model Tokens {

@@ -34,7 +34,7 @@ export function PaymentProviderModal() {
   const { paymentProvider } = useStore($modals)
   const router = useRouter()
   const analytics = useAnalytics()
-  const [step, setStep] = useState<"init" | "email" | "support">("init")
+  const [step, setStep] = useState<"init" | "email">("init")
 
   const stripe = trpc.stripe.createCheckoutSession.useMutation({
     onSuccess(data) {
@@ -51,6 +51,13 @@ export function PaymentProviderModal() {
     },
   })
   const cryptomus = trpc.cryptomus.invoice.useMutation({
+    onSuccess(data) {
+      if (data?.url) {
+        router.push(data.url)
+      }
+    },
+  })
+  const cardlink = trpc.cardlink.bill.useMutation({
     onSuccess(data) {
       if (data?.url) {
         router.push(data.url)
@@ -141,12 +148,29 @@ export function PaymentProviderModal() {
                 </Button>
               )}
 
-              <Button type="button" onClick={() => setStep("support")}>
-                {t("sbp")}
-              </Button>
+              {plan === "1y" && (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    analytics("subscribe", {
+                      props: {
+                        revenue: { currency: "RUB", amount: 5000 },
+                      },
+                    })
+                    cardlink.mutateAsync()
+                  }}
+                  disabled={cardlink.isPending}
+                >
+                  {cardlink.isPending ? (
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  ) : null}
+                  {t("sbp")}
+                </Button>
+              )}
             </div>
           </>
         )}
+
         {step === "email" && (
           <>
             <DialogHeader>
@@ -197,25 +221,6 @@ export function PaymentProviderModal() {
                   </Button>
                 </form>
               </Form>
-            </div>
-          </>
-        )}
-        {step === "support" && (
-          <>
-            <DialogHeader>
-              <DialogTitle>
-                <ArrowLeft
-                  width={18}
-                  className="inline-block ml-1 cursor-pointer"
-                  onClick={() => setStep("init")}
-                />
-                {t("title")}
-              </DialogTitle>
-            </DialogHeader>
-
-            <div className="grid gap-2">
-              {t("support")}:{" "}
-              <External href="https://t.me/frkn_support" text="@frkn_support" />
             </div>
           </>
         )}

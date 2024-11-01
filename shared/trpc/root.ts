@@ -1,4 +1,5 @@
 import {
+  cardlink,
   cryptomus,
   emailNewsletter,
   lava,
@@ -14,6 +15,7 @@ export const appRouter = createTRPCRouter({
   stripe,
   lava,
   cryptomus,
+  cardlink,
   user,
   wg,
   xray,
