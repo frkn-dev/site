@@ -5,7 +5,7 @@ import crypto from "node:crypto"
  * @example
  * strtoupper(md5($OutSum . ":" . $InvId . ":" . $apiToken));
  */
-export function generateHash(OutSum: number, InvId: string, apiToken: string) {
+export function generateHash(OutSum: string, InvId: string, apiToken: string) {
   return crypto
     .createHash("md5")
     .update(`${OutSum}:${InvId}:${apiToken}`)

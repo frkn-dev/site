@@ -7,7 +7,12 @@ import type { NextRequest } from "next/server"
 
 export async function POST(req: NextRequest) {
   try {
-    const body: PaymentPostback = await req.json()
+    const text = await req.text()
+    console.log("cardlink body text", text)
+    const searchParams = new URLSearchParams(text)
+    const body = Object.fromEntries(searchParams) as PaymentPostback
+    console.log("cardlink params", searchParams, body)
+
     const userId = body.custom
     const validSignature = generateHash(
       body.OutSum,
@@ -16,7 +21,7 @@ export async function POST(req: NextRequest) {
     )
 
     if (validSignature !== body.SignatureValue || !userId) {
-      console.error("cardlink", body)
+      console.error("cardlink", validSignature, body)
       return NextResponse.json(
         { message: "Missing signature" },
         { status: 401 },
@@ -57,8 +62,8 @@ export async function POST(req: NextRequest) {
 
 type PaymentPostback = {
   InvId: string
-  OutSum: number
-  Commission: number
+  OutSum: string
+  Commission: string
   TrsId: string
   Status: "SUCCESS" | "UNDERPAID" | "OVERPAID" | "FAIL"
   CurrencyIn: "RUB" | "USD" | "EUR" | "KZT"
