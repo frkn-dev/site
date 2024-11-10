@@ -4,7 +4,7 @@ import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import { NextResponse } from "next/server"
 
-export const revalidate = 300
+export const revalidate = 120
 
 export async function GET() {
   const databaseConnectionStatus = await checkDatabaseConnection()

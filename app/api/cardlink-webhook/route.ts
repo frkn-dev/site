@@ -8,10 +8,8 @@ import type { NextRequest } from "next/server"
 export async function POST(req: NextRequest) {
   try {
     const text = await req.text()
-    console.log("cardlink body text", text)
     const searchParams = new URLSearchParams(text)
     const body = Object.fromEntries(searchParams) as PaymentPostback
-    console.log("cardlink params", searchParams, body)
 
     const userId = body.custom
     const validSignature = generateHash(
