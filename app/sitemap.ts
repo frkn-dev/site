@@ -11,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/shadowsocks",
     "/vless",
     "/wireguard",
+    "/web3",
+    "/status",
     "/privacy-policy",
     "/terms-of-use",
   ].map((page) => ({

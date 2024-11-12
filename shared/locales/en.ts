@@ -84,6 +84,7 @@ export default {
     support: "Support",
     status: "Servers",
     terms: "Terms of Service",
+    tokenization: "Tokenization",
   },
   app: {
     installation: {
