@@ -39,6 +39,7 @@ export function Footer() {
           >
             Twitter
           </Link>
+          <Link href="/web3">{t("tokenization")}</Link>
         </div>
 
         <div className="flex flex-col md:items-center gap-6">
@@ -53,7 +54,6 @@ export function Footer() {
           </Link>
           <Link href="/privacy-policy">{t("privacy")}</Link>
           <Link href="/terms-of-use">{t("terms")}</Link>
-          <Link href="/web3">{t("tokenization")}</Link>
         </div>
 
         <div className="flex flex-col md:items-center gap-6">
