@@ -84,6 +84,7 @@ export default {
     support: "Поддержка",
     status: "Сервера",
     terms: "Соглашение",
+    tokenization: "Токенизация",
   },
   app: {
     installation: {

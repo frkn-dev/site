@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/wireguard",
     "/privacy-policy",
     "/terms-of-use",
+    "/web3",
   ].map((page) => ({
     url: url + page,
     alternates: {

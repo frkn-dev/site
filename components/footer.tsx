@@ -53,15 +53,14 @@ export function Footer() {
           </Link>
           <Link href="/privacy-policy">{t("privacy")}</Link>
           <Link href="/terms-of-use">{t("terms")}</Link>
+          <Link href="/web3">{t("tokenization")}</Link>
         </div>
 
         <div className="flex flex-col md:items-center gap-6">
           <p className="font-mono font-bold text-l text-center">
             {t("protocols")}
           </p>
-          <Link href="/xray" rel="noopener noreferrer">
-            XRay
-          </Link>
+          <Link href="/xray">XRay</Link>
           <Link href="/shadowsocks">Shadowsocks</Link>
           <Link href="/vless">VLESS</Link>
           <Link href="/wireguard">WireGuard</Link>
