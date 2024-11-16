@@ -93,10 +93,6 @@ export default async function Page({
                       {created.toLocaleString(locale)}
                     </div>
 
-                    <div className="text-sm mt-2">
-                      <strong>ID:</strong> {id}
-                    </div>
-
                     <div className="text-sm mt-1">
                       <strong>{t("amount")}:</strong> {sum} {currency}
                     </div>
@@ -142,10 +138,6 @@ export default async function Page({
                       {created.toLocaleString(locale)}
                     </div>
 
-                    <div className="text-sm mt-2">
-                      <strong>ID:</strong> {id}
-                    </div>
-
                     <div className="text-sm mt-1">
                       <strong>{t("amount")}:</strong>{" "}
                       {Number.parseFloat(amount)} {currency}{" "}
@@ -187,16 +179,6 @@ export default async function Page({
                     </div>
                   )}
 
-                  {payment.contractId && (
-                    <div className="text-sm mt-2">
-                      <strong>ID:</strong> {payment.contractId}
-                    </div>
-                  )}
-                  {payment.parentContractId && (
-                    <div className="text-sm text-gray-500">
-                      Parent ID: {payment.parentContractId}
-                    </div>
-                  )}
                   <div className="text-sm mt-1">
                     <strong>{t("amount")}:</strong> {payment.amount}{" "}
                     {payment.currency}
