@@ -2,7 +2,9 @@ import { env } from "@/env"
 import prisma from "@/prisma"
 import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
+import retryFetch from "fetch-retry"
 import { NextResponse } from "next/server"
+const fetch = retryFetch(global.fetch)
 
 export const revalidate = 120
 
@@ -45,6 +47,8 @@ async function checkCluster(): Promise<boolean> {
       headers: {
         Authorization: "Bearer " + token?.token,
       },
+      retries: 3,
+      retryDelay: 1000,
     })
     const nodes: components["schemas"]["NodeResponse"][] = await response.json()
     const connected = nodes.filter((node) => node.status === "connected").length
