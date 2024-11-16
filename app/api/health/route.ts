@@ -47,8 +47,7 @@ async function checkCluster(): Promise<boolean> {
       headers: {
         Authorization: "Bearer " + token?.token,
       },
-      retries: 3,
-      retryDelay: 1000,
+      retries: 1,
     })
     const nodes: components["schemas"]["NodeResponse"][] = await response.json()
     const connected = nodes.filter((node) => node.status === "connected").length
