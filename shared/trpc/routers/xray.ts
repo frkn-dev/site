@@ -3,6 +3,7 @@ import prisma from "@/prisma"
 import { XRAY_TOKEN_NAME } from "@/shared/config"
 import { extractCountry } from "@/shared/format/country"
 import type { components } from "@/shared/types/xray"
+import ky from "ky"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
 
 const proxies = {
@@ -19,20 +20,22 @@ export const xray = createTRPCRouter({
       const token = await prisma.tokens.findUnique({
         where: { id: XRAY_TOKEN_NAME },
       })
-      const request = () =>
-        fetch(env.XRAY_API + "/api/user/" + me.id, {
-          headers: {
-            Authorization: "Bearer " + token?.token,
-          },
-        })
 
-      let response = await request()
-      if (response.status === 404) {
-        create(me.id)
-        response = await request()
-      }
-
-      const xray: components["schemas"]["UserResponse"] = await response.json()
+      const xray = await ky(env.XRAY_API + "/api/user/" + me.id, {
+        headers: {
+          Authorization: "Bearer " + token?.token,
+        },
+        hooks: {
+          afterResponse: [
+            async (request, options, response) => {
+              if (response.status === 404) {
+                await create(me.id)
+                return ky(request)
+              }
+            },
+          ],
+        },
+      }).json<components["schemas"]["UserResponse"]>()
 
       return {
         status: xray.status,
@@ -61,13 +64,11 @@ export const xray = createTRPCRouter({
         where: { id: XRAY_TOKEN_NAME },
       })
 
-      const response = await fetch(env.XRAY_API + "/api/nodes", {
+      const nodes = await ky(env.XRAY_API + "/api/nodes", {
         headers: {
           Authorization: "Bearer " + token?.token,
         },
-      })
-      const nodes: components["schemas"]["NodeResponse"][] =
-        await response.json()
+      }).json<components["schemas"]["NodeResponse"][]>()
 
       return {
         hasError: nodes.some((node) => node.status === "error"),
@@ -87,7 +88,7 @@ const freePlan = {
   inbounds,
 } as const
 
-export async function create(userId: string) {
+export async function create(userId: string, isRetry = false) {
   const user: components["schemas"]["UserCreate"] = {
     username: userId,
     ...freePlan,
@@ -98,16 +99,16 @@ export async function create(userId: string) {
   })
 
   try {
-    const response = await fetch(env.XRAY_API + "/api/user", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: "Bearer " + token?.token,
-      },
-      body: JSON.stringify(user),
-    })
-
-    const xray: components["schemas"]["UserResponse"] = await response.json()
+    const xray = await ky
+      .post(env.XRAY_API + "/api/user", {
+        headers: {
+          Authorization: "Bearer " + token?.token,
+        },
+        json: user,
+        timeout: 3_000,
+        retry: 1,
+      })
+      .json<components["schemas"]["UserResponse"]>()
 
     return {
       subscription_url: xray.subscription_url,
@@ -115,7 +116,11 @@ export async function create(userId: string) {
       limit: xray.data_limit,
       limit_reset_strategy: xray.data_limit_reset_strategy,
     }
-  } catch (error) {
+  } catch (error: any) {
+    if (error.name === "TimeoutError" && !isRetry) {
+      console.warn("XRay user create: TimeoutError")
+      return create(userId, true)
+    }
     console.error("XRay user create", error)
     return null
   }
@@ -133,7 +138,11 @@ const getProPlan = (plan: "1m" | "1y") => {
   } as const
 }
 
-export async function upgrade(userId: string, plan: "free" | "1m" | "1y") {
+export async function upgrade(
+  userId: string,
+  plan: "free" | "1m" | "1y",
+  isRetry = false,
+) {
   const body: components["schemas"]["UserModify"] =
     plan === "free" ? freePlan : getProPlan(plan)
 
@@ -141,25 +150,32 @@ export async function upgrade(userId: string, plan: "free" | "1m" | "1y") {
     where: { id: XRAY_TOKEN_NAME },
   })
 
-  const request = () =>
-    fetch(env.XRAY_API + "/api/user/" + userId, {
-      method: "PUT",
+  try {
+    await ky.put(env.XRAY_API + "/api/user/" + userId, {
       headers: {
-        "Content-type": "application/json",
         Authorization: "Bearer " + token?.token,
       },
-      body: JSON.stringify(body),
+      json: body,
+      timeout: 3_000,
+      retry: 1,
+      hooks: {
+        afterResponse: [
+          async (request, options, response) => {
+            if (response.status === 404) {
+              await create(userId)
+              return ky(request)
+            }
+          },
+        ],
+      },
     })
 
-  try {
-    const response = await request()
-    if (response.status === 404) {
-      await create(userId)
-      await request()
-    }
-
     return { status: "ok" }
-  } catch (error) {
+  } catch (error: any) {
+    if (error.name === "TimeoutError" && !isRetry) {
+      console.warn("XRay upgrade: TimeoutError")
+      return upgrade(userId, plan, true)
+    }
     console.error("XRay upgrade", error)
     return null
   }

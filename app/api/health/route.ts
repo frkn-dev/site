@@ -47,7 +47,7 @@ async function checkCluster(isRetry = false): Promise<boolean> {
         Authorization: "Bearer " + token?.token,
       },
       timeout: 3_000,
-      retry: 2,
+      retry: 1,
     }).json<components["schemas"]["NodeResponse"][]>()
     const connected = nodes.filter((node) => node.status === "connected").length
 
@@ -56,7 +56,7 @@ async function checkCluster(isRetry = false): Promise<boolean> {
     return isMajorityConnected
   } catch (error: any) {
     if (error.name === "TimeoutError" && !isRetry) {
-      console.error("Cluster check failed: TimeoutError")
+      console.warn("Cluster check failed: TimeoutError. I'll try again")
       return checkCluster(true)
     }
     console.error("Cluster check failed:", error)
