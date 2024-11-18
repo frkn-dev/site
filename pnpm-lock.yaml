@@ -80,9 +80,6 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
-      fetch-retry:
-        specifier: 6.0.0
-        version: 6.0.0
       framer-motion:
         specifier: 11.3.8
         version: 11.3.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -95,6 +92,9 @@ importers:
       jsonwebtoken:
         specifier: 9.0.2
         version: 9.0.2
+      ky:
+        specifier: 1.7.2
+        version: 1.7.2
       lucide-react:
         specifier: 0.408.0
         version: 0.408.0(react@18.3.1)
@@ -1663,9 +1663,6 @@ packages:
   fb-watchman@2.0.2:
     resolution: {integrity: sha512-p5161BqbuCaSnB8jIbzQHOlpgsPmK5rJVDfDKO91Axs5NC1uu3HRQm6wt9cd9/+GtQQIO53JdGXXoyDpTAsgYA==}
 
-  fetch-retry@6.0.0:
-    resolution: {integrity: sha512-BUFj1aMubgib37I3v4q78fYo63Po7t4HUPTpQ6/QE6yK6cIQrP+W43FYToeTEyg5m2Y7eFUtijUuAv/PDlWuag==}
-
   filelist@1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
 
@@ -2175,6 +2172,10 @@ packages:
   kleur@3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
+
+  ky@1.7.2:
+    resolution: {integrity: sha512-OzIvbHKKDpi60TnF9t7UUVAF1B4mcqc02z5PIvrm08Wyb+yOcz63GRvEuVxNT18a9E1SrNouhB4W2NNLeD7Ykg==}
+    engines: {node: '>=18'}
 
   leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -4797,8 +4798,6 @@ snapshots:
     dependencies:
       bser: 2.1.1
 
-  fetch-retry@6.0.0: {}
-
   filelist@1.0.4:
     dependencies:
       minimatch: 5.1.6
@@ -5489,6 +5488,8 @@ snapshots:
       safe-buffer: 5.2.1
 
   kleur@3.0.3: {}
+
+  ky@1.7.2: {}
 
   leven@3.1.0: {}
 

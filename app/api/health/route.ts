@@ -2,9 +2,8 @@ import { env } from "@/env"
 import prisma from "@/prisma"
 import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
-import retryFetch from "fetch-retry"
+import ky from "ky"
 import { NextResponse } from "next/server"
-const fetch = retryFetch(global.fetch)
 
 export const revalidate = 120
 
@@ -37,25 +36,29 @@ async function checkDatabaseConnection(): Promise<boolean> {
   }
 }
 
-async function checkCluster(): Promise<boolean> {
+async function checkCluster(isRetry = false): Promise<boolean> {
   try {
     const token = await prisma.tokens.findUnique({
       where: { id: XRAY_TOKEN_NAME },
     })
 
-    const response = await fetch(env.XRAY_API + "/api/nodes", {
+    const nodes = await ky(env.XRAY_API + "/api/nodes", {
       headers: {
         Authorization: "Bearer " + token?.token,
       },
-      retries: 1,
-    })
-    const nodes: components["schemas"]["NodeResponse"][] = await response.json()
+      timeout: 3_000,
+      retry: 2,
+    }).json<components["schemas"]["NodeResponse"][]>()
     const connected = nodes.filter((node) => node.status === "connected").length
 
     const isMajorityConnected = connected > nodes.length / 2
 
     return isMajorityConnected
-  } catch (error) {
+  } catch (error: any) {
+    if (error.name === "TimeoutError" && !isRetry) {
+      console.error("Cluster check failed: TimeoutError")
+      return checkCluster(true)
+    }
     console.error("Cluster check failed:", error)
     return false
   }
