@@ -25,6 +25,8 @@ export const xray = createTRPCRouter({
         headers: {
           Authorization: "Bearer " + token?.token,
         },
+        timeout: 3_000,
+        retry: 2,
         hooks: {
           afterResponse: [
             async (request, options, response) => {

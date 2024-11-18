@@ -2,9 +2,10 @@ import { env } from "@/env"
 import prisma from "@/prisma"
 import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
+import ky from "ky"
 import { NextResponse } from "next/server"
 
-export const revalidate = 0
+export const revalidate = 6000
 
 export async function GET() {
   const id = XRAY_TOKEN_NAME
@@ -33,7 +34,7 @@ export async function GET() {
   return res
 }
 
-async function getToken() {
+async function getToken(isRetry = false) {
   const params: Omit<
     components["schemas"]["Body_admin_token_api_admin_token_post"],
     "scope"
@@ -41,19 +42,21 @@ async function getToken() {
     username: env.XRAY_USERNAME,
     password: env.XRAY_PASSWORD,
   }
-  const body = new URLSearchParams(Object.entries(params))
+  const body = new URLSearchParams(params)
 
   try {
-    const response = await fetch(env.XRAY_API + "/api/admin/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: body.toString(),
-    })
-
-    return response.json() as Promise<components["schemas"]["Token"]>
-  } catch (error) {
+    return ky
+      .post(env.XRAY_API + "/api/admin/token", {
+        timeout: 3_000,
+        retry: 2,
+        body,
+      })
+      .json<components["schemas"]["Token"]>()
+  } catch (error: any) {
+    if (error.name === "TimeoutError" && !isRetry) {
+      console.warn("/api/cron getToken error: TimeoutError")
+      return getToken(true)
+    }
     console.error("/api/cron getToken error", error)
     return null
   }
