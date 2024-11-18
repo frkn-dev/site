@@ -205,14 +205,14 @@ export default async function Page({ params: { locale } }: Props) {
 export function generateMetadata({ params: { locale } }: Props): Metadata {
   return {
     ru: {
-      title: "Токенизация: Безопасность вашей информации",
+      title: "Токенизация: На пути к децентрализации",
       description:
-        "Токенизация – процесс фрагментации и преобразования данных или активов в цифровые единицы (токены).",
+        "VPN-сервис на пути к децентрализации, обеспечивающий защиту вашей приватности и безопасности, открывая возможности для децентрализованного интернета.",
     },
     en: {
-      title: "Tokenization: Protecting Your Information",
+      title: "Tokenization: On the Path to Decentralization",
       description:
-        "Tokenization is the process of fragmenting and converting data or assets into digital units (tokens).",
+        "VPN service on the path to decentralization, offering enhanced privacy and security while embracing the future of a decentralized internet.",
     },
   }[locale]
 }
