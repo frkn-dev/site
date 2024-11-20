@@ -8,7 +8,7 @@ export function Footer() {
 
   return (
     <footer className="max-w-6xl w-full mx-auto px-4 py-8">
-      <div className="flex flex-col justify-center md:grid md:grid-cols-3 gap-6 w-full">
+      <div className="flex flex-col justify-center md:grid md:grid-cols-4 gap-6 w-full">
         <div className="flex flex-col md:items-center gap-6">
           <p className="font-mono font-bold text-l text-center">FRKN LLP</p>
           <Link href="/status">{t("status")}</Link>
@@ -54,6 +54,14 @@ export function Footer() {
           </Link>
           <Link href="/privacy-policy">{t("privacy")}</Link>
           <Link href="/terms-of-use">{t("terms")}</Link>
+        </div>
+
+        <div className="flex flex-col md:items-center gap-6">
+          <p className="font-mono font-bold text-l text-center">{t("setup")}</p>
+          <Link href="/setup/ios">iOS (IPhone)</Link>
+          <Link href="/setup/macos">macOS</Link>
+          <Link href="/setup/android">Android</Link>
+          <Link href="/setup/windows">Windows</Link>
         </div>
 
         <div className="flex flex-col md:items-center gap-6">

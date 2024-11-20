@@ -81,6 +81,7 @@ export default {
     merch: "Merch",
     privacy: "Privacy Policy",
     protocols: "Protocols",
+    setup: "Setup",
     support: "Support",
     status: "Servers",
     terms: "Terms of Service",
