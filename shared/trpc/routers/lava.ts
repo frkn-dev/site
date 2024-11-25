@@ -73,7 +73,7 @@ export const lava = createTRPCRouter({
 
         const subscriptions = await prisma.lavaSubscriptions.findFirst({
           where: { lavaBuyerId },
-          orderBy: { timestamp: "desc" },
+          orderBy: { timestamp: "asc" },
         })
 
         if (!subscriptions) {

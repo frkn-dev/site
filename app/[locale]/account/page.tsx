@@ -35,16 +35,20 @@ export default async function Page({
   const lavaSubscriptions = me.lavaBuyerId
     ? await prisma.lavaSubscriptions.findMany({
         where: { lavaBuyerId: me.lavaBuyerId },
+        orderBy: { timestamp: "desc" },
       })
     : []
   const cryptomusInvoices = await prisma.cryptomusInvoices.findMany({
     where: { userId: me.id },
+    orderBy: { created: "desc" },
   })
   const stripeInvoices = await prisma.stripeInvoices.findMany({
     where: { userId: me.id },
+    orderBy: { created: "desc" },
   })
   const cardlinkInvoices = await prisma.cardlinkInvoices.findMany({
     where: { userId: me.id },
+    orderBy: { created: "desc" },
   })
 
   return (
