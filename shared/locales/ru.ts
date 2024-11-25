@@ -81,6 +81,7 @@ export default {
     merch: "Мерч",
     privacy: "Конфиденциальность",
     protocols: "Протоколы",
+    setup: "Установка",
     support: "Поддержка",
     status: "Сервера",
     terms: "Соглашение",
