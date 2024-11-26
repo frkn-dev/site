@@ -4,34 +4,56 @@ import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
 import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 
 export const revalidate = 120
 
-export async function GET() {
-  const databaseConnectionStatus = await checkDatabaseConnection()
-  const clusterStatus = await checkCluster()
+type Param = "cluster" | "postgres" | "mysql" | null
 
-  const response = NextResponse.json({
-    status: "ok",
-    database: databaseConnectionStatus ? "connected" : "disconnected",
-    cluster: clusterStatus ? "connected" : "disconnected",
-    timestamp: new Date().toISOString(),
+export async function GET(req: NextRequest) {
+  const url = new URL(req.url)
+  const type = url.searchParams.get("type") as Param
+  const timestamp = new Date().toISOString()
+
+  if (type === "postgres") {
+    const status = await checkPostgres()
+    return NextResponse.json({
+      postgres: status ? "connected" : "disconnected",
+      timestamp,
+    })
+  }
+
+  if (type === "mysql") {
+    const status = await checkMySQL()
+    return NextResponse.json({
+      mysql: status ? "connected" : "disconnected",
+      timestamp,
+    })
+  }
+
+  const status = await checkCluster()
+  return NextResponse.json({
+    cluster: status ? "connected" : "disconnected",
+    timestamp,
   })
-
-  response.headers.set(
-    "Cache-Control",
-    "no-store, no-cache, must-revalidate, proxy-revalidate",
-  )
-
-  return response
 }
 
-async function checkDatabaseConnection(): Promise<boolean> {
+async function checkPostgres(): Promise<boolean> {
   try {
     await prisma.$queryRaw`SELECT 1`
     return true
   } catch (error) {
-    console.error("Prisma check failed:", error)
+    console.error("Prisma:postgres check failed:", error)
+    return false
+  }
+}
+
+async function checkMySQL(): Promise<boolean> {
+  try {
+    await prisma.$queryRaw`SELECT 1`
+    return true
+  } catch (error) {
+    console.error("Prisma:mysql check failed:", error)
     return false
   }
 }

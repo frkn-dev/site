@@ -6,17 +6,17 @@
     "pnpm": ">=9"
   },
   "scripts": {
-    "postinstall": "prisma generate",
+    "postinstall": "npm-run-all generate:*",
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
+    "generate:postgres": "prisma generate",
+    "generate:mysql": "prisma generate --schema=prisma/schema.mysql.prisma",
     "test": "npm-run-all test:*",
     "test:audit": "pnpm audit",
     "test:types": "tsc --noEmit --incremental false",
     "test:lint": "biome lint . --diagnostic-level=error",
-    "test:unit": "jest",
-    "prisma:push": "prisma db push",
-    "prisma:push:production": "dotenv -e .env.production.local -- prisma db push"
+    "test:unit": "jest"
   },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",
@@ -90,6 +90,9 @@
   "pnpm": {
     "auditConfig": {
       "ignoreCves": ["CVE-2024-4067"]
+    },
+    "overrides": {
+      "npm-run-all@4.1.5 > cross-spawn@7.0.3": ">=7.0.5"
     }
   }
 }
