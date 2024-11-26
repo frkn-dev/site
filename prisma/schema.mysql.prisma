@@ -1,0 +1,245 @@
+datasource mysql {
+    provider = "mysql"
+    url      = env("DATABASE_URL_MYSQL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "./mysql"
+}
+
+model admins {
+    id                Int       @id @default(autoincrement())
+    username          String?   @unique(map: "ix_admins_username") @mysql.VarChar(34)
+    hashed_password   String?   @mysql.VarChar(128)
+    created_at        DateTime? @mysql.DateTime(0)
+    is_sudo           Boolean?  @default(false)
+    password_reset_at DateTime? @mysql.DateTime(0)
+    telegram_id       BigInt?
+    discord_webhook   String?   @mysql.VarChar(1024)
+    users             users[]
+}
+
+model alembic_version {
+    version_num String @id @mysql.VarChar(32)
+}
+
+model hosts {
+    id                Int               @id @default(autoincrement())
+    remark            String            @mysql.VarChar(256)
+    address           String            @mysql.VarChar(256)
+    port              Int?
+    inbound_tag       String            @mysql.VarChar(256)
+    sni               String?           @mysql.VarChar(256)
+    host              String?           @mysql.VarChar(256)
+    security          hosts_security    @default(inbound_default)
+    alpn              hosts_alpn
+    fingerprint       hosts_fingerprint @default(none)
+    allowinsecure     Boolean?
+    is_disabled       Boolean?
+    path              String?           @mysql.VarChar(256)
+    mux_enable        Boolean           @default(false)
+    fragment_setting  String?           @mysql.VarChar(100)
+    random_user_agent Boolean           @default(false)
+    noise_setting     String?           @mysql.VarChar(2000)
+    inbounds          inbounds          @relation(fields: [inbound_tag], references: [tag], onDelete: NoAction, onUpdate: NoAction, map: "hosts_ibfk_1")
+
+    @@index([inbound_tag], map: "hosts_ibfk_1")
+}
+
+model inbounds {
+    id    Int     @id @default(autoincrement())
+    tag   String  @unique(map: "ix_inbounds_tag") @mysql.VarChar(256)
+    hosts hosts[]
+}
+
+model jwt {
+    id         Int    @id @default(autoincrement())
+    secret_key String @mysql.VarChar(64)
+}
+
+model node_usages {
+    id         Int      @id @default(autoincrement())
+    created_at DateTime @mysql.DateTime(0)
+    node_id    Int?
+    uplink     BigInt?
+    downlink   BigInt?
+    nodes      nodes?   @relation(fields: [node_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "node_usages_ibfk_1")
+
+    @@unique([created_at, node_id], map: "created_at")
+    @@index([node_id], map: "node_id")
+}
+
+model node_user_usages {
+    id           Int      @id @default(autoincrement())
+    created_at   DateTime @mysql.DateTime(0)
+    user_id      Int?
+    node_id      Int?
+    used_traffic BigInt?
+    nodes        nodes?   @relation(fields: [node_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "node_user_usages_ibfk_1")
+    users        users?   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "node_user_usages_ibfk_2")
+
+    @@unique([created_at, user_id, node_id], map: "created_at")
+    @@index([node_id], map: "node_id")
+    @@index([user_id], map: "user_id")
+}
+
+model nodes {
+    id                 Int                @id @default(autoincrement())
+    name               String?            @unique(map: "name") @mysql.VarChar(256)
+    address            String             @mysql.VarChar(256)
+    port               Int
+    api_port           Int
+    status             nodes_status
+    last_status_change DateTime?          @mysql.DateTime(0)
+    message            String?            @mysql.VarChar(1024)
+    created_at         DateTime?          @mysql.DateTime(0)
+    uplink             BigInt?
+    downlink           BigInt?
+    xray_version       String?            @mysql.VarChar(32)
+    usage_coefficient  Float              @default(1) @mysql.Float
+    node_usages        node_usages[]
+    node_user_usages   node_user_usages[]
+}
+
+model notification_reminders {
+    id         Int                         @id @default(autoincrement())
+    user_id    Int?
+    type       notification_reminders_type
+    expires_at DateTime?                   @mysql.DateTime(0)
+    created_at DateTime?                   @mysql.DateTime(0)
+    users      users?                      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "notification_reminders_ibfk_1")
+
+    @@index([user_id], map: "user_id")
+}
+
+model proxies {
+    id       Int          @id @default(autoincrement())
+    user_id  Int?
+    type     proxies_type
+    settings Json
+    users    users?       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "proxies_ibfk_1")
+
+    @@index([user_id], map: "user_id")
+}
+
+model system {
+    id       Int     @id @default(autoincrement())
+    uplink   BigInt?
+    downlink BigInt?
+}
+
+model tls {
+    id          Int    @id @default(autoincrement())
+    key         String @mysql.VarChar(4096)
+    certificate String @mysql.VarChar(2048)
+}
+
+model user_templates {
+    id              Int     @id @default(autoincrement())
+    name            String  @unique(map: "name") @mysql.VarChar(64)
+    data_limit      BigInt?
+    expire_duration BigInt?
+    username_prefix String? @mysql.VarChar(20)
+    username_suffix String? @mysql.VarChar(20)
+}
+
+model user_usage_logs {
+    id                    Int       @id @default(autoincrement())
+    user_id               Int?
+    used_traffic_at_reset BigInt
+    reset_at              DateTime? @mysql.DateTime(0)
+    users                 users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_usage_logs_ibfk_1")
+
+    @@index([user_id], map: "user_id")
+}
+
+model users {
+    id                        Int                             @id @default(autoincrement())
+    username                  String?                         @unique(map: "ix_users_username") @mysql.VarChar(40)
+    status                    users_status
+    used_traffic              Int?
+    data_limit                Int?
+    expire                    Int?
+    created_at                DateTime?                       @default(dbgenerated("(now())")) @mysql.DateTime(0)
+    admin_id                  Int?
+    data_limit_reset_strategy users_data_limit_reset_strategy @default(no_reset)
+    sub_revoked_at            DateTime?                       @mysql.DateTime(0)
+    note                      String?                         @mysql.VarChar(500)
+    sub_updated_at            DateTime?                       @mysql.DateTime(0)
+    sub_last_user_agent       String?                         @mysql.VarChar(512)
+    online_at                 DateTime?                       @mysql.DateTime(0)
+    edit_at                   DateTime?                       @mysql.DateTime(0)
+    on_hold_timeout           DateTime?                       @mysql.DateTime(0)
+    on_hold_expire_duration   Int?
+    auto_delete_in_days       Int?
+    last_status_change        DateTime?                       @mysql.DateTime(0)
+    node_user_usages          node_user_usages[]
+    notification_reminders    notification_reminders[]
+    proxies                   proxies[]
+    user_usage_logs           user_usage_logs[]
+    admins                    admins?                         @relation(fields: [admin_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_users_admin_id_admins")
+
+    @@index([admin_id], map: "fk_users_admin_id_admins")
+}
+
+enum notification_reminders_type {
+    expiration_date
+    data_usage
+}
+
+enum proxies_type {
+    VMess
+    VLESS
+    Trojan
+    Shadowsocks
+}
+
+enum users_status {
+    on_hold
+    active
+    limited
+    expired
+    disabled
+}
+
+enum nodes_status {
+    connected
+    connecting
+    error
+    disabled
+}
+
+enum hosts_security {
+    inbound_default
+    none
+    tls
+}
+
+enum hosts_alpn {
+    h3
+    h2
+    http_1_1 @map("http/1.1")
+    none
+}
+
+enum users_data_limit_reset_strategy {
+    no_reset
+    day
+    week
+    month
+    year
+}
+
+enum hosts_fingerprint {
+    none
+    chrome
+    firefox
+    safari
+    ios
+    android
+    edge
+    qq
+    random
+    randomized
+}

@@ -13,6 +13,7 @@ export const env = createEnv({
     LAVA_TOP_WEBHOOK_SECRET: z.string().min(1),
     DATABASE_URL: z.string().startsWith("postgresql://"),
     DIRECT_URL: z.string().startsWith("postgresql://"),
+    DATABASE_URL_MYSQL: z.string().startsWith("mysql://"),
     KV_REST_API_URL: z.string().startsWith("https://"),
     KV_REST_API_TOKEN: z.string().min(1),
     XRAY_API: z.string().startsWith("https://"),
