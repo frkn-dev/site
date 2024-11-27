@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
+import mysql from "@/prisma/mysql"
 import { XRAY_TOKEN_NAME } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
@@ -50,7 +51,7 @@ async function checkPostgres(): Promise<boolean> {
 
 async function checkMySQL(): Promise<boolean> {
   try {
-    await prisma.$queryRaw`SELECT 1`
+    await mysql.$queryRaw`SELECT 1`
     return true
   } catch (error) {
     console.error("Prisma:mysql check failed:", error)
