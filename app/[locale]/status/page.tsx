@@ -1,4 +1,3 @@
-import { ClusterStatus } from "@/components/cluster-status"
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
 import { getScopedI18n, getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
@@ -38,8 +37,6 @@ export default async function StatusPage({ params: { locale } }: Props) {
           </a>
         </HoverBorderGradient>
       </div>
-
-      <ClusterStatus />
     </div>
   )
 }

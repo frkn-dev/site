@@ -1,10 +1,9 @@
-import { env } from "@/env"
 import prisma from "@/prisma"
-import { XRAY_TOKEN_NAME } from "@/shared/config"
+import { getHostname } from "@/shared/config"
 import { extractCountry } from "@/shared/format/country"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
+import { createTRPCRouter, protectedProcedure } from "../trpc"
 
 const proxies = {
   vmess: {},
@@ -17,13 +16,14 @@ export const xray = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
     try {
       const me = ctx.user
-      const token = await prisma.tokens.findUnique({
-        where: { id: XRAY_TOKEN_NAME },
+      const cluster = await prisma.clusters.findUnique({
+        where: { id: me.cluster },
       })
+      const xrayApiUrl = getHostname(me.cluster)
 
-      const xray = await ky(env.XRAY_API + "/api/user/" + me.id, {
+      const xray = await ky(xrayApiUrl + "/api/user/" + me.id, {
         headers: {
-          Authorization: "Bearer " + token?.token,
+          Authorization: "Bearer " + cluster?.token,
         },
         timeout: 3_000,
         retry: 2,
@@ -31,7 +31,7 @@ export const xray = createTRPCRouter({
           afterResponse: [
             async (request, options, response) => {
               if (response.status === 404) {
-                await create(me.id)
+                await create(me.id, me.cluster)
                 return ky(request)
               }
             },
@@ -41,7 +41,7 @@ export const xray = createTRPCRouter({
 
       return {
         status: xray.status,
-        subscription_url: env.XRAY_API + xray.subscription_url,
+        subscription_url: xrayApiUrl + xray.subscription_url,
         ss_links: xray.links
           .filter((link) => link.startsWith("ss://"))
           .map((link) => ({
@@ -60,27 +60,6 @@ export const xray = createTRPCRouter({
       return null
     }
   }),
-  nodes: publicProcedure.query(async () => {
-    try {
-      const token = await prisma.tokens.findUnique({
-        where: { id: XRAY_TOKEN_NAME },
-      })
-
-      const nodes = await ky(env.XRAY_API + "/api/nodes", {
-        headers: {
-          Authorization: "Bearer " + token?.token,
-        },
-      }).json<components["schemas"]["NodeResponse"][]>()
-
-      return {
-        hasError: nodes.some((node) => node.status === "error"),
-        allConnected: nodes.every((node) => node.status === "connected"),
-      }
-    } catch (error) {
-      console.error("XRay nodes", error)
-      return null
-    }
-  }),
 })
 
 const freePlan = {
@@ -90,21 +69,25 @@ const freePlan = {
   inbounds,
 } as const
 
-export async function create(userId: string, isRetry = false) {
+export async function create(
+  userId: string,
+  clusterId: string,
+  isRetry = false,
+) {
   const user: components["schemas"]["UserCreate"] = {
     username: userId,
     ...freePlan,
   }
 
-  const token = await prisma.tokens.findUnique({
-    where: { id: XRAY_TOKEN_NAME },
+  const cluster = await prisma.clusters.findUnique({
+    where: { id: clusterId },
   })
 
   try {
     const xray = await ky
-      .post(env.XRAY_API + "/api/user", {
+      .post(getHostname(clusterId) + "/api/user", {
         headers: {
-          Authorization: "Bearer " + token?.token,
+          Authorization: "Bearer " + cluster?.token,
         },
         json: user,
         timeout: 3_000,
@@ -120,10 +103,10 @@ export async function create(userId: string, isRetry = false) {
     }
   } catch (error: any) {
     if (error.name === "TimeoutError" && !isRetry) {
-      console.warn("XRay user create: TimeoutError")
-      return create(userId, true)
+      console.warn(`XRay ${clusterId} user create: TimeoutError`)
+      return create(userId, clusterId, true)
     }
-    console.error("XRay user create", error)
+    console.error(`XRay ${clusterId} user create`, error)
     return null
   }
 }
@@ -142,20 +125,21 @@ const getProPlan = (plan: "1m" | "1y") => {
 
 export async function upgrade(
   userId: string,
+  clusterId: string,
   plan: "free" | "1m" | "1y",
   isRetry = false,
 ) {
   const body: components["schemas"]["UserModify"] =
     plan === "free" ? freePlan : getProPlan(plan)
 
-  const token = await prisma.tokens.findUnique({
-    where: { id: XRAY_TOKEN_NAME },
+  const cluster = await prisma.clusters.findUnique({
+    where: { id: clusterId },
   })
 
   try {
-    await ky.put(env.XRAY_API + "/api/user/" + userId, {
+    await ky.put(getHostname(clusterId) + "/api/user/" + userId, {
       headers: {
-        Authorization: "Bearer " + token?.token,
+        Authorization: "Bearer " + cluster?.token,
       },
       json: body,
       timeout: 3_000,
@@ -164,7 +148,7 @@ export async function upgrade(
         afterResponse: [
           async (request, options, response) => {
             if (response.status === 404) {
-              await create(userId)
+              await create(userId, clusterId)
               return ky(request)
             }
           },
@@ -175,10 +159,10 @@ export async function upgrade(
     return { status: "ok" }
   } catch (error: any) {
     if (error.name === "TimeoutError" && !isRetry) {
-      console.warn("XRay upgrade: TimeoutError")
-      return upgrade(userId, plan, true)
+      console.warn(`XRay ${clusterId} upgrade: TimeoutError`)
+      return upgrade(userId, clusterId, plan, true)
     }
-    console.error("XRay upgrade", error)
+    console.error(`XRay ${clusterId} upgrade`, error)
     return null
   }
 }

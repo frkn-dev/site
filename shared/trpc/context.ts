@@ -15,6 +15,7 @@ export async function createContext() {
       where: { id },
       select: {
         id: true,
+        cluster: true,
         password: false, // NOTE: Exclude password
         subscriptionType: true,
         lavaBuyerId: true,

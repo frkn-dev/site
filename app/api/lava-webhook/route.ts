@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
         },
       })
 
-      await upgrade(user.id, "1m")
+      await upgrade(user.id, user.cluster, "1m")
     }
 
     if (
