@@ -1,7 +1,7 @@
-import { HOSTNAME } from "@/shared/config"
+import { getHostname } from "@/shared/config"
 import type { MetadataRoute } from "next"
 
-const url = "https://" + HOSTNAME
+const url = getHostname()
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

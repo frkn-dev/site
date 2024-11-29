@@ -1,16 +1,16 @@
-import { HOSTNAME } from "@/shared/config"
+import { DOMAIN } from "@/shared/config"
 import type { MetadataRoute } from "next"
 import { headers } from "next/headers"
 
 export default function robots(): MetadataRoute.Robots {
   const host = headers().get("host")
-  const isProd = host === HOSTNAME
+  const isProd = host === DOMAIN
 
   return {
     rules: {
       userAgent: "*",
       disallow: isProd ? "/api" : "/",
     },
-    sitemap: isProd ? `https://${HOSTNAME}/sitemap.xml` : undefined,
+    sitemap: isProd ? `https://${DOMAIN}/sitemap.xml` : undefined,
   }
 }
