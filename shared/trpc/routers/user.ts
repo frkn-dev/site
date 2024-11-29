@@ -20,10 +20,15 @@ export const user = createTRPCRouter({
     .mutation(async ({ input }) => {
       const hashedPassword = await hashPassword(input.password)
 
+      const cluster = await prisma.clusters.findFirst({
+        orderBy: { paid: "asc" },
+      })
+
       const user = await prisma.users.create({
         data: {
           password: hashedPassword,
           ref: cookies().get("frkn_ref")?.value,
+          cluster: cluster?.id,
         },
       })
       await create(user.id, user.cluster)
