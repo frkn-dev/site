@@ -13,6 +13,7 @@ model Users {
   id               String            @id @default(uuid())
   password         String            @unique
   created          DateTime          @default(now())
+  cluster          String            @default("mk2")
   ref              String?
   subscriptionType SubscriptionType? @map("subscription_type")
   stripeCustomerId String?           @unique @map("stripe_customer_id")
@@ -90,10 +91,16 @@ model CardlinkInvoices {
   @@map("cardlink_invoices")
 }
 
+model Clusters {
+  id    String @unique
+  token String
+  paid  Int
+  all   Int
+
+  @@map("clusters")
+}
+
 model Tokens {
   id    String @id
   token String @db.Text
-  // token String
-
-  // @@map("tokens")
 }
