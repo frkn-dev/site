@@ -1,7 +1,17 @@
-import { getScopedI18n } from "@/shared/locales/server"
+import {
+  type Props,
+  getScopedI18n,
+  getStaticParams,
+} from "@/shared/locales/server"
+import { setStaticParamsLocale } from "next-international/server"
 import Tabs from "./components/tabs"
 
-export default async function Page() {
+export function generateStaticParams() {
+  return getStaticParams()
+}
+
+export default async function Page({ params: { locale } }: Props) {
+  setStaticParamsLocale(locale)
   const t = await getScopedI18n("ip_check")
 
   const translations = {
