@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react"
 import "@/shared/globals.css"
 import { Page } from "@/components/page"
 import { cn } from "@/shared/clsx"
-import { HOSTNAME } from "@/shared/config"
+import { DOMAIN } from "@/shared/config"
 import { getStaticParams } from "@/shared/locales/server"
 import type { Props } from "@/shared/locales/server"
 import { GeistMono } from "geist/font/mono"
@@ -30,7 +30,7 @@ export default function RootLayout({
       className={cn(GeistSans.variable, GeistMono.variable, "h-full")}
     >
       <head>
-        <Plausible domain={HOSTNAME} revenue={true} />
+        <Plausible domain={DOMAIN} revenue={true} />
       </head>
 
       <body className="h-full">

@@ -66,7 +66,9 @@ export function User({
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48" align={align}>
           <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(user.id)}
+            onClick={() =>
+              navigator.clipboard.writeText(`${user.id}#${user.cluster}`)
+            }
             className="cursor-pointer"
           >
             {t("myId")}

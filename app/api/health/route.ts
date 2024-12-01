@@ -1,6 +1,7 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
-import { XRAY_TOKEN_NAME } from "@/shared/config"
+import mysql from "@/prisma/mysql"
+import { getHostname } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
 import { NextResponse } from "next/server"
@@ -13,6 +14,7 @@ type Param = "cluster" | "postgres" | "mysql" | null
 export async function GET(req: NextRequest) {
   const url = new URL(req.url)
   const type = url.searchParams.get("type") as Param
+  const clusterId = url.searchParams.get("id")
   const timestamp = new Date().toISOString()
 
   if (type === "postgres") {
@@ -31,11 +33,15 @@ export async function GET(req: NextRequest) {
     })
   }
 
-  const status = await checkCluster()
-  return NextResponse.json({
-    cluster: status ? "connected" : "disconnected",
-    timestamp,
-  })
+  if (type === "cluster" && clusterId) {
+    const status = await checkCluster(clusterId)
+    return NextResponse.json({
+      cluster: status ? "connected" : "disconnected",
+      timestamp,
+    })
+  }
+
+  return NextResponse.json({ timestamp })
 }
 
 async function checkPostgres(): Promise<boolean> {
@@ -50,7 +56,7 @@ async function checkPostgres(): Promise<boolean> {
 
 async function checkMySQL(): Promise<boolean> {
   try {
-    await prisma.$queryRaw`SELECT 1`
+    await mysql.$queryRaw`SELECT 1`
     return true
   } catch (error) {
     console.error("Prisma:mysql check failed:", error)
@@ -58,15 +64,15 @@ async function checkMySQL(): Promise<boolean> {
   }
 }
 
-async function checkCluster(isRetry = false): Promise<boolean> {
+async function checkCluster(id: string, isRetry = false): Promise<boolean> {
   try {
-    const token = await prisma.tokens.findUnique({
-      where: { id: XRAY_TOKEN_NAME },
+    const cluster = await prisma.clusters.findUnique({
+      where: { id },
     })
 
-    const nodes = await ky(env.XRAY_API + "/api/nodes", {
+    const nodes = await ky(getHostname(cluster?.id) + "/api/nodes", {
       headers: {
-        Authorization: "Bearer " + token?.token,
+        Authorization: "Bearer " + cluster?.token,
       },
       timeout: 3_000,
       retry: 1,
@@ -78,10 +84,10 @@ async function checkCluster(isRetry = false): Promise<boolean> {
     return isMajorityConnected
   } catch (error: any) {
     if (error.name === "TimeoutError" && !isRetry) {
-      console.warn("Cluster check failed: TimeoutError. I'll try again")
-      return checkCluster(true)
+      console.warn(`Cluster ${id} check failed: TimeoutError. I'll try again`)
+      return checkCluster(id, true)
     }
-    console.error("Cluster check failed:", error)
+    console.error(`Cluster ${id} check failed:`, error)
     return false
   }
 }

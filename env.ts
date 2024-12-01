@@ -16,7 +16,6 @@ export const env = createEnv({
     DATABASE_URL_MYSQL: z.string().startsWith("mysql://"),
     KV_REST_API_URL: z.string().startsWith("https://"),
     KV_REST_API_TOKEN: z.string().min(1),
-    XRAY_API: z.string().startsWith("https://"),
     XRAY_USERNAME: z.string().min(1),
     XRAY_PASSWORD: z.string().min(1),
     CRYPTOMUS_ID: z.string().min(1),

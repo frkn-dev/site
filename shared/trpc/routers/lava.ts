@@ -104,7 +104,7 @@ export const lava = createTRPCRouter({
               subscriptionType: null,
             },
           })
-          await upgrade(ctx.user.id, "free")
+          await upgrade(ctx.user.id, ctx.user.cluster, "free")
 
           return { status: "ok" }
         }

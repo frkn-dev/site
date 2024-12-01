@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (body.status === "paid" || body.status === "paid_over") {
-      await prisma.users.update({
+      const user = await prisma.users.update({
         where: { id: userId },
         data: {
           subscriptionType: "Cryptomus",
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
 
       const plan = Number(body.amount) === 5 ? "1m" : "1y"
 
-      await upgrade(userId, plan)
+      await upgrade(userId, user.cluster, plan)
     }
 
     return NextResponse.json({ status: "ok" })

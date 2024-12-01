@@ -1,6 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
-import { XRAY_TOKEN_NAME } from "@/shared/config"
+import { getHostname } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
 import { NextResponse } from "next/server"
@@ -8,15 +8,21 @@ import { NextResponse } from "next/server"
 export const revalidate = 6000
 
 export async function GET() {
-  const id = XRAY_TOKEN_NAME
-  const token = await getToken()
+  const clusters = await prisma.clusters.findMany({
+    select: {
+      id: true,
+    },
+  })
 
-  if (token) {
-    await prisma.tokens.upsert({
-      where: { id },
-      create: { id, token: token.access_token },
-      update: { token: token.access_token },
-    })
+  for (const { id } of clusters) {
+    const token = await getToken(id)
+
+    if (token) {
+      await prisma.clusters.update({
+        where: { id },
+        data: { token: token.access_token },
+      })
+    }
   }
 
   const res = NextResponse.json({
@@ -34,7 +40,7 @@ export async function GET() {
   return res
 }
 
-async function getToken(isRetry = false) {
+async function getToken(cluster: string, isRetry = false) {
   const params: Omit<
     components["schemas"]["Body_admin_token_api_admin_token_post"],
     "scope"
@@ -46,7 +52,7 @@ async function getToken(isRetry = false) {
 
   try {
     return ky
-      .post(env.XRAY_API + "/api/admin/token", {
+      .post(getHostname(cluster) + "/api/admin/token", {
         timeout: 3_000,
         retry: 2,
         body,
@@ -55,7 +61,7 @@ async function getToken(isRetry = false) {
   } catch (error: any) {
     if (error.name === "TimeoutError" && !isRetry) {
       console.warn("/api/cron getToken error: TimeoutError")
-      return getToken(true)
+      return getToken(cluster, true)
     }
     console.error("/api/cron getToken error", error)
     return null
