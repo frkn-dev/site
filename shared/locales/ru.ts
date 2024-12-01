@@ -75,6 +75,32 @@ export default {
     subscribe: "Подписаться",
     success: "Спасибо за подписку на нашу рассылку!",
   },
+  ip_check: {
+    webrtc_tab: "Проверка утечек WebRTC",
+    dns_tab: "Проверка утечек DNS",
+    ip_tab: "Проверка IP-адреса",
+    loading: "Загрузка...",
+    no_ips_found: "IP-адреса не обнаружены",
+    webrtc_test_title: "Тест на утечку WebRTC",
+    webrtc_test_description:
+      "WebRTC может раскрыть ваши локальные IP-адреса даже при использовании VPN.",
+    type: "Тип",
+    status: "Статус",
+    ip: "IP-адрес",
+    country: "Страна",
+    provider: "Провайдер",
+    server_not_found: "Сервер не найден",
+    dns_admin_warning:
+      "Администраторы ваших DNS-серверов могут входить на любой веб-сайт, который вы посещаете.",
+    dns_leak_test: "Проверка утечек DNS",
+    dns_leak_not_found: "Утечка DNS не обнаружена.",
+    dns_leak_detected: "Обнаружена утечка DNS!",
+    ip_leak_test: "Тест на утечку IP",
+    city: "Город",
+    flag: "Флаг",
+    ip_not_found_or_protected: "IP адрес не обнаружен или соединение защищено",
+  },
+
   footer: {
     contact: "Связаться",
     help: "Помощь",
