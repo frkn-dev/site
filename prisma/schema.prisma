@@ -92,15 +92,11 @@ model CardlinkInvoices {
 }
 
 model Clusters {
-  id    String @unique
-  token String
-  paid  Int
-  all   Int
+  id      String   @id
+  token   String
+  paid    Int
+  all     Int
+  updated DateTime @default(now())
 
   @@map("clusters")
-}
-
-model Tokens {
-  id    String @id
-  token String @db.Text
 }
