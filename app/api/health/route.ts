@@ -1,3 +1,4 @@
+import { env } from "@/env"
 import prisma from "@/prisma"
 import { getMysqlClient } from "@/prisma/mysql"
 import { getHostname } from "@/shared/config"
@@ -51,11 +52,7 @@ async function checkPostgres(): Promise<boolean> {
 
 async function checkMySQL(clusterId: string): Promise<boolean> {
   try {
-    const cluster = await prisma.clusters.findFirstOrThrow({
-      where: { id: clusterId },
-      select: { uri: true },
-    })
-    const db = getMysqlClient(cluster.uri)
+    const db = getMysqlClient(env.CLUSTER_DATABASE_JSON[clusterId])
     await db.$queryRaw`SELECT 1`
 
     return true

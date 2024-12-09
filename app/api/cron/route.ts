@@ -11,10 +11,10 @@ export const revalidate = 6000
 export async function GET() {
   const clusters = await prisma.clusters.findMany()
 
-  for (const { id, uri } of clusters) {
+  for (const { id } of clusters) {
     const token = await getToken(id)
 
-    const db = getMysqlClient(uri)
+    const db = getMysqlClient(env.CLUSTER_DATABASE_JSON[id])
     const all = await db.users.count()
     const paid = await db.users.count({
       where: {

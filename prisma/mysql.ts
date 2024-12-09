@@ -1,8 +1,6 @@
-import { decrypt } from "@/shared/decrypt"
 import { PrismaClient } from "./mysql/index"
 
-export const getMysqlClient = (uri: string): PrismaClient => {
-  const url = decrypt(uri)
+export const getMysqlClient = (url: string): PrismaClient => {
   return new PrismaClient({
     datasources: { mysql: { url } },
   })
