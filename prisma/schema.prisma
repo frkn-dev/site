@@ -96,6 +96,7 @@ model Clusters {
   token   String
   paid    Int
   all     Int
+  uri     String
   updated DateTime @default(now())
 
   @@map("clusters")

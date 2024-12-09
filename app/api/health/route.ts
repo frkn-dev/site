@@ -1,6 +1,5 @@
-import { env } from "@/env"
 import prisma from "@/prisma"
-import mysql from "@/prisma/mysql"
+import { getMysqlClient } from "@/prisma/mysql"
 import { getHostname } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
@@ -9,7 +8,7 @@ import type { NextRequest } from "next/server"
 
 export const revalidate = 120
 
-type Param = "cluster" | "postgres" | "mysql" | null
+type Param = "cluster" | "postgres" | null
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url)
@@ -19,24 +18,20 @@ export async function GET(req: NextRequest) {
 
   if (type === "postgres") {
     const status = await checkPostgres()
+
     return NextResponse.json({
       postgres: status ? "connected" : "disconnected",
       timestamp,
     })
   }
 
-  if (type === "mysql") {
-    const status = await checkMySQL()
-    return NextResponse.json({
-      mysql: status ? "connected" : "disconnected",
-      timestamp,
-    })
-  }
-
   if (type === "cluster" && clusterId) {
-    const status = await checkCluster(clusterId)
+    const api = await checkCluster(clusterId)
+    const db = await checkMySQL(clusterId)
+
     return NextResponse.json({
-      cluster: status ? "connected" : "disconnected",
+      api: api ? "connected" : "disconnected",
+      db: db ? "connected" : "disconnected",
       timestamp,
     })
   }
@@ -54,12 +49,18 @@ async function checkPostgres(): Promise<boolean> {
   }
 }
 
-async function checkMySQL(): Promise<boolean> {
+async function checkMySQL(clusterId: string): Promise<boolean> {
   try {
-    await mysql.$queryRaw`SELECT 1`
+    const cluster = await prisma.clusters.findFirstOrThrow({
+      where: { id: clusterId },
+      select: { uri: true },
+    })
+    const db = getMysqlClient(cluster.uri)
+    await db.$queryRaw`SELECT 1`
+
     return true
   } catch (error) {
-    console.error("Prisma:mysql check failed:", error)
+    console.error(`Prisma:mysql ${clusterId} check failed:`, error)
     return false
   }
 }

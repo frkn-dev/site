@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
+import { getMysqlClient } from "@/prisma/mysql"
 import { getHostname } from "@/shared/config"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
@@ -8,19 +9,31 @@ import { NextResponse } from "next/server"
 export const revalidate = 6000
 
 export async function GET() {
-  const clusters = await prisma.clusters.findMany({
-    select: {
-      id: true,
-    },
-  })
+  const clusters = await prisma.clusters.findMany()
 
-  for (const { id } of clusters) {
+  for (const { id, uri } of clusters) {
     const token = await getToken(id)
+
+    const db = getMysqlClient(uri)
+    const all = await db.users.count()
+    const paid = await db.users.count({
+      where: {
+        status: "active",
+        data_limit: null,
+        data_limit_reset_strategy: "no_reset",
+        expire: { gt: Math.floor(Date.now() / 1000) },
+      },
+    })
 
     if (token) {
       await prisma.clusters.update({
         where: { id },
-        data: { token: token.access_token },
+        data: {
+          token: token.access_token,
+          all,
+          paid,
+          updated: new Date(),
+        },
       })
     }
   }
