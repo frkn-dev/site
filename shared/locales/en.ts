@@ -75,6 +75,32 @@ export default {
     subscribe: "Subscribe",
     success: "Thank you for subscribing to our newsletter!",
   },
+  ip_check: {
+    webrtc_tab: "WebRTC Leak Check",
+    dns_tab: "DNS Leak Check",
+    ip_tab: "IP Address Check",
+    loading: "Loading...",
+    no_ips_found: "No IP addresses found",
+    webrtc_test_title: "WebRTC Leak Test",
+    webrtc_test_description:
+      "WebRTC can reveal your local IP addresses even when using a VPN.",
+    type: "Type",
+    status: "Status",
+    ip: "IP Address",
+    country: "Country",
+    provider: "Provider",
+    server_not_found: "Server not found",
+    dns_admin_warning:
+      "Administrators of your DNS servers can access any website you visit.",
+    dns_leak_test: "DNS Leak Test",
+    dns_leak_not_found: "No DNS leak detected.",
+    dns_leak_detected: "DNS leak detected!",
+    ip_leak_test: "IP Leak Test",
+    city: "City",
+    flag: "Flag",
+    ip_not_found_or_protected:
+      "IP address not found or connection is protected",
+  },
   footer: {
     contact: "Contact",
     help: "Help",
