@@ -1,5 +1,7 @@
+import { randomUUID } from "node:crypto"
 import { env } from "@/env"
 import prisma from "@/prisma"
+import { getSubscriptionToken } from "@/shared/sub"
 import argon2 from "argon2"
 import jwt from "jsonwebtoken"
 import { cookies } from "next/headers"
@@ -24,16 +26,26 @@ export const user = createTRPCRouter({
         orderBy: { paid: "asc" },
       })
 
-      const user = await prisma.users.create({
-        data: {
-          password: hashedPassword,
-          ref: cookies().get("frkn_ref")?.value,
-          cluster: cluster?.id,
-        },
-      })
-      await create(user.id, user.cluster)
+      if (cluster) {
+        const id = randomUUID()
+        const created = new Date()
 
-      return { status: "success" }
+        const user = await prisma.users.create({
+          data: {
+            id,
+            password: hashedPassword,
+            ref: cookies().get("frkn_ref")?.value,
+            cluster: cluster.id,
+            created,
+            sub: getSubscriptionToken(id, created, cluster.jwt),
+          },
+        })
+        await create(user.id, user.cluster)
+
+        return { status: "success" }
+      }
+
+      return { status: "error" }
     }),
   login: publicProcedure
     .input(

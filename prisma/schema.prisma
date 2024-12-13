@@ -13,12 +13,14 @@ model Users {
   id               String            @id @default(uuid())
   password         String            @unique
   created          DateTime          @default(now())
-  cluster          String            @default("mk2")
+  cluster          String            @default("mk3")
+  sub              String?
   ref              String?
   subscriptionType SubscriptionType? @map("subscription_type")
   stripeCustomerId String?           @unique @map("stripe_customer_id")
   lavaBuyerId      String?           @unique @map("lava_buyer_id")
 
+  @@index([sub])
   @@map("users")
 }
 
