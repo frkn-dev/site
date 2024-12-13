@@ -15,23 +15,27 @@ export async function GET() {
     const token = await getToken(id)
 
     const db = getMysqlClient(env.CLUSTER_DATABASE_JSON[id])
-    const all = await db.users.count()
-    const paid = await db.users.count({
-      where: {
-        status: "active",
-        data_limit: null,
-        data_limit_reset_strategy: "no_reset",
-        expire: { gt: Math.floor(Date.now() / 1000) },
-      },
-    })
+    const [all, paid, jwt] = await Promise.all([
+      db.users.count(),
+      db.users.count({
+        where: {
+          status: "active",
+          data_limit: null,
+          data_limit_reset_strategy: "no_reset",
+          expire: { gt: Math.floor(Date.now() / 1000) },
+        },
+      }),
+      db.jwt.findUnique({ where: { id: 1 } }),
+    ])
 
-    if (token) {
+    if (token && jwt) {
       await prisma.clusters.update({
         where: { id },
         data: {
           token: token.access_token,
           all,
           paid,
+          jwt: jwt.secret_key,
           updated: new Date(),
         },
       })
