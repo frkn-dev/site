@@ -96,6 +96,7 @@ model Clusters {
   token   String
   paid    Int
   all     Int
+  jwt     String
   updated DateTime @default(now())
 
   @@map("clusters")
