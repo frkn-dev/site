@@ -1,11 +1,7 @@
 import crypto from "node:crypto"
 
-export function getSubscriptionToken(
-  username: string,
-  created: Date,
-  secret: string,
-) {
-  const timestamp = Math.ceil(created.getTime() / 1000)
+export function getSubscriptionToken(username: string, secret: string) {
+  const timestamp = Math.ceil(new Date().getTime() / 1000)
 
   const data = Buffer.from(`${username},${timestamp}`, "utf-8")
     .toString("base64")

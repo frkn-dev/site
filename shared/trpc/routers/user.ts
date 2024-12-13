@@ -37,7 +37,7 @@ export const user = createTRPCRouter({
             ref: cookies().get("frkn_ref")?.value,
             cluster: cluster.id,
             created,
-            sub: getSubscriptionToken(id, created, cluster.jwt),
+            sub: getSubscriptionToken(id, cluster.jwt),
           },
         })
         await create(user.id, user.cluster)
