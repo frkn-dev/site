@@ -6,7 +6,7 @@ import type { components } from "@/shared/types/xray"
 import ky from "ky"
 import { NextResponse } from "next/server"
 
-export const revalidate = 6000
+export const revalidate = 900
 
 export async function GET() {
   const clusters = await prisma.clusters.findMany()
