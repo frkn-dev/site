@@ -14,6 +14,7 @@ model Users {
   password         String            @unique
   created          DateTime          @default(now())
   cluster          String            @default("mk3")
+  clusterRelation  Clusters          @relation(fields: [cluster], references: [id])
   ref              String?
   subscriptionType SubscriptionType? @map("subscription_type")
   stripeCustomerId String?           @unique @map("stripe_customer_id")
@@ -99,6 +100,7 @@ model Clusters {
   all     Int
   jwt     String
   updated DateTime @default(now())
+  Users   Users[]
 
   @@map("clusters")
 }
