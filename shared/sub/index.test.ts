@@ -1,39 +1,64 @@
-import { getSubscriptionToken } from "./index"
+import { decodeSubscriptionToken, getSubscriptionToken } from "./index"
 
-describe("getSubscriptionToken", () => {
-  const mockUsername = "testuser"
-  const mockSecret = "supersecretkey"
+describe("Subscription Token", () => {
+  const username = "testUser"
+  const secret = "superSecretKey"
+  const mockDate = new Date("2024-12-14T12:00:00Z")
 
-  it("should generate a token with the correct format", () => {
-    const token = getSubscriptionToken(mockUsername, mockSecret)
+  beforeAll(() => jest.useFakeTimers().setSystemTime(mockDate.getTime()))
+  afterAll(() => jest.useRealTimers())
 
-    const [data, sign] = [token.slice(0, -10), token.slice(-10)]
+  describe("getSubscriptionToken", () => {
+    it("should generate a valid subscription token", () => {
+      const token = getSubscriptionToken(username, secret, mockDate)
 
-    expect(data + sign).toMatch(/^[a-zA-Z0-9-_]+$/)
-    expect(sign).toHaveLength(10)
-    expect(data.startsWith("dGVzdHVzZXIsMTczND")).toBe(true)
+      expect(token).toBe("dGVzdFVzZXIsMTczNDE3NzYwMAVeoACh6SiY")
+      expect(token.length).toBeGreaterThan(0)
+    })
+
+    it("should generate a unique token for different usernames", () => {
+      const token1 = getSubscriptionToken("user1", secret, mockDate)
+      const token2 = getSubscriptionToken("user2", secret, mockDate)
+
+      expect(token1).not.toBe(token2)
+    })
+
+    it("should generate consistent tokens for the same inputs", () => {
+      const token1 = getSubscriptionToken(username, secret, mockDate)
+      const token2 = getSubscriptionToken(username, secret, mockDate)
+
+      expect(token1).toBe(token2)
+    })
   })
 
-  it("should produce consistent results for the same inputs", () => {
-    const token1 = getSubscriptionToken(mockUsername, mockSecret)
-    const token2 = getSubscriptionToken(mockUsername, mockSecret)
+  describe("decodeSubscriptionToken", () => {
+    it("should decode a valid subscription token", () => {
+      const token = getSubscriptionToken(username, secret, mockDate)
+      const decodedUsername = decodeSubscriptionToken(token, secret)
 
-    expect(token1).toBe(token2)
-  })
+      expect(decodedUsername).toBe(username)
+    })
 
-  it("should produce different tokens for different usernames", () => {
-    const anotherUsername = "anotheruser"
-    const token1 = getSubscriptionToken(mockUsername, mockSecret)
-    const token2 = getSubscriptionToken(anotherUsername, mockSecret)
+    it("should return null for an invalid signature", () => {
+      const token = getSubscriptionToken(username, secret, mockDate)
+      const tamperedToken = token.slice(0, -1) + "A" // modified last character
+      const decodedUsername = decodeSubscriptionToken(tamperedToken, secret)
 
-    expect(token1).not.toBe(token2)
-  })
+      expect(decodedUsername).toBeUndefined()
+    })
 
-  it("should produce different tokens for different secrets", () => {
-    const anotherSecret = "anothersecretkey"
-    const token1 = getSubscriptionToken(mockUsername, mockSecret)
-    const token2 = getSubscriptionToken(mockUsername, anotherSecret)
+    it("should return null for an invalid token format", () => {
+      const invalidToken = "invalid.token.format"
+      const decodedUsername = decodeSubscriptionToken(invalidToken, secret)
 
-    expect(token1).not.toBe(token2)
+      expect(decodedUsername).toBeUndefined()
+    })
+
+    it("should return null if secret is incorrect", () => {
+      const token = getSubscriptionToken(username, secret, mockDate)
+      const decodedUsername = decodeSubscriptionToken(token, "wrongSecret")
+
+      expect(decodedUsername).toBeUndefined()
+    })
   })
 })

@@ -1,6 +1,8 @@
+import { env } from "@/env"
 import prisma from "@/prisma"
 import { getHostname } from "@/shared/config"
 import { extractCountry } from "@/shared/format/country"
+import { getSubscriptionToken } from "@/shared/sub"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
@@ -39,9 +41,14 @@ export const xray = createTRPCRouter({
         },
       }).json<components["schemas"]["UserResponse"]>()
 
+      const subscription_url =
+        getHostname() +
+        "/api/sub/" +
+        getSubscriptionToken(me.id, env.HMAC_SECRET, me.created)
+
       return {
         status: xray.status,
-        subscription_url: xrayApiUrl + xray.subscription_url,
+        subscription_url,
         ss_links: xray.links
           .filter((link) => link.startsWith("ss://"))
           .map((link) => ({
