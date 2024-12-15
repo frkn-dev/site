@@ -6,7 +6,7 @@
     }
   ],
   "functions": {
-    "api/**/*.js": {
+    "app/api/**/*.js": {
       "memory": 1024
     }
   }
