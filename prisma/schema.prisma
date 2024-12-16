@@ -95,7 +95,6 @@ model CardlinkInvoices {
 
 model Clusters {
   id      String   @id
-  token   String
   paid    Int
   all     Int
   jwt     String

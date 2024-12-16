@@ -2,6 +2,7 @@ import { env } from "@/env"
 import prisma from "@/prisma"
 import { getHostname } from "@/shared/config"
 import { extractCountry } from "@/shared/format/country"
+import { createAdminToken } from "@/shared/jwt/admin"
 import { getSubscriptionToken } from "@/shared/sub"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
@@ -18,14 +19,15 @@ export const xray = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
     try {
       const me = ctx.user
-      const cluster = await prisma.clusters.findUnique({
+      const cluster = await prisma.clusters.findUniqueOrThrow({
         where: { id: me.cluster },
       })
       const xrayApiUrl = getHostname(me.cluster)
+      const token = createAdminToken(cluster.jwt)
 
       const xray = await ky(xrayApiUrl + "/api/user/" + me.id, {
         headers: {
-          Authorization: "Bearer " + cluster?.token,
+          Authorization: "Bearer " + token,
         },
         timeout: 3_000,
         retry: 2,
@@ -86,15 +88,16 @@ export async function create(
     ...freePlan,
   }
 
-  const cluster = await prisma.clusters.findUnique({
+  const cluster = await prisma.clusters.findUniqueOrThrow({
     where: { id: clusterId },
   })
+  const token = createAdminToken(cluster.jwt)
 
   try {
     const xray = await ky
       .post(getHostname(clusterId) + "/api/user", {
         headers: {
-          Authorization: "Bearer " + cluster?.token,
+          Authorization: "Bearer " + token,
         },
         json: user,
         timeout: 3_000,
@@ -139,14 +142,15 @@ export async function upgrade(
   const body: components["schemas"]["UserModify"] =
     plan === "free" ? freePlan : getProPlan(plan)
 
-  const cluster = await prisma.clusters.findUnique({
+  const cluster = await prisma.clusters.findUniqueOrThrow({
     where: { id: clusterId },
   })
+  const token = createAdminToken(cluster.jwt)
 
   try {
     await ky.put(getHostname(clusterId) + "/api/user/" + userId, {
       headers: {
-        Authorization: "Bearer " + cluster?.token,
+        Authorization: "Bearer " + token,
       },
       json: body,
       timeout: 3_000,
