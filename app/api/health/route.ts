@@ -2,6 +2,7 @@ import { env } from "@/env"
 import prisma from "@/prisma"
 import { getMysqlClient } from "@/prisma/mysql"
 import { getHostname } from "@/shared/config"
+import { createAdminToken } from "@/shared/jwt/admin"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
 import { NextResponse } from "next/server"
@@ -64,13 +65,14 @@ async function checkMySQL(clusterId: string): Promise<boolean> {
 
 async function checkCluster(id: string, isRetry = false): Promise<boolean> {
   try {
-    const cluster = await prisma.clusters.findUnique({
+    const cluster = await prisma.clusters.findUniqueOrThrow({
       where: { id },
     })
+    const token = createAdminToken(cluster.jwt)
 
-    const nodes = await ky(getHostname(cluster?.id) + "/api/nodes", {
+    const nodes = await ky(getHostname(cluster.id) + "/api/nodes", {
       headers: {
-        Authorization: "Bearer " + cluster?.token,
+        Authorization: "Bearer " + token,
       },
       timeout: 3_000,
       retry: 1,
