@@ -238,4 +238,11 @@ export default {
       copied: "Copied!",
     },
   },
+  not_found: {
+    "404": "Page not found",
+    "404_sub":
+      "We're sorry, we seem to have lost this page, but we we don't want to lose you.",
+    search: "Search",
+    search_site: "Search the site",
+  },
 } as const
