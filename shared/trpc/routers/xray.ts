@@ -20,8 +20,14 @@ export const xray = createTRPCRouter({
   get: protectedProcedure.query(async ({ ctx }) => {
     try {
       const me = ctx.user
-
       const db = getMysqlClient(env.CLUSTER_DATABASE_JSON[me.cluster])
+
+      const isUserInCluster = await db.users.findUnique({
+        where: { username: me.id },
+        select: { id: true },
+      })
+      if (!isUserInCluster) await create(me.id, me.cluster)
+
       const [xray, nodes] = await Promise.all([
         db.users.findUniqueOrThrow({
           where: { username: me.id },
