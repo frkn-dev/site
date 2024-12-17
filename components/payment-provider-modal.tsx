@@ -137,16 +137,14 @@ export function PaymentProviderModal() {
                 {t("crypto")}
               </Button>
 
-              {plan === "1m" && (
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setStep("email")
-                  }}
-                >
-                  {t("lava_rub")}
-                </Button>
-              )}
+              <Button
+                type="button"
+                onClick={() => {
+                  setStep("email")
+                }}
+              >
+                {t("lava_rub")}
+              </Button>
 
               {plan === "1y" && (
                 <Button
@@ -197,6 +195,7 @@ export function PaymentProviderModal() {
                       email: data.email,
                       lang: locale.toUpperCase(),
                       currency: "RUB",
+                      periodicity: plan === "1m" ? "MONTHLY" : "PERIOD_YEAR",
                     })
                   })}
                   className="flex gap-2 w-full"

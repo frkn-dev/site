@@ -57,7 +57,8 @@ export async function POST(req: NextRequest) {
         },
       })
 
-      await upgrade(user.id, user.cluster, "1m")
+      const period = body.amount === 500 ? "1m" : "1y"
+      await upgrade(user.id, user.cluster, period)
     }
 
     if (
