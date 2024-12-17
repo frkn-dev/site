@@ -4,10 +4,5 @@
       "path": "/api/cron",
       "schedule": "0 * * * *"
     }
-  ],
-  "functions": {
-    "app/api/**/*.js": {
-      "memory": 1024
-    }
-  }
+  ]
 }
