@@ -5,13 +5,13 @@ export async function LocationsSection() {
   const t = await getScopedI18n("locations")
 
   const locations = [
-    { code: "AT", name: `${t("au")}`, flag: "🇦🇹" },
-    { code: "JP", name: `${t("jp")}`, flag: "🇯🇵" },
-    { code: "NL", name: `${t("nl")}`, flag: "🇳🇱" },
-    { code: "RU", name: `${t("ru")}`, flag: "🇷🇺" },
-    { code: "CH", name: `${t("ch")}`, flag: "🇨🇭" },
-    { code: "TR", name: `${t("tr")}`, flag: "🇹🇷" },
     { code: "US", name: `${t("us")}`, flag: "🇺🇸" },
+    { code: "NL", name: `${t("nl")}`, flag: "🇳🇱" },
+    { code: "CH", name: `${t("ch")}`, flag: "🇨🇭" },
+    { code: "AT", name: `${t("au")}`, flag: "🇦🇹" },
+    { code: "TR", name: `${t("tr")}`, flag: "🇹🇷" },
+    { code: "RU", name: `${t("ru")}`, flag: "🇷🇺" },
+    { code: "JP", name: `${t("jp")}`, flag: "🇯🇵" },
   ]
 
   return (
