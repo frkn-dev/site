@@ -75,6 +75,16 @@ export default {
     subscribe: "Subscribe",
     success: "Thank you for subscribing to our newsletter!",
   },
+  locations: {
+    available: "Available locations",
+    au: "Austria",
+    jp: "Japan",
+    nl: "Netherlands",
+    ru: "Russia",
+    ch: "Switzerland",
+    tr: "Turkey",
+    us: "United States",
+  },
   footer: {
     contact: "Contact",
     help: "Help",

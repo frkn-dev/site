@@ -50,7 +50,7 @@ export function NewsletterForm() {
   }
 
   return (
-    <PageSection>
+    <PageSection className="md:py-16">
       <h2 className="w-fit mx-auto py-8 font-mono font-bold text-4xl">
         {t("title")}
       </h2>
