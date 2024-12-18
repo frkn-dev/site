@@ -18,13 +18,17 @@ export default async function Page({ params: { locale } }: Props) {
         <ul className="list-disc list-inside mb-4 space-y-4">
           <li>
             Зайдите на страницу:{" "}
-            <Link href="/connect" className="text-blue-500">
+            <Link href="/dashboard/connections" className="text-blue-500">
               Подключения
             </Link>
           </li>
           <li>
             Выберите страну (1) и скопируйте адрес конфигурации (2)
-            <a href="/help/setup/windows/1.png" target="_blank">
+            <a
+              href="/help/setup/windows/1.png"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img
                 src="/help/setup/windows/1.png"
                 alt="Step 1"
@@ -97,13 +101,13 @@ export default async function Page({ params: { locale } }: Props) {
       <ul className="list-disc list-inside mb-4 space-y-4">
         <li>
           Go to the page:{" "}
-          <Link href="/connect" className="text-blue-500">
+          <Link href="/dashboard/connections" className="text-blue-500">
             Connections
           </Link>
         </li>
         <li>
           Select a country (1) and copy the configuration address (2)
-          <a href="/help/setup/windows/1.png" target="_blank">
+          <a href="/help/setup/windows/1.png" target="_blank" rel="noreferrer">
             <img
               src="/help/setup/windows/1.png"
               alt="Step 1"

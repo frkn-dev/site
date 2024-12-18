@@ -2,6 +2,7 @@
 
 import type { PropsWithChildren } from "react"
 
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { I18nProviderClient } from "@/shared/locales/client"
 import type { Props } from "@/shared/locales/server"
 import ThemeProvider from "@/shared/theme/provider"
@@ -14,7 +15,9 @@ export function Providers({
   return (
     <I18nProviderClient locale={locale}>
       <TRPCProvider locale={locale}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TooltipProvider delayDuration={50}>{children}</TooltipProvider>
+        </ThemeProvider>
       </TRPCProvider>
     </I18nProviderClient>
   )
