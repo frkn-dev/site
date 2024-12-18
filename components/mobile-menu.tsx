@@ -54,7 +54,7 @@ export function MobileMenu() {
               {t("pricing")}
             </DrawerClose>
             <DrawerClose asChild>
-              <Link href="/connect">{t("connect")}</Link>
+              <Link href="/dashboard/connections">{t("connect")}</Link>
             </DrawerClose>
             <LanguageMenu />
             <ThemeSwitcher />

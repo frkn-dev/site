@@ -1,17 +1,27 @@
-import withBundleAnalyzer from "@next/bundle-analyzer"
+import withBundleAnalyzer from '@next/bundle-analyzer'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/installation-ru.html",
-        destination: "/ru/connect",
+        source: '/installation-ru.html',
+        destination: '/ru/connect',
         permanent: true,
       },
       {
-        source: "/installation-en.html",
-        destination: "/connect",
+        source: '/installation-en.html',
+        destination: '/connect',
+        permanent: true,
+      },
+      {
+        source: '/ru/connect',
+        destination: '/ru/dashboard/connections',
+        permanent: true,
+      },
+      {
+        source: '/connect',
+        destination: '/dashboard/connections',
         permanent: true,
       },
     ]
@@ -19,5 +29,5 @@ const nextConfig = {
 }
 
 export default withBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
+  enabled: process.env.ANALYZE === 'true',
 })(nextConfig)

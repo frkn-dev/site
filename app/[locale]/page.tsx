@@ -67,7 +67,9 @@ export default async function Home({ params: { locale } }: Props) {
               <PricingFeature>{pricingT("free.feature_3")}</PricingFeature>
             </div>
             <Button variant="secondary" className="w-full" asChild>
-              <Link href="/connect">{pricingT("free.button")}</Link>
+              <Link href="/dashboard/connections">
+                {pricingT("free.button")}
+              </Link>
             </Button>
           </div>
           <div className="p-8 rounded-sm shadow-lg bg-zinc-950 text-light flex flex-col justify-between h-full">
