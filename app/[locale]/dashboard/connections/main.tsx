@@ -23,12 +23,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { formatBytes } from "@/shared/format/bytes"
+import { useScopedI18n } from "@/shared/locales/client"
 import { trpc } from "@/shared/trpc"
 import { Copy, LayoutGrid, QrCode } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
 export function Main() {
+  const t = useScopedI18n("app.dashboard")
   const [isModalOpen, setModalOpen] = useState(false)
   const [qr, setQr] = useState("")
 
@@ -47,22 +49,19 @@ export function Main() {
     <Card>
       <CardHeader>
         <CardTitle className="text-2xl/8 font-semibold text-foreground sm:text-xl/8">
-          Connections
+          {t("title")}
         </CardTitle>
         <CardDescription>
-          This table provides VPN servers with a{" "}
-          <span className="font-bold">{formatBytes(data.limit)}</span> daily
-          limit. Copy the configuration link into recommended VPN app or scan
-          the QR code using a supported VPN client to connect.
+          {t("vpnTableDescription_1")}
+          <span className="font-bold">{formatBytes(data.limit)}</span>
+          {t("vpnTableDescription_2")}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
         <div>
           <CardTitle className="mb-2">XRay</CardTitle>
           <CardDescription className="text-balance mb-2">
-            A more advanced VPN protocol offering additional features like
-            stronger encryption and obfuscation. Use the provided link in an
-            XRay-supported VPN client for a secure connection.
+            {t("xrayDescription")}
           </CardDescription>
           <div className="flex flex-wrap gap-2 mb-2">
             <Button size="sm" asChild>
@@ -82,18 +81,22 @@ export function Main() {
             <TableHeader>
               <TableRow>
                 <TableHead>Country</TableHead>
-                <TableHead className="text-right">Config</TableHead>
+                <TableHead className="text-right">{t("config")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell className="font-medium">All Countries</TableCell>
+                <TableCell className="font-medium">
+                  {t("allCountries")}
+                </TableCell>
                 <TableCell className="text-right">
                   <div className="flex gap-2 justify-end">
                     <Button size="sm" asChild>
                       <Link href="/">
                         <LayoutGrid className="h-4 w-4 md:mr-2" />
-                        <span className="hidden md:block">Open in App</span>
+                        <span className="hidden md:block">
+                          {t("openInApp")}
+                        </span>
                       </Link>
                     </Button>
                     <Tooltip>
@@ -119,7 +122,7 @@ export function Main() {
                       size="sm"
                     >
                       <QrCode className="h-4 w-4 md:mr-2" />
-                      <span className="hidden md:block">Show QR</span>
+                      <span className="hidden md:block">{t("showQr")}</span>
                     </Button>
                   </div>
                 </TableCell>
@@ -130,9 +133,7 @@ export function Main() {
         <div>
           <CardTitle className="mb-2">Shadowsocks</CardTitle>
           <CardDescription className="text-balance mb-2">
-            A lightweight proxy protocol ideal for bypassing internet
-            censorship. Copy the configuration link or scan the QR code in a
-            Shadowsocks-compatible app to connect quickly.
+            {t("shadowsocksDescription")}
           </CardDescription>
           <div className="flex flex-wrap gap-2 mb-2">
             <Button size="sm" asChild>
@@ -152,7 +153,7 @@ export function Main() {
             <TableHeader>
               <TableRow>
                 <TableHead>Country</TableHead>
-                <TableHead className="text-right">Config</TableHead>
+                <TableHead className="text-right">{t("config")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -164,7 +165,9 @@ export function Main() {
                       <Button size="sm" asChild>
                         <Link href="/">
                           <LayoutGrid className="h-4 w-4 md:mr-2" />
-                          <span className="hidden md:block">Open in App</span>
+                          <span className="hidden md:block">
+                            {t("openInApp")}
+                          </span>
                         </Link>
                       </Button>
                       <Tooltip>
@@ -177,7 +180,7 @@ export function Main() {
                             }}
                           >
                             <Copy className="h-4 w-4 md:mr-2" />
-                            <span className="hidden md:block">Copy</span>
+                            <span className="hidden md:block">{t("copy")}</span>
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent className="max-w-56 break-words drop-shadow-md">
@@ -190,7 +193,7 @@ export function Main() {
                         size="sm"
                       >
                         <QrCode className="h-4 w-4 md:mr-2" />
-                        <span className="hidden md:block">Show QR</span>
+                        <span className="hidden md:block">{t("showQr")}</span>
                       </Button>
                     </div>
                   </TableCell>

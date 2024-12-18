@@ -229,6 +229,22 @@ export default {
       databases: "API and databases status",
       check: "View status details",
     },
+    dashboard: {
+      vpnTableDescription_1: "This table provides VPN servers with a ",
+      vpnTableDescription_2:
+        " daily limit. Copy the configuration link into the recommended VPN app or scan the QR code using a supported VPN client to connect.",
+      title: "Connections",
+      xrayDescription:
+        "A more advanced VPN protocol offering additional features like stronger encryption and obfuscation. Use the provided link in an XRay-supported VPN client for a secure connection.",
+      shadowsocksDescription:
+        "A lightweight proxy protocol ideal for bypassing internet censorship. Copy the configuration link or scan the QR code in a Shadowsocks-compatible app to connect quickly.",
+      openInApp: "Open in App",
+      copy: "Copy",
+      showQr: "Show QR",
+      country: "Country",
+      config: "Config",
+      allCountries: "All Countries",
+    },
   },
   components: {
     email: {
