@@ -239,6 +239,22 @@ export default {
       databases: "API and databases status",
       check: "View status details",
     },
+    dashboard: {
+      title: "Connections",
+      xrayDescription:
+        "XRay is suitable for bypassing restrictions in countries with strict censorship, such as Russia and China. It provides stable connections and high security.",
+      shadowsocksDescription:
+        "Shadowsocks is a simple and lightweight protocol for countries without strict internet restrictions. It is easier to set up and use compared to other tools.",
+      openInApp: "Open in App",
+      copy: "Copy",
+      showQr: "Show QR",
+      country: "Country",
+      config: "Config",
+      allCountries: "All Countries",
+      status: "Status",
+      traffic_limit: "Your traffic limit",
+      used_traffic: "Used",
+    },
   },
   components: {
     email: {

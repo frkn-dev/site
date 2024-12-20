@@ -14,6 +14,16 @@ const nextConfig = {
         destination: "/connect",
         permanent: true,
       },
+      {
+        source: "/ru/connect",
+        destination: "/ru/dashboard/connections",
+        permanent: true,
+      },
+      {
+        source: "/connect",
+        destination: "/dashboard/connections",
+        permanent: true,
+      },
     ]
   },
 }
