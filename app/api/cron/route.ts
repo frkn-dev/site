@@ -3,6 +3,7 @@ import prisma from "@/prisma"
 import { getMysqlClient } from "@/prisma/mysql"
 import { NextResponse } from "next/server"
 
+export const maxDuration = 60
 export const revalidate = 900
 
 export async function GET() {
