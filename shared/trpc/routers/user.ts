@@ -7,7 +7,18 @@ import { z } from "zod"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
 import { create } from "./xray"
 
-const list = ["mk4"]
+const list = [
+  "mk5",
+  "mk6",
+  "mk7",
+  "mk8",
+  "mk9",
+  "mk10",
+  "mk11",
+  "mk12",
+  "mk13",
+  "mk14",
+]
 const getRandomCluster = () => list[Math.floor(Math.random() * list.length)]
 
 export const user = createTRPCRouter({
