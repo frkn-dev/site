@@ -4,7 +4,7 @@
 cp .env.example .env
 docker-compose up -d
 pnpm install
-pnpm run prisma:push
+npx prisma db push
 
 pnpm run dev
 ```
