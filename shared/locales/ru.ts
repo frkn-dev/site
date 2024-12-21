@@ -254,6 +254,8 @@ export default {
       status: "Статус",
       traffic_limit: "Ваш лимит трафика",
       used_traffic: "Использовано",
+      error_message: "Произошла ошибка, перезагрузите страницу",
+      reload_button: "Перезагрузить",
     },
   },
   components: {

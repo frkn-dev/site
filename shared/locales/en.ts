@@ -254,6 +254,8 @@ export default {
       status: "Status",
       traffic_limit: "Your traffic limit",
       used_traffic: "Used",
+      error_message: "An error occurred, please reload the page",
+      reload_button: "Reload",
     },
   },
   components: {

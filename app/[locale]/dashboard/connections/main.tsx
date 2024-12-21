@@ -49,18 +49,38 @@ export function Main() {
     setQr(data)
     setModalOpen(true)
   }
-  const { data, isLoading } = trpc.xray.get.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-  })
+  const { data, isLoading, isSuccess, refetch } = trpc.xray.get.useQuery(
+    undefined,
+    {
+      refetchOnWindowFocus: false,
+    },
+  )
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="flex flex-col lg:flex-row items-center justify-center gap-8 p-8">
         <Loader2 className="ml-4 h-6 w-6 animate-spin" />
       </div>
     )
+  }
 
-  if (!data) return null
+  if (!data || !isSuccess) {
+    return (
+      <div className="text-center mt-4">
+        <p>{t("error_message")}</p>
+        <div className="flex justify-center mt-2">
+          <button
+            onClick={() => refetch()}
+            disabled={isLoading}
+            className="px-4 py-2 bg-blue-500 text-white rounded flex items-center justify-center"
+          >
+            {isLoading && <Loader2 className="mr-2 h-6 w-6 animate-spin" />}
+            {t("reload_button")}
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <Card>
