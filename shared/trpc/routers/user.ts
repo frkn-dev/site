@@ -7,6 +7,9 @@ import { z } from "zod"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
 import { create } from "./xray"
 
+const list = ["mk4"]
+const getRandomCluster = () => list[Math.floor(Math.random() * list.length)]
+
 export const user = createTRPCRouter({
   me: publicProcedure.query(async ({ ctx }) => {
     return ctx.user
@@ -20,8 +23,8 @@ export const user = createTRPCRouter({
     .mutation(async ({ input }) => {
       const hashedPassword = await hashPassword(input.password)
 
-      const cluster = await prisma.clusters.findFirst({
-        orderBy: { paid: "asc" },
+      const cluster = await prisma.clusters.findUnique({
+        where: { id: getRandomCluster() },
       })
 
       if (cluster) {
