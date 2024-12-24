@@ -45,6 +45,8 @@ export default {
       in_month: "в месяц",
       feature_1: "Всё, что в Free",
       feature_2: "Без лимитов на трафик",
+      feature_3: "Можно смотреть YouTube в 4K",
+      feature_4: "Можно скачивать торренты",
       button: "Купить",
       active: "Активно",
     },

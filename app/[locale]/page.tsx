@@ -13,6 +13,10 @@ import { GitPullRequestDraft, Logs, Rocket, Shield } from "lucide-react"
 import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
+import { AiOutlineYoutube } from "react-icons/ai"
+import { AiFillYoutube } from "react-icons/ai"
+
+import { SiUtorrent } from "react-icons/si"
 
 export function generateStaticParams() {
   return getStaticParams()
@@ -85,6 +89,18 @@ export default async function Home({ params: { locale } }: Props) {
               <div className="mb-6 space-y-2">
                 <PricingFeature>{pricingT("pro.feature_1")}</PricingFeature>
                 <PricingFeature>{pricingT("pro.feature_2")}</PricingFeature>
+                <PricingFeature>
+                  {pricingT("pro.feature_3")}{" "}
+                  <AiFillYoutube
+                    style={{ width: "24px", height: "24px", color: "#FF0000" }}
+                  />
+                </PricingFeature>
+                <PricingFeature>
+                  {pricingT("pro.feature_4")}{" "}
+                  <SiUtorrent
+                    style={{ width: "24px", height: "24px", color: "#76b83f" }}
+                  />
+                </PricingFeature>
               </div>
             </div>
             <PurchaseButton plan="1m" />
