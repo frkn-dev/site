@@ -67,7 +67,7 @@ export type WebhookResponse = {
   from: string
   wallet_address_uuid: string | null
   network: string | null
-  currency: string
+  currency: "USD"
   payer_currency: string | null
   additional_data: string | null
   convert: {

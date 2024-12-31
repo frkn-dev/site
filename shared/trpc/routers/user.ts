@@ -42,6 +42,7 @@ export const user = createTRPCRouter({
         const user = await prisma.users.create({
           data: {
             password: hashedPassword,
+            refSource: cookies().get("frkn_ref_source")?.value,
             ref: cookies().get("frkn_ref")?.value,
             cluster: cluster.id,
           },
