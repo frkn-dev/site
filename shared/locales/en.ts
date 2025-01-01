@@ -45,6 +45,8 @@ export default {
       in_month: "per month",
       feature_1: "Everything in Free",
       feature_2: "Unlimited traffic",
+      feature_3: "YouTube 4K support",
+      feature_4: "You can download torrents",
       button: "Buy",
       active: "Active",
     },
