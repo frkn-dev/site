@@ -16,7 +16,7 @@ export async function postback(
       searchParams: {
         postback: "1",
         payment_type: "sale",
-        campaign_code: "a15db28ba0",
+        campaign_code: "db7d7f9f49",
         postback_key: env.ADMITAD_POSTBACK_KEY,
         action_code: "1",
         tariff_code: "1",
