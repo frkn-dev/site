@@ -96,6 +96,7 @@ export const xray = createTRPCRouter({
 const freePlan = {
   data_limit: 104_857_600, // 100 MB
   data_limit_reset_strategy: "day",
+  expire: 0, // unlimited in time
   proxies,
   inbounds,
 } as const
@@ -143,26 +144,33 @@ export async function create(
   }
 }
 
-const getProPlan = (plan: "1m" | "1y") => {
-  const days = plan === "1m" ? 31 : 367
-  return {
-    status: "active",
-    data_limit: 0, // unlimited
-    data_limit_reset_strategy: "no_reset",
-    expire: Math.floor(Date.now() / 1000) + days * 24 * 60 * 60,
-    proxies,
-    inbounds,
-  } as const
-}
-
 export async function upgrade(
   userId: string,
   clusterId: string,
   plan: "free" | "1m" | "1y",
   isRetry = false,
 ) {
-  const body: components["schemas"]["UserModify"] =
-    plan === "free" ? freePlan : getProPlan(plan)
+  let body: components["schemas"]["UserModify"] = freePlan
+
+  if (plan !== "free") {
+    const days = plan === "1m" ? 31 : 367
+    const clusterDB = getMysqlClient(env.CLUSTER_DATABASE_JSON[clusterId])
+    const { expire: previousExpire } = await clusterDB.users.findUniqueOrThrow({
+      where: { username: userId },
+    })
+
+    body = {
+      status: "active",
+      data_limit: 0, // unlimited
+      data_limit_reset_strategy: "no_reset",
+      expire:
+        previousExpire !== null
+          ? previousExpire + days * 24 * 60 * 60
+          : Math.floor(Date.now() / 1000) + days * 24 * 60 * 60,
+      proxies,
+      inbounds,
+    }
+  }
 
   const cluster = await prisma.clusters.findUniqueOrThrow({
     where: { id: clusterId },
