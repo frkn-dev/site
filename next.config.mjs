@@ -5,16 +5,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/installation-ru.html",
-        destination: "/ru/connect",
-        permanent: true,
-      },
-      {
-        source: "/installation-en.html",
-        destination: "/connect",
-        permanent: true,
-      },
-      {
         source: "/ru/connect",
         destination: "/ru/dashboard/connections",
         permanent: true,
