@@ -1,21 +1,57 @@
+import type { Props } from "@/shared/locales/server"
+
 export function formatStrategy(
   strategy: "no_reset" | "day" | "week" | "month" | "year",
-  locale: string,
+  locale: Props["params"]["locale"],
 ) {
   if (strategy === "no_reset") return null
 
-  if (locale === "en") return "per " + strategy
-
-  if (locale === "ru") {
-    return {
+  const translations = {
+    en: {
+      day: "per day",
+      week: "per week",
+      month: "per month",
+      year: "per year",
+    },
+    ru: {
       day: "в день",
       week: "в неделю",
       month: "в месяц",
       year: "в год",
-    }[strategy]
-  }
+    },
+    es: {
+      day: "por día",
+      week: "por semana",
+      month: "por mes",
+      year: "por año",
+    },
+    pt: {
+      day: "por dia",
+      week: "por semana",
+      month: "por mês",
+      year: "por ano",
+    },
+    fr: {
+      day: "par jour",
+      week: "par semaine",
+      month: "par mois",
+      year: "par an",
+    },
+    de: {
+      day: "pro Tag",
+      week: "pro Woche",
+      month: "pro Monat",
+      year: "pro Jahr",
+    },
+    tr: {
+      day: "günlük",
+      week: "haftalık",
+      month: "aylık",
+      year: "yıllık",
+    },
+  } as const
 
-  return "/ " + strategy
+  return translations[locale]?.[strategy] ?? "/ " + strategy
 }
 
 export function formatExpire(

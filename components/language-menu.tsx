@@ -8,6 +8,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+const locales = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Español" },
+  { code: "ru", label: "Русский" },
+  { code: "pt", label: "Português" },
+  { code: "fr", label: "Français" },
+  { code: "de", label: "Deutsch" },
+  { code: "tr", label: "Türkçe" },
+] as const
+
 export function LanguageMenu() {
   const changeLocale = useChangeLocale()
   const locale = useCurrentLocale()
@@ -18,22 +28,15 @@ export function LanguageMenu() {
         {locale}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={() => {
-            changeLocale("ru")
-          }}
-        >
-          Ru
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onClick={() => {
-            changeLocale("en")
-          }}
-        >
-          En
-        </DropdownMenuItem>
+        {locales.map(({ code, label }) => (
+          <DropdownMenuItem
+            key={code}
+            className="cursor-pointer"
+            onClick={() => changeLocale(code)}
+          >
+            {label}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   )

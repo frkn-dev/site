@@ -14,6 +14,11 @@ export const emailNewsletter = createTRPCRouter({
       const groupToIdMap = {
         ru: "e3KmpA",
         en: "b4Ynq7",
+        es: "eEGr4K",
+        pt: "dGgy4Q",
+        fr: "dJlG5l",
+        de: "aKmK4z",
+        tr: "dLnM4W",
       } as const
       type Lang = keyof typeof groupToIdMap
 

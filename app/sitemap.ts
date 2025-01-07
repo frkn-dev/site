@@ -16,15 +16,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/setup/macos",
     "/setup/android",
     "/setup/ios",
-    "/status",
-    "/privacy-policy",
-    "/terms-of-use",
   ].map((page) => ({
     url: url + page,
     alternates: {
       languages: {
         en: url + page,
         ru: url + "/ru" + page,
+        es: url + "/es" + page,
+        pt: url + "/pt" + page,
+        fr: url + "/fr" + page,
+        de: url + "/de" + page,
+        tr: url + "/tr" + page,
       },
     },
   }))

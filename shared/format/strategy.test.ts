@@ -14,7 +14,8 @@ describe("formatStrategy", () => {
   })
 
   it('should return correct format for "week" strategy in unsupported locale', () => {
-    expect(formatStrategy("week", "fr")).toBe("/ week")
+    // @ts-expect-error
+    expect(formatStrategy("week", "uk")).toBe("/ week")
   })
 })
 
