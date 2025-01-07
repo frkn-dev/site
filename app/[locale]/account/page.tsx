@@ -261,11 +261,12 @@ function formatAmount(
 
 export function generateMetadata({ params: { locale } }: Props): Metadata {
   return {
-    ru: {
-      title: "Платежи – FRKN VPN",
-    },
-    en: {
-      title: "Payments – FRKN VPN",
-    },
+    ru: { title: "Платежи – FRKN VPN" },
+    en: { title: "Payments – FRKN VPN" },
+    es: { title: "Pagos – FRKN VPN" },
+    pt: { title: "Pagamentos – FRKN VPN" },
+    fr: { title: "Paiements – FRKN VPN" },
+    de: { title: "Zahlungen – FRKN VPN" },
+    tr: { title: "Ödemeler – FRKN VPN" },
   }[locale]
 }

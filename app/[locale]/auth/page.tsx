@@ -16,11 +16,12 @@ export default function Page({ params: { locale } }: Props) {
 
 export function generateMetadata({ params: { locale } }: Props): Metadata {
   return {
-    ru: {
-      title: "Авторизация – FRKN VPN",
-    },
-    en: {
-      title: "Authentication – FRKN VPN",
-    },
+    ru: { title: "Авторизация – FRKN VPN" },
+    en: { title: "Authentication – FRKN VPN" },
+    es: { title: "Autenticación – FRKN VPN" },
+    pt: { title: "Autenticação – FRKN VPN" },
+    fr: { title: "Authentification – FRKN VPN" },
+    de: { title: "Authentifizierung – FRKN VPN" },
+    tr: { title: "Kimlik Doğrulama – FRKN VPN" },
   }[locale]
 }

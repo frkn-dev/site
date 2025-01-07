@@ -175,5 +175,30 @@ export function generateMetadata({ params: { locale } }: Props): Metadata {
       description:
         "Learn about the advantages and disadvantages of WireGuard, ways to bypass blocks, and how to connect.",
     },
+    es: {
+      title: "WireGuard: Protocolo VPN Seguro y Rápido",
+      description:
+        "Conozca las ventajas y desventajas de WireGuard, las formas de evitar bloqueos y cómo conectarse.",
+    },
+    pt: {
+      title: "WireGuard: Protocolo VPN Seguro e Rápido",
+      description:
+        "Saiba mais sobre as vantagens e desvantagens do WireGuard, maneiras de contornar bloqueios e como se conectar.",
+    },
+    fr: {
+      title: "WireGuard: Protocole VPN Sécurisé et Rapide",
+      description:
+        "Découvrez les avantages et les inconvénients de WireGuard, les moyens de contourner les blocages et comment se connecter.",
+    },
+    de: {
+      title: "WireGuard: Sicheres und Schnelles VPN-Protokoll",
+      description:
+        "Erfahren Sie mehr über die Vorteile und Nachteile von WireGuard, Möglichkeiten zur Umgehung von Sperren und wie Sie sich verbinden.",
+    },
+    tr: {
+      title: "WireGuard: Güvenli ve Hızlı VPN Protokolü",
+      description:
+        "WireGuard'ın avantajları ve dezavantajları, engelleri aşma yolları ve nasıl bağlanılacağı hakkında bilgi edinin.",
+    },
   }[locale]
 }
