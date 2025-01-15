@@ -75,7 +75,7 @@ export function AnimatedHeadline() {
     <PageSection className="md:py-8">
       <div className="w-fit flex gap-3 mx-auto py-8 font-mono font-bold text-sm md:text-xl lg:text-3xl xl:text-4xl">
         FRKN:{" "}
-        {["F", "R", "K", "N"].map((key, index) => {
+        {(["F", "R", "K", "N"] as letters[]).map((key, index) => {
           return (
             <motion.span
               key={`${currentWords[key]}-${index}`}
