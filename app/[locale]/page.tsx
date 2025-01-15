@@ -1,4 +1,5 @@
 import { Advantage } from "@/components/landing/advantage"
+import { AnimatedHeadline } from "@/components/landing/animated-headline"
 import { Hero } from "@/components/landing/hero"
 import { LocationsSection } from "@/components/landing/locations-section"
 import { NewsletterForm } from "@/components/landing/newsletter-form"
@@ -129,6 +130,7 @@ export default async function Home({ params: { locale } }: Props) {
       </PageSection>
       <LocationsSection />
       <NewsletterForm />
+      <AnimatedHeadline />
     </>
   )
 }
