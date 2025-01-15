@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
+import { postback } from "@/shared/affiliate"
 import { generateHash } from "@/shared/cardlink"
 import { upgrade } from "@/shared/trpc/routers/xray"
 import { NextResponse } from "next/server"
@@ -46,6 +47,15 @@ export async function POST(req: NextRequest) {
       })
 
       await upgrade(user.id, user.cluster, "1y")
+
+      if (user.refSource === "admitad" && user.ref) {
+        await postback(
+          "cardlink:" + body.TrsId,
+          Number(body.OutSum),
+          body.CurrencyIn,
+          user.ref,
+        )
+      }
     }
 
     return NextResponse.json({ status: "ok" })
@@ -64,7 +74,7 @@ type PaymentPostback = {
   Commission: string
   TrsId: string
   Status: "SUCCESS" | "UNDERPAID" | "OVERPAID" | "FAIL"
-  CurrencyIn: "RUB" | "USD" | "EUR" | "KZT"
+  CurrencyIn: "RUB"
   custom?: string
   SignatureValue: string
 }

@@ -1,5 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
+import { postback } from "@/shared/affiliate"
 import { getSign } from "@/shared/cryptomus"
 import { upgrade } from "@/shared/trpc/routers/xray"
 import type { WebhookResponse } from "@/shared/types/cryptomus"
@@ -50,6 +51,15 @@ export async function POST(req: NextRequest) {
       const plan = Number(body.amount) === 5 ? "1m" : "1y"
 
       await upgrade(userId, user.cluster, plan)
+
+      if (user.refSource === "admitad" && user.ref) {
+        await postback(
+          "cryptomus:" + body.order_id,
+          Number(body.amount),
+          body.currency,
+          user.ref,
+        )
+      }
     }
 
     return NextResponse.json({ status: "ok" })

@@ -45,6 +45,8 @@ export default {
       in_month: "per month",
       feature_1: "Everything in Free",
       feature_2: "Unlimited traffic",
+      feature_3: "YouTube 4K support",
+      feature_4: "You can download torrents",
       button: "Buy",
       active: "Active",
     },
@@ -74,6 +76,16 @@ export default {
       "Receive information about our product to your email, we guarantee no spam.",
     subscribe: "Subscribe",
     success: "Thank you for subscribing to our newsletter!",
+  },
+  locations: {
+    available: "Available locations",
+    au: "Austria",
+    jp: "Japan",
+    nl: "Netherlands",
+    ru: "Russia",
+    ch: "Switzerland",
+    tr: "Turkey",
+    us: "United States",
   },
   footer: {
     contact: "Contact",
@@ -229,6 +241,24 @@ export default {
       databases: "API and databases status",
       check: "View status details",
     },
+    dashboard: {
+      title: "Connections",
+      xrayDescription:
+        "XRay is suitable for bypassing restrictions in countries with strict censorship, such as Russia and China. It provides stable connections and high security.",
+      shadowsocksDescription:
+        "Shadowsocks is a simple and lightweight protocol for countries without strict internet restrictions. It is easier to set up and use compared to other tools.",
+      openInApp: "Open in App",
+      copy: "Copy",
+      showQr: "Show QR",
+      country: "Country",
+      config: "Config",
+      allCountries: "All Countries",
+      status: "Status",
+      traffic_limit: "Your traffic limit",
+      used_traffic: "Used",
+      error_message: "An error occurred, please reload the page",
+      reload_button: "Reload",
+    },
   },
   components: {
     email: {
@@ -237,5 +267,12 @@ export default {
     bash_command: {
       copied: "Copied!",
     },
+  },
+  not_found: {
+    "404": "Page not found",
+    "404_sub":
+      "We're sorry, we seem to have lost this page, but we we don't want to lose you.",
+    search: "Search",
+    search_site: "Search the site",
   },
 } as const

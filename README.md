@@ -4,7 +4,7 @@
 cp .env.example .env
 docker-compose up -d
 pnpm install
-pnpm run prisma:push
+npx prisma db push
 
 pnpm run dev
 ```
@@ -17,9 +17,8 @@ To automatically format code, it is important to properly configure your IDE. Se
 
 ### Stack
 
-- [Next.js](https://nextjs.org/docs/getting-started/project-structure#app-routing-conventions) app Routing Conventions
+- [Next.js](https://nextjs.org/docs/getting-started/project-structure#app-routing-conventions) App Routing Conventions
 - [Prisma ORM](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma)
-- [FSD](https://feature-sliced.design/ru/docs/get-started/overview) folder structure
 
 ### DB
 

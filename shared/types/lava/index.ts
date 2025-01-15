@@ -989,7 +989,9 @@ export interface components {
        * @description Идентификатор цены
        */
       offerId?: string
+      periodicity?: components["schemas"]["Periodicity"]
       currency?: components["schemas"]["CurrencyDto"]
+      paymentMethod?: components["schemas"]["PaymentMethod"]
       buyerLanguage?: components["schemas"]["LanguageDto"] | null
     }
     /** @description Описание созданного контракта */
@@ -1013,7 +1015,8 @@ export interface components {
      */
     DeleteNotAllowedReason: "HAS_SALES" | "HAS_POSTS"
     /**
-     * @description Описание повторяемости платежа
+     * @deprecated
+     * @description Описание повторяемости платежа. Устарел. Используйте поле periodicity в ценах оффера
      * @enum {string}
      */
     RecurrentDto: "monthly"
@@ -1025,6 +1028,7 @@ export interface components {
        */
       amount?: number | null
       currency?: components["schemas"]["CurrencyDto"]
+      periodicity?: components["schemas"]["Periodicity"]
     }
     /** @description Ценник */
     OfferDto: {
@@ -1363,6 +1367,21 @@ export interface components {
      * @enum {string}
      */
     FeedVisibility: "ALL" | "ONLY_VISIBLE" | "ONLY_HIDDEN"
+    /**
+     * @description Провайдер для платежа. Для платежей в российских рублях (RUB) доступен только BANK131, для платежей в Евро (EUR) или Долларах (USD) - UNLIMINT и PAYPAL. Для оплаты подписок PAYPAL недоступен. STRIPE доступен только для оплаты продуктов
+     * @enum {string}
+     */
+    PaymentMethod: "BANK131" | "UNLIMINT" | "PAYPAL" | "STRIPE"
+    /**
+     * @description Периодичность оплаты
+     * @enum {string}
+     */
+    Periodicity:
+      | "ONE_TIME"
+      | "MONTHLY"
+      | "PERIOD_90_DAYS"
+      | "PERIOD_180_DAYS"
+      | "PERIOD_YEAR"
   }
   responses: never
   parameters: never

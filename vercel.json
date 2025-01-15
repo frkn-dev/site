@@ -2,12 +2,7 @@
   "crons": [
     {
       "path": "/api/cron",
-      "schedule": "0 * * * *"
+      "schedule": "*/30 * * * *"
     }
-  ],
-  "functions": {
-    "app/api/**/*.js": {
-      "memory": 1024
-    }
-  }
+  ]
 }

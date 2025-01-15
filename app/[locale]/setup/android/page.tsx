@@ -18,7 +18,7 @@ export default async function Page({ params: { locale } }: Props) {
         <ul className="list-disc list-inside mb-4 space-y-4">
           <li>
             Зайдите на страницу:{" "}
-            <Link href="/connect" className="text-blue-500">
+            <Link href="/dashboard/connections" className="text-blue-500">
               Подключения
             </Link>
           </li>
@@ -98,7 +98,7 @@ export default async function Page({ params: { locale } }: Props) {
       <ul className="list-disc list-inside mb-4 space-y-4">
         <li>
           Go to the page:{" "}
-          <Link href="/connect" className="text-blue-500">
+          <Link href="/dashboard/connections" className="text-blue-500">
             Connections
           </Link>
         </li>

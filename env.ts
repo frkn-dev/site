@@ -24,6 +24,7 @@ export const env = createEnv({
     CRYPTOMUS_ID: z.string().min(1),
     CRYPTOMUS_API_KEY: z.string().min(1),
     CARDLINK_API_KEY: z.string().min(1),
+    ADMITAD_POSTBACK_KEY: z.string().min(1),
   },
   client: {},
   experimental__runtimeEnv: {},

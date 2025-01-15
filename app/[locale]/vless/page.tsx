@@ -39,14 +39,14 @@ export default async function Page({ params: { locale } }: Props) {
         <ul className="list-disc list-inside mb-4 space-y-4">
           <li>
             Зайдите на страницу{" "}
-            <Link href="/connect" className="text-blue-500">
-              /connect
+            <Link href="/dashboard/connections" className="text-blue-500">
+              /dashboard/connections
             </Link>
           </li>
           <li>
             Выберите страну (1) и скопируйте адрес конфигурации (2a) или
             разверните QR-код (2b)
-            <a href="/help/vless/1.png" target="_blank">
+            <a href="/help/vless/1.png" target="_blank" rel="noreferrer">
               <img src="/help/vless/1.png" alt="Step 1" className="w-full" />
             </a>
           </li>
@@ -119,14 +119,14 @@ export default async function Page({ params: { locale } }: Props) {
       <ul className="list-disc list-inside mb-4 space-y-4">
         <li>
           Go to the page{" "}
-          <Link href="/connect" className="text-blue-500">
+          <Link href="/dashboard/connections" className="text-blue-500">
             /connect
           </Link>
         </li>
         <li>
           Select a country (1) and copy the configuration address (2a) or expand
           the QR code (2b)
-          <a href="/help/vless/1.png" target="_blank">
+          <a href="/help/vless/1.png" target="_blank" rel="noreferrer">
             <img src="/help/vless/1.png" alt="Step 1" className="w-full" />
           </a>
         </li>

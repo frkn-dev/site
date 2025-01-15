@@ -15,6 +15,7 @@ model Users {
   created          DateTime          @default(now())
   cluster          String            @default("mk3")
   clusterRelation  Clusters          @relation(fields: [cluster], references: [id])
+  refSource        String?           @map("ref_source")
   ref              String?
   subscriptionType SubscriptionType? @map("subscription_type")
   stripeCustomerId String?           @unique @map("stripe_customer_id")

@@ -1,6 +1,7 @@
 import { Advantage } from "@/components/landing/advantage"
 import { AnimatedHeadline } from "@/components/landing/animated-headline"
 import { Hero } from "@/components/landing/hero"
+import { LocationsSection } from "@/components/landing/locations-section"
 import { NewsletterForm } from "@/components/landing/newsletter-form"
 import { PricingFeature } from "@/components/landing/pricing-feature"
 import { PageSection } from "@/components/page-section"
@@ -13,6 +14,8 @@ import { GitPullRequestDraft, Logs, Rocket, Shield } from "lucide-react"
 import type { Metadata } from "next"
 import { setStaticParamsLocale } from "next-international/server"
 import Link from "next/link"
+import { AiFillYoutube } from "react-icons/ai"
+import { SiUtorrent } from "react-icons/si"
 
 export function generateStaticParams() {
   return getStaticParams()
@@ -68,7 +71,9 @@ export default async function Home({ params: { locale } }: Props) {
               <PricingFeature>{pricingT("free.feature_3")}</PricingFeature>
             </div>
             <Button variant="secondary" className="w-full" asChild>
-              <Link href="/connect">{pricingT("free.button")}</Link>
+              <Link href="/dashboard/connections">
+                {pricingT("free.button")}
+              </Link>
             </Button>
           </div>
           <div className="p-8 rounded-sm shadow-lg bg-zinc-950 text-light flex flex-col justify-between h-full">
@@ -83,6 +88,18 @@ export default async function Home({ params: { locale } }: Props) {
               <div className="mb-6 space-y-2">
                 <PricingFeature>{pricingT("pro.feature_1")}</PricingFeature>
                 <PricingFeature>{pricingT("pro.feature_2")}</PricingFeature>
+                <PricingFeature>
+                  {pricingT("pro.feature_3")}{" "}
+                  <AiFillYoutube
+                    style={{ width: "24px", height: "24px", color: "#FF0000" }}
+                  />
+                </PricingFeature>
+                <PricingFeature>
+                  {pricingT("pro.feature_4")}{" "}
+                  <SiUtorrent
+                    style={{ width: "24px", height: "24px", color: "#76b83f" }}
+                  />
+                </PricingFeature>
               </div>
             </div>
             <PurchaseButton plan="1m" />
@@ -111,6 +128,7 @@ export default async function Home({ params: { locale } }: Props) {
           </div>
         </div>
       </PageSection>
+      <LocationsSection />
       <NewsletterForm />
       <AnimatedHeadline />
     </>

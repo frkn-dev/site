@@ -1,7 +1,6 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
 import { hashEmail } from "@/shared/hmac"
-import { currencies, offer } from "@/shared/services/lava"
 import type { components, paths } from "@/shared/types/lava"
 import { z } from "zod"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
@@ -13,7 +12,8 @@ export const lava = createTRPCRouter({
       z.object({
         email: z.string().email(),
         lang: z.string(),
-        currency: z.enum(currencies),
+        currency: z.enum(["RUB", "USD"]),
+        periodicity: z.enum(["MONTHLY", "PERIOD_YEAR"]),
       }),
     )
     .mutation(async ({ input, ctx }) => {
@@ -23,8 +23,9 @@ export const lava = createTRPCRouter({
           buyerLanguage: (["EN", "RU", "ES"] as const).find(
             (i) => i === input.lang,
           ),
-          offerId: offer.id,
+          offerId: "5187e4ac-2ce8-4237-8086-c39bca794a25",
           currency: input.currency,
+          periodicity: input.periodicity,
         }
         const data = await fetch("https://gate.lava.top/api/v2/invoice", {
           method: "POST",
