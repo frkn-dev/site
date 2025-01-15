@@ -85,6 +85,9 @@ export default {
     tr: "Турция",
     us: "США",
   },
+  reviews: {
+    reviews: "Отзывы",
+  },
   footer: {
     contact: "Связаться",
     help: "Помощь",

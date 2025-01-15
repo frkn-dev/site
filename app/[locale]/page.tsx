@@ -3,6 +3,7 @@ import { Hero } from "@/components/landing/hero"
 import { LocationsSection } from "@/components/landing/locations-section"
 import { NewsletterForm } from "@/components/landing/newsletter-form"
 import { PricingFeature } from "@/components/landing/pricing-feature"
+import { ReviewsSection } from "@/components/landing/reviews-section"
 import { PageSection } from "@/components/page-section"
 import { PurchaseButton } from "@/components/purchase-button"
 import { Button } from "@/components/ui/button"
@@ -114,6 +115,7 @@ export default async function Home({ params: { locale } }: Props) {
         </div>
       </PageSection>
       <LocationsSection />
+      <ReviewsSection />
       <NewsletterForm />
     </>
   )
