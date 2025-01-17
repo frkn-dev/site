@@ -50,24 +50,6 @@ export default async function Page({ params: { locale } }: Props) {
           изменены заголовки пакетов, изменены их размеры с помощью дописанных
           рандомных байтов.
         </p>
-
-        <h2 className="text-2xl font-semibold mb-4">Подключение</h2>
-        <ul className="list-disc list-inside mb-4">
-          <li>
-            Зайдите на страницу{" "}
-            <Link href="/installation" className="text-blue-500">
-              /installation
-            </Link>
-          </li>
-          <li>
-            Скачайте и установите WireGuard:
-            <Download />
-          </li>
-          <li>
-            Нажмите в приложении на плюсик и выберите добавление туннеля через
-            загрузку файла или QR-код.
-          </li>
-        </ul>
       </div>
     )
   }
@@ -107,59 +89,7 @@ export default async function Page({ params: { locale } }: Props) {
         packet headers are changed, and their sizes are modified with appended
         random bytes.
       </p>
-
-      <h2 className="text-2xl font-semibold mb-4">Connection</h2>
-      <ul className="list-disc list-inside mb-4">
-        <li>
-          Go to the page{" "}
-          <Link href="/installation" className="text-blue-500">
-            /installation
-          </Link>
-        </li>
-        <li>
-          Download and install WireGuard:
-          <Download />
-        </li>
-        <li>
-          Click the plus sign in the app and select adding a tunnel via file
-          upload or QR code.
-        </li>
-      </ul>
     </div>
-  )
-}
-
-function Download() {
-  return (
-    <ul className="list-none list-inside ml-4 mb-4">
-      {[
-        [
-          "Android",
-          "https://play.google.com/store/apps/details?id=com.wireguard.android",
-        ],
-        [
-          "iOS (iPhone)",
-          "https://itunes.apple.com/us/app/wireguard/id1441195209",
-        ],
-        [
-          "Windows",
-          "https://download.wireguard.com/windows-client/wireguard-installer.exe",
-        ],
-        ["MacOS", "https://itunes.apple.com/us/app/wireguard/id1451685025"],
-      ].map(([name, url]) => (
-        <li key={name}>
-          –{" "}
-          <a
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-500"
-          >
-            {name}
-          </a>
-        </li>
-      ))}
-    </ul>
   )
 }
 
