@@ -221,20 +221,6 @@ export default {
         },
       },
     },
-    connect: {
-      table: {
-        title: "Connections",
-        protocol: "Protocol",
-        country: "Country",
-        traffic: "Traffic",
-        limit: "Limit",
-        configuration: "Configuration",
-        qr: "QR Code",
-        all: "All countries",
-        premium:
-          "To increase the current limits, please visit the Pricing page or contact our support team:",
-      },
-    },
     status: {
       connection: "Connection status",
       services: "Services status",

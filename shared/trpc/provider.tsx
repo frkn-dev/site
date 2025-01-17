@@ -43,6 +43,31 @@ const errorMessageMap = {
     info: "Error info:",
     copy: "Copy error message",
   },
+  es: {
+    main: "Disculpa las molestias. Estamos solucionando un problema en el servidor. Por favor, contacta con el soporte si necesitas más ayuda.",
+    info: "Información del error:",
+    copy: "Copiar mensaje de error",
+  },
+  pt: {
+    main: "Desculpe pelo inconveniente. Estamos resolvendo um problema no servidor. Por favor, entre em contato com o suporte se precisar de mais ajuda.",
+    info: "Informações sobre o erro:",
+    copy: "Copiar mensagem de erro",
+  },
+  fr: {
+    main: "Désolé pour le dérangement. Nous réparons un problème de serveur. Veuillez contacter le support si vous avez besoin d'aide supplémentaire.",
+    info: "Informations sur l'erreur :",
+    copy: "Copier le message d'erreur",
+  },
+  de: {
+    main: "Entschuldigung für die Unannehmlichkeiten. Wir beheben ein Serverproblem. Bitte kontaktieren Sie den Support, wenn Sie weitere Hilfe benötigen.",
+    info: "Fehlerinformation:",
+    copy: "Fehlernachricht kopieren",
+  },
+  tr: {
+    main: "Verdiğimiz rahatsızlıktan dolayı özür dileriz. Bir sunucu sorununu düzeltiyoruz. Daha fazla yardıma ihtiyacınız varsa, lütfen destekle iletişime geçin.",
+    info: "Hata bilgisi:",
+    copy: "Hata mesajını kopyala",
+  },
 } as const
 
 export function TRPCProvider({

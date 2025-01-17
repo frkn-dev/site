@@ -145,5 +145,31 @@ export function generateMetadata({ params: { locale } }: Props): Metadata {
       description:
         "We support freedom of speech and oppose any form of censorship. We develop a decentralized VPN that does not collect or store user data.",
     },
+    es: {
+      title: "FRKN — VPN rápido y gratuito con soporte para el protocolo XRay",
+      description:
+        "Apoyamos la libertad de expresión y nos oponemos a cualquier forma de censura. Desarrollamos una VPN descentralizada que no recopila ni almacena datos de los usuarios.",
+    },
+    pt: {
+      title: "FRKN — VPN rápido e gratuito com suporte ao protocolo XRay",
+      description:
+        "Apoiamos a liberdade de expressão e nos opomos a qualquer forma de censura. Desenvolvemos uma VPN descentralizada que não coleta ou armazena dados dos usuários.",
+    },
+    fr: {
+      title: "FRKN — VPN rapide et gratuit avec support du protocole XRay",
+      description:
+        "Nous soutenons la liberté d'expression et nous opposons à toute forme de censure. Nous développons un VPN décentralisé qui ne collecte ni ne stocke les données des utilisateurs.",
+    },
+    de: {
+      title:
+        "FRKN — schneller, kostenloser VPN mit XRay-Protokollunterstützung",
+      description:
+        "Wir unterstützen die Meinungsfreiheit und lehnen jede Form von Zensur ab. Wir entwickeln ein dezentrales VPN, das keine Benutzerdaten sammelt oder speichert.",
+    },
+    tr: {
+      title: "FRKN — XRay protokol desteği ile hızlı, ücretsiz VPN",
+      description:
+        "İfade özgürlüğünü destekliyoruz ve her türlü sansüre karşıyız. Kullanıcı verilerini toplamayan veya saklamayan merkeziyetsiz bir VPN geliştiriyoruz.",
+    },
   }[locale]
 }
