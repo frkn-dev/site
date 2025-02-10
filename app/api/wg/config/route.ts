@@ -22,11 +22,11 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      interface: {
+      Interface: {
         PrivateKey: "AOV8JwLNENELRKIpI5qimhCeNG6sTtsgxYWNLMlTMkc=",
         Address: "10.0.1.5/32",
       },
-      peer: {
+      Peer: {
         PublicKey: "Hm/BARisqfYyatsL4PDw0zNJU1U14rYuThzoJyzLCXY=",
         Endpoint: "37.143.10.117:51820",
       },
