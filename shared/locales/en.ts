@@ -261,4 +261,55 @@ export default {
     search: "Search",
     search_site: "Search the site",
   },
+  product: {
+    meta: {
+      title: "FRKN Box — Smart VPN for Your Home",
+      description:
+        "Secure and reliable VPN router to protect all devices in your network",
+    },
+    hero: {
+      line1: "Secure",
+      line2: "Wi-Fi with VPN",
+      line3: "Passive Income",
+    },
+    trust: {
+      description:
+        "Smart Raspberry-based router that provides anonymous and secure internet, and earns money for you in its spare time.",
+    },
+    features: {
+      cpu: "1.5 GHz",
+      cpu_description: "ARM v8 processor with a frequency of 1.5 GHz",
+      ram: "4 GB",
+      ram_description: "LPDDR4 RAM",
+      ethernet: "1 Gbit",
+      ethernet_description: "Ethernet for stable connection",
+      wifi_support: "Wi-Fi Support",
+      wifi_frequency: "2.4 / 5 GHz",
+      aluminum_heatsink: "Aluminum Heatsink",
+      heatsink_description: "for noiseless cooling",
+      optimized_software: "Optimized Software",
+      software_description: "with automatic updates",
+    },
+    specs: {
+      title: "Hardware Encryption",
+      module:
+        "The FRKN VPN Node is equipped with a TPM 2.0 (Trusted Platform Module) that provides deep crypto-encryption at the hardware level.",
+      description:
+        "The solution protects keys and data from hacking by using hardware storage to encrypt VPN traffic. Even in the event of device compromise, the system remains resilient to attacks, maintaining data security.",
+    },
+    extensible: {
+      title: "Income from Internet Sharing",
+      description:
+        "FRKN VPN provides complete traffic protection without logs and tracking, and helps bypass restrictions in censored regions. In addition to security, the device allows you to earn: you can receive $10+ per month and tokens for sharing the internet, and early users have a chance for an airdrop.",
+      settings:
+        "<br />Setup takes just 5 minutes — simply connect the power and internet, and everything else is already configured.",
+      cta: "Buy",
+    },
+    get: {
+      headerTop: "Participate in the Node Sale",
+      headerBottom: "get special terms",
+      description:
+        "Our token will launch in May 2025, and early participants will be able to receive an AirDrop. The distribution of nodes will start in summer 2025, so all owners can immediately connect to the network and start earning.",
+    },
+  },
 } as const
