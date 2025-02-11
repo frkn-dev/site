@@ -10,9 +10,9 @@ export default {
     logout: "Déconnexion",
   },
   hero: {
-    h1: "FRKN — VPN gratuit pour les personnes libres",
-    text: "Nous soutenons la liberté d'expression et nous opposons à toutes les formes de censure. Nous développons un VPN décentralisé qui ne collecte ni ne stocke les données des utilisateurs.",
-    connect: "Se connecter",
+    h1: "FRKN — VPN gratuit pour les gens libres",
+    text: "Nous soutenons la liberté d'expression et nous opposons à toute forme de censure. Nous développons un VPN décentralisé qui ne collecte ni ne stocke les données des utilisateurs.",
+    connect: "Connecter",
   },
   advantages: {
     no_logs: {
@@ -257,5 +257,56 @@ export default {
       "Désolé, nous avons perdu cette page, mais nous ne voulons pas vous perdre.",
     search: "Rechercher",
     search_site: "Rechercher sur le site",
+  },
+  product: {
+    meta: {
+      title: "FRKN Box — VPN intelligent pour votre maison",
+      description:
+        "Routeur VPN sécurisé et fiable pour protéger tous les appareils de votre réseau",
+    },
+    hero: {
+      line1: "Wi-Fi",
+      line2: "sécurisé avec VPN",
+      line3: "Revenu passif",
+    },
+    trust: {
+      description:
+        "Un routeur intelligent basé sur Raspberry qui fournit un internet anonyme et sécurisé, et gagne de l'argent pour vous pendant son temps libre.",
+    },
+    features: {
+      cpu: "1,5 GHz",
+      cpu_description: "Processeur ARM v8 avec une fréquence de 1,5 GHz",
+      ram: "4 Go",
+      ram_description: "RAM LPDDR4",
+      ethernet: "1 Gbit",
+      ethernet_description: "Ethernet pour une connexion stable",
+      wifi_support: "Support Wi-Fi",
+      wifi_frequency: "2,4 / 5 GHz",
+      aluminum_heatsink: "Radiateur en aluminium",
+      heatsink_description: "pour un refroidissement silencieux",
+      optimized_software: "Logiciel optimisé",
+      software_description: "avec mises à jour automatiques",
+    },
+    specs: {
+      title: "Chiffrement Matériel",
+      module:
+        "Le FRKN VPN Node est équipé d'un module TPM 2.0 (Trusted Platform Module) qui assure un chiffrement crypto-profond au niveau matériel.",
+      description:
+        "La solution protège les clés et les données contre le piratage en utilisant un stockage matériel pour chiffrer le trafic VPN. Même en cas de compromission de l'appareil, le système reste résistant aux attaques, maintenant la sécurité des données.",
+    },
+    extensible: {
+      title: "Revenu de partage d'Internet",
+      description:
+        "FRKN VPN assure une protection complète du trafic sans journaux ni suivi, et aide à contourner les blocages dans les régions censurées. En plus de la sécurité, l'appareil vous permet de gagner : vous pourrez recevoir plus de 10 $ par mois et des jetons pour le partage d'Internet, et les premiers utilisateurs ont une chance de recevoir un airdrop.",
+      settings:
+        "La configuration ne prend que 5 minutes — il suffit de connecter l'alimentation et Internet, et tout le reste est déjà configuré.",
+      cta: "Acheter",
+    },
+    get: {
+      headerTop: "Participez à la vente de nœuds",
+      headerBottom: "obtenez des conditions privilégiées",
+      description:
+        "Notre jeton sera lancé en mai 2025, et les premiers participants pourront recevoir un AirDrop. La distribution des nœuds commencera à l'été 2025, afin que tous les propriétaires puissent immédiatement se connecter au réseau et commencer à gagner.",
+    },
   },
 } as const

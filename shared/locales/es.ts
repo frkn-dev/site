@@ -11,7 +11,7 @@ export default {
   },
   hero: {
     h1: "FRKN — VPN gratuita para personas libres",
-    text: "Apoyamos la libertad de expresión y nos oponemos a todas las formas de censura. Estamos desarrollando una VPN descentralizada que no recopila ni almacena datos de los usuarios.",
+    text: "Apoyamos la libertad de expresión y nos oponemos a todas las formas de censura. Estamos desarrollando una VPN descentralizada que no recopila ni almacena datos de usuarios.",
     connect: "Conectar",
   },
   advantages: {
@@ -260,5 +260,56 @@ export default {
       "Lo sentimos, parece que hemos perdido esta página, pero no queremos perderte a ti.",
     search: "Buscar",
     search_site: "Buscar en el sitio",
+  },
+  product: {
+    meta: {
+      title: "FRKN Box — VPN inteligente para tu hogar",
+      description:
+        "Router VPN seguro y confiable para proteger todos los dispositivos en tu red",
+    },
+    hero: {
+      line1: "Wi-Fi seguro",
+      line2: "con VPN",
+      line3: "Ingresos pasivos",
+    },
+    trust: {
+      description:
+        "Un router inteligente basado en Raspberry que proporciona internet anónimo y seguro, y gana dinero para ti en su tiempo libre.",
+    },
+    features: {
+      cpu: "1.5 GHz",
+      cpu_description: "Procesador ARM v8 con una frecuencia de 1.5 GHz",
+      ram: "4 GB",
+      ram_description: "RAM LPDDR4",
+      ethernet: "1 Gbit",
+      ethernet_description: "Ethernet para conexión estable",
+      wifi_support: "Soporte Wi-Fi",
+      wifi_frequency: "2.4 / 5 GHz",
+      aluminum_heatsink: "Disipador de aluminio",
+      heatsink_description: "para refrigeración silenciosa",
+      optimized_software: "Software optimizado",
+      software_description: "con actualizaciones automáticas",
+    },
+    specs: {
+      title: "Cifrado de Hardware",
+      module:
+        "El FRKN VPN Node está equipado con un módulo TPM 2.0 (Trusted Platform Module) que proporciona cifrado criptográfico profundo a nivel de hardware.",
+      description:
+        "La solución protege las claves y los datos de los ataques utilizando almacenamiento de hardware para cifrar el tráfico VPN. Incluso en caso de compromiso del dispositivo, el sistema sigue siendo resistente a los ataques, manteniendo la seguridad de los datos.",
+    },
+    extensible: {
+      title: "Ingreso por Compartir Internet",
+      description:
+        "FRKN VPN proporciona protección completa del tráfico sin registros ni seguimiento, y ayuda a eludir bloqueos en regiones censuradas. Además de la seguridad, el dispositivo te permite ganar: puedes recibir más de $10 al mes y tokens por compartir Internet, y los primeros usuarios tienen la oportunidad de recibir un airdrop.",
+      settings:
+        "La configuración toma solo 5 minutos: simplemente conecta la alimentación y el Internet, y todo lo demás ya está configurado.",
+      cta: "Comprar",
+    },
+    get: {
+      headerTop: "Participa en la Venta de Nodos",
+      headerBottom: "obtén condiciones especiales",
+      description:
+        "Nuestro token se lanzará en mayo de 2025, y los primeros participantes podrán recibir un AirDrop. La distribución de nodos comenzará en el verano de 2025, para que todos los propietarios puedan conectarse a la red de inmediato y empezar a ganar.",
+    },
   },
 } as const
