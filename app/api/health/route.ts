@@ -28,12 +28,12 @@ export async function GET(req: NextRequest) {
   }
 
   if (type === "cluster" && clusterId) {
-    const api = await checkCluster(clusterId)
-    const db = await checkMySQL(clusterId)
+    const isClusterOk = await checkCluster(clusterId)
+    const isDbOk = await checkMySQL(clusterId)
 
     return NextResponse.json({
-      api: api ? "connected" : "disconnected",
-      db: db ? "connected" : "disconnected",
+      api: isClusterOk ? "connected" : "disconnected",
+      db: isDbOk ? "connected" : "disconnected",
       timestamp,
     })
   }
@@ -77,11 +77,11 @@ async function checkCluster(id: string, isRetry = false): Promise<boolean> {
       timeout: 3_000,
       retry: 1,
     }).json<components["schemas"]["NodeResponse"][]>()
-    const connected = nodes.filter((node) => node.status === "connected").length
+    const disconnected = nodes.filter(
+      (node) => node.status !== "connected",
+    ).length
 
-    const isMajorityConnected = connected > nodes.length / 2
-
-    return isMajorityConnected
+    return disconnected < 3
   } catch (error: any) {
     if (error.name === "TimeoutError" && !isRetry) {
       console.warn(`Cluster ${id} check failed: TimeoutError. I'll try again`)
