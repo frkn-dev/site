@@ -149,7 +149,8 @@ export default async function Page({
                     </div>
 
                     <div className="text-sm mt-1">
-                      <strong>{t("status")}:</strong> {status}
+                      <strong>{t("status")}:</strong>{" "}
+                      {status.replace("_over", "")}
                     </div>
                   </div>
                 )
