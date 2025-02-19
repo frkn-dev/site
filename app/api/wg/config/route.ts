@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         Address: "10.0.1.5/32",
       },
       Peer: {
-        PublicKey: "Hm/BARisqfYyatsL4PDw0zNJU1U14rYuThzoJyzLCXY=",
+        PublicKey: "4toxSFaZ/eWXAAz2MeYo1lsbm/EisCIQzW3GdL75mzQ=",
         Endpoint: "37.143.10.117:51820",
       },
     })
