@@ -1,3 +1,5 @@
+import prisma from "@/prisma"
+import { generateWireGuardKeys } from "@/shared/wg"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -12,6 +14,7 @@ export async function POST(request: Request) {
   try {
     const json = await request.json()
     const body = schema.safeParse(json)
+
     if (!body.success) {
       return NextResponse.json(
         {
@@ -22,8 +25,16 @@ export async function POST(request: Request) {
       )
     }
 
+    const { publicKey, privateKey } = generateWireGuardKeys()
+    const user = await prisma.wgUsers.create({
+      data: {
+        public: publicKey,
+        private: privateKey,
+      },
+    })
+
     return NextResponse.json({
-      id: "d7b01123-5db9-4174-ae70-7e58c4587eed",
+      id: user.id,
     })
   } catch {
     return NextResponse.json({ status: "error" }, { status: 500 })

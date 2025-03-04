@@ -104,3 +104,29 @@ model Clusters {
 
   @@map("clusters")
 }
+
+model WgServers {
+  id        String    @id @default(uuid())
+  ip        String    @unique
+  country   WgCountry
+  created   DateTime  @default(now())
+  publicKey String    @unique
+
+  @@map("wg_servers")
+}
+
+model WgUsers {
+  id        String    @id @default(uuid())
+  offset    Int       @unique @default(autoincrement())
+  public    String    @unique
+  private   String
+  created   DateTime  @default(now())
+  connected DateTime?
+
+  @@map("wg_users")
+}
+
+enum WgCountry {
+  DE
+  RU
+}

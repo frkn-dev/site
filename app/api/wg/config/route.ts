@@ -1,4 +1,6 @@
 import { countries } from "@/app/api/wg/vars"
+import prisma from "@/prisma"
+import { getUserAddress } from "@/shared/ip"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -11,6 +13,7 @@ export async function POST(request: Request) {
   try {
     const json = await request.json()
     const body = schema.safeParse(json)
+
     if (!body.success) {
       return NextResponse.json(
         {
@@ -21,14 +24,25 @@ export async function POST(request: Request) {
       )
     }
 
+    const [server, user] = await Promise.all([
+      prisma.wgServers.findFirstOrThrow({
+        where: {
+          country: body.data.country,
+        },
+      }),
+      prisma.wgUsers.findUniqueOrThrow({
+        where: { id: body.data.id },
+      }),
+    ])
+
     return NextResponse.json({
       Interface: {
-        PrivateKey: "AOV8JwLNENELRKIpI5qimhCeNG6sTtsgxYWNLMlTMkc=",
-        Address: "10.0.1.5/32",
+        PrivateKey: user.private,
+        Address: getUserAddress(user.offset),
       },
       Peer: {
-        PublicKey: "4toxSFaZ/eWXAAz2MeYo1lsbm/EisCIQzW3GdL75mzQ=",
-        Endpoint: "37.143.10.117:51820",
+        PublicKey: server.publicKey,
+        Endpoint: server.ip + ":51820",
       },
     })
   } catch {

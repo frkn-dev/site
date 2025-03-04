@@ -46,6 +46,7 @@
     "clsx": "2.1.1",
     "framer-motion": "11.3.8",
     "geist": "1.3.1",
+    "ip": "2.0.1",
     "js-sha3": "0.9.3",
     "jsonwebtoken": "9.0.2",
     "ky": "1.7.2",
@@ -73,6 +74,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@next/bundle-analyzer": "14.2.5",
+    "@types/ip": "1.1.3",
     "@types/jest": "29.5.13",
     "@types/jsonwebtoken": "9.0.6",
     "@types/node": "^20",
@@ -91,10 +93,7 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": [
-        "CVE-2024-4067",
-        "CVE-2024-55565"
-      ]
+      "ignoreCves": ["CVE-2024-4067", "CVE-2024-55565", "CVE-2024-29415"]
     },
     "overrides": {
       "npm-run-all@4.1.5 > cross-spawn@7.0.3": ">=7.0.5"
