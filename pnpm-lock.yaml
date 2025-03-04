@@ -92,6 +92,9 @@ importers:
       geist:
         specifier: 1.3.1
         version: 1.3.1(next@14.2.21(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      ip:
+        specifier: 2.0.1
+        version: 2.0.1
       js-sha3:
         specifier: 0.9.3
         version: 0.9.3
@@ -168,6 +171,9 @@ importers:
       '@next/bundle-analyzer':
         specifier: 14.2.5
         version: 14.2.5
+      '@types/ip':
+        specifier: 1.1.3
+        version: 1.1.3
       '@types/jest':
         specifier: 29.5.13
         version: 29.5.13
@@ -1275,6 +1281,9 @@ packages:
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
 
+  '@types/ip@1.1.3':
+    resolution: {integrity: sha512-64waoJgkXFTYnCYDUWgSATJ/dXEBanVkaP5d4Sbk7P6U7cTTMhxVyROTckc6JKdwCrgnAjZMn0k3177aQxtDEA==}
+
   '@types/istanbul-lib-coverage@2.0.6':
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
 
@@ -2004,6 +2013,9 @@ packages:
 
   invariant@2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
+
+  ip@2.0.1:
+    resolution: {integrity: sha512-lJUL9imLTNi1ZfXT+DU6rBBdbiKGBuay9B6xGSPVjUeQwaH1RIGqef8RZkUtHioLmSNpPR5M4HVKJGm1j8FWVQ==}
 
   is-array-buffer@3.0.4:
     resolution: {integrity: sha512-wcjaerHw0ydZwfhiKbXJWLDY8A7yV7KhjQOpb83hGgGfId/aQa4TOvwyzn2PuswW2gPCYEL/nEAiSVpdOj1lXw==}
@@ -4471,6 +4483,10 @@ snapshots:
     dependencies:
       '@types/node': 20.14.11
 
+  '@types/ip@1.1.3':
+    dependencies:
+      '@types/node': 20.14.11
+
   '@types/istanbul-lib-coverage@2.0.6': {}
 
   '@types/istanbul-lib-report@3.0.3':
@@ -5259,6 +5275,8 @@ snapshots:
   invariant@2.2.4:
     dependencies:
       loose-envify: 1.4.0
+
+  ip@2.0.1: {}
 
   is-array-buffer@3.0.4:
     dependencies:
