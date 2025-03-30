@@ -1,6 +1,5 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
-import { postback } from "@/shared/affiliate"
 import { hashEmail } from "@/shared/hmac"
 import { upgrade } from "@/shared/trpc/routers/xray"
 import type { components } from "@/shared/types/lava"
@@ -60,15 +59,6 @@ export async function POST(req: NextRequest) {
 
       const period = body.amount === 500 ? "1m" : "1y"
       await upgrade(user.id, user.cluster, period)
-
-      if (user.refSource === "admitad" && user.ref) {
-        await postback(
-          "lava:" + body.contractId,
-          body.amount as number,
-          body.currency!,
-          user.ref,
-        )
-      }
     }
 
     if (

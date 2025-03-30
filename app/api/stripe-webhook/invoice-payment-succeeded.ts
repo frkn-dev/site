@@ -1,5 +1,4 @@
 import prisma from "@/prisma"
-import { postback } from "@/shared/affiliate"
 import { upgrade } from "@/shared/trpc/routers"
 import type { Stripe } from "stripe"
 
@@ -33,15 +32,6 @@ export async function invoicePaymentSucceeded(
 
       const plan = invoice.amount_paid === 500 ? "1m" : "1y"
       await upgrade(userId, user.cluster, plan)
-
-      if (user.refSource === "admitad" && user.ref) {
-        await postback(
-          "stripe:" + invoice.id,
-          invoice.amount_paid / 100,
-          "USD",
-          user.ref,
-        )
-      }
     } else {
       console.error("Stripe: unexpected status", invoice.status)
     }
