@@ -28,7 +28,7 @@ export const cryptomus = createTRPCRouter({
 
         const sign = getSign(body, env.CRYPTOMUS_API_KEY)
 
-        const response = await fetch("https://api.cryptomus.com/v1/payment", {
+        const response = await fetch("https://api.heleket.com/v1/payment", {
           method: "POST",
           headers: {
             merchant: env.CRYPTOMUS_ID,
