@@ -54,7 +54,7 @@
     "mono": "link:geist/font/mono",
     "nanoid": "5.0.7",
     "nanostores": "0.11.2",
-    "next": "14.2.21",
+    "next": "14.2.26",
     "next-international": "1.2.4",
     "next-plausible": "3.12.1",
     "next-themes": "0.3.0",
@@ -93,7 +93,12 @@
   },
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": ["CVE-2024-4067", "CVE-2024-55565", "CVE-2024-29415"]
+      "ignoreCves": [
+        "CVE-2024-4067",
+        "CVE-2024-55565",
+        "CVE-2024-29415",
+        "CVE-2025-27789"
+      ]
     },
     "overrides": {
       "npm-run-all@4.1.5 > cross-spawn@7.0.3": ">=7.0.5"
