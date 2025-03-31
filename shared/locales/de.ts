@@ -10,8 +10,8 @@ export default {
     logout: "Abmelden",
   },
   hero: {
-    h1: "FRKN — Kostenloses VPN für freie Menschen",
-    text: "Wir unterstützen die Meinungsfreiheit und lehnen jede Form der Zensur ab. Wir entwickeln ein dezentrales VPN, das keine Benutzerdaten sammelt oder speichert.",
+    h1: "FRKN — Freies VPN für freie Menschen",
+    text: "Wir unterstützen die Meinungsfreiheit und lehnen jede Form von Zensur ab. Wir entwickeln ein dezentrales VPN, das keine Benutzerdaten sammelt oder speichert.",
     connect: "Verbinden",
   },
   advantages: {
@@ -267,5 +267,56 @@ export default {
       "Es tut uns leid, wir scheinen diese Seite verloren zu haben, aber wir möchten Sie nicht verlieren.",
     search: "Suche",
     search_site: "Website durchsuchen",
+  },
+  product: {
+    meta: {
+      title: "FRKN Box — Smart VPN für Ihr Zuhause",
+      description:
+        "Sicherer und zuverlässiger VPN-Router zum Schutz aller Geräte in Ihrem Netzwerk",
+    },
+    hero: {
+      line1: "Sicheres",
+      line2: "Wi-Fi mit VPN",
+      line3: "Passives Einkommen",
+    },
+    trust: {
+      description:
+        "Ein intelligenter Raspberry-basierter Router, der anonymes und sicheres Internet bietet und in seiner Freizeit Geld für Sie verdient.",
+    },
+    features: {
+      cpu: "1,5 GHz",
+      cpu_description: "ARM v8-Prozessor mit einer Frequenz von 1,5 GHz",
+      ram: "4 GB",
+      ram_description: "LPDDR4 RAM",
+      ethernet: "1 Gbit",
+      ethernet_description: "Ethernet für stabile Verbindung",
+      wifi_support: "Wi-Fi Unterstützung",
+      wifi_frequency: "2,4 / 5 GHz",
+      aluminum_heatsink: "Aluminium-Kühlkörper",
+      heatsink_description: "für geräuschloses Kühlen",
+      optimized_software: "Optimierte Software",
+      software_description: "mit automatischen Updates",
+    },
+    specs: {
+      title: "Hardware-Verschlüsselung",
+      module:
+        "Der FRKN VPN Node ist mit einem TPM 2.0 (Trusted Platform Module) ausgestattet, das eine tiefgreifende Krypto-Verschlüsselung auf Hardware-Ebene bietet.",
+      description:
+        "Die Lösung schützt Schlüssel und Daten vor dem Hacken, indem sie Hardware-Speicher zur Verschlüsselung des VPN-Verkehrs verwendet. Selbst im Falle einer Kompromittierung des Geräts bleibt das System gegenüber Angriffen widerstandsfähig und gewährleistet die Datensicherheit.",
+    },
+    extensible: {
+      title: "Einkommen aus Internet-Sharing",
+      description:
+        "FRKN VPN bietet vollständigen Schutz des Datenverkehrs ohne Protokolle und Überwachung und hilft, Einschränkungen in zensierten Regionen zu umgehen. Neben der Sicherheit ermöglicht das Gerät Ihnen, Geld zu verdienen: Sie können über 10 $ pro Monat und Token für das Teilen des Internets erhalten, und frühe Benutzer haben die Chance auf einen Airdrop.",
+      settings:
+        "Die Einrichtung dauert nur 5 Minuten — schließen Sie einfach die Stromversorgung und das Internet an, und alles andere ist bereits konfiguriert.",
+      cta: "Kaufen",
+    },
+    get: {
+      headerTop: "Nehmen Sie am Node-Verkauf teil",
+      headerBottom: "erhalten Sie Sonderkonditionen",
+      description:
+        "Unser Token wird im Mai 2025 gestartet, und frühe Teilnehmer können einen AirDrop erhalten. Die Verteilung der Knoten beginnt im Sommer 2025, damit alle Besitzer sofort mit dem Netzwerk verbinden und Geld verdienen können.",
+    },
   },
 } as const
