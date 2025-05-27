@@ -1,8 +1,13 @@
-import { createEnv } from "@t3-oss/env-nextjs"
-import { z } from "zod"
+import { createEnv } from "@t3-oss/env-nextjs";
+import { z } from "zod";
 
 export const env = createEnv({
   server: {
+    HOSTNAME: z.string().startsWith("http"),
+    DOMAIN: z.string().min(1),
+    MARZBAN_API_DOMAIN: z.string().optional().transform((val) => val || process.env.DOMAIN),
+    WG_API_URL: z.string().min(1),
+    MODE: z.enum(["dev", "prod"]),
     PASSWORD_PEPPER: z.string().min(1),
     JWT_SECRET: z.string().min(1),
     HMAC_SECRET: z.string().min(1),
@@ -28,4 +33,7 @@ export const env = createEnv({
   },
   client: {},
   experimental__runtimeEnv: {},
-})
+});
+
+
+

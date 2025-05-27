@@ -1,7 +1,7 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
 import { getMysqlClient } from "@/prisma/mysql"
-import { getHostname } from "@/shared/config"
+import { getMarzbanApi } from "@/shared/config"
 import { createAdminToken } from "@/shared/jwt/admin"
 import type { components } from "@/shared/types/xray"
 import ky from "ky"
@@ -70,7 +70,7 @@ async function checkCluster(id: string, isRetry = false): Promise<boolean> {
     })
     const token = createAdminToken(cluster.jwt)
 
-    const nodes = await ky(getHostname(cluster.id) + "/api/nodes", {
+    const nodes = await ky(getMarzbanApi(cluster.id) + "/api/nodes", {
       headers: {
         Authorization: "Bearer " + token,
       },
