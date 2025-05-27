@@ -1,7 +1,7 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
 import { getMysqlClient } from "@/prisma/mysql"
-import { getHostname } from "@/shared/config"
+import { getApiHostname } from "@/shared/config"
 import { createAdminToken } from "@/shared/jwt/admin"
 import { getSubscriptionToken } from "@/shared/sub"
 import { getFlag, getShadowsocksLink } from "@/shared/sub/ss"
@@ -57,7 +57,7 @@ export const xray = createTRPCRouter({
       ])
 
       const subscription_url =
-        getHostname() +
+        env.HOSTNAME +
         "/api/sub/" +
         getSubscriptionToken(me.id, env.HMAC_SECRET, me.created)
 
@@ -116,9 +116,11 @@ export async function create(
   })
   const token = createAdminToken(cluster.jwt)
 
+  const marzban_hostname = getApiHostname(clusterId);
+
   try {
     const xray = await ky
-      .post(getHostname(clusterId) + "/api/user", {
+      .post(marzban_hostname + "/api/user", {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -178,7 +180,7 @@ export async function upgrade(
   const token = createAdminToken(cluster.jwt)
 
   try {
-    await ky.put(getHostname(clusterId) + "/api/user/" + userId, {
+    await ky.put(getApiHostname(clusterId) + "/api/user/" + userId, {
       headers: {
         Authorization: "Bearer " + token,
       },

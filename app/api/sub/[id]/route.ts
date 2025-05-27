@@ -1,4 +1,5 @@
 import { env } from "@/env"
+import { getApiHostname } from "@/shared/config"
 import prisma from "@/prisma"
 import { decodeSubscriptionToken, getSubscriptionToken } from "@/shared/sub"
 import { NextResponse } from "next/server"
@@ -29,9 +30,10 @@ export async function GET(req: NextRequest, { params }: Params) {
     })
 
     const token = getSubscriptionToken(user.id, user.clusterRelation.jwt)
-
+    const api_hostname = getApiHostname(user.cluster);
+    
     const response = await fetch(
-      `https://${user.cluster}.frkn.org/sub/${token}`,
+      `${api_hostname}/sub/${token}`,
     )
 
     if (!response.ok) {
