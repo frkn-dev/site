@@ -7,7 +7,10 @@ export async function GET() {
   try {
     const result = await caller.xray.get()
 
-    return NextResponse.json(result)
+    return NextResponse.json({
+      beta: false,
+      ...result,
+    })
   } catch {
     return NextResponse.json({ status: "error" }, { status: 500 })
   }
