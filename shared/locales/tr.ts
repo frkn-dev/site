@@ -80,11 +80,14 @@ export default {
   locations: {
     available: "Mevcut konumlar",
     au: "Avusturya",
+    de: "Almanya",
     jp: "Japonya",
     nl: "Hollanda",
+    pl: "Polonya",
     ru: "Rusya",
     ch: "İsviçre",
     tr: "Türkiye",
+    uk: "Birleşik Krallık",
     us: "Amerika Birleşik Devletleri",
   },
   footer: {

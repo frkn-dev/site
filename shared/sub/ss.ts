@@ -36,6 +36,9 @@ export function getFlag(country?: string | null): string {
     JP: "🇯🇵",
     AM: "🇦🇲",
     KZ: "🇰🇿",
+    UK: "🇬🇧",
+    DE: "🇩🇪",
+    PL: "🇵🇱",
   }
 
   const flag = map[country.split("-")[0] as keyof typeof map] || "🏴‍☠️"

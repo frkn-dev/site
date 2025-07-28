@@ -80,11 +80,14 @@ export default {
   locations: {
     available: "Available locations",
     au: "Austria",
+    de: "Germany",
     jp: "Japan",
     nl: "Netherlands",
+    pl: "Poland",
     ru: "Russia",
     ch: "Switzerland",
     tr: "Turkey",
+    uk: "United Kingdom",
     us: "United States",
   },
   footer: {
