@@ -1,7 +1,7 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
 import { getMysqlClient } from "@/prisma/mysql"
-import { getHostname } from "@/shared/config"
+import { getHostname, SUB_URL } from "@/shared/config"
 import { createAdminToken } from "@/shared/jwt/admin"
 import { getSubscriptionToken } from "@/shared/sub"
 import { getFlag, getShadowsocksLink } from "@/shared/sub/ss"
@@ -57,8 +57,8 @@ export const xray = createTRPCRouter({
       ])
 
       const subscription_url =
-        getHostname() +
-        "/api/sub/" +
+        SUB_URL +
+        "/sub/" +
         getSubscriptionToken(me.id, env.HMAC_SECRET, me.created)
 
       const ssProxy = xray.proxies.find((proxy) => proxy.type === "Shadowsocks")
