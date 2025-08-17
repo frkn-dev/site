@@ -1,7 +1,7 @@
 import { env } from "@/env"
 import prisma from "@/prisma"
 import { getMysqlClient } from "@/prisma/mysql"
-import { getHostname, SUB_URL } from "@/shared/config"
+import { SUB_URL, getHostname } from "@/shared/config"
 import { createAdminToken } from "@/shared/jwt/admin"
 import { getSubscriptionToken } from "@/shared/sub"
 import { getFlag, getShadowsocksLink } from "@/shared/sub/ss"
@@ -9,11 +9,16 @@ import type { components } from "@/shared/types/xray"
 import ky from "ky"
 import { createTRPCRouter, protectedProcedure } from "../trpc"
 
-const proxies = {
-  vmess: {},
-  vless: {},
-  shadowsocks: {},
-}
+const getProxies = (
+  clusterId: string,
+): components["schemas"]["UserModify"]["proxies"] =>
+  clusterId.includes("mk")
+    ? { vless: {} }
+    : {
+        vmess: {},
+        vless: {},
+        shadowsocks: {},
+      }
 const inbounds = {}
 
 export const xray = createTRPCRouter({
@@ -97,7 +102,6 @@ const freePlan = {
   data_limit: 104_857_600, // 100 MB
   data_limit_reset_strategy: "day",
   expire: 0, // unlimited in time
-  proxies,
   inbounds,
 } as const
 
@@ -109,6 +113,7 @@ export async function create(
   const user: components["schemas"]["UserCreate"] = {
     username: userId,
     ...freePlan,
+    proxies: getProxies(clusterId),
   }
 
   const cluster = await prisma.clusters.findUniqueOrThrow({
@@ -150,7 +155,10 @@ export async function upgrade(
   plan: "free" | "1m" | "1y",
   isRetry = false,
 ) {
-  let body: components["schemas"]["UserModify"] = freePlan
+  let body: components["schemas"]["UserModify"] = {
+    ...freePlan,
+    proxies: getProxies(clusterId),
+  }
 
   if (plan !== "free") {
     const days = plan === "1m" ? 31 : 367
@@ -167,7 +175,7 @@ export async function upgrade(
         previousExpire !== null
           ? previousExpire + days * 24 * 60 * 60
           : Math.floor(Date.now() / 1000) + days * 24 * 60 * 60,
-      proxies,
+      proxies: getProxies(clusterId),
       inbounds,
     }
   }
