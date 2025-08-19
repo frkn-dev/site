@@ -10,8 +10,8 @@ export default {
     logout: "Çıkış",
   },
   hero: {
-    h1: "FRKN — Özgür insanlar için Ücretsiz VPN",
-    text: "İfade özgürlüğünü destekliyor ve her türlü sansüre karşı çıkıyoruz. Kullanıcı verilerini toplamayan ve depolamayan merkezi olmayan bir VPN geliştiriyoruz.",
+    h1: "FRKN — Özgür insanlar için özgür VPN",
+    text: "İfade özgürlüğünü destekliyor ve her türlü sansüre karşı çıkıyoruz. Kullanıcı verilerini toplamayan ve saklamayan merkezi olmayan bir VPN geliştiriyoruz.",
     connect: "Bağlan",
   },
   advantages: {
@@ -263,5 +263,56 @@ export default {
       "Üzgünüz, bu sayfayı kaybetmiş görünüyoruz, ama sizi kaybetmek istemiyoruz.",
     search: "Ara",
     search_site: "Sitede ara",
+  },
+  product: {
+    meta: {
+      title: "FRKN Box — Eviniz için akıllı VPN",
+      description:
+        "Ağınızdaki tüm cihazları korumak için güvenli ve güvenilir VPN yönlendiricisi",
+    },
+    hero: {
+      line1: "VPN ile",
+      line2: "Güvenli Wi-Fi",
+      line3: "Pasif Gelir",
+    },
+    trust: {
+      description:
+        "Anonim ve güvenli internet sağlayan ve boş zamanlarında sizin için para kazanan Raspberry tabanlı akıllı yönlendirici.",
+    },
+    features: {
+      cpu: "1.5 GHz",
+      cpu_description: "1.5 GHz frekanslı ARM v8 işlemci",
+      ram: "4 GB",
+      ram_description: "LPDDR4 RAM",
+      ethernet: "1 Gbit",
+      ethernet_description: "Stabil bağlantı için Ethernet",
+      wifi_support: "Wi-Fi Desteği",
+      wifi_frequency: "2.4 / 5 GHz",
+      aluminum_heatsink: "Alüminyum Soğutucu",
+      heatsink_description: "sessiz soğutma için",
+      optimized_software: "Optimize Edilmiş Yazılım",
+      software_description: "otomatik güncellemeler ile",
+    },
+    specs: {
+      title: "Donanım Şifrelemesi",
+      module:
+        "FRKN VPN Node, donanım seviyesinde derin kripto-şifreleme sağlayan bir TPM 2.0 (Trusted Platform Module) modülü ile donatılmıştır.",
+      description:
+        "Çözüm, VPN trafiğini şifrelemek için donanım depolaması kullanarak anahtarları ve verileri hacklenmeye karşı korur. Cihazın ele geçirilmesi durumunda bile sistem, veri güvenliğini koruyarak saldırılara karşı dayanıklı kalır.",
+    },
+    extensible: {
+      title: "İnternet Paylaşımından Gelir",
+      description:
+        "FRKN VPN, günlükler ve izleme olmadan tam trafik koruması sağlar ve sansürlü bölgelerdeki kısıtlamaları aşmanıza yardımcı olur. Güvenliğin yanı sıra, cihaz size kazanç sağlar: internet paylaşımından ayda 10 $'dan fazla ve token alabilirsiniz ve erken kullanıcıların airdrop şansı vardır.",
+      settings:
+        "Kurulum sadece 5 dakika sürer — sadece gücü ve interneti bağlayın, diğer her şey zaten ayarlanmıştır.",
+      cta: "Satın Al",
+    },
+    get: {
+      headerTop: "Node Satışına Katılın",
+      headerBottom: "özel şartlar elde edin",
+      description:
+        "Tokenimiz Mayıs 2025'te piyasaya sürülecek ve erken katılımcılar AirDrop alabilecek. Node dağıtımı yaz 2025'te başlayacak, böylece tüm sahipleri hemen ağa bağlanıp kazanmaya başlayabilecek.",
+    },
   },
 } as const
