@@ -90,6 +90,9 @@ export default {
     uk: "United Kingdom",
     us: "United States",
   },
+  reviews: {
+    reviews: "Reviews",
+  },
   footer: {
     contact: "Contact",
     help: "Help",
